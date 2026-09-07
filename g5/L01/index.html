@@ -29,8 +29,9 @@
     <span id="tStatus" class="text-slate-300 text-xs"></span>
     <span id="tTally" class="text-emerald-300 text-xs font-bold"></span>
     <div class="ml-auto flex gap-2">
-      <button id="revealBtn" class="bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1">🎉 公布答案</button>
-      <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1">🔒 收回</button>
+      <button id="uploadBtn" class="bg-sky-600 hover:bg-sky-700 font-bold rounded-lg px-3 py-1" title="備課用：把正確答案存進資料庫，只需做一次">⬆ 上傳答案</button>
+      <button id="revealBtn" class="bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1">🎉 公布</button>
+      <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="回到未公布狀態">↩ 還原</button>
     </div>
   </div>
 </div>
@@ -191,8 +192,11 @@ var QUIZ_ID = "L01";
   ];
 
   var state={votes:{},revealed:false,harms:{},essay:'',pick:'',_pushed:false};
-  function save(){try{localStorage.setItem('g5L01flow',JSON.stringify(state))}catch(e){}}
-  function load(){try{var d=localStorage.getItem('g5L01flow');if(d)state=Object.assign(state,JSON.parse(d))}catch(e){}}
+  var ANSWERS=null; // 正解來源：老師上傳到資料庫的優先，否則退回內建
+  function answerOf(i){return (ANSWERS&&ANSWERS.length===items.length)?ANSWERS[i]:items[i].real;}
+  // 只把「學生自己的作答」寫進瀏覽器快取；公布狀態不落地本機，改由資料庫即時決定
+  function save(){try{localStorage.setItem('g5L01flow',JSON.stringify({votes:state.votes,harms:state.harms,essay:state.essay,pick:state.pick}))}catch(e){}}
+  function load(){try{var d=localStorage.getItem('g5L01flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.harms=o.harms||{};state.essay=o.essay||'';state.pick=o.pick||'';}}catch(e){}}
   load();state._pushed=false;
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -253,7 +257,7 @@ var QUIZ_ID = "L01";
   function updateVoted(){document.getElementById('voted').textContent=Object.keys(state.votes).length+' / 8';}
   updateVoted();
 
-  function scoreNow(){var n=0;items.forEach(function(it,i){if(state.votes[i]!==undefined&&state.votes[i]===it.real)n++});return n;}
+  function scoreNow(){var n=0;items.forEach(function(it,i){if(state.votes[i]!==undefined&&state.votes[i]===answerOf(i))n++});return n;}
 
   // ===== 公布答案 =====
   function doReveal(){
@@ -262,10 +266,10 @@ var QUIZ_ID = "L01";
     Array.prototype.forEach.call(grid.children,function(c,i){
       var it=items[i];
       c.querySelectorAll('.vt').forEach(function(b){b.disabled=true;b.classList.add('opacity-60')});
-      var rev=c.querySelector('.reveal'),voted=state.votes[i],got=voted!==undefined&&voted===it.real;
-      c.className='card border-4 rounded-2xl p-4 shadow-sm flex flex-col '+(it.real?'bg-emerald-50 border-emerald-300':'bg-rose-50 border-rose-300');
-      rev.className='reveal mt-3 text-sm rounded-xl p-3 flip bg-white '+(it.real?'text-emerald-800':'text-rose-800');
-      rev.innerHTML='<b>'+(it.real?'✅ 這是真的':'❌ 這是謠言')+'</b>'+
+      var rev=c.querySelector('.reveal'),voted=state.votes[i],ans=answerOf(i),got=voted!==undefined&&voted===ans;
+      c.className='card border-4 rounded-2xl p-4 shadow-sm flex flex-col '+(ans?'bg-emerald-50 border-emerald-300':'bg-rose-50 border-rose-300');
+      rev.className='reveal mt-3 text-sm rounded-xl p-3 flip bg-white '+(ans?'text-emerald-800':'text-rose-800');
+      rev.innerHTML='<b>'+(ans?'✅ 這是真的':'❌ 這是謠言')+'</b>'+
         (voted===undefined?' <span class="text-slate-400">（你沒投票）</span>':(got?' <span class="text-emerald-600">· 你答對了！</span>':' <span class="text-amber-600">· 你被騙了 😵</span>'))+
         '<br>'+esc(it.truth);
       rev.classList.remove('hidden');
@@ -278,7 +282,7 @@ var QUIZ_ID = "L01";
     r.scrollIntoView({behavior:'smooth',block:'center'});
     if(!IS_ADMIN)pushResult(correct);
   }
-  if(state.revealed)doReveal();
+  // 公布狀態不再從本機還原；一律由資料庫（同步模式）即時決定，避免學生一開網頁就看到答案。
 
   // ===== 危害勾選 =====
   var harms=['花錢買到沒用、甚至有害的產品或偏方','延誤看醫生，讓身體受到傷害','把假消息轉給家人朋友，害別人也受騙','個資或帳號被詐騙集團騙走','造成大家恐慌，也不再相信真正的資訊'];
@@ -326,8 +330,9 @@ var QUIZ_ID = "L01";
         quizRef=db.collection('quizzes').doc(QUIZ_ID);
         document.getElementById('syncBadge').classList.remove('hidden');
         quizRef.onSnapshot(function(doc){var d=(doc&&doc.data())||{};
+          if(Array.isArray(d.answers)&&d.answers.length===items.length)ANSWERS=d.answers;
           if(d.revealed&&!state.revealed)doReveal();
-          if(!d.revealed&&state.revealed){state.revealed=false;save();location.reload();}
+          if(!d.revealed&&state.revealed)location.reload();   // 老師還原 → 回到未公布（作答）畫面
         },function(e){console.warn('讀取失敗',e);});
         if(IS_ADMIN)teacherOnline();
         else auth.signInAnonymously().catch(function(e){console.warn('匿名登入失敗',e);});
@@ -336,10 +341,11 @@ var QUIZ_ID = "L01";
   }
   function showBar(){document.getElementById('teacherbar').classList.remove('hidden');}
   function teacherOffline(){
-    showBar();document.getElementById('tStatus').textContent='單機模式';
+    showBar();document.getElementById('tStatus').textContent='單機模式（答案已內建，免上傳）';
     var pw=prompt('教師密碼：');if(pw!=='1234'){if(pw!==null)alert('密碼錯誤');document.getElementById('teacherbar').classList.add('hidden');return;}
+    var up=document.getElementById('uploadBtn');if(up)up.onclick=function(){alert('單機模式：答案已內建，不需上傳。');};
     document.getElementById('revealBtn').onclick=doReveal;
-    document.getElementById('lockBtn').onclick=function(){state.revealed=false;save();location.reload();};
+    document.getElementById('lockBtn').onclick=function(){location.reload();};  // 還原＝回到未公布
   }
   function teacherOnline(){
     showBar();
@@ -347,6 +353,12 @@ var QUIZ_ID = "L01";
     var pw=prompt('密碼：');if(pw===null){document.getElementById('teacherbar').classList.add('hidden');return;}
     auth.signInWithEmailAndPassword(email,pw).then(function(){
       document.getElementById('tStatus').textContent='已登入 '+email;
+      var up=document.getElementById('uploadBtn');
+      if(up)up.onclick=function(){up.disabled=true;up.textContent='上傳中…';
+        quizRef.set({answers:items.map(function(it){return it.real}),answersAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})
+          .then(function(){up.disabled=false;up.textContent='✓ 已上傳';setTimeout(function(){up.textContent='⬆ 上傳答案';},2500);
+            alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要按「🎉 公布」即可。');})
+          .catch(function(e){up.disabled=false;up.textContent='⬆ 上傳答案';alert('上傳失敗：'+e.message);});};
       document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
       document.getElementById('lockBtn').onclick=function(){quizRef.set({revealed:false},{merge:true});};
       quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
