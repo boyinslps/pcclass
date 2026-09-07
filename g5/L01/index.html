@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直覺大考驗｜五上 L01 教學活動</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Noto Sans TC',sans-serif;background:#F4F6FB;color:#1f2430}
+  .cute{font-family:'Baloo 2','Noto Sans TC',cursive}
+  .opt{transition:.15s}
+  .shake{animation:sh .35s}@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .pop{animation:pp .35s}@keyframes pp{0%{transform:scale(.9)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+  .flip{animation:fl .5s}@keyframes fl{0%{transform:rotateX(90deg);opacity:0}100%{transform:rotateX(0);opacity:1}}
+  .step{scroll-margin-top:84px}
+  .vidbox{position:relative;width:100%;padding-top:56.25%}
+  .vidbox>*{position:absolute;inset:0;width:100%;height:100%}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="text-slate-800">
+
+<!-- 老師工具列（僅 #admin 時顯示） -->
+<div id="teacherbar" class="hidden sticky top-0 z-30 bg-slate-900 text-white text-sm">
+  <div class="max-w-4xl mx-auto px-4 py-2 flex items-center gap-3 flex-wrap">
+    <span class="cute font-bold text-amber-300">👩‍🏫 教師模式</span>
+    <span id="tStatus" class="text-slate-300 text-xs"></span>
+    <span id="tTally" class="text-emerald-300 text-xs font-bold"></span>
+    <div class="ml-auto flex gap-2">
+      <button id="revealBtn" class="bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1">🎉 公布答案</button>
+      <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1">🔒 收回</button>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-4xl mx-auto px-4 py-6">
+
+  <header class="text-center mb-6">
+    <h1 class="cute text-3xl md:text-5xl font-extrabold text-indigo-600">🕵️ 直覺大考驗</h1>
+    <p class="text-sm text-slate-500 mt-2">五年級上學期 · L01 假消息與目的辨識 · 教學活動流程（45 分鐘）</p>
+    <div class="mt-3 flex justify-center gap-2 text-xs flex-wrap">
+      <span class="bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 font-bold">環節① 開場挑戰 15′</span>
+      <span class="bg-rose-100 text-rose-700 rounded-full px-3 py-1 font-bold">環節② 隱形殺傷力 10′</span>
+      <span class="bg-teal-100 text-teal-700 rounded-full px-3 py-1 font-bold">環節③ 危害推論短文 20′</span>
+    </div>
+    <p id="syncBadge" class="hidden mt-2 text-xs text-emerald-600 font-bold">🔗 已連線：老師公布時，這台會自動同步對答案</p>
+  </header>
+
+  <!-- ===== 環節①：直覺大考驗 ===== -->
+  <section id="s1" class="step">
+    <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-indigo-700">① 你分得出真的假的嗎？</h2>
+      <p class="text-slate-600 mt-1">下面 8 則訊息，有些是<b>真的</b>、有些是<b>謠言</b>。<br>先看圖片／影片／連結，再憑直覺投票：覺得真按 <span class="text-emerald-600 font-bold">✅ 真</span>、覺得假按 <span class="text-rose-600 font-bold">❌ 假</span>。</p>
+      <div class="mt-3 inline-flex items-center gap-2 bg-indigo-50 border-2 border-indigo-200 rounded-full px-4 py-1.5 text-sm font-bold text-indigo-700">
+        <span>🗳️ 已投票</span><span id="voted">0 / 8</span>
+      </div>
+    </div>
+
+    <div id="grid" class="grid sm:grid-cols-2 gap-4"></div>
+
+    <div id="result" class="hidden mt-6 text-center bg-gradient-to-b from-amber-100 to-rose-100 border-4 border-rose-300 rounded-3xl p-6 pop">
+      <div class="text-5xl mb-1">🤯</div>
+      <h3 class="cute text-2xl font-extrabold text-rose-700">揭曉！你的直覺準嗎？</h3>
+      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-indigo-600 font-extrabold">0</span> / 8</p>
+      <p id="verdict" class="text-slate-700 mt-2 font-bold"></p>
+      <p class="text-sm text-slate-600 mt-3 max-w-xl mx-auto">
+        發現了嗎？<b>看起來很扯的，反而是真的</b>；<b>講得很有道理的，卻是假的</b>。<br>
+        我們的「直覺」很容易被騙 —— 這就是假消息厲害的地方。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== 環節②：隱形的殺傷力 ===== -->
+  <section id="s2" class="step mt-10">
+    <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-rose-700">② 隱形的殺傷力</h2>
+      <p class="text-slate-600 mt-1">你可能覺得：假消息笑一笑就好，有什麼關係？<br>但如果<b>「真的信了」</b>，會發生什麼事？</p>
+      <div class="mt-4 grid sm:grid-cols-2 gap-3">
+        <div class="bg-pink-50 border-2 border-pink-200 rounded-2xl p-4">
+          <div class="text-4xl">🍬</div>
+          <p class="font-bold text-pink-700 mt-1">表面：包著糖衣</p>
+          <p class="text-sm text-slate-600">看起來是關心你的健康、免費的好康、貼心的提醒。</p>
+        </div>
+        <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4">
+          <div class="text-4xl">🪤</div>
+          <p class="font-bold text-rose-700 mt-1">裡面：其實是陷阱</p>
+          <p class="text-sm text-slate-600">踩下去會受傷 —— 賠上金錢、健康，甚至害到家人。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h3 class="cute text-xl font-extrabold text-rose-700 mb-2">📺 真實案例：信了之後…</h3>
+      <div class="vidbox rounded-2xl overflow-hidden bg-slate-900">
+        <iframe src="https://www.youtube-nocookie.com/embed/VQbGeAVmuRw"
+          title="假訊息危害案例" frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">看完想一想：受害的人「損失了什麼」？如果是你，會怎麼提醒家人？</p>
+    </div>
+
+    <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h3 class="cute text-xl font-extrabold text-rose-700">✅ 相信假訊息，可能造成哪些危害？</h3>
+      <p class="text-sm text-slate-600 mb-3">把你覺得<b>「可能會發生」</b>的都勾起來。</p>
+      <div id="harms" class="space-y-2"></div>
+      <p id="harmFb" class="text-sm font-bold mt-3 min-h-[24px]"></p>
+    </div>
+  </section>
+
+  <!-- ===== 環節③：危害推論短文 ===== -->
+  <section id="s3" class="step mt-10">
+    <div class="bg-white border-4 border-teal-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-teal-700">③ 換你當偵探：危害推論短文</h2>
+      <p class="text-slate-600 mt-1">從上面的<b>謠言</b>裡挑一則，用下面的句型，推論「如果有人真的相信了，會發生什麼危害」。</p>
+      <div class="mt-3 bg-teal-50 border-2 border-teal-200 rounded-2xl p-4 text-sm text-teal-900 leading-relaxed">
+        <b>句型鷹架：</b><br>
+        我選的假消息是：「______」。<br>
+        如果有人相信它，可能會 <b>______</b>（做出什麼行為），<br>
+        結果造成 <b>______</b>（金錢／健康／害到別人 的具體損失）。<br>
+        所以看到訊息時，我會先<b>懷疑後果</b>，再決定要不要相信。
+      </div>
+      <select id="pick" class="mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none"></select>
+      <textarea id="essay" class="mt-2 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none" rows="4" placeholder="把上面的句型填成一段完整的話…"></textarea>
+      <p class="text-xs text-slate-400 mt-1">💾 會自動存在這台裝置，重新整理不會不見。</p>
+    </div>
+
+    <div class="text-center bg-gradient-to-b from-indigo-100 to-sky-100 border-4 border-indigo-300 rounded-3xl p-6">
+      <div class="text-5xl mb-2">🎖️</div>
+      <h2 class="cute text-2xl font-extrabold text-indigo-700">今天你帶走的能力</h2>
+      <p class="text-slate-700 mt-2"><b>看見隱形危害</b> —— 先懷疑後果，再決定是否相信。<br>下一節，我們要學真正的<b>查證方法</b>！</p>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">教師公布答案：在網址列加上 <code class="bg-slate-200 rounded px-1">#admin</code> 後重新整理。</footer>
+</div>
+
+<script>
+/* ============================================================
+   Firebase 同步設定（已填入 pcclass-94300 專案）
+   單機模式：把 firebaseConfig 設為 null 即可。
+   Firestore 規則見檔案最下方註解。
+   ============================================================ */
+var firebaseConfig = {
+  apiKey:"AIzaSyAaodBvsP-BSovON14izt22DOXeH40TTGM",
+  authDomain:"pcclass-94300.firebaseapp.com",
+  projectId:"pcclass-94300",
+  storageBucket:"pcclass-94300.firebasestorage.app",
+  messagingSenderId:"1034787516465",
+  appId:"1:1034787516465:web:73c334b2ddad152c472510",
+  measurementId:"G-37P75R7TZ7"
+};
+var TEACHER_EMAIL = "boyin0304@slps.tn.edu.tw"; // 教師 Firebase 帳號
+var QUIZ_ID = "L01";
+
+(function(){
+  var IS_ADMIN = location.hash === '#admin';
+
+  // ===== 題目資料（順序已打亂，真假穿插）=====
+  var FB_PUMPKIN='https://www.facebook.com/61551413690175/posts/%E5%B8%B8%E5%B8%B8%E5%90%83%E5%8D%97%E7%93%9C%E6%89%8B%E6%8E%8C%E8%AE%8A%E9%BB%83%E9%BB%83%E9%80%99%E9%A1%9E%E6%97%8F%E7%BE%A4%E8%AB%8B%E6%B3%A8%E6%84%8F%E6%9C%89%E4%BA%9B%E4%BA%BA%E9%95%B7%E6%9C%9F%E5%90%83%E5%8D%97%E7%93%9C%E8%83%A1%E8%98%BF%E8%94%94%E6%89%8B%E6%8E%8C%E6%88%96%E8%85%B3%E5%BA%95%E8%AE%8A%E6%88%90%E6%A9%99%E9%BB%83%E8%89%B2%E9%80%99%E5%80%8B%E7%8F%BE%E8%B1%A1%E5%85%B6%E5%AF%A6%E6%9C%89%E7%A7%91%E5%AD%B8%E8%A7%A3%E9%87%8B%E8%83%A1%E8%98%BF%E8%94%94%E7%B4%A0%E8%A1%80%E7%97%87carotenemia%E6%8C%87%E8%A1%80%E6%B6%B2%E4%B8%AD%E8%83%A1%E8%98%BF%E8%94%94%E7%B4%A0%E5%90%AB%E9%87%8F%E9%81%8E%E5%A4%9A%E8%87%B3%E6%96%BC/122207012468047123/';
+  var FB_HONEY='https://www.facebook.com/enjoyeat8/videos/%E5%8E%9F%E4%BE%86%E7%B4%94%E5%A4%A9%E7%84%B6%E7%9A%84%E8%9C%82%E8%9C%9C%E6%B2%92%E6%9C%89%E9%81%8E%E6%9C%9F%E9%80%99%E5%80%8B%E8%AA%AA%E6%B3%95-%E7%A7%91%E6%99%AE%E4%B8%80%E4%B8%8B-%E5%86%B7%E7%9F%A5%E8%AD%98-%E7%A7%91%E6%99%AE/3108692545974858/';
+
+  var items=[
+    {t:'牙膏管底的黑色條紋，代表裡面含有化學成分',real:false,mode:'img',src:'assets/toothpaste.jpg',
+      truth:'那只是「封管機器辨識用的色條」，跟成分完全無關。'},
+    {t:'常常吃南瓜、胡蘿蔔，手掌或腳底真的會變黃',real:true,mode:'link',fb:true,
+      url:FB_PUMPKIN,title:'常吃南瓜手掌變黃？其實有科學解釋：胡蘿蔔素血症',site:'facebook.com',
+      truth:'真的！這叫「胡蘿蔔素血症（carotenemia）」，停一陣子就會消退，對身體無害。'},
+    {t:'熱檸檬水能殺死癌細胞，功效比化療強一萬倍',real:false,mode:'link',
+      url:'https://momdata.blogspot.com/2014/07/blog-post_5.html',
+      img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUqlC5fqQV36aITc5RvKphWEw-Md6pYFMX2pflQovDB5AZBDy6LOEXTh962yUGjDbu6O1I7Qw1IPIARvVltvKcdTyNUvAqxFdZa8A_ShftuQGMzcvaa2R2N0F0IRm47-FntCA6bNKXrvc/s1600/0.png',
+      title:'驚天大秘！大藥廠打死也不願說…檸檬可殺死癌細胞',site:'momdata.blogspot.com',
+      truth:'內容農場謠言，檸檬水無法殺死癌細胞，聽信而延誤就醫很危險。'},
+    {t:'奇異果連皮一起吃，膳食纖維會大幅增加',real:true,mode:'link',
+      url:'https://health.udn.com/health/story/6037/8839419',
+      img:'https://pgw.udn.com.tw/gw/photo.php?u=/photo/2025/06/29/realtime/32407364.jpg&x=0&y=0&sw=0&sh=0&exp=3600&w=930',
+      title:'奇異果連皮吃更好！營養師：纖維是果肉的 2 倍',site:'health.udn.com',
+      truth:'真的！奇異果皮富含纖維，洗乾淨連皮吃營養更多。'},
+    {t:'房間放一顆沒剝皮的洋蔥，能吸病毒、預防流感',real:false,mode:'youtube',yt:'Lm9KiSn4VUk',
+      truth:'洋蔥沒有吸附病毒的效果。這支影片本身就是在散播謠言（還叫你「快分享」）。'},
+    {t:'純天然的蜂蜜不會過期，放很久也不會壞',real:true,mode:'link',fb:true,
+      url:FB_HONEY,title:'原來純天然的蜂蜜沒有過期！科普一下冷知識',site:'facebook.com',
+      truth:'真的！純蜂蜜含水量低、又有天然抗菌性，密封保存幾乎不會壞。'},
+    {t:'酷暑天喝冰水，會導致血管爆裂或中風',real:false,mode:'link',
+      url:'https://www.cmoney.tw/forum/article/179361052',
+      title:'網傳「熱天喝冰水血管會爆裂」是真的嗎？',site:'cmoney.tw',
+      truth:'喝冰水不會讓血管爆裂，這是被誇大的錯誤說法。'},
+    {t:'微波爐加熱食物，會把食物變成毒藥、產生致癌輻射',real:false,mode:'video',src:'assets/microwave.mp4',
+      truth:'正常使用微波爐不會產生毒素，也不會有致癌輻射。'}
+  ];
+
+  var state={votes:{},revealed:false,harms:{},essay:'',pick:'',_pushed:false};
+  function save(){try{localStorage.setItem('g5L01flow',JSON.stringify(state))}catch(e){}}
+  function load(){try{var d=localStorage.getItem('g5L01flow');if(d)state=Object.assign(state,JSON.parse(d))}catch(e){}}
+  load();state._pushed=false;
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  // ===== 媒體呈現 =====
+  function media(it){
+    if(it.mode==='img')
+      return '<img src="'+it.src+'" loading="lazy" class="w-full rounded-xl border-2 border-slate-200" '+
+        'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'+
+        '<div style="display:none" class="h-32 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 items-center justify-center text-center text-xs text-slate-400 px-3">找不到圖片，請把圖放到<br>'+esc(it.src)+'</div>';
+    if(it.mode==='video')
+      return '<video src="'+it.src+'" controls preload="metadata" class="w-full rounded-xl border-2 border-slate-200 bg-black" '+
+        'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"></video>'+
+        '<div style="display:none" class="h-32 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 items-center justify-center text-center text-xs text-slate-400 px-3">找不到影片，請把影片放到<br>'+esc(it.src)+'</div>';
+    if(it.mode==='youtube')
+      return '<div class="vidbox rounded-xl overflow-hidden bg-slate-900 border-2 border-slate-200">'+
+        '<iframe src="https://www.youtube-nocookie.com/embed/'+it.yt+'" title="影片" frameborder="0" '+
+        'allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>';
+    var banner = it.img
+      ? '<div class="bg-slate-100" style="aspect-ratio:16/9;overflow:hidden"><img src="'+it.img+'" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
+      : (it.fb
+        ? '<div class="h-24 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-4xl">📘</div>'
+        : '<div class="h-24 bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-4xl">🔗</div>');
+    return '<a href="'+it.url+'" target="_blank" rel="noopener" class="block border-2 border-slate-200 rounded-xl overflow-hidden hover:border-indigo-400 hover:shadow-sm">'+
+      banner+
+      '<div class="p-3 flex items-center gap-2">'+
+        '<img src="https://www.google.com/s2/favicons?domain='+it.site+'&sz=32" class="w-5 h-5 rounded shrink-0" onerror="this.style.display=\'none\'">'+
+        '<div class="min-w-0 flex-1"><div class="text-xs font-bold text-slate-700 leading-snug">'+esc(it.title)+'</div>'+
+        '<div class="text-[11px] text-slate-400 truncate">'+esc(it.site)+'</div></div>'+
+        '<span class="text-xs font-bold text-indigo-600 shrink-0">開啟 ↗</span></div></a>';
+  }
+
+  // ===== 建立題卡 =====
+  var grid=document.getElementById('grid');
+  items.forEach(function(it,i){
+    var c=document.createElement('div');
+    c.className='card bg-white border-4 border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col';
+    c.innerHTML=
+      '<div class="flex items-start gap-2 mb-2"><span class="cute text-lg font-extrabold text-slate-400">'+(i+1)+'</span>'+
+        '<div class="font-bold text-slate-700 leading-snug">'+esc(it.t)+'</div></div>'+
+      '<div>'+media(it)+'</div>'+
+      '<div class="mt-3 grid grid-cols-2 gap-2">'+
+        '<button class="vt v-real opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-emerald-400" data-v="1">✅ 真</button>'+
+        '<button class="vt v-fake opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400" data-v="0">❌ 假</button>'+
+      '</div><div class="reveal hidden mt-3 text-sm rounded-xl p-3"></div>';
+    grid.appendChild(c);
+    var btns=c.querySelectorAll('.vt');
+    btns.forEach(function(b){b.onclick=function(){
+      if(state.revealed)return;
+      state.votes[i]=b.dataset.v==='1';
+      btns.forEach(function(x){x.classList.remove('bg-indigo-100','border-indigo-400','text-indigo-700')});
+      b.classList.add('bg-indigo-100','border-indigo-400','text-indigo-700');
+      updateVoted();save();
+    }});
+    if(state.votes[i]!==undefined)
+      c.querySelector(state.votes[i]?'.v-real':'.v-fake').classList.add('bg-indigo-100','border-indigo-400','text-indigo-700');
+  });
+  function updateVoted(){document.getElementById('voted').textContent=Object.keys(state.votes).length+' / 8';}
+  updateVoted();
+
+  function scoreNow(){var n=0;items.forEach(function(it,i){if(state.votes[i]!==undefined&&state.votes[i]===it.real)n++});return n;}
+
+  // ===== 公布答案 =====
+  function doReveal(){
+    if(state.revealed && !document.getElementById('result').classList.contains('hidden'))return;
+    state.revealed=true;save();
+    Array.prototype.forEach.call(grid.children,function(c,i){
+      var it=items[i];
+      c.querySelectorAll('.vt').forEach(function(b){b.disabled=true;b.classList.add('opacity-60')});
+      var rev=c.querySelector('.reveal'),voted=state.votes[i],got=voted!==undefined&&voted===it.real;
+      c.className='card border-4 rounded-2xl p-4 shadow-sm flex flex-col '+(it.real?'bg-emerald-50 border-emerald-300':'bg-rose-50 border-rose-300');
+      rev.className='reveal mt-3 text-sm rounded-xl p-3 flip bg-white '+(it.real?'text-emerald-800':'text-rose-800');
+      rev.innerHTML='<b>'+(it.real?'✅ 這是真的':'❌ 這是謠言')+'</b>'+
+        (voted===undefined?' <span class="text-slate-400">（你沒投票）</span>':(got?' <span class="text-emerald-600">· 你答對了！</span>':' <span class="text-amber-600">· 你被騙了 😵</span>'))+
+        '<br>'+esc(it.truth);
+      rev.classList.remove('hidden');
+    });
+    var correct=scoreNow();
+    document.getElementById('score').textContent=correct;
+    document.getElementById('verdict').textContent = correct>=7?'太厲害了！但別大意，這次剛好而已 😏'
+      : correct>=4?'一半一半 —— 直覺根本不可靠對吧？' : '被騙慘了！這正是我們要學會小心的原因。';
+    var r=document.getElementById('result');r.classList.remove('hidden');
+    r.scrollIntoView({behavior:'smooth',block:'center'});
+    if(!IS_ADMIN)pushResult(correct);
+  }
+  if(state.revealed)doReveal();
+
+  // ===== 危害勾選 =====
+  var harms=['花錢買到沒用、甚至有害的產品或偏方','延誤看醫生，讓身體受到傷害','把假消息轉給家人朋友，害別人也受騙','個資或帳號被詐騙集團騙走','造成大家恐慌，也不再相信真正的資訊'];
+  var hEl=document.getElementById('harms');
+  harms.forEach(function(h,i){
+    var b=document.createElement('button');
+    b.className='opt w-full text-left border-2 border-slate-200 rounded-xl p-3 flex items-center gap-3 hover:border-rose-400';
+    b.innerHTML='<span class="chk w-6 h-6 shrink-0 rounded-md border-2 border-slate-300 flex items-center justify-center font-bold text-white"></span><span>'+h+'</span>';
+    b.onclick=function(){state.harms[i]=!state.harms[i];paintHarm(b,i);checkHarms();save();};
+    hEl.appendChild(b);if(state.harms[i])paintHarm(b,i);
+  });
+  function paintHarm(b,i){var chk=b.querySelector('.chk');
+    if(state.harms[i]){b.classList.add('border-rose-400','bg-rose-50');chk.classList.add('bg-rose-500','border-rose-500');chk.textContent='✓';}
+    else{b.classList.remove('border-rose-400','bg-rose-50');chk.classList.remove('bg-rose-500','border-rose-500');chk.textContent='';}}
+  function checkHarms(){var n=harms.filter(function(_,i){return state.harms[i]}).length,fb=document.getElementById('harmFb');
+    if(n===harms.length)fb.innerHTML='<span class="text-rose-600">💥 沒錯 —— <b>全部都會！</b> 假消息的危害往往是「隱形」的，等你發現時已經受傷了。</span>';
+    else if(n>0)fb.innerHTML='<span class="text-slate-500">還有嗎？再想想哪些也可能發生…</span>';else fb.textContent='';}
+  checkHarms();
+
+  // ===== 短文 =====
+  var pick=document.getElementById('pick'),essay=document.getElementById('essay');
+  pick.innerHTML='<option value="">— 選一則你要推論的假消息 —</option>'+
+    items.map(function(it,i){return it.real?'':'<option value="'+i+'">'+esc(it.t)+'</option>'}).join('');
+  pick.value=state.pick||'';essay.value=state.essay||'';
+  pick.onchange=function(){state.pick=pick.value;
+    if(pick.value!==''&&!essay.value)essay.value='我選的假消息是：「'+items[pick.value].t+'」。如果有人相信它，可能會…';save();};
+  essay.oninput=function(){state.essay=essay.value;save();};
+
+  /* ================= Firebase 同步層 ================= */
+  var db=null,auth=null,quizRef=null;
+  function loadScript(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+  function pushResult(correct){
+    if(!db||!auth||!auth.currentUser)return;if(state._pushed)return;state._pushed=true;
+    quizRef.collection('results').doc(auth.currentUser.uid)
+      .set({score:correct,total:8,at:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(function(){});
+  }
+  function boot(){
+    if(!firebaseConfig){ if(IS_ADMIN)teacherOffline(); return; }
+    var base='https://www.gstatic.com/firebasejs/10.8.0/';
+    loadScript(base+'firebase-app-compat.js')
+      .then(function(){return loadScript(base+'firebase-auth-compat.js')})
+      .then(function(){return loadScript(base+'firebase-firestore-compat.js')})
+      .then(function(){
+        firebase.initializeApp(firebaseConfig);db=firebase.firestore();auth=firebase.auth();
+        quizRef=db.collection('quizzes').doc(QUIZ_ID);
+        document.getElementById('syncBadge').classList.remove('hidden');
+        quizRef.onSnapshot(function(doc){var d=(doc&&doc.data())||{};
+          if(d.revealed&&!state.revealed)doReveal();
+          if(!d.revealed&&state.revealed){state.revealed=false;save();location.reload();}
+        },function(e){console.warn('讀取失敗',e);});
+        if(IS_ADMIN)teacherOnline();
+        else auth.signInAnonymously().catch(function(e){console.warn('匿名登入失敗',e);});
+      })
+      .catch(function(e){console.warn('Firebase 啟用失敗，改用單機模式',e);if(IS_ADMIN)teacherOffline();});
+  }
+  function showBar(){document.getElementById('teacherbar').classList.remove('hidden');}
+  function teacherOffline(){
+    showBar();document.getElementById('tStatus').textContent='單機模式';
+    var pw=prompt('教師密碼：');if(pw!=='1234'){if(pw!==null)alert('密碼錯誤');document.getElementById('teacherbar').classList.add('hidden');return;}
+    document.getElementById('revealBtn').onclick=doReveal;
+    document.getElementById('lockBtn').onclick=function(){state.revealed=false;save();location.reload();};
+  }
+  function teacherOnline(){
+    showBar();
+    var email=prompt('教師 Email：',TEACHER_EMAIL);if(email===null){document.getElementById('teacherbar').classList.add('hidden');return;}
+    var pw=prompt('密碼：');if(pw===null){document.getElementById('teacherbar').classList.add('hidden');return;}
+    auth.signInWithEmailAndPassword(email,pw).then(function(){
+      document.getElementById('tStatus').textContent='已登入 '+email;
+      document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
+      document.getElementById('lockBtn').onclick=function(){quizRef.set({revealed:false},{merge:true});};
+      quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
+        document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / 8';});
+    }).catch(function(e){alert('登入失敗：'+e.message);document.getElementById('teacherbar').classList.add('hidden');});
+  }
+  boot();
+
+  // 環節進度標籤
+  var phases=[['s1','① 開場挑戰'],['s2','② 隱形殺傷力'],['s3','③ 危害推論']];
+  window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=phases[0][1];
+    phases.forEach(function(p){var el=document.getElementById(p[0]);if(el&&el.offsetTop<=y)cur=p[1];});
+  },{passive:true});
+})();
+</script>
+
+<!--
+================= Firestore 規則（跨裝置同步對答案）=================
+Firestore Database → 規則，貼上以下內容：
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isTeacher() {
+      return request.auth != null && request.auth.token.email == "boyin0304@slps.tn.edu.tw";
+    }
+    match /quizzes/{quiz} {
+      allow read: if true;                 // 任何人可讀「是否公布」
+      allow write: if isTeacher();         // 只有老師能按公布/收回
+      match /results/{uid} {
+        allow read: if true;                              // 老師端統計
+        allow create, update: if request.auth != null
+                              && request.auth.uid == uid; // 學生只能寫自己那筆
+      }
+    }
+  }
+}
+
+Authentication 需啟用：匿名（學生）＋ 電子郵件/密碼（老師，Users 內建 boyin0304@slps.tn.edu.tw）。
+用法：學生開一般網址作答；老師開 網址#admin → 輸入 Email/密碼 →
+「🎉 公布答案」→ 全班同步翻答案、各自顯示對幾題，老師列顯示「已交卷 N 人 · 平均 X/8」。
+=====================================================================
+-->
+</body>
+</html>

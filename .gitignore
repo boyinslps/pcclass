@@ -1,0 +1,19 @@
+# === 備課過程檔（教案、規劃、關鍵字、素材清單等）===
+*.md
+
+# === 憑證 / 機密（切勿上傳）===
+client_secret*.json
+*credentials*.json
+*.env
+.env*
+*.key
+*.pem
+
+# === 系統 / 編輯器暫存 ===
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc
+.vscode/
+.idea/
