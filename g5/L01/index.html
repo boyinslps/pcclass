@@ -44,9 +44,12 @@
       <button id="uploadBtn" class="bg-sky-600 hover:bg-sky-700 font-bold rounded-lg px-3 py-1" title="備課用：把正確答案存進資料庫，只需做一次">⬆ 上傳答案</button>
       <button id="revealBtn" class="bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1">🎉 公布</button>
       <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="回到未公布狀態">↩ 還原</button>
+      <button id="previewModeBtn" class="bg-indigo-600 hover:bg-indigo-700 font-bold rounded-lg px-3 py-1" title="暫時隱藏教師工具列，看學生看到的畫面">👀 預覽學生模式</button>
     </div>
   </div>
 </div>
+<!-- 預覽學生模式時顯示的浮動返回鍵 -->
+<button id="backToTeacher" class="hidden fixed bottom-4 right-4 z-30 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full px-4 py-2 shadow-lg">↩ 返回教師模式</button>
 
 <div class="max-w-4xl mx-auto px-4 py-6">
 
@@ -136,13 +139,16 @@
       </div>
       <select id="pick" class="mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none"></select>
       <textarea id="essay" data-qid="essay" data-qtype="open" class="mt-2 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none" rows="4" placeholder="把上面的句型填成一段完整的話…"></textarea>
-      <p class="text-xs text-slate-400 mt-1">💾 會自動存在這台裝置，重新整理不會不見。</p>
+      <p class="text-xs text-slate-400 mt-1">💾 這裡會自動存在這台裝置，重新整理不會不見（但這只是草稿，老師還看不到）。</p>
+      <!-- 「推送」是獨立動作：把這題貼進下面的留言牆，跟最下面的「繳交學習單」是兩件不同的事（見《學習單資料與提交規範》§4）-->
+      <button id="pushEssay" class="mt-2 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
+      <span id="pushEssayNote" class="text-xs text-slate-400 ml-2"></span>
     </div>
 
     <!-- 即時同儕動態：看看其他同學怎麼推論（見《學習單資料與提交規範》§4） -->
     <div class="bg-white border-4 border-teal-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h3 class="cute text-lg font-extrabold text-teal-700 mb-1">💬 同學們的推論</h3>
-      <p class="text-xs text-slate-500 mb-3">繳交後會看到其他同學怎麼推論，看看有沒有你沒想到的角度。</p>
+      <p class="text-xs text-slate-500 mb-3">按上面「推送」就會出現在這裡，不用等到最後繳交。</p>
       <div id="feedList" class="space-y-2 max-h-56 overflow-y-auto pr-1"><p class="text-xs text-slate-400">還沒有人送出…</p></div>
     </div>
 
@@ -383,8 +389,20 @@ var QUIZ_ID = "L01";
           html+='<div class="bg-teal-50 rounded-xl px-3 py-2 text-sm text-teal-900">'+(m.tag?('<b class="text-teal-600 text-xs block">'+esc(m.tag)+'</b>'):'')+esc(m.text||'')+'</div>';});
         list.innerHTML=html;
       },function(e){console.warn('feed 讀取失敗',e);
-        var list=document.getElementById('feedList');if(list)list.innerHTML='<p class="text-xs text-slate-400">目前看不到同學動態（需老師部署 Firestore 規則）。</p>';});
+        var list=document.getElementById('feedList');if(list)list.innerHTML='<p class="text-xs text-slate-400">現在看不到同學的留言，晚點再來看看。</p>';});
   }
+  // 「推送」單獨一個按鈕：只把這題貼上留言牆，不涉及整份學習單繳交
+  document.getElementById('pushEssay').onclick=function(){
+    var text=(document.getElementById('essay').value||'').trim(),note=document.getElementById('pushEssayNote');
+    if(!text){note.textContent='先寫一點再推送喔';return;}
+    if(!db){note.textContent='系統尚未連線，請稍後再試。';return;}
+    var idn=getIdentity(),tag=identityValid(idn)?(idn.grade+'年'+idn.className+'班'):'';
+    note.textContent='推送中…';
+    ensureAuth().then(function(){
+      return db.collection('feeds').doc('g5-L01').collection('messages').add(
+        {qid:'essay',text:text.slice(0,200),tag:tag,at:firebase.firestore.FieldValue.serverTimestamp()});
+    }).then(function(){note.textContent='✓ 已推送！';}).catch(function(e){note.textContent='推送失敗：'+e.message;});
+  };
   // ===== 繳交學習單（見《學習單資料與提交規範》§3）=====
   document.getElementById('submitBtn').onclick=function(){
     var idn=getIdentity();
@@ -412,8 +430,6 @@ var QUIZ_ID = "L01";
     btn.disabled=true;stat.className='text-sm font-bold mt-3 min-h-[20px] text-indigo-600';stat.textContent='繳交中…';
     ensureAuth().then(function(){return db.collection('submissions').doc(docId).set(payload,{merge:true});})
       .then(function(){
-        if(essayText)db.collection('feeds').doc('g5-L01').collection('messages').add(
-          {qid:'essay',text:essayText.slice(0,200),tag:idn.grade+'年'+idn.className+'班',at:firebase.firestore.FieldValue.serverTimestamp()}).catch(function(){});
         btn.disabled=false;btn.textContent='重新繳交（覆蓋）';
         stat.className='text-sm font-bold mt-3 min-h-[20px] text-emerald-600';
         stat.textContent='✓ 已繳交（體驗完成度 '+experienceCompletion+'%）。可再按一次覆蓋更新。';
@@ -449,6 +465,15 @@ var QUIZ_ID = "L01";
       .catch(function(e){console.warn('Firebase 啟用失敗，改用單機模式',e);if(IS_ADMIN)teacherOffline();});
   }
   function showBar(){document.getElementById('teacherbar').classList.remove('hidden');}
+  // 預覽學生模式：暫時隱藏教師工具列，確認畫面跟學生看到的一樣（見《學習單資料與提交規範》）
+  document.getElementById('previewModeBtn').onclick=function(){
+    document.getElementById('teacherbar').classList.add('hidden');
+    document.getElementById('backToTeacher').classList.remove('hidden');
+  };
+  document.getElementById('backToTeacher').onclick=function(){
+    document.getElementById('teacherbar').classList.remove('hidden');
+    document.getElementById('backToTeacher').classList.add('hidden');
+  };
   function teacherOffline(){
     showBar();document.getElementById('tStatus').textContent='單機模式（答案已內建，免上傳）';
     var pw=prompt('教師密碼：');if(pw!=='1234'){if(pw!==null)alert('密碼錯誤');document.getElementById('teacherbar').classList.add('hidden');return;}
