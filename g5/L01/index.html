@@ -193,6 +193,15 @@ var QUIZ_ID = "L01";
 (function(){
   var IS_ADMIN = location.hash === '#admin';
 
+  // 「預覽學生模式」跨頁保留的標記：清快取＋拿掉 #admin 重新整理後，
+  // 這頁本身已經是一般學生視角（IS_ADMIN=false），要靠這個 flag 才知道還要顯示「返回教師模式」浮動鍵。
+  var PREVIEW_KEY='wk_previewMode';
+  if(!IS_ADMIN){
+    try{
+      if(sessionStorage.getItem(PREVIEW_KEY)==='1')document.getElementById('backToTeacher').classList.remove('hidden');
+    }catch(e){}
+  }
+
   // ===== 識別列：年級/班級/學號（數字），見《學習單資料與提交規範》§1 =====
   var ID_KEY='wk_identity';
   function digits(s){return String(s||'').replace(/[^0-9]/g,'');}
@@ -465,14 +474,18 @@ var QUIZ_ID = "L01";
       .catch(function(e){console.warn('Firebase 啟用失敗，改用單機模式',e);if(IS_ADMIN)teacherOffline();});
   }
   function showBar(){document.getElementById('teacherbar').classList.remove('hidden');}
-  // 預覽學生模式：暫時隱藏教師工具列，確認畫面跟學生看到的一樣（見《學習單資料與提交規範》）
+  // 預覽學生模式：清空本機快取（身分＋作答），拿掉 #admin 重新整理，
+  // 確保看到的是「全新學生第一次進來」的畫面，不是老師自己測試留下的答案（見《學習單資料與提交規範》§5）
   document.getElementById('previewModeBtn').onclick=function(){
-    document.getElementById('teacherbar').classList.add('hidden');
-    document.getElementById('backToTeacher').classList.remove('hidden');
+    if(!confirm('會清空這台裝置上已填寫的身分（年級/班級/學號）與作答，改成全新未填寫的畫面，確定要預覽嗎？'))return;
+    try{localStorage.removeItem(ID_KEY);localStorage.removeItem('g5L01flow');}catch(e){}
+    try{sessionStorage.setItem(PREVIEW_KEY,'1');}catch(e){}
+    location.href=location.pathname+location.search;   // 拿掉 #admin，以全新學生身分重新載入
   };
   document.getElementById('backToTeacher').onclick=function(){
-    document.getElementById('teacherbar').classList.remove('hidden');
-    document.getElementById('backToTeacher').classList.add('hidden');
+    try{sessionStorage.removeItem(PREVIEW_KEY);}catch(e){}
+    location.href=location.pathname+location.search+'#admin';
+    location.reload();   // hash-only 導向不會重新載入頁面，強制重整讓 IS_ADMIN 重新判斷、走登入流程
   };
   function teacherOffline(){
     showBar();document.getElementById('tStatus').textContent='單機模式（答案已內建，免上傳）';
