@@ -494,24 +494,36 @@ var QUIZ_ID = "L01";
     document.getElementById('revealBtn').onclick=doReveal;
     document.getElementById('lockBtn').onclick=function(){location.reload();};  // 還原＝回到未公布
   }
+  function wireTeacherUI(email){
+    document.getElementById('tStatus').textContent='已登入 '+email;
+    initFeed();
+    var up=document.getElementById('uploadBtn');
+    if(up)up.onclick=function(){up.disabled=true;up.textContent='上傳中…';
+      quizRef.set({answers:items.map(function(it){return it.real}),answersAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})
+        .then(function(){up.disabled=false;up.textContent='✓ 已上傳';setTimeout(function(){up.textContent='⬆ 上傳答案';},2500);
+          alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要按「🎉 公布」即可。');})
+        .catch(function(e){up.disabled=false;up.textContent='⬆ 上傳答案';alert('上傳失敗：'+e.message);});};
+    document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
+    document.getElementById('lockBtn').onclick=function(){quizRef.set({revealed:false},{merge:true});};
+    quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
+      document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / 8';});
+  }
+  // 登入過一次後 Firebase 會把 session 存在本機（預設 LOCAL persistence），
+  // 這裡先等 onAuthStateChanged 回報目前狀態，已經是登入過的教師帳號就直接用，不必每次重整/回到教師模式都再問一次帳密。
   function teacherOnline(){
     showBar();
-    var email=prompt('教師 Email：',TEACHER_EMAIL);if(email===null){document.getElementById('teacherbar').classList.add('hidden');return;}
-    var pw=prompt('密碼：');if(pw===null){document.getElementById('teacherbar').classList.add('hidden');return;}
-    auth.signInWithEmailAndPassword(email,pw).then(function(){
-      document.getElementById('tStatus').textContent='已登入 '+email;
-      initFeed();
-      var up=document.getElementById('uploadBtn');
-      if(up)up.onclick=function(){up.disabled=true;up.textContent='上傳中…';
-        quizRef.set({answers:items.map(function(it){return it.real}),answersAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})
-          .then(function(){up.disabled=false;up.textContent='✓ 已上傳';setTimeout(function(){up.textContent='⬆ 上傳答案';},2500);
-            alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要按「🎉 公布」即可。');})
-          .catch(function(e){up.disabled=false;up.textContent='⬆ 上傳答案';alert('上傳失敗：'+e.message);});};
-      document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
-      document.getElementById('lockBtn').onclick=function(){quizRef.set({revealed:false},{merge:true});};
-      quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
-        document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / 8';});
-    }).catch(function(e){alert('登入失敗：'+e.message);document.getElementById('teacherbar').classList.add('hidden');});
+    var handled=false;
+    var unsub=auth.onAuthStateChanged(function(u){
+      if(handled)return;handled=true;if(unsub)unsub();
+      if(u&&!u.isAnonymous&&u.email){
+        wireTeacherUI(u.email);
+        return;
+      }
+      var email=prompt('教師 Email：',TEACHER_EMAIL);if(email===null){document.getElementById('teacherbar').classList.add('hidden');return;}
+      var pw=prompt('密碼：');if(pw===null){document.getElementById('teacherbar').classList.add('hidden');return;}
+      auth.signInWithEmailAndPassword(email,pw).then(function(cred){wireTeacherUI(cred.user.email);})
+        .catch(function(e){alert('登入失敗：'+e.message);document.getElementById('teacherbar').classList.add('hidden');});
+    });
   }
   boot();
 
