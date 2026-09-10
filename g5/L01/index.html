@@ -469,7 +469,16 @@ var QUIZ_ID = "L01";
           if(!d.revealed&&state.revealed)location.reload();   // 老師還原 → 回到未公布（作答）畫面
         },function(e){console.warn('讀取失敗',e);});
         if(IS_ADMIN)teacherOnline();
-        else auth.signInAnonymously().then(initFeed).catch(function(e){console.warn('匿名登入失敗',e);initFeed();});
+        else{
+          // 先看目前是否已經有登入狀態（可能是老師自己持久化的帳號——例如剛從 #admin 按「預覽學生模式」過來）。
+          // 直接呼叫 signInAnonymously() 會把已登入的帳號換成匿名使用者、蓋掉本機持久化的 session，
+          // 害老師之後按「返回教師模式」還要重新輸入帳密——所以一定要先確認真的沒有登入過，才簽名匿名。
+          var unsubStudent=auth.onAuthStateChanged(function(u){
+            if(unsubStudent)unsubStudent();unsubStudent=null;
+            if(u)initFeed();
+            else auth.signInAnonymously().then(initFeed).catch(function(e){console.warn('匿名登入失敗',e);initFeed();});
+          });
+        }
       })
       .catch(function(e){console.warn('Firebase 啟用失敗，改用單機模式',e);if(IS_ADMIN)teacherOffline();});
   }
