@@ -91,8 +91,7 @@
     <div id="reasonBox" class="hidden bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h3 class="cute text-xl font-extrabold text-indigo-700">🤔 你是怎麼判斷的？</h3>
       <p class="text-sm text-slate-600 mb-2">投票結束了，說說看：你是靠什麼線索判斷一則消息是真是假的？</p>
-      <textarea id="reason" data-qid="reason" data-qtype="open" class="mt-1 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-indigo-400 outline-none" rows="3" placeholder="例如：看內容合不合理、看是誰發的、看有沒有其他人也在說…"></textarea>
-      <p class="text-xs text-slate-400 mt-1">💾 這裡會自動存在這台裝置，重新整理不會不見（但這只是草稿，老師還看不到）。</p>
+      <textarea id="reason" data-qid="reason" data-qtype="open" class="mt-1 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-indigo-400 outline-none" rows="3"></textarea>
       <button id="pushReason" class="mt-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
       <span id="pushReasonNote" class="text-xs text-slate-400 ml-2"></span>
       <div id="reasonFeedList" class="mt-3 space-y-2 max-h-56 overflow-y-auto pr-1"><p class="text-xs text-slate-400">還沒有人送出…</p></div>
@@ -148,8 +147,7 @@
         結果造成 <b>______</b>（金錢／健康／害到別人 的具體損失）。<br>
         所以看到訊息時，我會先<b>懷疑後果</b>，再決定要不要相信。
       </div>
-      <textarea id="essay" data-qid="essay" data-qtype="open" class="mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none" rows="4" placeholder="把上面的句型填成一段完整的話…"></textarea>
-      <p class="text-xs text-slate-400 mt-1">💾 這裡會自動存在這台裝置，重新整理不會不見（但這只是草稿，老師還看不到）。</p>
+      <textarea id="essay" data-qid="essay" data-qtype="open" class="mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none" rows="4"></textarea>
       <!-- 「推送」是獨立動作：把這題貼進下面的留言牆，跟最下面的「繳交學習單」是兩件不同的事（見《學習單資料與提交規範》§4）-->
       <button id="pushEssay" class="mt-2 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
       <span id="pushEssayNote" class="text-xs text-slate-400 ml-2"></span>
