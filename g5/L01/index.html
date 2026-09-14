@@ -87,11 +87,11 @@
       </p>
     </div>
 
-    <!-- 投完 8 題就跳出「你是怎麼判斷的」（不必等老師公布答案），推送給同學看（見《學習單資料與提交規範》§4） -->
-    <div id="reasonBox" class="hidden">
+    <!-- 直接列出，不需要等投完票或老師公布答案（見《學習單資料與提交規範》§4） -->
+    <div id="reasonBox">
       <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
         <h3 class="cute text-xl font-extrabold text-indigo-700">🤔 你是怎麼判斷的？</h3>
-        <p class="text-sm text-slate-600 mb-2">投票結束了，說說看：你是靠什麼線索判斷一則消息是真是假的？</p>
+        <p class="text-sm text-slate-600 mb-2">說說看：你是靠什麼線索判斷一則消息是真是假的？</p>
         <textarea id="reason" data-qid="reason" data-qtype="open" class="mt-1 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-indigo-400 outline-none" rows="3"></textarea>
         <button id="pushReason" class="mt-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
         <span id="pushReasonNote" class="text-xs text-slate-400 ml-2"></span>
@@ -342,11 +342,8 @@ var QUIZ_ID = "L01";
     if(state.votes[i]!==undefined)
       c.querySelector(state.votes[i]?'.v-real':'.v-fake').classList.add('bg-indigo-100','border-indigo-400','text-indigo-700');
   });
-  // 投完 8 題就跳出「你是怎麼判斷的」，不必等老師公布答案
   function updateVoted(){
-    var n=Object.keys(state.votes).length;
-    document.getElementById('voted').textContent=n+' / 8';
-    if(n>=items.length)document.getElementById('reasonBox').classList.remove('hidden');
+    document.getElementById('voted').textContent=Object.keys(state.votes).length+' / 8';
   }
   updateVoted();
 
