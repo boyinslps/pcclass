@@ -44,9 +44,6 @@
       <h1 class="cute text-4xl md:text-5xl font-extrabold text-orange-600 leading-tight">台南小導遊養成記</h1>
       <p class="text-slate-500">四年級上學期 · 第 1 課：旅行經驗與主題發想</p>
     </div>
-    <div class="inline-flex items-center gap-2 bg-white border-4 border-orange-200 rounded-full px-5 py-2 font-extrabold text-lg">
-      <span>🏅</span><span id="prog" class="text-orange-600">0 / 4</span>
-    </div>
   </header>
 
   <!-- ===== 第一節 ===== -->
@@ -188,107 +185,6 @@
     <canvas id="surveyCv" width="900" height="620" class="hidden"></canvas>
   </section>
 
-  <!-- ===== 第二節 ===== -->
-  <div class="flex items-center gap-3 my-6">
-    <div class="h-1 flex-1 bg-violet-200 rounded"></div>
-    <span class="cute text-xl font-extrabold text-violet-500">第二節 · 想主題</span>
-    <div class="h-1 flex-1 bg-violet-200 rounded"></div>
-  </div>
-
-  <!-- ④ 導覽主題 -->
-  <section class="bg-white border-4 border-violet-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-violet-700 mb-3">⑤ 從「去哪裡」到「玩什麼」</h2>
-    <div class="grid md:grid-cols-2 gap-6 items-center mb-5">
-      <div>
-        <p class="text-xl mb-2">只跟朋友說「我們去<b>安平</b>」，他會問：「去<b>吃東西</b>？還是<b>看古蹟</b>？」🤨</p>
-        <p class="text-xl mb-3">只給地點<b>不夠</b>，要有一個「<b class="text-violet-700">主題</b>」！</p>
-        <div class="bg-violet-50 rounded-2xl p-4">
-          <p class="cute text-lg font-extrabold text-violet-700 mb-1">🍔 主題就像速食店「套餐」</p>
-          <p class="text-lg">選「美食探險套餐」就不會排圖書館；選「時光機套餐（古蹟）」就帶他去看古蹟，不是逛百貨。</p>
-        </div>
-      </div>
-      <a href="https://www.youtube.com/watch?v=zLH9mzD7-3E" target="_blank" rel="noopener" class="vcard block relative rounded-2xl overflow-hidden shadow-lg">
-        <img src="assets/yt_zLH9mzD7-3E.jpg" alt="影片：台南美食節" loading="lazy" style="width:100%;border-radius:14px">
-        <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/35 transition">
-          <div class="bg-red-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-lg">▶</div>
-        </div>
-        <div class="absolute bottom-0 inset-x-0 bg-black/65 text-white font-bold px-3 py-2">▶ 點我播放：台南好食小旅行</div>
-      </a>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6 items-center mb-5">
-      <img src="assets/Anping_Fort.jpg" alt="安平古堡" class="shot">
-      <div class="bg-violet-50 rounded-2xl p-4">
-        <p class="cute text-lg font-extrabold text-violet-700 mb-1">🏰 舉例：「時光機套餐（古蹟）」</p>
-        <p class="text-lg">像<b>安平古堡</b>就很適合放進這個套餐 —— 台灣第一座城堡，一走進去就像回到 400 年前。想想看，這個套餐還能放哪些台南古蹟？</p>
-      </div>
-    </div>
-
-    <div class="bg-white border-2 border-violet-200 rounded-2xl p-4">
-      <p class="field font-bold text-violet-800 mb-2">🎯 承重測試：「<b>台南自然風景</b>」套餐，你會選哪些景點？（可複選）</p>
-      <div id="menuOpts" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
-      <button id="menuBtn" class="mt-3 bg-violet-500 hover:bg-violet-600 text-white font-bold rounded-xl px-5 py-2">看看我選得對不對</button>
-      <p id="menuFb" class="font-bold text-violet-700 mt-3 min-h-[28px]"></p>
-    </div>
-  </section>
-
-  <!-- ⑤ 主題九宮格 -->
-  <section class="bg-white border-4 border-emerald-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-emerald-700 mb-1">⑥ 主題九宮格</h2>
-    <p class="text-lg mb-4">一個主題能放進好多景點！幫 8 個主題各找<b>一個台南景點</b>；中間那格，換<b>你自己想主題</b>！</p>
-    <div class="grid md:grid-cols-2 gap-6 items-start mb-5">
-      <div id="grid9" class="grid grid-cols-3 gap-2"></div>
-      <div>
-        <p class="text-sm font-bold text-emerald-600 mb-1">💡 台南旅遊網有這些主題，可以參考：</p>
-        <img src="assets/九宮格.png" alt="台南旅遊網主題分類" class="shot">
-      </div>
-    </div>
-    <div class="bg-emerald-50 rounded-2xl p-4">
-      <p class="field font-bold text-emerald-800 mb-1">🧺 想一想：像「水仙宮市場」這種<b>傳統市場</b>，可以放進哪些主題？（可複選）</p>
-      <p class="text-sm text-slate-500 mb-2">同一個地方，其實可以符合好幾個主題喔！</p>
-      <div id="predOpts" class="flex flex-wrap gap-2"></div>
-      <button id="predBtn" class="mt-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl px-5 py-2">送出</button>
-      <p id="predFb" class="font-bold text-emerald-700 mt-3 min-h-[28px]"></p>
-    </div>
-  </section>
-
-  <!-- ⑥ 主題構想卡 -->
-  <section class="bg-white border-4 border-teal-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-teal-700 mb-1">⑦ 我的導覽主題構想卡</h2>
-    <p class="text-lg text-slate-600 mb-4">把空格填滿，就完成你的第一張導覽構想卡了！</p>
-    <div class="grid md:grid-cols-2 gap-6 items-start">
-      <div>
-        <div class="space-y-3 text-xl">
-          <div>我想要帶 <input id="c1" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-40"></div>
-          <div>主題是 <input id="c2" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-56"></div>
-          <div>因為 <input id="c3" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-full mt-1"></div>
-        </div>
-        <div class="mt-4 bg-teal-50 rounded-2xl p-4 text-lg">
-          <p class="font-bold text-teal-800 mb-1">✅ 交出前自己檢查：</p>
-          <label class="flex items-center gap-2 mb-1"><input type="checkbox" class="w-5 h-5"> 三個空格都填滿了</label>
-          <label class="flex items-center gap-2"><input type="checkbox" class="w-5 h-5"> 理由和台南特色（或我的經驗）有關</label>
-        </div>
-        <button id="cardBtn" class="mt-4 w-full bg-teal-500 hover:bg-teal-600 text-white cute text-xl font-extrabold rounded-2xl py-3">✨ 產生我的構想卡</button>
-      </div>
-      <div id="cardOut" class="hidden bg-gradient-to-b from-teal-50 to-cyan-50 border-4 border-teal-200 rounded-3xl p-5 text-center">
-        <div class="text-3xl mb-2">🎴</div>
-        <p id="cardText" class="text-xl font-bold text-teal-900 leading-relaxed"></p>
-        <div class="flex gap-2 justify-center mt-3">
-          <button id="cardCopy" class="bg-white border-2 border-teal-300 rounded-xl px-4 py-2 font-bold text-teal-700">📋 複製</button>
-          <button id="cardDl" class="bg-white border-2 border-teal-300 rounded-xl px-4 py-2 font-bold text-teal-700">📸 下載卡片</button>
-        </div>
-      </div>
-    </div>
-    <canvas id="cardCv" width="900" height="500" class="hidden"></canvas>
-  </section>
-
-  <!-- 完成 -->
-  <section id="done" class="hidden text-center bg-gradient-to-b from-amber-100 to-orange-100 border-4 border-amber-300 rounded-3xl p-7">
-    <div class="text-6xl mb-2">🎉</div>
-    <h2 class="cute text-3xl font-extrabold text-orange-700">恭喜！你已經是小導遊了！</h2>
-    <p class="text-lg text-slate-700 mt-3">你學會用台南旅遊網找景點、也懂了用「主題」規劃路線。<br>下一課，我們要把你的主題變成一本真正的<b>導覽小書</b>！</p>
-  </section>
-
   <!-- ===== 繳交學習單 ===== -->
   <section class="mt-8">
     <div class="bg-white border-4 border-orange-300 rounded-3xl p-5 shadow-sm text-center">
@@ -296,6 +192,18 @@
       <p class="text-sm text-slate-500 mb-3">確定都填好了嗎？按下面按鈕交給老師（可以重交，會覆蓋前一次）。</p>
       <button id="submitBtn" class="w-full bg-orange-600 hover:bg-orange-700 text-white cute text-xl font-extrabold rounded-2xl py-3">繳交學習單</button>
       <p id="submitStat" class="text-sm font-bold mt-3 min-h-[20px]"></p>
+    </div>
+  </section>
+
+  <!-- 繳交成功才出現：完成獎勵 -->
+  <section id="rewardBox" class="hidden text-center bg-gradient-to-b from-amber-100 to-orange-100 border-4 border-amber-300 rounded-3xl p-7 mt-6">
+    <div class="text-6xl mb-2 pop">🎉</div>
+    <h2 class="cute text-3xl font-extrabold text-orange-700">恭喜你已經做完今日的作業，可以遊玩！</h2>
+    <div class="flex flex-wrap gap-3 justify-center mt-4">
+      <a href="https://boyinslps.github.io/typehero/index.html" target="_blank" rel="noopener"
+         class="cute inline-block bg-orange-600 hover:bg-orange-700 text-white text-xl font-extrabold rounded-2xl px-8 py-3">🎮 打字英雄</a>
+      <a href="https://gemini.google.com/share/0adbaeae6c16?skid=751ce4ac-860d-4160-8a1a-12a1ebcf6f1d" target="_blank" rel="noopener"
+         class="cute inline-block bg-white border-4 border-orange-300 hover:bg-orange-50 text-orange-700 text-xl font-extrabold rounded-2xl px-8 py-3">🕹️ 更多遊戲</a>
     </div>
   </section>
 
@@ -359,14 +267,11 @@ var firebaseConfig = {
   }
   boot();
 
-  var done={survey:false,menu:false,grid:false,card:false};
+  var done={survey:false};
   function save(){try{localStorage.setItem('g4L01v3',JSON.stringify(done))}catch(e){}}
   function load(){try{var d=localStorage.getItem('g4L01v3');if(d)done=Object.assign(done,JSON.parse(d))}catch(e){}}
   load();
-  function prog(){var n=['survey','menu','grid','card'].filter(function(k){return done[k]}).length;
-    document.getElementById('prog').textContent=n+' / 4';
-    if(n>=4){var d=document.getElementById('done');d.classList.remove('hidden');d.classList.add('pop');}
-    save();}
+  function prog(){save();}
 
   document.querySelectorAll('.warm').forEach(function(b){b.onclick=function(){document.getElementById('warmFb').textContent=b.dataset.fb;};});
 
@@ -412,64 +317,6 @@ var firebaseConfig = {
     if(!done.survey){done.survey=true;prog();}
   };
 
-  var menu=[{n:'四草綠色隧道',ok:true},{n:'漁光島',ok:true},{n:'巴克禮公園',ok:true},{n:'花園夜市',ok:false},{n:'林百貨',ok:false},{n:'赤崁樓',ok:false}];
-  var mEl=document.getElementById('menuOpts');
-  menu.forEach(function(m){var b=document.createElement('button');
-    b.className='opt border-2 border-slate-200 rounded-xl px-3 py-2 font-bold hover:border-violet-400';b.textContent=m.n;
-    b.onclick=function(){if(b.dataset.on){b.dataset.on='';b.className='opt border-2 border-slate-200 rounded-xl px-3 py-2 font-bold hover:border-violet-400';}
-      else{b.dataset.on='1';b.className='opt border-2 border-violet-500 bg-violet-50 rounded-xl px-3 py-2 font-bold';}};
-    mEl.appendChild(b);});
-  document.getElementById('menuBtn').onclick=function(){
-    var picks=Array.from(mEl.children);
-    var right=picks.every(function(b,i){return (!!b.dataset.on)===menu[i].ok;});
-    var chosenAny=picks.some(function(b){return b.dataset.on;});
-    if(right)document.getElementById('menuFb').textContent='✓ 完全正確！自然風景套餐要選四草、漁光島、巴克禮公園這種大自然的地方。';
-    else if(!chosenAny)document.getElementById('menuFb').textContent='先勾選看看喔～提示：哪些是「大自然」的地方？';
-    else document.getElementById('menuFb').textContent='再想想！花園夜市、林百貨、赤崁樓比較像「美食」或「古蹟」套餐喔。';
-    if(!done.menu){done.menu=true;prog();}
-  };
-
-  var themes=['歷史古蹟','自然景觀','夜市夜遊','宗教廟宇','__center__','公園綠地','觀光工廠','在地藝文','生態教育'];
-  var g=document.getElementById('grid9');
-  themes.forEach(function(t){var cell=document.createElement('div');
-    if(t==='__center__'){cell.className='border-2 border-dashed border-emerald-400 bg-emerald-50 rounded-xl p-2 text-center';
-      cell.innerHTML='<div class="text-xs font-bold text-emerald-600 mb-1">✏️ 我的主題</div>'
-        +'<input class="field w-full text-center text-sm border-b-2 border-emerald-300 outline-none mb-1">'
-        +'<input class="field w-full text-center text-sm border-b-2 border-emerald-300 outline-none">';
-    }else{cell.className='border-2 border-slate-200 rounded-xl p-2 text-center';
-      cell.innerHTML='<div class="font-bold text-emerald-700 text-sm mb-1">'+t+'</div>'
-        +'<input class="gi field w-full text-center text-sm border-b-2 border-emerald-200 focus:border-emerald-500 outline-none">';}
-    g.appendChild(cell);});
-  g.addEventListener('input',function(){var filled=Array.from(g.querySelectorAll('.gi')).filter(function(i){return i.value.trim();}).length;
-    if(filled>=3&&!done.grid){done.grid=true;prog();}});
-
-  var preds=[{n:'美食'},{n:'夜市夜遊'},{n:'在地藝文'},{n:'溫泉度假'},{n:'自然景觀'}];
-  var pEl=document.getElementById('predOpts');
-  preds.forEach(function(p){var b=document.createElement('button');
-    b.className='opt border-2 border-slate-200 rounded-full px-4 py-1.5 font-bold hover:border-emerald-400';b.textContent=p.n;
-    b.onclick=function(){if(b.dataset.on){b.dataset.on='';b.className='opt border-2 border-slate-200 rounded-full px-4 py-1.5 font-bold hover:border-emerald-400';}
-      else{b.dataset.on='1';b.className='opt border-2 border-emerald-500 bg-emerald-50 rounded-full px-4 py-1.5 font-bold';}};
-    pEl.appendChild(b);});
-  document.getElementById('predBtn').onclick=function(){
-    document.getElementById('predFb').textContent='💡 傳統市場可以同時是「美食」「夜市夜遊」，也是「在地藝文」！同一個地方能放進好多主題，看你想介紹哪一面。';};
-
-  function cardTextStr(){var a=document.getElementById('c1').value.trim()||'＿＿',b=document.getElementById('c2').value.trim()||'＿＿',c=document.getElementById('c3').value.trim()||'＿＿';
-    return '我想要帶「'+a+'」，\n主題是「'+b+'」，\n因為'+c+'。';}
-  document.getElementById('cardBtn').onclick=function(){
-    document.getElementById('cardText').innerText=cardTextStr();
-    var o=document.getElementById('cardOut');o.classList.remove('hidden');o.classList.add('pop');
-    if(!done.card){done.card=true;prog();}};
-  document.getElementById('cardCopy').onclick=function(){var t=cardTextStr().replace(/\n/g,'');
-    try{navigator.clipboard.writeText(t);this.textContent='✓ 已複製';}catch(e){this.textContent='✓';}};
-  document.getElementById('cardDl').onclick=function(){
-    var cv=document.getElementById('cardCv'),x=cv.getContext('2d');
-    x.fillStyle='#f0fdfa';x.fillRect(0,0,900,500);x.strokeStyle='#5eead4';x.lineWidth=8;x.strokeRect(16,16,868,468);
-    x.fillStyle='#0f766e';x.font='bold 34px "Noto Sans TC",sans-serif';x.fillText('🎴 我的導覽主題構想卡',40,80);
-    x.fillStyle='#134e4a';x.font='30px "Noto Sans TC",sans-serif';
-    var lines=cardTextStr().split('\n');var y=170;lines.forEach(function(l){var t=l;if(t.length>26)t=t.slice(0,26)+'…';x.fillText(t,40,y);y+=64;});
-    x.fillStyle='#94a3b8';x.font='20px "Noto Sans TC",sans-serif';x.fillText('台南小導遊養成記 · 四上 L01',40,460);
-    try{var a=document.createElement('a');a.download='我的構想卡.png';a.href=cv.toDataURL('image/png');a.click();this.textContent='✓ 已下載';}catch(e){this.textContent='✓';}};
-
   // ===== 繳交學習單（見《學習單資料與提交規範》§3）=====
   // 這份全部標 experience／open，沒有 score 題：這節是「先接觸、有感」的體驗課，不是正式檢核（呼應 L01 一貫定位）。
   document.getElementById('submitBtn').onclick=function(){
@@ -487,43 +334,17 @@ var firebaseConfig = {
     experienceAnswers.survey={given:qv,correct:null,isCorrect:surveyFilled===4};
     answers.survey=qv;qtypes.survey='experience';
 
-    // ⑤ 導覽主題套餐（menu）：真的有正解（menu 陣列的 ok），沿用 menuBtn 同一套判斷邏輯。
-    var menuPicks=Array.from(mEl.children),menuChosen=menuPicks.map(function(b){return !!b.dataset.on;});
-    var menuNames=menu.map(function(m){return m.n;}),menuGiven=menu.filter(function(m,i){return menuChosen[i];}).map(function(m){return m.n;});
-    var menuCorrect=menu.filter(function(m){return m.ok;}).map(function(m){return m.n;});
-    var menuRight=menuChosen.every(function(on,i){return on===menu[i].ok;});
-    experienceAnswers.menu={given:menuGiven,correct:menuCorrect,isCorrect:menuRight};
-    answers.menu=menuGiven;qtypes.menu='experience';
-
-    // ⑥ 主題九宮格：8 個主題各填一個景點，答案開放（同一主題可以填很多不同景點），
-    // 用「填了幾格」當完成度／正確度依據，跟頁面自己判斷「解鎖」的門檻（填滿 3 格）一致。
-    var giFilled=Array.from(g.querySelectorAll('.gi')).filter(function(i){return i.value.trim();}).length;
-    experienceAnswers.grid9={given:giFilled,correct:null,isCorrect:giFilled>=3};
-    answers.grid9=giFilled;qtypes.grid9='experience';
-
-    // ⑥ 傳統市場歸類（pred）：原本就沒有標準答案（頁面固定回饋「好幾個主題都可以」），
-    // 只看「有沒有挑」當完成依據。
-    var predPicks=Array.from(pEl.children),predGiven=preds.filter(function(p,i){return predPicks[i]&&predPicks[i].dataset.on;}).map(function(p){return p.n;});
-    experienceAnswers.pred={given:predGiven,correct:null,isCorrect:predGiven.length>0};
-    answers.pred=predGiven;qtypes.pred='experience';
-
     // ② 換個角度看：純觀察／討論，沒有作答欄位，不進繳交（跟①的 icebreaker、影片卡同一種不追蹤慣例）。
 
-    // ⑦ 導覽主題構想卡：開放題，學生自己的創意內容。
-    var cardText=cardTextStr();
-    answers.card=cardText;qtypes.card='open';
+    var experienceCompletion=Math.round((surveyFilled>0?1:0)/1*100);
 
-    var answeredCount=[surveyFilled>0,menuChosen.some(Boolean),giFilled>0,predGiven.length>0].filter(Boolean).length;
-    var experienceCompletion=Math.round(answeredCount/4*100);
-    var cardFilled=!!(document.getElementById('c1').value.trim()&&document.getElementById('c2').value.trim()&&document.getElementById('c3').value.trim());
-
-    var msg='確定要繳交嗎？\n體驗完成度：'+experienceCompletion+'%\n導覽構想卡：'+(cardFilled?'已填寫':'尚未填寫完整，建議先寫再交')+'\n\n送出後這份會被老師看到，確定要交嗎？';
+    var msg='確定要繳交嗎？\n景點調查表：'+(surveyFilled===4?'四題都填了':(surveyFilled>0?'填了 '+surveyFilled+' / 4 題':'還沒填'))+'\n\n送出後這份會被老師看到，確定要交嗎？';
     if(!confirm(msg))return;
 
     var docId='g4-L01__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:'g4-L01',worksheetTitle:'台南小導遊養成記',lessonPath:'g4/L01',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
-      answers:answers,qtypes:qtypes,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{card:cardText},
+      answers:answers,qtypes:qtypes,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{},
       accuracyRate:null,experienceCompletion:experienceCompletion,
       status:'submitted',submittedAt:firebase.firestore.FieldValue.serverTimestamp()};
     var btn=this,stat=document.getElementById('submitStat');
@@ -532,7 +353,8 @@ var firebaseConfig = {
       .then(function(){
         btn.disabled=false;btn.textContent='重新繳交（覆蓋）';
         stat.className='text-sm font-bold mt-3 min-h-[20px] text-emerald-600';
-        stat.textContent='✓ 已繳交（體驗完成度 '+experienceCompletion+'%）。可再按一次覆蓋更新。';
+        stat.textContent='✓ 已繳交！';
+        var rb=document.getElementById('rewardBox');rb.classList.remove('hidden');rb.scrollIntoView({behavior:'smooth'});
       }).catch(function(e){
         btn.disabled=false;
         stat.className='text-sm font-bold mt-3 min-h-[20px] text-amber-600';
