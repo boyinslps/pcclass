@@ -23,13 +23,13 @@
 </head>
 <body class="text-slate-800">
 
-<!-- 識別列：年級/班級/學號（數字），頁面最上方，見《學習單資料與提交規範》§1 -->
+<!-- 識別列：年級/班級/座號（數字），頁面最上方，見《學習單資料與提交規範》§1 -->
 <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b-2 border-indigo-200">
   <div class="max-w-4xl mx-auto px-4 py-2 flex items-center gap-3 flex-wrap text-sm">
     <span class="cute font-bold text-indigo-700">我是誰</span>
     <label class="flex items-center gap-1 text-slate-500">年級<input id="idGrade" class="idnum border-2 border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-700 focus:border-indigo-400 outline-none" inputmode="numeric" maxlength="2"></label>
     <label class="flex items-center gap-1 text-slate-500">班級<input id="idClass" class="idnum border-2 border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-700 focus:border-indigo-400 outline-none" inputmode="numeric" maxlength="2"></label>
-    <label class="flex items-center gap-1 text-slate-500">學號<input id="idStudent" class="idnum border-2 border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-700 focus:border-indigo-400 outline-none" inputmode="numeric" maxlength="2"></label>
+    <label class="flex items-center gap-1 text-slate-500">座號<input id="idStudent" class="idnum border-2 border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-700 focus:border-indigo-400 outline-none" inputmode="numeric" maxlength="2"></label>
     <span id="idOk" class="hidden text-emerald-600 font-bold text-xs">✓ 已記住</span>
   </div>
 </div>
@@ -218,7 +218,7 @@ var QUIZ_ID = "L01";
     }catch(e){}
   }
 
-  // ===== 識別列：年級/班級/學號（數字），見《學習單資料與提交規範》§1 =====
+  // ===== 識別列：年級/班級/座號（數字），見《學習單資料與提交規範》§1 =====
   var ID_KEY='wk_identity';
   function digits(s){return String(s||'').replace(/[^0-9]/g,'');}
   function loadIdentity(){try{return JSON.parse(localStorage.getItem(ID_KEY)||'{}')}catch(e){return {}}}
@@ -227,7 +227,8 @@ var QUIZ_ID = "L01";
     var g=digits(document.getElementById('idGrade').value),c=digits(document.getElementById('idClass').value),s=digits(document.getElementById('idStudent').value);
     return {grade:g?Number(g):null,className:c?Number(c):null,studentId:s?Number(s):null};
   }
-  function identityValid(id){return id.grade!=null&&id.className!=null&&id.studentId!=null;}
+  function identityValid(id){return id.grade!=null&&id.className!=null&&id.className>=1&&id.className<=14&&id.studentId!=null;}
+  function clampClass(v){while(v!==''&&Number(v)>14)v=v.slice(0,-1);return v;}   // 防呆：班級不接受 15 以上
   (function initIdentity(){
     var saved=loadIdentity();
     if(saved.grade)document.getElementById('idGrade').value=saved.grade;
@@ -237,7 +238,9 @@ var QUIZ_ID = "L01";
     ['idGrade','idClass','idStudent'].forEach(function(id){
       var el=document.getElementById(id);
       el.addEventListener('input',function(){
-        var d=digits(el.value);if(d!==el.value)el.value=d;
+        var d=digits(el.value);
+        if(id==='idClass')d=clampClass(d);
+        if(d!==el.value)el.value=d;
         var idn=getIdentity();
         if(identityValid(idn)){saveIdentity(idn);document.getElementById('idOk').classList.remove('hidden');}
         else document.getElementById('idOk').classList.add('hidden');
@@ -458,7 +461,7 @@ var QUIZ_ID = "L01";
   // ===== 繳交學習單（見《學習單資料與提交規範》§3）=====
   document.getElementById('submitBtn').onclick=function(){
     var idn=getIdentity();
-    if(!identityValid(idn)){alert('請先在最上方填好年級、班級、學號（都是數字）。');window.scrollTo({top:0,behavior:'smooth'});return;}
+    if(!identityValid(idn)){alert('請先在最上方填好年級、班級（1-14）、座號（都是數字）。');window.scrollTo({top:0,behavior:'smooth'});return;}
     if(!db){alert('系統尚未連線，請稍後再試或重新整理頁面。');return;}
     var experienceAnswers={},answers={},qtypes={};
     items.forEach(function(it,i){var qid='v'+(i+1),given=state.votes[i];given=(given===undefined)?null:given;var correct=answerOf(i);
@@ -531,7 +534,7 @@ var QUIZ_ID = "L01";
   // 預覽學生模式：清空本機快取（身分＋作答），拿掉 #admin 重新整理，
   // 確保看到的是「全新學生第一次進來」的畫面，不是老師自己測試留下的答案（見《學習單資料與提交規範》§5）
   document.getElementById('previewModeBtn').onclick=function(){
-    if(!confirm('會清空這台裝置上已填寫的身分（年級/班級/學號）與作答，改成全新未填寫的畫面，確定要預覽嗎？'))return;
+    if(!confirm('會清空這台裝置上已填寫的身分（年級/班級/座號）與作答，改成全新未填寫的畫面，確定要預覽嗎？'))return;
     try{localStorage.removeItem(ID_KEY);localStorage.removeItem('g5L01flow');}catch(e){}
     try{sessionStorage.setItem(PREVIEW_KEY,'1');}catch(e){}
     location.href=location.pathname+location.search;   // 拿掉 #admin，以全新學生身分重新載入
