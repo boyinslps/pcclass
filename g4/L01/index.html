@@ -14,6 +14,8 @@
   .pop{animation:pp .35s}@keyframes pp{0%{transform:scale(.94)}60%{transform:scale(1.03)}100%{transform:scale(1)}}
   .vwrap{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.15)}
   .vwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .slido-wrap{width:100%;height:480px;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+  .slido-wrap iframe{width:100%;height:100%;border:0}
   .field{font-size:19px}
   .idnum{width:52px;text-align:center}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -57,33 +59,64 @@
   <!-- ① 開場動機 -->
   <section class="bg-white border-4 border-sky-300 rounded-3xl p-6 mb-6 shadow-sm">
     <h2 class="cute text-2xl font-extrabold text-sky-700 mb-3">① 台南，超好玩！</h2>
-    <div class="grid md:grid-cols-2 gap-6 items-center">
-      <div>
-        <p class="text-xl mb-3">每年有<b class="text-sky-700">好幾百萬人</b>特地搭高鐵來台南玩。</p>
-        <p class="text-xl mb-3">如果有外國 YouTuber 要你當導遊帶路 —— 你是不是<b class="text-sky-700">一片空白</b>？😅</p>
-        <p class="text-lg text-slate-600">我們每天住在台南，把它當成「經過的地方」。但在別人眼中，這裡是<b>特地要來的觀光勝地</b>。今天我們用「觀光客的眼睛」重新看台南！</p>
-        <div class="mt-4 bg-sky-50 rounded-2xl p-3">
-          <p class="font-bold text-sky-800 mb-2">🙋 你帶人玩過台南嗎？</p>
-          <div class="flex gap-3 flex-wrap">
-            <button class="warm bg-sky-100 hover:bg-sky-200 rounded-xl px-4 py-2 font-bold text-sky-700" data-fb="太棒了！你已經有一點導遊經驗，今天讓它升級！">帶過 😎</button>
-            <button class="warm bg-sky-100 hover:bg-sky-200 rounded-xl px-4 py-2 font-bold text-sky-700" data-fb="沒關係！今天就是你的第一次，我們一步一步來。">還沒 🤔</button>
-          </div>
-          <p id="warmFb" class="font-bold text-sky-700 mt-2 min-h-[28px]"></p>
-        </div>
+
+    <div class="mb-5">
+      <p class="font-bold text-sky-800 mb-2">📝 你有去台南哪些地方旅遊過？打幾個字上去，看看全班拼出什麼台南地圖！</p>
+      <div class="slido-wrap">
+        <iframe src="https://app.sli.do/event/57BADTynVjSF6x6cgNGDva" title="台南旅遊地點文字雲" allow="clipboard-write"></iframe>
       </div>
-      <a href="https://www.youtube.com/watch?v=sI9bKz7IQVQ" target="_blank" rel="noopener" class="vcard block relative rounded-2xl overflow-hidden shadow-lg">
-        <img src="assets/yt_sI9bKz7IQVQ.jpg" alt="影片：冬季旅遊來台南" loading="lazy" style="width:100%;border-radius:14px">
-        <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/35 transition">
-          <div class="bg-red-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-lg">▶</div>
-        </div>
-        <div class="absolute bottom-0 inset-x-0 bg-black/65 text-white font-bold px-3 py-2">▶ 點我播放：冬季旅遊，來台南正好玩！</div>
-      </a>
+    </div>
+
+    <p class="text-xl mb-3">每年有<b class="text-sky-700">好幾百萬人</b>特地搭高鐵來台南玩。</p>
+    <p class="text-xl mb-3">如果有外國 YouTuber 要你當導遊帶路 —— 你是不是<b class="text-sky-700">一片空白</b>？😅</p>
+    <p class="text-lg text-slate-600">我們每天住在台南，把它當成「經過的地方」。但在別人眼中，這裡是<b>特地要來的觀光勝地</b>。今天我們用「觀光客的眼睛」重新看台南！</p>
+    <div class="mt-4 bg-sky-50 rounded-2xl p-3">
+      <p class="font-bold text-sky-800 mb-2">🙋 你帶人玩過台南嗎？</p>
+      <div class="flex gap-3 flex-wrap">
+        <button class="warm bg-sky-100 hover:bg-sky-200 rounded-xl px-4 py-2 font-bold text-sky-700" data-fb="太棒了！你已經有一點導遊經驗，今天讓它升級！">帶過 😎</button>
+        <button class="warm bg-sky-100 hover:bg-sky-200 rounded-xl px-4 py-2 font-bold text-sky-700" data-fb="沒關係！今天就是你的第一次，我們一步一步來。">還沒 🤔</button>
+      </div>
+      <p id="warmFb" class="font-bold text-sky-700 mt-2 min-h-[28px]"></p>
     </div>
   </section>
 
-  <!-- ② 台南旅遊網 -->
+  <!-- ② 換個角度看 -->
+  <section class="bg-white border-4 border-cyan-300 rounded-3xl p-6 mb-6 shadow-sm">
+    <h2 class="cute text-2xl font-extrabold text-cyan-700 mb-1">② 換個角度看</h2>
+    <p class="text-lg text-slate-600 mb-4">同一間廟，「路過」跟「用觀光客的眼睛細看」，看到的東西差很多！</p>
+    <div class="grid md:grid-cols-2 gap-6 items-start mb-5">
+      <div>
+        <p class="font-bold text-cyan-700 mb-2">🚶 路過視角</p>
+        <img src="assets/城隍廟路過.png" alt="路過城隍廟" class="shot">
+        <p class="text-sm text-slate-500 mt-2">如果只是經過，可能就覺得「喔，一間廟」。</p>
+      </div>
+      <div>
+        <p class="font-bold text-cyan-700 mb-2">🔍 觀光客細看視角</p>
+        <div class="relative">
+          <img id="templeImg" src="" alt="" class="shot">
+          <button id="templePrev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full w-9 h-9 shadow-lg font-bold text-cyan-700">‹</button>
+          <button id="templeNext" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full w-9 h-9 shadow-lg font-bold text-cyan-700">›</button>
+        </div>
+        <p id="templeCap" class="text-sm text-slate-600 mt-2 min-h-[40px]"></p>
+        <p id="templeCount" class="text-xs text-slate-400 text-center"></p>
+      </div>
+    </div>
+    <div class="bg-cyan-50 rounded-2xl p-4">
+      <p class="field font-bold text-cyan-800 m-0">🤔 你發現「路過」跟「用觀光客的眼睛細看」，看到的東西有什麼不同？</p>
+    </div>
+
+    <a href="https://www.youtube.com/watch?v=sI9bKz7IQVQ" target="_blank" rel="noopener" class="vcard block relative rounded-2xl overflow-hidden shadow-lg mt-5">
+      <img src="assets/yt_sI9bKz7IQVQ.jpg" alt="影片：冬季旅遊來台南" loading="lazy" style="width:100%;border-radius:14px">
+      <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/35 transition">
+        <div class="bg-red-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-lg">▶</div>
+      </div>
+      <div class="absolute bottom-0 inset-x-0 bg-black/65 text-white font-bold px-3 py-2">▶ 再看看觀光局會怎麼介紹台南：冬季旅遊，來台南正好玩！</div>
+    </a>
+  </section>
+
+  <!-- ③ 台南旅遊網 -->
   <section class="bg-white border-4 border-rose-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-rose-700 mb-4">② 找景點的好幫手：台南旅遊網</h2>
+    <h2 class="cute text-2xl font-extrabold text-rose-700 mb-4">③ 找景點的好幫手：台南旅遊網</h2>
 
     <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
       <img src="assets/台南旅遊網.png" alt="台南旅遊網首頁" class="shot">
@@ -130,24 +163,24 @@
 
   <!-- ③ 景點調查員 -->
   <section class="bg-white border-4 border-amber-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-amber-700 mb-1">③ 任務：景點調查員 🔍</h2>
+    <h2 class="cute text-2xl font-extrabold text-amber-700 mb-1">④ 任務：景點調查員 🔍</h2>
     <p class="text-lg text-slate-600 mb-4">打開台南旅遊網，當一位小小調查員，把答案填進來！</p>
     <div class="grid md:grid-cols-2 gap-4">
       <div>
         <p class="field font-bold mb-1">1. 找出 3 個位於「<b class="text-amber-700">東區</b>」的景點</p>
-        <input id="q1" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none" placeholder="例：巴克禮公園…">
+        <input id="q1" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
       </div>
       <div>
         <p class="field font-bold mb-1">2. 找出 1 個「<b class="text-amber-700">在地藝文</b>」景點</p>
-        <input id="q2" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none" placeholder="用主題篩選找找看">
+        <input id="q2" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
       </div>
       <div>
         <p class="field font-bold mb-1">3.「<b class="text-amber-700">水交社文化園區</b>」<b>週六</b>開放時間？</p>
-        <input id="q3" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none" placeholder="例：09:00–17:00">
+        <input id="q3" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
       </div>
       <div>
         <p class="field font-bold mb-1">⭐ 加分：「<b class="text-amber-700">勝利國小</b>」附近有什麼景點？</p>
-        <input id="q4" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none" placeholder="用地圖找學校附近">
+        <input id="q4" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
       </div>
     </div>
     <button id="surveyBtn" class="mt-5 w-full bg-amber-500 hover:bg-amber-600 text-white cute text-xl font-extrabold rounded-2xl py-3">📸 完成！產生我的調查表</button>
@@ -164,7 +197,7 @@
 
   <!-- ④ 導覽主題 -->
   <section class="bg-white border-4 border-violet-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-violet-700 mb-3">④ 從「去哪裡」到「玩什麼」</h2>
+    <h2 class="cute text-2xl font-extrabold text-violet-700 mb-3">⑤ 從「去哪裡」到「玩什麼」</h2>
     <div class="grid md:grid-cols-2 gap-6 items-center mb-5">
       <div>
         <p class="text-xl mb-2">只跟朋友說「我們去<b>安平</b>」，他會問：「去<b>吃東西</b>？還是<b>看古蹟</b>？」🤨</p>
@@ -201,7 +234,7 @@
 
   <!-- ⑤ 主題九宮格 -->
   <section class="bg-white border-4 border-emerald-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-emerald-700 mb-1">⑤ 主題九宮格</h2>
+    <h2 class="cute text-2xl font-extrabold text-emerald-700 mb-1">⑥ 主題九宮格</h2>
     <p class="text-lg mb-4">一個主題能放進好多景點！幫 8 個主題各找<b>一個台南景點</b>；中間那格，換<b>你自己想主題</b>！</p>
     <div class="grid md:grid-cols-2 gap-6 items-start mb-5">
       <div id="grid9" class="grid grid-cols-3 gap-2"></div>
@@ -221,14 +254,14 @@
 
   <!-- ⑥ 主題構想卡 -->
   <section class="bg-white border-4 border-teal-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-teal-700 mb-1">⑥ 我的導覽主題構想卡</h2>
+    <h2 class="cute text-2xl font-extrabold text-teal-700 mb-1">⑦ 我的導覽主題構想卡</h2>
     <p class="text-lg text-slate-600 mb-4">把空格填滿，就完成你的第一張導覽構想卡了！</p>
     <div class="grid md:grid-cols-2 gap-6 items-start">
       <div>
         <div class="space-y-3 text-xl">
-          <div>我想要帶 <input id="c1" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-40" placeholder="誰？"></div>
-          <div>主題是 <input id="c2" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-56" placeholder="例：台南美食探險"></div>
-          <div>因為 <input id="c3" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-full mt-1" placeholder="說說你的理由…"></div>
+          <div>我想要帶 <input id="c1" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-40"></div>
+          <div>主題是 <input id="c2" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-56"></div>
+          <div>因為 <input id="c3" class="field border-b-4 border-teal-300 focus:border-teal-500 outline-none px-2 w-full mt-1"></div>
         </div>
         <div class="mt-4 bg-teal-50 rounded-2xl p-4 text-lg">
           <p class="font-bold text-teal-800 mb-1">✅ 交出前自己檢查：</p>
@@ -337,6 +370,25 @@ var firebaseConfig = {
 
   document.querySelectorAll('.warm').forEach(function(b){b.onclick=function(){document.getElementById('warmFb').textContent=b.dataset.fb;};});
 
+  // ② 換個角度看：城隍廟觀光客細看視角，4 張輪播（上一張/下一張）
+  var temple=[
+    {src:'assets/城隍廟內部.jfif',cap:'走進去才看得到的內部空間——香煙裊裊、金碧輝煌的氣氛，路過完全感受不到。'},
+    {src:'assets/三川殿屋頂.jfif',cap:'抬頭看屋頂：精細的剪黏、雕飾，是老師傅一片一片黏上去的工藝。'},
+    {src:'assets/三川殿「八仙騎獸斗座」.jfif',cap:'「八仙騎獸斗座」：八位仙人各騎一隻神獸，撐著屋頂的木雕，近看才發現這麼講究。'},
+    {src:'assets/「四逸」之「漁」.jfif',cap:'「四逸之漁」：牆上的木雕刻著漁夫捕魚的畫面，是廟裡藏著的小故事。'}
+  ];
+  var templeI=0;
+  function renderTemple(){
+    var t=temple[templeI];
+    document.getElementById('templeImg').src=t.src;
+    document.getElementById('templeImg').alt=t.cap;
+    document.getElementById('templeCap').textContent=t.cap;
+    document.getElementById('templeCount').textContent=(templeI+1)+' / '+temple.length;
+  }
+  document.getElementById('templePrev').onclick=function(){templeI=(templeI-1+temple.length)%temple.length;renderTemple();};
+  document.getElementById('templeNext').onclick=function(){templeI=(templeI+1)%temple.length;renderTemple();};
+  renderTemple();
+
   function drawSurvey(){
     var cv=document.getElementById('surveyCv'),x=cv.getContext('2d');
     x.fillStyle='#FFFBF3';x.fillRect(0,0,900,620);
@@ -382,11 +434,11 @@ var firebaseConfig = {
   themes.forEach(function(t){var cell=document.createElement('div');
     if(t==='__center__'){cell.className='border-2 border-dashed border-emerald-400 bg-emerald-50 rounded-xl p-2 text-center';
       cell.innerHTML='<div class="text-xs font-bold text-emerald-600 mb-1">✏️ 我的主題</div>'
-        +'<input class="field w-full text-center text-sm border-b-2 border-emerald-300 outline-none mb-1" placeholder="主題">'
-        +'<input class="field w-full text-center text-sm border-b-2 border-emerald-300 outline-none" placeholder="景點">';
+        +'<input class="field w-full text-center text-sm border-b-2 border-emerald-300 outline-none mb-1">'
+        +'<input class="field w-full text-center text-sm border-b-2 border-emerald-300 outline-none">';
     }else{cell.className='border-2 border-slate-200 rounded-xl p-2 text-center';
       cell.innerHTML='<div class="font-bold text-emerald-700 text-sm mb-1">'+t+'</div>'
-        +'<input class="gi field w-full text-center text-sm border-b-2 border-emerald-200 focus:border-emerald-500 outline-none" placeholder="填景點">';}
+        +'<input class="gi field w-full text-center text-sm border-b-2 border-emerald-200 focus:border-emerald-500 outline-none">';}
     g.appendChild(cell);});
   g.addEventListener('input',function(){var filled=Array.from(g.querySelectorAll('.gi')).filter(function(i){return i.value.trim();}).length;
     if(filled>=3&&!done.grid){done.grid=true;prog();}});
@@ -427,7 +479,7 @@ var firebaseConfig = {
 
     var answers={},qtypes={},experienceAnswers={};
 
-    // ③ 景點調查員（q1-q4）：自由文字查證題，答案因人而查、無法用固定字串核對——
+    // ④ 景點調查員（q1-q4）：自由文字查證題，答案因人而查、無法用固定字串核對——
     // 用「四格都填了」當這一段的完成／正確依據，而不是比對正確地名。
     var qv={q1:document.getElementById('q1').value.trim(),q2:document.getElementById('q2').value.trim(),
       q3:document.getElementById('q3').value.trim(),q4:document.getElementById('q4').value.trim()};
@@ -435,7 +487,7 @@ var firebaseConfig = {
     experienceAnswers.survey={given:qv,correct:null,isCorrect:surveyFilled===4};
     answers.survey=qv;qtypes.survey='experience';
 
-    // ④ 導覽主題套餐（menu）：真的有正解（menu 陣列的 ok），沿用 menuBtn 同一套判斷邏輯。
+    // ⑤ 導覽主題套餐（menu）：真的有正解（menu 陣列的 ok），沿用 menuBtn 同一套判斷邏輯。
     var menuPicks=Array.from(mEl.children),menuChosen=menuPicks.map(function(b){return !!b.dataset.on;});
     var menuNames=menu.map(function(m){return m.n;}),menuGiven=menu.filter(function(m,i){return menuChosen[i];}).map(function(m){return m.n;});
     var menuCorrect=menu.filter(function(m){return m.ok;}).map(function(m){return m.n;});
@@ -443,19 +495,21 @@ var firebaseConfig = {
     experienceAnswers.menu={given:menuGiven,correct:menuCorrect,isCorrect:menuRight};
     answers.menu=menuGiven;qtypes.menu='experience';
 
-    // ⑤ 主題九宮格：8 個主題各填一個景點，答案開放（同一主題可以填很多不同景點），
+    // ⑥ 主題九宮格：8 個主題各填一個景點，答案開放（同一主題可以填很多不同景點），
     // 用「填了幾格」當完成度／正確度依據，跟頁面自己判斷「解鎖」的門檻（填滿 3 格）一致。
     var giFilled=Array.from(g.querySelectorAll('.gi')).filter(function(i){return i.value.trim();}).length;
     experienceAnswers.grid9={given:giFilled,correct:null,isCorrect:giFilled>=3};
     answers.grid9=giFilled;qtypes.grid9='experience';
 
-    // ⑤ 傳統市場歸類（pred）：原本就沒有標準答案（頁面固定回饋「好幾個主題都可以」），
+    // ⑥ 傳統市場歸類（pred）：原本就沒有標準答案（頁面固定回饋「好幾個主題都可以」），
     // 只看「有沒有挑」當完成依據。
     var predPicks=Array.from(pEl.children),predGiven=preds.filter(function(p,i){return predPicks[i]&&predPicks[i].dataset.on;}).map(function(p){return p.n;});
     experienceAnswers.pred={given:predGiven,correct:null,isCorrect:predGiven.length>0};
     answers.pred=predGiven;qtypes.pred='experience';
 
-    // ⑥ 導覽主題構想卡：開放題，學生自己的創意內容。
+    // ② 換個角度看：純觀察／討論，沒有作答欄位，不進繳交（跟①的 icebreaker、影片卡同一種不追蹤慣例）。
+
+    // ⑦ 導覽主題構想卡：開放題，學生自己的創意內容。
     var cardText=cardTextStr();
     answers.card=cardText;qtypes.card='open';
 
