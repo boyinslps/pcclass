@@ -148,8 +148,7 @@
         結果造成 <b>______</b>（金錢／健康／害到別人 的具體損失）。<br>
         所以看到訊息時，我會先<b>懷疑後果</b>，再決定要不要相信。
       </div>
-      <select id="pick" class="mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none"></select>
-      <textarea id="essay" data-qid="essay" data-qtype="open" class="mt-2 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none" rows="4" placeholder="把上面的句型填成一段完整的話…"></textarea>
+      <textarea id="essay" data-qid="essay" data-qtype="open" class="mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none" rows="4" placeholder="把上面的句型填成一段完整的話…"></textarea>
       <p class="text-xs text-slate-400 mt-1">💾 這裡會自動存在這台裝置，重新整理不會不見（但這只是草稿，老師還看不到）。</p>
       <!-- 「推送」是獨立動作：把這題貼進下面的留言牆，跟最下面的「繳交學習單」是兩件不同的事（見《學習單資料與提交規範》§4）-->
       <button id="pushEssay" class="mt-2 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
@@ -273,12 +272,12 @@ var QUIZ_ID = "L01";
       truth:'正常使用微波爐不會產生毒素，也不會有致癌輻射。'}
   ];
 
-  var state={votes:{},revealed:false,harms:{},essay:'',pick:'',_pushed:false};
+  var state={votes:{},revealed:false,harms:{},essay:'',_pushed:false};
   var ANSWERS=null; // 正解來源：老師上傳到資料庫的優先，否則退回內建
   function answerOf(i){return (ANSWERS&&ANSWERS.length===items.length)?ANSWERS[i]:items[i].real;}
   // 只把「學生自己的作答」寫進瀏覽器快取；公布狀態不落地本機，改由資料庫即時決定
-  function save(){try{localStorage.setItem('g5L01flow',JSON.stringify({votes:state.votes,harms:state.harms,essay:state.essay,pick:state.pick,reason:state.reason}))}catch(e){}}
-  function load(){try{var d=localStorage.getItem('g5L01flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.harms=o.harms||{};state.essay=o.essay||'';state.pick=o.pick||'';state.reason=o.reason||'';}}catch(e){}}
+  function save(){try{localStorage.setItem('g5L01flow',JSON.stringify({votes:state.votes,harms:state.harms,essay:state.essay,reason:state.reason}))}catch(e){}}
+  function load(){try{var d=localStorage.getItem('g5L01flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.harms=o.harms||{};state.essay=o.essay||'';state.reason=o.reason||'';}}catch(e){}}
   load();state._pushed=false;
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -387,12 +386,8 @@ var QUIZ_ID = "L01";
   checkHarms();
 
   // ===== 短文 =====
-  var pick=document.getElementById('pick'),essay=document.getElementById('essay');
-  pick.innerHTML='<option value="">— 選一則你要推論的假消息 —</option>'+
-    items.map(function(it,i){return it.real?'':'<option value="'+i+'">'+esc(it.t)+'</option>'}).join('');
-  pick.value=state.pick||'';essay.value=state.essay||'';
-  pick.onchange=function(){state.pick=pick.value;
-    if(pick.value!==''&&!essay.value)essay.value='我選的假消息是：「'+items[pick.value].t+'」。如果有人相信它，可能會…';save();};
+  var essay=document.getElementById('essay');
+  essay.value=state.essay||'';
   essay.oninput=function(){state.essay=essay.value;save();};
 
   // ===== 你是怎麼判斷的 =====
