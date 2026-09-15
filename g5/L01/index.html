@@ -68,9 +68,9 @@
   <section id="s1" class="step">
     <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h2 class="cute text-2xl font-extrabold text-indigo-700">① 你分得出真的假的嗎？</h2>
-      <p class="text-slate-600 mt-1">下面 9 則訊息，有些是<b>真的</b>、有些是<b>謠言</b>。<br>先看圖片／影片／連結，再憑直覺投票：覺得真按 <span class="text-emerald-600 font-bold">✅ 真</span>、覺得假按 <span class="text-rose-600 font-bold">❌ 假</span>。</p>
+      <p class="text-slate-600 mt-1">下面 8 則訊息，有些是<b>真的</b>、有些是<b>謠言</b>。<br>先看圖片／影片／連結，再憑直覺投票：覺得真按 <span class="text-emerald-600 font-bold">✅ 真</span>、覺得假按 <span class="text-rose-600 font-bold">❌ 假</span>。</p>
       <div class="mt-3 inline-flex items-center gap-2 bg-indigo-50 border-2 border-indigo-200 rounded-full px-4 py-1.5 text-sm font-bold text-indigo-700">
-        <span>🗳️ 已投票</span><span id="voted">0 / 9</span>
+        <span>🗳️ 已投票</span><span id="voted">0 / 8</span>
       </div>
     </div>
 
@@ -79,7 +79,7 @@
     <div id="result" class="hidden mt-6 text-center bg-gradient-to-b from-amber-100 to-rose-100 border-4 border-rose-300 rounded-3xl p-6 pop">
       <div class="text-5xl mb-1">🤯</div>
       <h3 class="cute text-2xl font-extrabold text-rose-700">揭曉！你的直覺準嗎？</h3>
-      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-indigo-600 font-extrabold">0</span> / 9</p>
+      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-indigo-600 font-extrabold">0</span> / 8</p>
       <p id="verdict" class="text-slate-700 mt-2 font-bold"></p>
       <p class="text-sm text-slate-600 mt-3 max-w-xl mx-auto">
         發現了嗎？<b>看起來很扯的，反而是真的</b>；<b>講得很有道理的，卻是假的</b>。<br>
@@ -279,9 +279,12 @@ var QUIZ_ID = "L01";
       title:'網傳「熱天喝冰水血管會爆裂」是真的嗎？',site:'cmoney.tw',
       truth:'喝冰水不會讓血管爆裂，這是被誇大的錯誤說法。'},
     {t:'微波爐加熱食物，會把食物變成毒藥、產生致癌輻射',real:false,mode:'video',src:'assets/microwave.mp4',
-      truth:'正常使用微波爐不會產生毒素，也不會有致癌輻射。'},
-    {t:'手遊突然私訊你：「恭喜成為內部福利玩家」，加好友就能免費拿寶物、課金點數',real:false,mode:'youtube',yt:'tcNg0HSLKKk',
-      truth:'這是新型態的手遊詐騙手法——假借「內部福利玩家」名義私訊玩家，其實是要騙走你的帳號或金錢。正規遊戲公司不會用私訊主動邀你加入什麼「內部福利」，看到這種訊息要提高警覺，不要隨便加好友或提供帳號密碼。'}
+      truth:'正常使用微波爐不會產生毒素，也不會有致癌輻射。'}
+  ];
+
+  // ===== ③下拉清單額外主題（不進①投票卡，只是多一個可推論的謠言情境）=====
+  var extraTopics=[
+    {t:'手遊私訊你：「恭喜成為內部福利玩家」，加好友就能免費拿寶物、課金點數'}
   ];
 
   var state={votes:{},revealed:false,harms:{},essay:'',pick:'',_pushed:false};
@@ -372,13 +375,12 @@ var QUIZ_ID = "L01";
     });
     var correct=scoreNow();
     document.getElementById('score').textContent=correct;
-    document.getElementById('verdict').textContent = correct>=8?'太厲害了！但別大意，這次剛好而已 😏'
-      : correct>=5?'一半一半 —— 直覺根本不可靠對吧？' : '被騙慘了！這正是我們要學會小心的原因。';
+    document.getElementById('verdict').textContent = correct>=7?'太厲害了！但別大意，這次剛好而已 😏'
+      : correct>=4?'一半一半 —— 直覺根本不可靠對吧？' : '被騙慘了！這正是我們要學會小心的原因。';
     var r=document.getElementById('result');r.classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth',block:'center'});
     // 公布答案後才讓③的下拉選單出現（用最終確定的正解重建選項，避免跟老師上傳的答案不一致）
-    pick.innerHTML='<option value="">— 選一則你要推論的假消息 —</option>'+
-      items.map(function(it,i){return answerOf(i)?'':'<option value="'+i+'">'+esc(it.t)+'</option>'}).join('');
+    buildPickOptions();
     pick.value=state.pick||'';
     pick.classList.remove('hidden');
     if(!IS_ADMIN)pushResult(correct);
@@ -405,13 +407,24 @@ var QUIZ_ID = "L01";
 
   // ===== 短文 =====
   // 下拉選單協助貼上，但要等老師公布①的真假答案後才顯示（避免提前洩漏哪些是謠言）
+  // 選項＝①投票卡裡的謠言 ∪ extraTopics（沒進投票卡、單純多一個可推論的情境）
   var pick=document.getElementById('pick'),essay=document.getElementById('essay');
-  pick.innerHTML='<option value="">— 選一則你要推論的假消息 —</option>'+
-    items.map(function(it,i){return answerOf(i)?'':'<option value="'+i+'">'+esc(it.t)+'</option>'}).join('');
+  function pickTopicText(v){
+    if(v.charAt(0)==='q')return items[Number(v.slice(1))].t;
+    if(v.charAt(0)==='x')return extraTopics[Number(v.slice(1))].t;
+    return null;
+  }
+  function buildPickOptions(){
+    pick.innerHTML='<option value="">— 選一則你要推論的假消息 —</option>'+
+      items.map(function(it,i){return answerOf(i)?'':'<option value="q'+i+'">'+esc(it.t)+'</option>'}).join('')+
+      extraTopics.map(function(t,i){return '<option value="x'+i+'">'+esc(t.t)+'</option>'}).join('');
+  }
+  buildPickOptions();
   essay.value=state.essay||'';
   pick.onchange=function(){
     state.pick=pick.value;
-    if(pick.value!==''&&!essay.value)essay.value='我選的假消息是：「'+items[pick.value].t+'」。如果有人相信它，可能會…';
+    var t=pickTopicText(pick.value);
+    if(t&&!essay.value)essay.value='我選的假消息是：「'+t+'」。如果有人相信它，可能會…';
     save();
   };
   essay.oninput=function(){state.essay=essay.value;save();};
@@ -450,6 +463,16 @@ var QUIZ_ID = "L01";
         list.innerHTML=html;
       },function(e){console.warn('feed 讀取失敗',e);
         var list=document.getElementById('reasonFeedList');if(list)list.innerHTML='<p class="text-xs text-slate-400">現在看不到同學的留言，晚點再來看看。</p>';});
+  }
+  // 老師「還原」時呼叫：清空這堂課 essay/reason 兩個留言牆共用的訊息集合，讓下一堂課從空白開始
+  function clearFeed(){
+    if(!db)return Promise.resolve();
+    return db.collection('feeds').doc('g5-L01').collection('messages').get().then(function(qs){
+      if(qs.empty)return;
+      var batch=db.batch();
+      qs.forEach(function(d){batch.delete(d.ref);});
+      return batch.commit();
+    });
   }
   // 「推送」單獨一個按鈕：只把這題貼上留言牆，不涉及整份學習單繳交
   document.getElementById('pushEssay').onclick=function(){
@@ -577,7 +600,12 @@ var QUIZ_ID = "L01";
           alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要按「🎉 公布」即可。');})
         .catch(function(e){up.disabled=false;up.textContent='⬆ 上傳答案';alert('上傳失敗：'+e.message);});};
     document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
-    document.getElementById('lockBtn').onclick=function(){quizRef.set({revealed:false},{merge:true});};
+    // 還原：回到未公布，同時清空這堂課的留言板，讓下一堂課看到的是全新空白的討論
+    document.getElementById('lockBtn').onclick=function(){
+      if(!confirm('確定要還原成未公布狀態嗎？\n\n這也會一併清空目前的「同學留言」討論板，下一堂課會是全新空白的留言板，確定要繼續嗎？'))return;
+      clearFeed().catch(function(e){console.warn('清空留言板失敗',e);});
+      quizRef.set({revealed:false},{merge:true});
+    };
     quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
       document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / '+items.length;});
   }
