@@ -427,8 +427,8 @@ var QUIZ_ID = "L01";
   pick.onchange=function(){
     state.pick=pick.value;
     var t=pickTopicText(pick.value);
-    if(t&&!essay.value)essay.value='我選的假消息是：「'+t+'」。如果有人相信它，可能會…';
-    save();
+    if(t)essay.value='我選的假消息是：「'+t+'」。如果有人相信它，可能會…';
+    state.essay=essay.value;save();
   };
   essay.oninput=function(){state.essay=essay.value;save();};
 
