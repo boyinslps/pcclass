@@ -95,7 +95,7 @@
           <span id="reasonStatus" class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-400">🎁 加分題：尚未完成</span>
         </div>
         <p class="text-sm text-slate-600 mb-2">說說看：你是靠什麼線索判斷一則消息是真是假的？</p>
-        <textarea id="reason" data-qid="reason" data-qtype="bonus" class="mt-1 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-indigo-400 outline-none" rows="3"></textarea>
+        <textarea id="reason" data-qid="reason" data-qtype="open" data-bonus="1" class="mt-1 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-indigo-400 outline-none" rows="3"></textarea>
         <button id="pushReason" class="mt-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
         <span id="pushReasonNote" class="text-xs text-slate-400 ml-2"></span>
       </div>
@@ -521,7 +521,8 @@ var QUIZ_ID = "L01";
     answers.essay=essayText;qtypes.essay='open';
     // 加分題：不進 experienceCompletion 分母，但繳交時要判定完成與否；分數（+1/+2/+3）由老師/AI 在評分平台事後評，這裡只記「有沒有寫」
     var reasonText=(document.getElementById('reason').value||'').trim();
-    answers.reason=reasonText;qtypes.reason='bonus';
+    answers.reason=reasonText;qtypes.reason='open';   // 題型仍是三選一，加分只是另外用 bonusQids 標記
+    var bonusQids=['reason'];
     var bonusAnswers={reason:{given:reasonText,completed:!!reasonText}};
     var votesAnswered=Object.keys(state.votes).length,harmsAttempted=Object.keys(state.harms).length>0?1:0;
     var experienceCompletion=Math.round((votesAnswered+harmsAttempted)/(items.length+1)*100);
@@ -532,7 +533,7 @@ var QUIZ_ID = "L01";
     var docId='g5-L01__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:'g5-L01',worksheetTitle:'假消息與目的辨識',lessonPath:'g5/L01',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
-      answers:answers,qtypes:qtypes,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{essay:essayText},bonusAnswers:bonusAnswers,
+      answers:answers,qtypes:qtypes,bonusQids:bonusQids,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{essay:essayText},bonusAnswers:bonusAnswers,
       accuracyRate:null,experienceCompletion:experienceCompletion,
       status:'submitted',submittedAt:firebase.firestore.FieldValue.serverTimestamp()};
     var btn=this,stat=document.getElementById('submitStat');
