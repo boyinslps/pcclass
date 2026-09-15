@@ -16,6 +16,20 @@
   .vwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .slido-wrap{width:100%;height:480px;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.15)}
   .slido-wrap iframe{width:100%;height:100%;border:0}
+  .lcard{cursor:grab;user-select:none;touch-action:none;border:3px solid #e9d5ff;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .lcard img{width:100%;height:76px;object-fit:cover;display:block;pointer-events:none}
+  .lcard .lname{font-size:13px;font-weight:800;text-align:center;padding:5px 4px;color:#6d28d9}
+  .lcard.placed{opacity:0;pointer-events:none}
+  .lcard.shake{animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .lghost{position:fixed;z-index:50;pointer-events:none;width:96px;border:3px solid #a78bfa;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:.95}
+  .lghost img{width:100%;height:64px;object-fit:cover;display:block}
+  .lghost .lname{font-size:11px;font-weight:800;text-align:center;padding:3px;color:#6d28d9}
+  .dzone circle{transition:fill .15s,stroke .15s}
+  .dzone.over circle{fill:#ede9fe;stroke:#7c3aed;stroke-width:4}
+  .dzone.wrong circle{fill:#fee2e2;stroke:#ef4444}
+  .dzone.done circle{fill:#ddd6fe;stroke:#7c3aed}
+  .dzone .doneMark{font-size:20px}
   .field{font-size:19px}
   .idnum{width:52px;text-align:center}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -77,9 +91,63 @@
     </div>
   </section>
 
-  <!-- ② 換個角度看 -->
+  <!-- ② 認識台南：行政區與景點配對 -->
+  <section class="bg-white border-4 border-violet-300 rounded-3xl p-6 mb-6 shadow-sm">
+    <h2 class="cute text-2xl font-extrabold text-violet-700 mb-1">② 認識台南：行政區在哪裡？</h2>
+    <p class="text-lg text-slate-600 mb-4">台南這麼大，其實是分成好多個「行政區」管理的！</p>
+
+    <div class="bg-violet-50 rounded-2xl p-4 mb-5">
+      <p class="text-xl mb-2">台南市總共有 <b class="text-violet-700 text-2xl">37</b> 個行政區！</p>
+      <p class="text-base text-slate-600 mb-2">民國 99 年，原本的「台南市」和「台南縣」合併升格，兩邊的區域全部改叫「區」——原台南市的
+        <b class="text-violet-700">中西、東、南、北、安平、安南</b> 6 區，加上原台南縣的
+        <b class="text-violet-700">永康、仁德、新化、麻豆…</b>等 31 個鄉鎮，合起來就是現在的 37 區。</p>
+      <p class="text-xl font-bold text-violet-800">🏫 我們勝利國小，就在<span class="bg-violet-200 rounded-lg px-2">東區</span>喔！</p>
+    </div>
+
+    <h3 class="cute text-xl font-extrabold text-violet-700 mb-1">🗺️ 景點配對：把景點拖進正確的行政區！</h3>
+    <p class="text-base text-slate-600 mb-3">先來認識 6 個代表性的行政區。看看下面的景點，把它<b>拖到地圖上</b>正確的區域！</p>
+
+    <div class="bg-violet-50/60 border-2 border-violet-200 rounded-2xl p-3 mb-4">
+      <svg id="distMap" viewBox="0 0 480 400" class="w-full" style="max-width:480px;margin:0 auto;display:block;touch-action:none">
+        <path d="M30,60 Q10,160 60,260 Q90,340 190,370 Q320,390 420,330 Q460,260 430,180 Q410,90 320,50 Q200,10 100,30 Q50,35 30,60 Z"
+              fill="#FBEFDC" stroke="#E9C88F" stroke-width="2" stroke-dasharray="6 5"/>
+        <text x="245" y="30" text-anchor="middle" class="cute" font-size="15" fill="#B45309" font-weight="800">台南市</text>
+        <text x="35" y="150" font-size="12" fill="#7DA6C9" font-style="italic">台灣海峽</text>
+        <g class="dzone" data-d="annan">
+          <circle cx="140" cy="95" r="42" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+          <text x="140" y="100" text-anchor="middle" class="cute" font-size="14" fill="#6d28d9" font-weight="800">安南區</text>
+        </g>
+        <g class="dzone" data-d="anping">
+          <circle cx="105" cy="205" r="38" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+          <text x="105" y="210" text-anchor="middle" class="cute" font-size="14" fill="#6d28d9" font-weight="800">安平區</text>
+        </g>
+        <g class="dzone" data-d="zhongxi">
+          <circle cx="210" cy="215" r="36" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+          <text x="210" y="220" text-anchor="middle" class="cute" font-size="14" fill="#6d28d9" font-weight="800">中西區</text>
+        </g>
+        <g class="dzone" data-d="bei">
+          <circle cx="235" cy="120" r="38" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+          <text x="235" y="125" text-anchor="middle" class="cute" font-size="14" fill="#6d28d9" font-weight="800">北區</text>
+        </g>
+        <g class="dzone" data-d="dong">
+          <circle cx="330" cy="175" r="44" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+          <text x="330" y="172" text-anchor="middle" class="cute" font-size="14" fill="#6d28d9" font-weight="800">東區</text>
+          <text x="330" y="190" text-anchor="middle" font-size="10" fill="#8b5cf6">（我們在這！）</text>
+        </g>
+        <g class="dzone" data-d="rende">
+          <circle cx="370" cy="280" r="38" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+          <text x="370" y="285" text-anchor="middle" class="cute" font-size="14" fill="#6d28d9" font-weight="800">仁德區</text>
+        </g>
+      </svg>
+    </div>
+
+    <div id="landTray" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+    <p id="matchMsg" class="text-center font-bold text-violet-700 mt-3 min-h-[28px]"></p>
+  </section>
+
+  <!-- ③ 換個角度看 -->
   <section class="bg-white border-4 border-cyan-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-cyan-700 mb-1">② 換個角度看</h2>
+    <h2 class="cute text-2xl font-extrabold text-cyan-700 mb-1">③ 換個角度看</h2>
     <p class="text-lg text-slate-600 mb-4">同一間廟，「路過」跟「用觀光客的眼睛細看」，看到的東西差很多！</p>
     <div class="grid md:grid-cols-2 gap-6 items-start mb-5">
       <div>
@@ -109,80 +177,6 @@
       </div>
       <div class="absolute bottom-0 inset-x-0 bg-black/65 text-white font-bold px-3 py-2">▶ 再看看觀光局會怎麼介紹台南：冬季旅遊，來台南正好玩！</div>
     </a>
-  </section>
-
-  <!-- ③ 台南旅遊網 -->
-  <section class="bg-white border-4 border-rose-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-rose-700 mb-4">③ 找景點的好幫手：台南旅遊網</h2>
-
-    <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
-      <img src="assets/台南旅遊網.png" alt="台南旅遊網首頁" class="shot">
-      <p class="text-xl">想不到要介紹哪裡？這是台南市政府的<b class="text-rose-700">官方旅遊網</b>，全台南的景點都在這裡，是我們找主題的好幫手！</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
-      <div>
-        <h3 class="cute text-xl font-extrabold text-rose-600 mb-2">🔎 功能一：景點搜尋</h3>
-        <ul class="text-lg space-y-1">
-          <li>① 搜尋<b>一個區</b>有什麼景點</li>
-          <li>② 篩選你想要的<b>主題</b>（歷史古蹟、自然景觀…）</li>
-          <li>③ 查景點的<b>詳細資料</b></li>
-        </ul>
-      </div>
-      <img src="assets/景點搜尋.png" alt="景點搜尋頁" class="shot">
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
-      <img src="assets/旅遊地圖.png" alt="旅遊地圖" class="shot">
-      <div>
-        <h3 class="cute text-xl font-extrabold text-rose-600 mb-2">🗺️ 功能二：旅遊地圖</h3>
-        <p class="text-lg">用地圖就能看到<b>附近有哪些景點</b>，每一個小圖釘都是一個景點！想找學校附近的景點特別好用。</p>
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
-      <div>
-        <h3 class="cute text-xl font-extrabold text-rose-600 mb-2">📄 點進景點，會看到…</h3>
-        <p class="text-lg mb-3">分類、地址、<b>營業時間</b>、<b>門票</b>寫得清清楚楚（例：安平古堡）：</p>
-        <div class="grid grid-cols-2 gap-2 text-center text-sm font-bold">
-          <div class="bg-rose-50 rounded-xl py-2">🏷️ 分類<br><span class="text-rose-700">歷史古蹟</span></div>
-          <div class="bg-rose-50 rounded-xl py-2">🕐 時間<br><span class="text-rose-700">10:00–17:10</span></div>
-          <div class="bg-rose-50 rounded-xl py-2">🎫 門票<br><span class="text-rose-700">全票70/半票35</span></div>
-          <div class="bg-rose-50 rounded-xl py-2">📍 地址<br><span class="text-rose-700">安平區國勝路82號</span></div>
-        </div>
-      </div>
-      <img src="assets/景點資訊.png" alt="景點資訊 安平古堡" class="shot">
-    </div>
-
-    <a href="https://www.twtainan.net/" target="_blank" rel="noopener"
-       class="block text-center bg-rose-500 hover:bg-rose-600 text-white cute text-xl font-extrabold rounded-2xl py-3">🌐 開啟台南旅遊網，自己逛逛看 →</a>
-  </section>
-
-  <!-- ③ 景點調查員 -->
-  <section class="bg-white border-4 border-amber-300 rounded-3xl p-6 mb-6 shadow-sm">
-    <h2 class="cute text-2xl font-extrabold text-amber-700 mb-1">④ 任務：景點調查員 🔍</h2>
-    <p class="text-lg text-slate-600 mb-4">打開台南旅遊網，當一位小小調查員，把答案填進來！</p>
-    <div class="grid md:grid-cols-2 gap-4">
-      <div>
-        <p class="field font-bold mb-1">1. 找出 3 個位於「<b class="text-amber-700">東區</b>」的景點</p>
-        <input id="q1" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
-      </div>
-      <div>
-        <p class="field font-bold mb-1">2. 找出 1 個「<b class="text-amber-700">在地藝文</b>」景點</p>
-        <input id="q2" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
-      </div>
-      <div>
-        <p class="field font-bold mb-1">3.「<b class="text-amber-700">水交社文化園區</b>」<b>週六</b>開放時間？</p>
-        <input id="q3" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
-      </div>
-      <div>
-        <p class="field font-bold mb-1">⭐ 加分：「<b class="text-amber-700">勝利國小</b>」附近有什麼景點？</p>
-        <input id="q4" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
-      </div>
-    </div>
-    <button id="surveyBtn" class="mt-5 w-full bg-amber-500 hover:bg-amber-600 text-white cute text-xl font-extrabold rounded-2xl py-3">📸 完成！產生我的調查表</button>
-    <p id="surveyMsg" class="text-center font-bold text-amber-700 mt-3 min-h-[28px]"></p>
-    <canvas id="surveyCv" width="900" height="620" class="hidden"></canvas>
   </section>
 
   <!-- ===== 繳交學習單 ===== -->
@@ -267,15 +261,106 @@ var firebaseConfig = {
   }
   boot();
 
-  var done={survey:false};
-  function save(){try{localStorage.setItem('g4L01v3',JSON.stringify(done))}catch(e){}}
-  function load(){try{var d=localStorage.getItem('g4L01v3');if(d)done=Object.assign(done,JSON.parse(d))}catch(e){}}
+  var done={districts:false};
+  function save(){try{localStorage.setItem('g4L01v4',JSON.stringify(done))}catch(e){}}
+  function load(){try{var d=localStorage.getItem('g4L01v4');if(d)done=Object.assign(done,JSON.parse(d))}catch(e){}}
   load();
   function prog(){save();}
 
   document.querySelectorAll('.warm').forEach(function(b){b.onclick=function(){document.getElementById('warmFb').textContent=b.dataset.fb;};});
 
-  // ② 換個角度看：城隍廟觀光客細看視角，4 張輪播（上一張/下一張）
+  // ② 認識台南：行政區與景點配對（拖曳，用 Pointer Events 統一處理滑鼠／觸控）
+  var LANDS=[
+    {d:'zhongxi',dName:'中西區',name:'赤崁樓',img:'assets/Chihkan_Tower.jpg'},
+    {d:'dong',dName:'東區',name:'大東夜市',img:'assets/Dadong_Night_Market.jpg'},
+    {d:'bei',dName:'北區',name:'花園夜市',img:'assets/Garden_Night_Market.jpg'},
+    {d:'annan',dName:'安南區',name:'四草綠色隧道',img:'assets/Sicao_Green_Tunnel.jpg'},
+    {d:'anping',dName:'安平區',name:'安平古堡',img:'assets/Anping_Fort.jpg'},
+    {d:'rende',dName:'仁德區',name:'奇美博物館',img:'assets/Chimei_Museum.jpg'}
+  ];
+  var matched={}; // d -> true 一旦配對正確
+  (function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}})(LANDS);
+
+  var tray=document.getElementById('landTray');
+  LANDS.forEach(function(land){
+    var c=document.createElement('div');
+    c.className='lcard';c.dataset.d=land.d;
+    c.innerHTML='<img src="'+land.img+'" alt="'+land.name+'"><div class="lname">'+land.name+'</div>';
+    tray.appendChild(c);
+    c.addEventListener('pointerdown',function(ev){startDrag(ev,c,land);});
+  });
+
+  var ghost=null,curDrag=null,curZone=null;
+  function zoneEls(){return Array.from(document.querySelectorAll('.dzone'));}
+  function startDrag(ev,cardEl,land){
+    if(matched[land.d])return;
+    ev.preventDefault();
+    curDrag={cardEl:cardEl,land:land};
+    ghost=document.createElement('div');
+    ghost.className='lghost';
+    ghost.innerHTML='<img src="'+land.img+'" alt=""><div class="lname">'+land.name+'</div>';
+    document.body.appendChild(ghost);
+    moveGhost(ev.clientX,ev.clientY);
+    cardEl.style.opacity='.35';
+    window.addEventListener('pointermove',onDragMove);
+    window.addEventListener('pointerup',onDragEnd);
+  }
+  function moveGhost(x,y){if(ghost){ghost.style.left=(x-48)+'px';ghost.style.top=(y-40)+'px';}}
+  function zoneUnderPoint(x,y){
+    var best=null,bestDist=Infinity;
+    zoneEls().forEach(function(g){
+      var c=g.querySelector('circle'),r=c.getBoundingClientRect();
+      var cx=r.left+r.width/2,cy=r.top+r.height/2;
+      var dist=Math.hypot(x-cx,y-cy);
+      if(dist<r.width/2&&dist<bestDist){bestDist=dist;best=g;}
+    });
+    return best;
+  }
+  function onDragMove(ev){
+    if(!curDrag)return;
+    moveGhost(ev.clientX,ev.clientY);
+    var z=zoneUnderPoint(ev.clientX,ev.clientY);
+    if(z!==curZone){
+      if(curZone)curZone.classList.remove('over');
+      curZone=z;
+      if(curZone&&!matched[curZone.dataset.d])curZone.classList.add('over');
+    }
+  }
+  function onDragEnd(ev){
+    window.removeEventListener('pointermove',onDragMove);
+    window.removeEventListener('pointerup',onDragEnd);
+    if(ghost){ghost.remove();ghost=null;}
+    var z=zoneUnderPoint(ev.clientX,ev.clientY);
+    if(curZone){curZone.classList.remove('over');}
+    var land=curDrag.land,cardEl=curDrag.cardEl;
+    curDrag=null;curZone=null;
+    cardEl.style.opacity='';
+    if(z&&z.dataset.d===land.d){
+      matched[land.d]=true;
+      z.classList.add('done');
+      var c=z.querySelector('circle');
+      var mark=document.createElementNS('http://www.w3.org/2000/svg','text');
+      mark.setAttribute('x',c.getAttribute('cx'));mark.setAttribute('y',(Number(c.getAttribute('cy'))+6));
+      mark.setAttribute('text-anchor','middle');mark.setAttribute('class','doneMark');mark.textContent='✅';
+      z.appendChild(mark);
+      cardEl.classList.add('placed');
+      updateMatchMsg();
+    }else if(z){
+      z.classList.add('wrong');
+      setTimeout(function(){z.classList.remove('wrong');},450);
+      cardEl.classList.add('shake');
+      setTimeout(function(){cardEl.classList.remove('shake');},400);
+    }
+  }
+  function updateMatchMsg(){
+    var n=Object.keys(matched).length;
+    var msg=document.getElementById('matchMsg');
+    if(n>=LANDS.length){msg.className='text-center font-bold text-emerald-600 mt-3 min-h-[28px]';msg.textContent='🎉 全部配對成功！你已經認識台南 6 個行政區了！';
+      if(!done.districts){done.districts=true;prog();}}
+    else msg.textContent='已配對 '+n+' / '+LANDS.length;
+  }
+
+  // ③ 換個角度看：城隍廟觀光客細看視角，4 張輪播（上一張/下一張）
   var temple=[
     {src:'assets/城隍廟內部.jfif',cap:'走進去才看得到的內部空間——香煙裊裊、金碧輝煌的氣氛，路過完全感受不到。'},
     {src:'assets/三川殿屋頂.jfif',cap:'抬頭看屋頂：精細的剪黏、雕飾，是老師傅一片一片黏上去的工藝。'},
@@ -294,29 +379,6 @@ var firebaseConfig = {
   document.getElementById('templeNext').onclick=function(){templeI=(templeI+1)%temple.length;renderTemple();};
   renderTemple();
 
-  function drawSurvey(){
-    var cv=document.getElementById('surveyCv'),x=cv.getContext('2d');
-    x.fillStyle='#FFFBF3';x.fillRect(0,0,900,620);
-    x.fillStyle='#f59e0b';x.fillRect(0,0,900,74);
-    x.fillStyle='#fff';x.font='bold 34px "Noto Sans TC",sans-serif';x.fillText('🔍 我的台南景點調查表',28,48);
-    var rows=[['1. 東區的 3 個景點',document.getElementById('q1').value||'（未填）'],
-      ['2. 在地藝文景點',document.getElementById('q2').value||'（未填）'],
-      ['3. 水交社文化園區 週六開放',document.getElementById('q3').value||'（未填）'],
-      ['⭐ 勝利國小附近景點',document.getElementById('q4').value||'（未填）']];
-    var y=120;
-    rows.forEach(function(r){x.fillStyle='#b45309';x.font='bold 24px "Noto Sans TC",sans-serif';x.fillText(r[0],36,y);
-      x.fillStyle='#243b53';x.font='22px "Noto Sans TC",sans-serif';var t=r[1];if(t.length>34)t=t.slice(0,34)+'…';x.fillText(t,36,y+36);
-      x.strokeStyle='#fcd34d';x.beginPath();x.moveTo(36,y+56);x.lineTo(864,y+56);x.stroke();y+=110;});
-    x.fillStyle='#94a3b8';x.font='18px "Noto Sans TC",sans-serif';x.fillText('台南小導遊養成記 · 四上 L01',36,600);
-    return cv;
-  }
-  document.getElementById('surveyBtn').onclick=function(){
-    var cv=drawSurvey();
-    try{var a=document.createElement('a');a.download='景點調查表.png';a.href=cv.toDataURL('image/png');a.click();
-      document.getElementById('surveyMsg').textContent='✓ 調查表已下載！';}catch(e){document.getElementById('surveyMsg').textContent='✓ 調查完成！';}
-    if(!done.survey){done.survey=true;prog();}
-  };
-
   // ===== 繳交學習單（見《學習單資料與提交規範》§3）=====
   // 這份全部標 experience／open，沒有 score 題：這節是「先接觸、有感」的體驗課，不是正式檢核（呼應 L01 一貫定位）。
   document.getElementById('submitBtn').onclick=function(){
@@ -326,19 +388,17 @@ var firebaseConfig = {
 
     var answers={},qtypes={},experienceAnswers={};
 
-    // ④ 景點調查員（q1-q4）：自由文字查證題，答案因人而查、無法用固定字串核對——
-    // 用「四格都填了」當這一段的完成／正確依據，而不是比對正確地名。
-    var qv={q1:document.getElementById('q1').value.trim(),q2:document.getElementById('q2').value.trim(),
-      q3:document.getElementById('q3').value.trim(),q4:document.getElementById('q4').value.trim()};
-    var surveyFilled=Object.keys(qv).filter(function(k){return qv[k];}).length;
-    experienceAnswers.survey={given:qv,correct:null,isCorrect:surveyFilled===4};
-    answers.survey=qv;qtypes.survey='experience';
+    // ② 景點配對：有正確答案（每個景點對應一個行政區），用「配對成功幾個」當完成／正確依據。
+    var matchedCount=Object.keys(matched).length;
+    var givenPairs={};LANDS.forEach(function(l){if(matched[l.d])givenPairs[l.name]=l.dName;});
+    experienceAnswers.districts={given:givenPairs,correct:null,isCorrect:matchedCount===LANDS.length};
+    answers.districts=givenPairs;qtypes.districts='experience';
 
-    // ② 換個角度看：純觀察／討論，沒有作答欄位，不進繳交（跟①的 icebreaker、影片卡同一種不追蹤慣例）。
+    // ③ 換個角度看：純觀察／討論，沒有作答欄位，不進繳交（跟①的 icebreaker、影片卡同一種不追蹤慣例）。
 
-    var experienceCompletion=Math.round((surveyFilled>0?1:0)/1*100);
+    var experienceCompletion=Math.round((matchedCount>0?1:0)/1*100);
 
-    var msg='確定要繳交嗎？\n景點調查表：'+(surveyFilled===4?'四題都填了':(surveyFilled>0?'填了 '+surveyFilled+' / 4 題':'還沒填'))+'\n\n送出後這份會被老師看到，確定要交嗎？';
+    var msg='確定要繳交嗎？\n景點配對：'+(matchedCount===LANDS.length?'6 個行政區都配對成功':(matchedCount>0?'配對了 '+matchedCount+' / '+LANDS.length+' 個':'還沒配對'))+'\n\n送出後這份會被老師看到，確定要交嗎？';
     if(!confirm(msg))return;
 
     var docId='g4-L01__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
