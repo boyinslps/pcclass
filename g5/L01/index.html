@@ -533,7 +533,7 @@ var QUIZ_ID = "L01";
     var docId='g5-L01__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:'g5-L01',worksheetTitle:'假消息與目的辨識',lessonPath:'g5/L01',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
-      answers:answers,qtypes:qtypes,bonusQids:bonusQids,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{essay:essayText},bonusAnswers:bonusAnswers,
+      answers:answers,qtypes:qtypes,bonusQids:bonusQids,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{essay:essayText,reason:reasonText},bonusAnswers:bonusAnswers,
       accuracyRate:null,experienceCompletion:experienceCompletion,
       status:'submitted',submittedAt:firebase.firestore.FieldValue.serverTimestamp()};
     var btn=this,stat=document.getElementById('submitStat');
