@@ -68,9 +68,9 @@
   <section id="s1" class="step">
     <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h2 class="cute text-2xl font-extrabold text-indigo-700">① 你分得出真的假的嗎？</h2>
-      <p class="text-slate-600 mt-1">下面 8 則訊息，有些是<b>真的</b>、有些是<b>謠言</b>。<br>先看圖片／影片／連結，再憑直覺投票：覺得真按 <span class="text-emerald-600 font-bold">✅ 真</span>、覺得假按 <span class="text-rose-600 font-bold">❌ 假</span>。</p>
+      <p class="text-slate-600 mt-1">下面 9 則訊息，有些是<b>真的</b>、有些是<b>謠言</b>。<br>先看圖片／影片／連結，再憑直覺投票：覺得真按 <span class="text-emerald-600 font-bold">✅ 真</span>、覺得假按 <span class="text-rose-600 font-bold">❌ 假</span>。</p>
       <div class="mt-3 inline-flex items-center gap-2 bg-indigo-50 border-2 border-indigo-200 rounded-full px-4 py-1.5 text-sm font-bold text-indigo-700">
-        <span>🗳️ 已投票</span><span id="voted">0 / 8</span>
+        <span>🗳️ 已投票</span><span id="voted">0 / 9</span>
       </div>
     </div>
 
@@ -79,7 +79,7 @@
     <div id="result" class="hidden mt-6 text-center bg-gradient-to-b from-amber-100 to-rose-100 border-4 border-rose-300 rounded-3xl p-6 pop">
       <div class="text-5xl mb-1">🤯</div>
       <h3 class="cute text-2xl font-extrabold text-rose-700">揭曉！你的直覺準嗎？</h3>
-      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-indigo-600 font-extrabold">0</span> / 8</p>
+      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-indigo-600 font-extrabold">0</span> / 9</p>
       <p id="verdict" class="text-slate-700 mt-2 font-bold"></p>
       <p class="text-sm text-slate-600 mt-3 max-w-xl mx-auto">
         發現了嗎？<b>看起來很扯的，反而是真的</b>；<b>講得很有道理的，卻是假的</b>。<br>
@@ -155,6 +155,7 @@
         結果造成 <b>______</b>（金錢／健康／害到別人 的具體損失）。<br>
         所以看到訊息時，我會先<b>懷疑後果</b>，再決定要不要相信。
       </div>
+      <select id="pick" class="hidden mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none"></select>
       <textarea id="essay" data-qid="essay" data-qtype="open" class="mt-3 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-teal-400 outline-none" rows="4"></textarea>
       <!-- 「推送」是獨立動作：把這題貼進下面的留言牆，跟最下面的「繳交學習單」是兩件不同的事（見《學習單資料與提交規範》§4）-->
       <button id="pushEssay" class="mt-2 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
@@ -278,15 +279,17 @@ var QUIZ_ID = "L01";
       title:'網傳「熱天喝冰水血管會爆裂」是真的嗎？',site:'cmoney.tw',
       truth:'喝冰水不會讓血管爆裂，這是被誇大的錯誤說法。'},
     {t:'微波爐加熱食物，會把食物變成毒藥、產生致癌輻射',real:false,mode:'video',src:'assets/microwave.mp4',
-      truth:'正常使用微波爐不會產生毒素，也不會有致癌輻射。'}
+      truth:'正常使用微波爐不會產生毒素，也不會有致癌輻射。'},
+    {t:'手遊突然私訊你：「恭喜成為內部福利玩家」，加好友就能免費拿寶物、課金點數',real:false,mode:'youtube',yt:'tcNg0HSLKKk',
+      truth:'這是新型態的手遊詐騙手法——假借「內部福利玩家」名義私訊玩家，其實是要騙走你的帳號或金錢。正規遊戲公司不會用私訊主動邀你加入什麼「內部福利」，看到這種訊息要提高警覺，不要隨便加好友或提供帳號密碼。'}
   ];
 
-  var state={votes:{},revealed:false,harms:{},essay:'',_pushed:false};
+  var state={votes:{},revealed:false,harms:{},essay:'',pick:'',_pushed:false};
   var ANSWERS=null; // 正解來源：老師上傳到資料庫的優先，否則退回內建
   function answerOf(i){return (ANSWERS&&ANSWERS.length===items.length)?ANSWERS[i]:items[i].real;}
   // 只把「學生自己的作答」寫進瀏覽器快取；公布狀態不落地本機，改由資料庫即時決定
-  function save(){try{localStorage.setItem('g5L01flow',JSON.stringify({votes:state.votes,harms:state.harms,essay:state.essay,reason:state.reason}))}catch(e){}}
-  function load(){try{var d=localStorage.getItem('g5L01flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.harms=o.harms||{};state.essay=o.essay||'';state.reason=o.reason||'';}}catch(e){}}
+  function save(){try{localStorage.setItem('g5L01flow',JSON.stringify({votes:state.votes,harms:state.harms,essay:state.essay,pick:state.pick,reason:state.reason}))}catch(e){}}
+  function load(){try{var d=localStorage.getItem('g5L01flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.harms=o.harms||{};state.essay=o.essay||'';state.pick=o.pick||'';state.reason=o.reason||'';}}catch(e){}}
   load();state._pushed=false;
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -346,7 +349,7 @@ var QUIZ_ID = "L01";
       c.querySelector(state.votes[i]?'.v-real':'.v-fake').classList.add('bg-indigo-100','border-indigo-400','text-indigo-700');
   });
   function updateVoted(){
-    document.getElementById('voted').textContent=Object.keys(state.votes).length+' / 8';
+    document.getElementById('voted').textContent=Object.keys(state.votes).length+' / '+items.length;
   }
   updateVoted();
 
@@ -369,10 +372,15 @@ var QUIZ_ID = "L01";
     });
     var correct=scoreNow();
     document.getElementById('score').textContent=correct;
-    document.getElementById('verdict').textContent = correct>=7?'太厲害了！但別大意，這次剛好而已 😏'
-      : correct>=4?'一半一半 —— 直覺根本不可靠對吧？' : '被騙慘了！這正是我們要學會小心的原因。';
+    document.getElementById('verdict').textContent = correct>=8?'太厲害了！但別大意，這次剛好而已 😏'
+      : correct>=5?'一半一半 —— 直覺根本不可靠對吧？' : '被騙慘了！這正是我們要學會小心的原因。';
     var r=document.getElementById('result');r.classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth',block:'center'});
+    // 公布答案後才讓③的下拉選單出現（用最終確定的正解重建選項，避免跟老師上傳的答案不一致）
+    pick.innerHTML='<option value="">— 選一則你要推論的假消息 —</option>'+
+      items.map(function(it,i){return answerOf(i)?'':'<option value="'+i+'">'+esc(it.t)+'</option>'}).join('');
+    pick.value=state.pick||'';
+    pick.classList.remove('hidden');
     if(!IS_ADMIN)pushResult(correct);
   }
   // 公布狀態不再從本機還原；一律由資料庫（同步模式）即時決定，避免學生一開網頁就看到答案。
@@ -396,8 +404,16 @@ var QUIZ_ID = "L01";
   checkHarms();
 
   // ===== 短文 =====
-  var essay=document.getElementById('essay');
+  // 下拉選單協助貼上，但要等老師公布①的真假答案後才顯示（避免提前洩漏哪些是謠言）
+  var pick=document.getElementById('pick'),essay=document.getElementById('essay');
+  pick.innerHTML='<option value="">— 選一則你要推論的假消息 —</option>'+
+    items.map(function(it,i){return answerOf(i)?'':'<option value="'+i+'">'+esc(it.t)+'</option>'}).join('');
   essay.value=state.essay||'';
+  pick.onchange=function(){
+    state.pick=pick.value;
+    if(pick.value!==''&&!essay.value)essay.value='我選的假消息是：「'+items[pick.value].t+'」。如果有人相信它，可能會…';
+    save();
+  };
   essay.oninput=function(){state.essay=essay.value;save();};
 
   // ===== 你是怎麼判斷的 =====
@@ -563,7 +579,7 @@ var QUIZ_ID = "L01";
     document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
     document.getElementById('lockBtn').onclick=function(){quizRef.set({revealed:false},{merge:true});};
     quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
-      document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / 8';});
+      document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / '+items.length;});
   }
   // 登入過一次後 Firebase 會把 session 存在本機（預設 LOCAL persistence），
   // 這裡先等 onAuthStateChanged 回報目前狀態，已經是登入過的教師帳號就直接用，不必每次重整/回到教師模式都再問一次帳密。
