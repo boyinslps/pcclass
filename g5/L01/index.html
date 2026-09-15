@@ -490,9 +490,11 @@ var QUIZ_ID = "L01";
     btn.onclick=function(){
       var text=(ta.value||'').trim();
       if(!text){note.textContent='先寫一點再推送喔';return;}
+      var idn=getIdentity();
+      if(!identityValid(idn)){alert('請先在最上方填好年級、班級、座號，才能推送給同學看喔。');window.scrollTo({top:0,behavior:'smooth'});return;}
       if(!db){note.textContent='系統尚未連線，請稍後再試。';return;}
       btn.disabled=true;
-      var idn=getIdentity(),tag=identityValid(idn)?(idn.grade+'年'+idn.className+'班'):'';
+      var tag=idn.grade+'年'+idn.className+'班'+idn.studentId+'號';
       note.textContent='推送中…';
       ensureAuth().then(function(){
         return db.collection('feeds').doc('g5-L01').collection('messages').add(
