@@ -90,9 +90,12 @@
     <!-- 直接列出，不需要等投完票或老師公布答案（見《學習單資料與提交規範》§4） -->
     <div id="reasonBox">
       <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
-        <h3 class="cute text-xl font-extrabold text-indigo-700">🤔 你是怎麼判斷的？</h3>
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <h3 class="cute text-xl font-extrabold text-indigo-700">🤔 你是怎麼判斷的？</h3>
+          <span id="reasonStatus" class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-400">🎁 加分題：尚未完成</span>
+        </div>
         <p class="text-sm text-slate-600 mb-2">說說看：你是靠什麼線索判斷一則消息是真是假的？</p>
-        <textarea id="reason" data-qid="reason" data-qtype="open" class="mt-1 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-indigo-400 outline-none" rows="3"></textarea>
+        <textarea id="reason" data-qid="reason" data-qtype="bonus" class="mt-1 w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-indigo-400 outline-none" rows="3"></textarea>
         <button id="pushReason" class="mt-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl px-4 py-2 text-sm">📤 推送給同學看</button>
         <span id="pushReasonNote" class="text-xs text-slate-400 ml-2"></span>
       </div>
@@ -432,7 +435,13 @@ var QUIZ_ID = "L01";
   // ===== 你是怎麼判斷的 =====
   var reasonEl=document.getElementById('reason');
   reasonEl.value=state.reason||'';
-  reasonEl.oninput=function(){state.reason=reasonEl.value;save();};
+  function updateReasonStatus(){
+    var done=!!reasonEl.value.trim(),st=document.getElementById('reasonStatus');
+    st.textContent=done?'🎁 加分題：已完成':'🎁 加分題：尚未完成';
+    st.className='text-xs font-bold px-2.5 py-1 rounded-full '+(done?'bg-emerald-100 text-emerald-700':'bg-slate-100 text-slate-400');
+  }
+  updateReasonStatus();
+  reasonEl.oninput=function(){state.reason=reasonEl.value;save();updateReasonStatus();};
 
   /* ================= Firebase 同步層 ================= */
   var db=null,auth=null,quizRef=null;
@@ -475,28 +484,26 @@ var QUIZ_ID = "L01";
     });
   }
   // 「推送」單獨一個按鈕：只把這題貼上留言牆，不涉及整份學習單繳交
-  document.getElementById('pushEssay').onclick=function(){
-    var text=(document.getElementById('essay').value||'').trim(),note=document.getElementById('pushEssayNote');
-    if(!text){note.textContent='先寫一點再推送喔';return;}
-    if(!db){note.textContent='系統尚未連線，請稍後再試。';return;}
-    var idn=getIdentity(),tag=identityValid(idn)?(idn.grade+'年'+idn.className+'班'):'';
-    note.textContent='推送中…';
-    ensureAuth().then(function(){
-      return db.collection('feeds').doc('g5-L01').collection('messages').add(
-        {qid:'essay',text:text.slice(0,200),tag:tag,at:firebase.firestore.FieldValue.serverTimestamp()});
-    }).then(function(){note.textContent='✓ 已推送！';}).catch(function(e){note.textContent='推送失敗：'+e.message;});
-  };
-  document.getElementById('pushReason').onclick=function(){
-    var text=(document.getElementById('reason').value||'').trim(),note=document.getElementById('pushReasonNote');
-    if(!text){note.textContent='先寫一點再推送喔';return;}
-    if(!db){note.textContent='系統尚未連線，請稍後再試。';return;}
-    var idn=getIdentity(),tag=identityValid(idn)?(idn.grade+'年'+idn.className+'班'):'';
-    note.textContent='推送中…';
-    ensureAuth().then(function(){
-      return db.collection('feeds').doc('g5-L01').collection('messages').add(
-        {qid:'reason',text:text.slice(0,200),tag:tag,at:firebase.firestore.FieldValue.serverTimestamp()});
-    }).then(function(){note.textContent='✓ 已推送！';}).catch(function(e){note.textContent='推送失敗：'+e.message;});
-  };
+  // 防呆：送出成功後鎖住按鈕，避免學生連點洗版；改過內容才重新解鎖，允許送修改後的版本
+  function wirePush(btnId,noteId,textareaId,qid){
+    var btn=document.getElementById(btnId),note=document.getElementById(noteId),ta=document.getElementById(textareaId);
+    btn.onclick=function(){
+      var text=(ta.value||'').trim();
+      if(!text){note.textContent='先寫一點再推送喔';return;}
+      if(!db){note.textContent='系統尚未連線，請稍後再試。';return;}
+      btn.disabled=true;
+      var idn=getIdentity(),tag=identityValid(idn)?(idn.grade+'年'+idn.className+'班'):'';
+      note.textContent='推送中…';
+      ensureAuth().then(function(){
+        return db.collection('feeds').doc('g5-L01').collection('messages').add(
+          {qid:qid,text:text.slice(0,200),tag:tag,at:firebase.firestore.FieldValue.serverTimestamp()});
+      }).then(function(){btn.textContent='✓ 已送出';note.textContent='推送成功！改內容才能再推送一次。';})
+        .catch(function(e){btn.disabled=false;note.textContent='推送失敗：'+e.message;});
+    };
+    ta.addEventListener('input',function(){if(btn.disabled){btn.disabled=false;btn.textContent='📤 推送給同學看';note.textContent='';}});
+  }
+  wirePush('pushEssay','pushEssayNote','essay','essay');
+  wirePush('pushReason','pushReasonNote','reason','reason');
   // ===== 繳交學習單（見《學習單資料與提交規範》§3）=====
   document.getElementById('submitBtn').onclick=function(){
     var idn=getIdentity();
@@ -510,16 +517,20 @@ var QUIZ_ID = "L01";
     answers.harms=harmLabels;qtypes.harms='experience';
     var essayText=(document.getElementById('essay').value||'').trim();
     answers.essay=essayText;qtypes.essay='open';
+    // 加分題：不進 experienceCompletion 分母，但繳交時要判定完成與否；分數（+1/+2/+3）由老師/AI 在評分平台事後評，這裡只記「有沒有寫」
     var reasonText=(document.getElementById('reason').value||'').trim();
-    answers.reason=reasonText;qtypes.reason='open';
+    answers.reason=reasonText;qtypes.reason='bonus';
+    var bonusAnswers={reason:{given:reasonText,completed:!!reasonText}};
     var votesAnswered=Object.keys(state.votes).length,harmsAttempted=Object.keys(state.harms).length>0?1:0;
     var experienceCompletion=Math.round((votesAnswered+harmsAttempted)/(items.length+1)*100);
-    var msg='確定要繳交嗎？\n體驗完成度：'+experienceCompletion+'%\n開放題：'+(essayText?'已填寫':'尚未填寫，建議先寫再交')+'\n\n送出後這份會被老師看到，確定要交嗎？';
+    var msg='確定要繳交嗎？\n體驗完成度：'+experienceCompletion+'%\n開放題：'+(essayText?'已填寫':'尚未填寫，建議先寫再交')
+      +'\n加分題（你是怎麼判斷的）：'+(reasonText?'已完成':'尚未完成')
+      +'\n\n送出後這份會被老師看到，確定要交嗎？';
     if(!confirm(msg))return;
     var docId='g5-L01__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:'g5-L01',worksheetTitle:'假消息與目的辨識',lessonPath:'g5/L01',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
-      answers:answers,qtypes:qtypes,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{essay:essayText,reason:reasonText},
+      answers:answers,qtypes:qtypes,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{essay:essayText},bonusAnswers:bonusAnswers,
       accuracyRate:null,experienceCompletion:experienceCompletion,
       status:'submitted',submittedAt:firebase.firestore.FieldValue.serverTimestamp()};
     var btn=this,stat=document.getElementById('submitStat');
