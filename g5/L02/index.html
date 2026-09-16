@@ -64,8 +64,7 @@
       <span class="bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 font-bold">① 開場對比</span>
       <span class="bg-amber-100 text-amber-700 rounded-full px-3 py-1 font-bold">② 解密比喻</span>
       <span class="bg-emerald-100 text-emerald-700 rounded-full px-3 py-1 font-bold">③ 找線索</span>
-      <span class="bg-rose-100 text-rose-700 rounded-full px-3 py-1 font-bold">④ 破解迷思</span>
-      <span class="bg-teal-100 text-teal-700 rounded-full px-3 py-1 font-bold">⑤ 偵探畫線</span>
+      <span class="bg-teal-100 text-teal-700 rounded-full px-3 py-1 font-bold">④ 偵探畫線</span>
     </div>
     <p id="syncBadge" class="hidden mt-2 text-xs text-emerald-600 font-bold">🔗 已連線：老師公布③的答案時，這台會自動同步</p>
   </header>
@@ -162,7 +161,7 @@
       <h3 class="cute text-xl font-extrabold text-emerald-700">🕵️ 換你來分類</h3>
       <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是事實還是意見？投完票先別急，等老師公布答案。</p>
       <div class="inline-flex items-center gap-2 bg-emerald-50 border-2 border-emerald-200 rounded-full px-4 py-1.5 text-sm font-bold text-emerald-700">
-        <span>🗳️ 已投票</span><span id="voted">0 / 4</span>
+        <span>🗳️ 已投票</span><span id="voted">0 / 5</span>
       </div>
     </div>
 
@@ -171,30 +170,18 @@
     <div id="result" class="hidden mt-6 text-center bg-gradient-to-b from-emerald-100 to-sky-100 border-4 border-emerald-300 rounded-3xl p-6 pop">
       <div class="text-5xl mb-1">🎯</div>
       <h3 class="cute text-2xl font-extrabold text-emerald-700">公布答案！</h3>
-      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-sky-600 font-extrabold">0</span> / 4</p>
+      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-sky-600 font-extrabold">0</span> / 5</p>
+    </div>
+
+    <div id="factNote" class="hidden mt-4 bg-sky-50 border-2 border-sky-200 rounded-2xl p-4 text-sm text-sky-900 flip">
+      💡 <b>事實不等於正確！</b> 事實句只代表這件事「可以被查證」，不代表它一定是對的——對不對，要看查證出來的結果。（想一想：剛剛的句子裡，有沒有哪一句其實是假的，卻依然是事實句？）
     </div>
   </section>
 
-  <!-- ===== ④ 承接與釐清：孔廟迷思 ===== -->
+  <!-- ===== ④ 任務：偵探畫線 ===== -->
   <section id="s4" class="step mt-10">
-    <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 mb-5 shadow-sm">
-      <h2 class="cute text-2xl font-extrabold text-rose-700">④ 小心！這一題會讓你嚇一跳</h2>
-      <p class="text-slate-600 mt-1 font-bold">「台南孔廟建於西元 2024 年。」──這是事實還是意見？先選一個！</p>
-      <div class="mt-3 grid grid-cols-2 gap-2 max-w-sm">
-        <button id="mythFact" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400">🔵 事實</button>
-        <button id="mythOpinion" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400">🔴 意見</button>
-      </div>
-      <div id="mythReveal" class="hidden mt-4 bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 text-sm text-rose-900 flip">
-        <b>答案是「事實句」！</b>（雖然它是假的——孔廟其實建於西元 1665 年。）<br>
-        因為你可以拿歷史資料去<b>查證</b>它的真假。「事實句」的意思是「可以被查證」，<b>不是「保證是真的」</b>。看起來很像意見的假話，也可能其實是事實句喔！
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ⑤ 任務：偵探畫線 ===== -->
-  <section id="s5" class="step mt-10">
     <div class="bg-white border-4 border-teal-300 rounded-3xl p-5 mb-5 shadow-sm">
-      <h2 class="cute text-2xl font-extrabold text-teal-700">⑤ 換你當偵探：把事實跟意見拆開</h2>
+      <h2 class="cute text-2xl font-extrabold text-teal-700">④ 換你當偵探：把事實跟意見拆開</h2>
       <p class="text-slate-600 mt-1">下面這篇文章把事實跟意見混在一起了。先選一個顏色，再點文章裡的句子把它畫線標出來。</p>
       <div class="mt-3 flex items-center gap-2">
         <button id="modeFact" class="modebtn flex-1 border-2 rounded-xl py-2 font-bold">🔵 標事實</button>
@@ -214,13 +201,13 @@
   <section class="step mt-10">
     <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm text-center">
       <h2 class="cute text-xl font-extrabold text-indigo-700 mb-1">📮 繳交學習單</h2>
-      <p class="text-sm text-slate-500 mb-3">確定都填好了嗎？按下面按鈕交給老師（⑤畫線由老師後續核對並計算成績，可以重交，會覆蓋前一次）。</p>
+      <p class="text-sm text-slate-500 mb-3">確定都填好了嗎？按下面按鈕交給老師（④畫線由老師後續核對並計算成績，可以重交，會覆蓋前一次）。</p>
       <button id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white cute text-xl font-extrabold rounded-2xl py-3">繳交學習單</button>
       <p id="submitStat" class="text-sm font-bold mt-3 min-h-[20px]"></p>
     </div>
   </section>
 
-  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">教師公布③的答案：在網址列加上 <code class="bg-slate-200 rounded px-1">#admin</code> 後重新整理。③投票和⑤畫線交出去後由老師核對計分。</footer>
+  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">教師公布③的答案：在網址列加上 <code class="bg-slate-200 rounded px-1">#admin</code> 後重新整理。③投票和④畫線交出去後由老師核對計分。</footer>
 </div>
 
 <script>
@@ -314,13 +301,14 @@ var WS_ID = "g5-L02";
     {t:'中央氣象署發布，今天台南地區高溫達 35 度。',type:'fact'},
     {t:'這波高溫熱到讓人幾乎融化，實在讓人受不了。',type:'opinion'},
     {t:'台南市教育局公告，全市國小將於下週三舉辦防災演練。',type:'fact'},
-    {t:'我認為這次防災演練安排得非常用心。',type:'opinion'}
+    {t:'我認為這次防災演練安排得非常用心。',type:'opinion'},
+    {t:'台南孔廟建於西元 2024 年。',type:'fact'}
   ];
-  var state={votes:{},revealed:false,myth:null,clauses:{},_pushed:false};
+  var state={votes:{},revealed:false,clauses:{},_pushed:false};
   var ANSWERS=null;
   function answerOf(i){return (ANSWERS&&ANSWERS.length===items.length)?ANSWERS[i]:items[i].type;}
-  function save(){try{localStorage.setItem('g5L02flow',JSON.stringify({votes:state.votes,myth:state.myth,clauses:state.clauses}))}catch(e){}}
-  function load(){try{var d=localStorage.getItem('g5L02flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.myth=o.myth||null;state.clauses=o.clauses||{};}}catch(e){}}
+  function save(){try{localStorage.setItem('g5L02flow',JSON.stringify({votes:state.votes,clauses:state.clauses}))}catch(e){}}
+  function load(){try{var d=localStorage.getItem('g5L02flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.clauses=o.clauses||{};}}catch(e){}}
   load();state._pushed=false;
 
   var grid=document.getElementById('grid');
@@ -368,22 +356,12 @@ var WS_ID = "g5-L02";
     var correct=scoreNow();
     document.getElementById('score').textContent=correct;
     var r=document.getElementById('result');r.classList.remove('hidden');
+    document.getElementById('factNote').classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth',block:'center'});
     if(!IS_ADMIN)pushResult(correct);
   }
 
-  // ===== ④ 孔廟迷思：個人自我檢核，作答後立即看解說（教學釐清，非評量）=====
-  document.getElementById('mythFact').onclick=function(){ mythPick('fact'); };
-  document.getElementById('mythOpinion').onclick=function(){ mythPick('opinion'); };
-  function mythPick(v){
-    state.myth=v;save();
-    ['mythFact','mythOpinion'].forEach(function(id){document.getElementById(id).classList.remove('bg-indigo-100','border-indigo-400')});
-    document.getElementById(v==='fact'?'mythFact':'mythOpinion').classList.add('bg-indigo-100','border-indigo-400');
-    document.getElementById('mythReveal').classList.remove('hidden');
-  }
-  if(state.myth)mythPick(state.myth);
-
-  // ===== ⑤ 偵探畫線：國華街文章（不在頁面揭曉，老師後台核對計分）=====
+  // ===== ④ 偵探畫線：國華街文章（不在頁面揭曉，老師後台核對計分）=====
   var clauses=[
     {text:'位於台南市中西區的國華街全長約 1.5 公里',type:'fact',sep:'，'},
     {text:'是我心中全台灣最有魅力的美食聖地。',type:'opinion',sep:''},
@@ -439,25 +417,21 @@ var WS_ID = "g5-L02";
     var idn=getIdentity();
     if(!identityValid(idn)){alert('請先在最上方填好年級、班級（1-14）、座號（都是數字）。');window.scrollTo({top:0,behavior:'smooth'});return;}
     if(!db){alert('系統尚未連線，請稍後或重新整理頁面。');return;}
-    var experienceAnswers={},scoreAnswers={},answers={},qtypes={};
+    var scoreAnswers={},answers={},qtypes={};
     var totalCorrect=0,totalScored=items.length+clauses.length;
     items.forEach(function(it,i){var qid='v'+(i+1),given=state.votes[i];given=(given===undefined)?null:given;var correct=answerOf(i),ok=given!=null&&given===correct;
       if(ok)totalCorrect++;
       scoreAnswers[qid]={given:given,correct:correct,isCorrect:ok};answers[qid]=given;qtypes[qid]='score';});
-    var mythGiven=state.myth||null;
-    experienceAnswers.myth={given:mythGiven,correct:'fact',isCorrect:mythGiven==='fact'};
-    answers.myth=mythGiven;qtypes.myth='experience';
     clauses.forEach(function(cl,i){var qid='c'+(i+1),given=state.clauses[i];given=(given===undefined)?null:given;var correct=cl.type,ok=given===correct;
       if(ok)totalCorrect++;
       scoreAnswers[qid]={given:given,correct:correct,isCorrect:ok};answers[qid]=given;qtypes[qid]='score';});
-    var experienceCompletion=state.myth?100:0;
     var accuracyRate=Math.round(totalCorrect/totalScored*100);
-    if(!confirm('確定要繳交嗎？③投票和⑤畫線都會計分，交出去後由老師核對，不會馬上顯示對錯。'))return;
+    if(!confirm('確定要繳交嗎？③投票和④畫線都會計分，交出去後由老師核對，不會馬上顯示對錯。'))return;
     var docId=WS_ID+'__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:WS_ID,worksheetTitle:'事實與意見區分',lessonPath:'g5/L02',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
-      answers:answers,qtypes:qtypes,scoreAnswers:scoreAnswers,experienceAnswers:experienceAnswers,openAnswers:{},
-      accuracyRate:accuracyRate,experienceCompletion:experienceCompletion,
+      answers:answers,qtypes:qtypes,scoreAnswers:scoreAnswers,experienceAnswers:{},openAnswers:{},
+      accuracyRate:accuracyRate,experienceCompletion:null,
       status:'submitted',submittedAt:firebase.firestore.FieldValue.serverTimestamp()};
     var btn=this,stat=document.getElementById('submitStat');
     btn.disabled=true;stat.className='text-sm font-bold mt-3 min-h-[20px] text-indigo-600';stat.textContent='繳交中…';
@@ -550,7 +524,7 @@ var WS_ID = "g5-L02";
   }
   boot();
 
-  var phases=[['s1','① 開場對比'],['s2','② 解密比喻'],['s3','③ 找線索'],['s4','④ 破解迷思'],['s5','⑤ 偵探畫線']];
+  var phases=[['s1','① 開場對比'],['s2','② 解密比喻'],['s3','③ 找線索'],['s4','④ 偵探畫線']];
   window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=phases[0][1];
     phases.forEach(function(p){var el=document.getElementById(p[0]);if(el&&el.offsetTop<=y)cur=p[1];});
   },{passive:true});
@@ -563,8 +537,8 @@ var WS_ID = "g5-L02";
 quizzes/{L02}、submissions 都已涵蓋在既有規則的通用路徑內，無需額外新增規則。
 Authentication 需啟用：匿名（學生）＋ 電子郵件/密碼（老師 boyin0304@slps.tn.edu.tw）。
 用法：學生開一般網址作答；老師開 網址#admin → 登入 → 「⬆ 上傳答案」（僅需一次）→
-上課時按「🎉 公布」→ 全班③投票卡同步翻答案，老師看「已交卷 N 人 · 平均 X/4」。
-③投票與⑤偵探畫線都計入 accuracyRate；⑤不在頁面揭曉，學生直接繳交，老師於評分平台後台核對計分。
+上課時按「🎉 公布」→ 全班③投票卡同步翻答案（公布後會出現「事實不等於正確」說明），老師看「已交卷 N 人 · 平均 X/5」。
+③投票與④偵探畫線都計入 accuracyRate；④不在頁面揭曉，學生直接繳交，老師於評分平台後台核對計分。
 =====================================================================
 -->
 </body>
