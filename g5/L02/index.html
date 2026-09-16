@@ -38,6 +38,23 @@
   </div>
 </div>
 
+<!-- 老師工具列（僅 #admin 時顯示，控制③投票分類的公布時機） -->
+<div id="teacherbar" class="hidden sticky top-0 z-30 bg-slate-900 text-white text-sm">
+  <div class="max-w-4xl mx-auto px-4 py-2 flex items-center gap-3 flex-wrap">
+    <span class="cute font-bold text-amber-300">👩‍🏫 教師模式</span>
+    <span id="tStatus" class="text-slate-300 text-xs"></span>
+    <span id="tTally" class="text-emerald-300 text-xs font-bold"></span>
+    <div class="ml-auto flex gap-2">
+      <button id="uploadBtn" class="bg-sky-600 hover:bg-sky-700 font-bold rounded-lg px-3 py-1" title="備課用：把③的正確答案存進資料庫，只需做一次">⬆ 上傳答案</button>
+      <button id="revealBtn" class="bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1">🎉 公布</button>
+      <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="回到未公布狀態">↩ 還原</button>
+      <button id="previewModeBtn" class="bg-indigo-600 hover:bg-indigo-700 font-bold rounded-lg px-3 py-1" title="暫時隱藏教師工具列，看學生看到的畫面">👀 預覽學生模式</button>
+    </div>
+  </div>
+</div>
+<!-- 預覽學生模式時顯示的浮動返回鍵 -->
+<button id="backToTeacher" class="hidden fixed bottom-4 right-4 z-30 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full px-4 py-2 shadow-lg">↩ 返回教師模式</button>
+
 <div class="max-w-4xl mx-auto px-4 py-6">
 
   <header class="text-center mb-6">
@@ -50,6 +67,7 @@
       <span class="bg-rose-100 text-rose-700 rounded-full px-3 py-1 font-bold">④ 破解迷思</span>
       <span class="bg-teal-100 text-teal-700 rounded-full px-3 py-1 font-bold">⑤ 偵探畫線</span>
     </div>
+    <p id="syncBadge" class="hidden mt-2 text-xs text-emerald-600 font-bold">🔗 已連線：老師公布③的答案時，這台會自動同步</p>
   </header>
 
   <!-- ===== ① 開場：同一家店，兩種說法 ===== -->
@@ -108,7 +126,7 @@
     <p class="text-center text-sm text-slate-500 mt-3">👉 判斷口訣：「拿尺量得出對錯的，是事實；只能問你覺不覺得的，是意見。」</p>
   </section>
 
-  <!-- ===== ③ 找線索：觀察範例 → Slido 分享發現 → 換你分類 ===== -->
+  <!-- ===== ③ 找線索：觀察範例 → Slido 分享發現 → 換你分類（教師公布） ===== -->
   <section id="s3" class="step mt-10">
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h2 class="cute text-2xl font-extrabold text-emerald-700">③ 偵探的第一步：找出線索</h2>
@@ -126,13 +144,19 @@
 
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h3 class="cute text-xl font-extrabold text-emerald-700">🕵️ 換你來分類</h3>
-      <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是溫度計（事實）還是穿衣服（意見）？</p>
+      <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是溫度計（事實）還是穿衣服（意見）？投完票先別急，等老師公布答案。</p>
       <div class="inline-flex items-center gap-2 bg-emerald-50 border-2 border-emerald-200 rounded-full px-4 py-1.5 text-sm font-bold text-emerald-700">
         <span>🗳️ 已投票</span><span id="voted">0 / 4</span>
       </div>
     </div>
 
     <div id="grid" class="grid sm:grid-cols-2 gap-4"></div>
+
+    <div id="result" class="hidden mt-6 text-center bg-gradient-to-b from-emerald-100 to-sky-100 border-4 border-emerald-300 rounded-3xl p-6 pop">
+      <div class="text-5xl mb-1">🎯</div>
+      <h3 class="cute text-2xl font-extrabold text-emerald-700">公布答案！</h3>
+      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-sky-600 font-extrabold">0</span> / 4</p>
+    </div>
   </section>
 
   <!-- ===== ④ 承接與釐清：孔廟迷思 ===== -->
@@ -178,19 +202,18 @@
   <section class="step mt-10">
     <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm text-center">
       <h2 class="cute text-xl font-extrabold text-indigo-700 mb-1">📮 繳交學習單</h2>
-      <p class="text-sm text-slate-500 mb-3">確定都填好了嗎？按下面按鈕交給老師（老師會後續核對並計算成績，可以重交，會覆蓋前一次）。</p>
+      <p class="text-sm text-slate-500 mb-3">確定都填好了嗎？按下面按鈕交給老師（⑤畫線由老師後續核對並計算成績，可以重交，會覆蓋前一次）。</p>
       <button id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white cute text-xl font-extrabold rounded-2xl py-3">繳交學習單</button>
       <p id="submitStat" class="text-sm font-bold mt-3 min-h-[20px]"></p>
     </div>
   </section>
 
-  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">交出去之後，老師會統一核對答案並計算成績，不會馬上顯示對錯。</footer>
+  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">教師公布③的答案：在網址列加上 <code class="bg-slate-200 rounded px-1">#admin</code> 後重新整理。⑤畫線交出去後由老師核對計分。</footer>
 </div>
 
 <script>
 /* ============================================================
-   Firebase 設定（沿用 pcclass-94300 專案，僅用於匿名登入＋寫入 submissions）
-   單機模式：把 firebaseConfig 設為 null 即可（此時無法繳交，需連網）。
+   Firebase 同步設定（沿用 pcclass-94300 專案，單機模式把 firebaseConfig 設為 null 即可）
    ============================================================ */
 var firebaseConfig = {
   apiKey:"AIzaSyAaodBvsP-BSovON14izt22DOXeH40TTGM",
@@ -201,9 +224,18 @@ var firebaseConfig = {
   appId:"1:1034787516465:web:73c334b2ddad152c472510",
   measurementId:"G-37P75R7TZ7"
 };
+var TEACHER_EMAIL = "boyin0304@slps.tn.edu.tw";
+var QUIZ_ID = "L02";
 var WS_ID = "g5-L02";
 
 (function(){
+  var IS_ADMIN = location.hash === '#admin';
+
+  var PREVIEW_KEY='wk_previewMode';
+  if(!IS_ADMIN){
+    try{ if(sessionStorage.getItem(PREVIEW_KEY)==='1')document.getElementById('backToTeacher').classList.remove('hidden'); }catch(e){}
+  }
+
   // ===== 識別列 =====
   var ID_KEY='wk_identity';
   function digits(s){return String(s||'').replace(/[^0-9]/g,'');}
@@ -258,32 +290,36 @@ var WS_ID = "g5-L02";
     exEl.appendChild(d);
   });
 
-  // ===== ③ 換你來分類（無揭曉，僅記錄投票，成績由老師後台核對）=====
+  // ===== ③ 換你來分類（教師公布，Firebase 同步）=====
   var items=[
     {t:'文章牛肉湯位於台南市安平區安平路 300 號。',type:'fact'},
     {t:'我覺得文章牛肉湯的湯頭鮮甜，讓人一喝就上癮。',type:'opinion'},
     {t:'文章牛肉湯的粉絲專頁有超過 1 萬 6 千人追蹤。',type:'fact'},
     {t:'溫暖，是台南最美的風景。',type:'opinion'}
   ];
-  var state={votes:{},myth:null,clauses:{}};
+  var state={votes:{},revealed:false,myth:null,clauses:{},_pushed:false};
+  var ANSWERS=null;
+  function answerOf(i){return (ANSWERS&&ANSWERS.length===items.length)?ANSWERS[i]:items[i].type;}
   function save(){try{localStorage.setItem('g5L02flow',JSON.stringify({votes:state.votes,myth:state.myth,clauses:state.clauses}))}catch(e){}}
   function load(){try{var d=localStorage.getItem('g5L02flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.myth=o.myth||null;state.clauses=o.clauses||{};}}catch(e){}}
-  load();
+  load();state._pushed=false;
 
   var grid=document.getElementById('grid');
   items.forEach(function(it,i){
     var c=document.createElement('div');
     c.className='card bg-white border-4 border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col';
+    c.setAttribute('data-qid','v'+(i+1));c.setAttribute('data-qtype','experience');
     c.innerHTML=
       '<div class="flex items-start gap-2 mb-2"><span class="cute text-lg font-extrabold text-slate-400">'+(i+1)+'</span>'+
         '<div class="font-bold text-slate-700 leading-snug">'+esc(it.t)+'</div></div>'+
       '<div class="mt-auto grid grid-cols-2 gap-2">'+
         '<button class="vt v-fact opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400" data-v="fact">🌡️ 事實</button>'+
         '<button class="vt v-opinion opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400" data-v="opinion">👕 意見</button>'+
-      '</div>';
+      '</div><div class="reveal hidden mt-3 text-sm rounded-xl p-3"></div>';
     grid.appendChild(c);
     var btns=c.querySelectorAll('.vt');
     btns.forEach(function(b){b.onclick=function(){
+      if(state.revealed)return;
       state.votes[i]=b.dataset.v;
       btns.forEach(function(x){x.classList.remove('bg-indigo-100','border-indigo-400','text-indigo-700')});
       b.classList.add('bg-indigo-100','border-indigo-400','text-indigo-700');
@@ -294,6 +330,28 @@ var WS_ID = "g5-L02";
   });
   function updateVoted(){document.getElementById('voted').textContent=Object.keys(state.votes).length+' / '+items.length;}
   updateVoted();
+  function scoreNow(){var n=0;items.forEach(function(it,i){if(state.votes[i]!==undefined&&state.votes[i]===answerOf(i))n++});return n;}
+
+  function doReveal(){
+    if(state.revealed && !document.getElementById('result').classList.contains('hidden'))return;
+    state.revealed=true;save();
+    Array.prototype.forEach.call(grid.children,function(c,i){
+      var it=items[i];
+      c.querySelectorAll('.vt').forEach(function(b){b.disabled=true;b.classList.add('opacity-60')});
+      var rev=c.querySelector('.reveal'),voted=state.votes[i],ans=answerOf(i),got=voted!==undefined&&voted===ans;
+      var isFact=ans==='fact';
+      c.className='card border-4 rounded-2xl p-4 shadow-sm flex flex-col '+(isFact?'bg-sky-50 border-sky-300':'bg-rose-50 border-rose-300');
+      rev.className='reveal mt-3 text-sm rounded-xl p-3 flip bg-white '+(isFact?'text-sky-800':'text-rose-800');
+      rev.innerHTML='<b>'+(isFact?'🌡️ 這是事實句':'👕 這是意見句')+'</b>'+
+        (voted===undefined?' <span class="text-slate-400">（你沒投票）</span>':(got?' <span class="text-emerald-600">· 你答對了！</span>':' <span class="text-amber-600">· 再想想</span>'));
+      rev.classList.remove('hidden');
+    });
+    var correct=scoreNow();
+    document.getElementById('score').textContent=correct;
+    var r=document.getElementById('result');r.classList.remove('hidden');
+    r.scrollIntoView({behavior:'smooth',block:'center'});
+    if(!IS_ADMIN)pushResult(correct);
+  }
 
   // ===== ④ 孔廟迷思：個人自我檢核，作答後立即看解說（教學釐清，非評量）=====
   document.getElementById('mythFact').onclick=function(){ mythPick('fact'); };
@@ -306,7 +364,7 @@ var WS_ID = "g5-L02";
   }
   if(state.myth)mythPick(state.myth);
 
-  // ===== ⑤ 偵探畫線：國華街文章（不揭曉，老師後台核對計分）=====
+  // ===== ⑤ 偵探畫線：國華街文章（不在頁面揭曉，老師後台核對計分）=====
   var clauses=[
     {text:'位於台南市中西區的國華街全長約 1.5 公里',type:'fact',sep:'，'},
     {text:'是我心中全台灣最有魅力的美食聖地。',type:'opinion',sep:''},
@@ -353,28 +411,17 @@ var WS_ID = "g5-L02";
   renderPassage();
   document.getElementById('resetClauses').onclick=function(){ state.clauses={};save();renderPassage(); };
 
-  /* ================= Firebase：匿名登入＋繳交 ================= */
-  var db=null,auth=null;
+  /* ================= Firebase 同步層（③ 投票分類的教師公布）================= */
+  var db=null,auth=null,quizRef=null;
   function loadScript(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
   function ensureAuth(){return (auth&&auth.currentUser)?Promise.resolve(auth.currentUser):auth.signInAnonymously().then(function(c){return c.user});}
-  function boot(){
-    if(!firebaseConfig)return;
-    var base='https://www.gstatic.com/firebasejs/10.8.0/';
-    loadScript(base+'firebase-app-compat.js')
-      .then(function(){return loadScript(base+'firebase-auth-compat.js')})
-      .then(function(){return loadScript(base+'firebase-firestore-compat.js')})
-      .then(function(){ firebase.initializeApp(firebaseConfig);db=firebase.firestore();auth=firebase.auth(); })
-      .catch(function(e){console.warn('Firebase 啟用失敗',e);});
-  }
-  boot();
 
-  // ===== 繳交學習單（見《學習單資料與提交規範》§3；不在頁面上揭曉對錯，isCorrect 供老師後台核對）=====
   document.getElementById('submitBtn').onclick=function(){
     var idn=getIdentity();
     if(!identityValid(idn)){alert('請先在最上方填好年級、班級（1-14）、座號（都是數字）。');window.scrollTo({top:0,behavior:'smooth'});return;}
     if(!db){alert('系統尚未連線，請稍後或重新整理頁面。');return;}
     var experienceAnswers={},scoreAnswers={},answers={},qtypes={};
-    items.forEach(function(it,i){var qid='v'+(i+1),given=state.votes[i];given=(given===undefined)?null:given;var correct=it.type;
+    items.forEach(function(it,i){var qid='v'+(i+1),given=state.votes[i];given=(given===undefined)?null:given;var correct=answerOf(i);
       experienceAnswers[qid]={given:given,correct:correct,isCorrect:given==null?false:(given===correct)};answers[qid]=given;qtypes[qid]='experience';});
     var mythGiven=state.myth||null;
     experienceAnswers.myth={given:mythGiven,correct:'fact',isCorrect:mythGiven==='fact'};
@@ -387,7 +434,7 @@ var WS_ID = "g5-L02";
     var experienceAnswered=Object.keys(state.votes).length+(state.myth?1:0);
     var experienceCompletion=Math.round(experienceAnswered/experienceItemsTotal*100);
     var accuracyRate=Math.round(clauseCorrect/clauses.length*100);
-    if(!confirm('確定要繳交嗎？交出去後老師會核對答案並計算成績，不會馬上顯示對錯。'))return;
+    if(!confirm('確定要繳交嗎？⑤畫線交出去後由老師核對並計算成績，不會馬上顯示對錯。'))return;
     var docId=WS_ID+'__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:WS_ID,worksheetTitle:'事實與意見區分',lessonPath:'g5/L02',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
@@ -400,13 +447,90 @@ var WS_ID = "g5-L02";
       .then(function(){
         btn.disabled=false;btn.textContent='重新繳交（覆蓋）';
         stat.className='text-sm font-bold mt-3 min-h-[20px] text-emerald-600';
-        stat.textContent='✓ 已繳交，老師會後續核對並計算成績。可再按一次覆蓋更新。';
+        stat.textContent='✓ 已繳交。可再按一次覆蓋更新。';
       }).catch(function(e){
         btn.disabled=false;
         stat.className='text-sm font-bold mt-3 min-h-[20px] text-amber-600';
         stat.textContent='繳交失敗：'+e.message+'（可能是老師尚未部署 Firestore 規則）';
       });
   };
+  function pushResult(correct){
+    if(!db||!auth||!auth.currentUser)return;if(state._pushed)return;state._pushed=true;
+    quizRef.collection('results').doc(auth.currentUser.uid)
+      .set({score:correct,total:items.length,at:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(function(){});
+  }
+  function boot(){
+    if(!firebaseConfig){ if(IS_ADMIN)teacherOffline(); return; }
+    var base='https://www.gstatic.com/firebasejs/10.8.0/';
+    loadScript(base+'firebase-app-compat.js')
+      .then(function(){return loadScript(base+'firebase-auth-compat.js')})
+      .then(function(){return loadScript(base+'firebase-firestore-compat.js')})
+      .then(function(){
+        firebase.initializeApp(firebaseConfig);db=firebase.firestore();auth=firebase.auth();
+        quizRef=db.collection('quizzes').doc(QUIZ_ID);
+        document.getElementById('syncBadge').classList.remove('hidden');
+        quizRef.onSnapshot(function(doc){var d=(doc&&doc.data())||{};
+          if(Array.isArray(d.answers)&&d.answers.length===items.length)ANSWERS=d.answers;
+          if(d.revealed&&!state.revealed)doReveal();
+          if(!d.revealed&&state.revealed)location.reload();
+        },function(e){console.warn('讀取失敗',e);});
+        if(IS_ADMIN)teacherOnline();
+        else{
+          var unsubStudent=auth.onAuthStateChanged(function(u){
+            if(unsubStudent)unsubStudent();unsubStudent=null;
+          });
+        }
+      })
+      .catch(function(e){console.warn('Firebase 啟用失敗，改用單機模式',e);if(IS_ADMIN)teacherOffline();});
+  }
+  function showBar(){document.getElementById('teacherbar').classList.remove('hidden');}
+  document.getElementById('previewModeBtn').onclick=function(){
+    if(!confirm('會清空這台裝置上已填寫的身分（年級/班級/座號）與作答，改成全新未填寫的畫面，確定要預覽嗎？'))return;
+    try{localStorage.removeItem(ID_KEY);localStorage.removeItem('g5L02flow');}catch(e){}
+    try{sessionStorage.setItem(PREVIEW_KEY,'1');}catch(e){}
+    location.href=location.pathname+location.search;
+  };
+  document.getElementById('backToTeacher').onclick=function(){
+    try{sessionStorage.removeItem(PREVIEW_KEY);}catch(e){}
+    location.href=location.pathname+location.search+'#admin';
+    location.reload();
+  };
+  function teacherOffline(){
+    showBar();document.getElementById('tStatus').textContent='單機模式（答案已內建，免上傳）';
+    var pw=prompt('教師密碼：');if(pw!=='1234'){if(pw!==null)alert('密碼錯誤');document.getElementById('teacherbar').classList.add('hidden');return;}
+    var up=document.getElementById('uploadBtn');if(up)up.onclick=function(){alert('單機模式：答案已內建，不需上傳。');};
+    document.getElementById('revealBtn').onclick=doReveal;
+    document.getElementById('lockBtn').onclick=function(){location.reload();};
+  }
+  function wireTeacherUI(email){
+    document.getElementById('tStatus').textContent='已登入 '+email;
+    var up=document.getElementById('uploadBtn');
+    if(up)up.onclick=function(){up.disabled=true;up.textContent='上傳中…';
+      quizRef.set({answers:items.map(function(it){return it.type}),answersAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})
+        .then(function(){up.disabled=false;up.textContent='✓ 已上傳';setTimeout(function(){up.textContent='⬆ 上傳答案';},2500);
+          alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要按「🎉 公布」即可。');})
+        .catch(function(e){up.disabled=false;up.textContent='⬆ 上傳答案';alert('上傳失敗：'+e.message);});};
+    document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
+    document.getElementById('lockBtn').onclick=function(){
+      if(!confirm('確定要還原成未公布狀態嗎？'))return;
+      quizRef.set({revealed:false},{merge:true});
+    };
+    quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
+      document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / '+items.length;});
+  }
+  function teacherOnline(){
+    showBar();
+    var handled=false;
+    var unsub=auth.onAuthStateChanged(function(u){
+      if(handled)return;handled=true;if(unsub)unsub();
+      if(u&&!u.isAnonymous&&u.email){ wireTeacherUI(u.email); return; }
+      var email=prompt('教師 Email：',TEACHER_EMAIL);if(email===null){document.getElementById('teacherbar').classList.add('hidden');return;}
+      var pw=prompt('密碼：');if(pw===null){document.getElementById('teacherbar').classList.add('hidden');return;}
+      auth.signInWithEmailAndPassword(email,pw).then(function(cred){wireTeacherUI(cred.user.email);})
+        .catch(function(e){alert('登入失敗：'+e.message);document.getElementById('teacherbar').classList.add('hidden');});
+    });
+  }
+  boot();
 
   var phases=[['s1','① 開場對比'],['s2','② 解密比喻'],['s3','③ 找線索'],['s4','④ 破解迷思'],['s5','⑤ 偵探畫線']];
   window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=phases[0][1];
@@ -414,5 +538,16 @@ var WS_ID = "g5-L02";
   },{passive:true});
 })();
 </script>
+
+<!--
+================= Firestore 規則（③ 投票分類跨裝置同步公布）=================
+沿用 L01 的 firestore.rules（見《互動教材進階規範》§2.4／評分平台/firestore.rules）：
+quizzes/{L02}、submissions 都已涵蓋在既有規則的通用路徑內，無需額外新增規則。
+Authentication 需啟用：匿名（學生）＋ 電子郵件/密碼（老師 boyin0304@slps.tn.edu.tw）。
+用法：學生開一般網址作答；老師開 網址#admin → 登入 → 「⬆ 上傳答案」（僅需一次）→
+上課時按「🎉 公布」→ 全班③投票卡同步翻答案，老師看「已交卷 N 人 · 平均 X/4」。
+⑤ 偵探畫線不在頁面揭曉，學生直接繳交，老師於評分平台後台核對計分。
+=====================================================================
+-->
 </body>
 </html>
