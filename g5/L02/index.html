@@ -143,10 +143,13 @@
       <h2 class="cute text-2xl font-extrabold text-emerald-700">③ 偵探的第一步：找出線索
         <span class="align-middle text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">🧪 體驗，不計分</span>
       </h2>
-      <p class="text-slate-600 mt-1">下面幾句話，主題都不一樣。仔細看看，<b>標好的地方</b>是不是有什麼規律？</p>
+      <p class="text-slate-600 mt-1">下面分成兩組，主題都不一樣。先看看<b>「事實句」</b>這組有什麼共同點，再看看<b>「意見句」</b>這組有什麼共同點。</p>
     </div>
 
-    <div id="examples" class="grid sm:grid-cols-2 gap-3"></div>
+    <p class="font-bold text-sky-700 mb-2">🔵 以下都是事實句：</p>
+    <div id="examplesFact" class="grid sm:grid-cols-2 gap-3 mb-4"></div>
+    <p class="font-bold text-rose-700 mb-2">🔴 以下都是意見句：</p>
+    <div id="examplesOpinion" class="grid sm:grid-cols-2 gap-3"></div>
 
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 my-5 shadow-sm">
       <p class="text-lg font-bold text-emerald-700 mb-2">📝 你發現了嗎？事實句跟意見句，在用詞上有什麼不同？打字分享你發現的「線索」！</p>
@@ -205,10 +208,6 @@
     </div>
 
     <button id="resetClauses" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl px-4 py-3">🔄 清除重來</button>
-
-    <div class="mt-4 bg-teal-50 border-2 border-teal-200 rounded-2xl p-4 text-sm text-teal-900">
-      🧑‍🤝‍🧑 <b>同桌互相討論</b>：完成後跟同桌交換螢幕，說說看你們畫線的地方一不一樣、為什麼這樣分類。
-    </div>
   </section>
 
   <!-- ===== 繳交學習單 ===== -->
@@ -287,28 +286,35 @@ var WS_ID = "g5-L02";
   });
 
   // ===== ③ 找線索：觀察範例（已標好答案，供學生自己歸納規律，不是投票題） =====
-  var examples=[
-    {t:'文章牛肉湯創立於<b>民國 83 年</b>。',tag:'事實',cls:'sky'},
-    {t:'林百貨是台南<b>最有特色</b>的老建築。',tag:'意見',cls:'rose'},
-    {t:'臺南市在<b>民國 99 年</b>由台南縣市合併升格。',tag:'事實',cls:'sky'},
-    {t:'度小月擔仔麵是全台南<b>最好吃</b>的擔仔麵。',tag:'意見',cls:'rose'}
+  var factExamples=[
+    '文章牛肉湯創立於<b>民國 83 年</b>。',
+    '文章牛肉湯位於台南市安平區<b>安平路 300 號</b>。',
+    '文章牛肉湯的粉絲專頁有超過<b>1 萬 6 千人</b>追蹤。',
+    '臺南市在<b>民國 99 年</b>由台南縣市合併升格。'
   ];
-  var exEl=document.getElementById('examples');
-  examples.forEach(function(ex){
-    var d=document.createElement('div');
-    var isFact=ex.tag==='事實';
-    d.className='bg-white border-4 rounded-2xl p-4 shadow-sm '+(isFact?'border-sky-200':'border-rose-200');
-    d.innerHTML='<span class="text-xs font-bold px-2 py-0.5 rounded-full '+(isFact?'bg-sky-100 text-sky-700':'bg-rose-100 text-rose-700')+'">'+(isFact?'🔵 事實':'🔴 意見')+'</span>'+
-      '<p class="mt-2 text-sm text-slate-700 leading-relaxed">'+ex.t+'</p>';
-    exEl.appendChild(d);
-  });
+  var opinionExamples=[
+    '<b>我認為</b>度小月擔仔麵是全台南最好吃的擔仔麵。',
+    '林百貨是台南<b>最有特色</b>的老建築。',
+    '<b>我覺得</b>夏天的台南熱到讓人受不了。',
+    '<b>我認為</b>這間店的服務態度非常親切。'
+  ];
+  function renderExamples(el,list,isFact){
+    list.forEach(function(t){
+      var d=document.createElement('div');
+      d.className='bg-white border-4 rounded-2xl p-4 shadow-sm '+(isFact?'border-sky-200':'border-rose-200');
+      d.innerHTML='<p class="text-sm text-slate-700 leading-relaxed">'+t+'</p>';
+      el.appendChild(d);
+    });
+  }
+  renderExamples(document.getElementById('examplesFact'),factExamples,true);
+  renderExamples(document.getElementById('examplesOpinion'),opinionExamples,false);
 
   // ===== ③ 換你來分類（教師公布，Firebase 同步）=====
   var items=[
     {t:'中央氣象署發布，今天台南地區高溫達 35 度。',type:'fact'},
-    {t:'有記者在報導中寫道，這波炎熱「讓人幾乎融化」。',type:'opinion'},
+    {t:'這波高溫熱到讓人幾乎融化，實在讓人受不了。',type:'opinion'},
     {t:'台南市教育局公告，全市國小將於下週三舉辦防災演練。',type:'fact'},
-    {t:'有家長投書表示，這次演練「安排得非常用心」。',type:'opinion'}
+    {t:'我認為這次防災演練安排得非常用心。',type:'opinion'}
   ];
   var state={votes:{},revealed:false,myth:null,clauses:{},_pushed:false};
   var ANSWERS=null;
