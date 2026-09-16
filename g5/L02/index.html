@@ -107,7 +107,18 @@
   <section id="s2" class="step mt-10">
     <div class="bg-white border-4 border-amber-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h2 class="cute text-2xl font-extrabold text-amber-700">② 兩把量尺：溫度計 ／ 穿衣服</h2>
-      <p class="text-slate-600 mt-1">點一下卡片，看看怎麼分辨「事實」跟「意見」。</p>
+      <p class="text-slate-600 mt-1 font-bold">🌤️ 如果有人問你：「今天天氣怎麼樣？」你會怎麼回答？</p>
+      <div class="mt-3 grid sm:grid-cols-2 gap-3">
+        <div class="bg-sky-50 border-2 border-sky-200 rounded-2xl p-3">
+          <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-sky-100 text-sky-700">🌡️ 事實</span>
+          <p class="mt-2 text-sm text-slate-700">「現在<b>溫度</b>是攝氏 25 度。」──拿溫度計量，大家量出來都一樣。</p>
+        </div>
+        <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-3">
+          <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-700">👕 意見</span>
+          <p class="mt-2 text-sm text-slate-700">「今天<b>很熱</b>，我只穿一件短袖。」──有多熱、多冷、穿幾件衣服，每個人感覺不同。</p>
+        </div>
+      </div>
+      <p class="text-slate-600 mt-3">同一個天氣，可以有兩種回答！點一下下面的卡片，看看這兩種回答分別叫做什麼名字。</p>
     </div>
     <div class="grid sm:grid-cols-2 gap-4">
       <button class="metaphor text-left bg-white border-4 border-sky-300 rounded-2xl p-5 hover:shadow-md" data-m="fact">
@@ -119,7 +130,7 @@
       <button class="metaphor text-left bg-white border-4 border-rose-300 rounded-2xl p-5 hover:shadow-md" data-m="opinion">
         <div class="text-4xl">👕</div>
         <h3 class="cute text-xl font-extrabold text-rose-700 mt-1">意見 ＝ 穿幾件衣服</h3>
-        <p class="text-sm text-slate-600 mt-1">每個人的感覺不一樣，<b>沒有標準答案</b>。</p>
+        <p class="text-sm text-slate-600 mt-1">有多熱、多冷、要<b>穿幾件衣服</b>，每個人感覺不一樣，<b>沒有標準答案</b>。</p>
         <div class="mex hidden mt-3 bg-rose-50 rounded-xl p-3 text-sm text-rose-900">〔例〕今天天氣很舒服。──有人覺得冷、有人覺得剛好，因人而異。</div>
       </button>
     </div>
@@ -129,8 +140,10 @@
   <!-- ===== ③ 找線索：觀察範例 → Slido 分享發現 → 換你分類（教師公布） ===== -->
   <section id="s3" class="step mt-10">
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
-      <h2 class="cute text-2xl font-extrabold text-emerald-700">③ 偵探的第一步：找出線索</h2>
-      <p class="text-slate-600 mt-1">下面每一組都是「同一個主題」的事實句跟意見句。仔細看看，<b>圈出來的地方</b>是不是有什麼規律？</p>
+      <h2 class="cute text-2xl font-extrabold text-emerald-700">③ 偵探的第一步：找出線索
+        <span class="align-middle text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">🧪 體驗，不計分</span>
+      </h2>
+      <p class="text-slate-600 mt-1">下面幾句話，主題都不一樣。仔細看看，<b>標好的地方</b>是不是有什麼規律？</p>
     </div>
 
     <div id="examples" class="grid sm:grid-cols-2 gap-3"></div>
@@ -144,7 +157,7 @@
 
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h3 class="cute text-xl font-extrabold text-emerald-700">🕵️ 換你來分類</h3>
-      <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是溫度計（事實）還是穿衣服（意見）？投完票先別急，等老師公布答案。</p>
+      <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是事實還是意見？投完票先別急，等老師公布答案。</p>
       <div class="inline-flex items-center gap-2 bg-emerald-50 border-2 border-emerald-200 rounded-full px-4 py-1.5 text-sm font-bold text-emerald-700">
         <span>🗳️ 已投票</span><span id="voted">0 / 4</span>
       </div>
@@ -165,8 +178,8 @@
       <h2 class="cute text-2xl font-extrabold text-rose-700">④ 小心！這一題會讓你嚇一跳</h2>
       <p class="text-slate-600 mt-1 font-bold">「台南孔廟建於西元 2024 年。」──這是事實還是意見？先選一個！</p>
       <div class="mt-3 grid grid-cols-2 gap-2 max-w-sm">
-        <button id="mythFact" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400">🌡️ 事實</button>
-        <button id="mythOpinion" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400">👕 意見</button>
+        <button id="mythFact" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400">🔵 事實</button>
+        <button id="mythOpinion" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400">🔴 意見</button>
       </div>
       <div id="mythReveal" class="hidden mt-4 bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 text-sm text-rose-900 flip">
         <b>答案是「事實句」！</b>（雖然它是假的——孔廟其實建於西元 1665 年。）<br>
@@ -208,7 +221,7 @@
     </div>
   </section>
 
-  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">教師公布③的答案：在網址列加上 <code class="bg-slate-200 rounded px-1">#admin</code> 後重新整理。⑤畫線交出去後由老師核對計分。</footer>
+  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">教師公布③的答案：在網址列加上 <code class="bg-slate-200 rounded px-1">#admin</code> 後重新整理。③投票和⑤畫線交出去後由老師核對計分。</footer>
 </div>
 
 <script>
@@ -276,26 +289,26 @@ var WS_ID = "g5-L02";
   // ===== ③ 找線索：觀察範例（已標好答案，供學生自己歸納規律，不是投票題） =====
   var examples=[
     {t:'文章牛肉湯創立於<b>民國 83 年</b>。',tag:'事實',cls:'sky'},
-    {t:'文章牛肉湯的牛腩湯<b>超級好吃</b>，讓人吃了還想再吃。',tag:'意見',cls:'rose'},
-    {t:'台南孔廟建於<b>西元 1665 年</b>。',tag:'事實',cls:'sky'},
-    {t:'台南孔廟是全台南<b>最漂亮</b>的地方。',tag:'意見',cls:'rose'}
+    {t:'林百貨是台南<b>最有特色</b>的老建築。',tag:'意見',cls:'rose'},
+    {t:'臺南市在<b>民國 99 年</b>由台南縣市合併升格。',tag:'事實',cls:'sky'},
+    {t:'度小月擔仔麵是全台南<b>最好吃</b>的擔仔麵。',tag:'意見',cls:'rose'}
   ];
   var exEl=document.getElementById('examples');
   examples.forEach(function(ex){
     var d=document.createElement('div');
     var isFact=ex.tag==='事實';
     d.className='bg-white border-4 rounded-2xl p-4 shadow-sm '+(isFact?'border-sky-200':'border-rose-200');
-    d.innerHTML='<span class="text-xs font-bold px-2 py-0.5 rounded-full '+(isFact?'bg-sky-100 text-sky-700':'bg-rose-100 text-rose-700')+'">'+(isFact?'🌡️ 事實':'👕 意見')+'</span>'+
+    d.innerHTML='<span class="text-xs font-bold px-2 py-0.5 rounded-full '+(isFact?'bg-sky-100 text-sky-700':'bg-rose-100 text-rose-700')+'">'+(isFact?'🔵 事實':'🔴 意見')+'</span>'+
       '<p class="mt-2 text-sm text-slate-700 leading-relaxed">'+ex.t+'</p>';
     exEl.appendChild(d);
   });
 
   // ===== ③ 換你來分類（教師公布，Firebase 同步）=====
   var items=[
-    {t:'文章牛肉湯位於台南市安平區安平路 300 號。',type:'fact'},
-    {t:'我覺得文章牛肉湯的湯頭鮮甜，讓人一喝就上癮。',type:'opinion'},
-    {t:'文章牛肉湯的粉絲專頁有超過 1 萬 6 千人追蹤。',type:'fact'},
-    {t:'溫暖，是台南最美的風景。',type:'opinion'}
+    {t:'中央氣象署發布，今天台南地區高溫達 35 度。',type:'fact'},
+    {t:'有記者在報導中寫道，這波炎熱「讓人幾乎融化」。',type:'opinion'},
+    {t:'台南市教育局公告，全市國小將於下週三舉辦防災演練。',type:'fact'},
+    {t:'有家長投書表示，這次演練「安排得非常用心」。',type:'opinion'}
   ];
   var state={votes:{},revealed:false,myth:null,clauses:{},_pushed:false};
   var ANSWERS=null;
@@ -308,13 +321,13 @@ var WS_ID = "g5-L02";
   items.forEach(function(it,i){
     var c=document.createElement('div');
     c.className='card bg-white border-4 border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col';
-    c.setAttribute('data-qid','v'+(i+1));c.setAttribute('data-qtype','experience');
+    c.setAttribute('data-qid','v'+(i+1));c.setAttribute('data-qtype','score');
     c.innerHTML=
       '<div class="flex items-start gap-2 mb-2"><span class="cute text-lg font-extrabold text-slate-400">'+(i+1)+'</span>'+
         '<div class="font-bold text-slate-700 leading-snug">'+esc(it.t)+'</div></div>'+
       '<div class="mt-auto grid grid-cols-2 gap-2">'+
-        '<button class="vt v-fact opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400" data-v="fact">🌡️ 事實</button>'+
-        '<button class="vt v-opinion opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400" data-v="opinion">👕 意見</button>'+
+        '<button class="vt v-fact opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400" data-v="fact">🔵 事實</button>'+
+        '<button class="vt v-opinion opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400" data-v="opinion">🔴 意見</button>'+
       '</div><div class="reveal hidden mt-3 text-sm rounded-xl p-3"></div>';
     grid.appendChild(c);
     var btns=c.querySelectorAll('.vt');
@@ -342,7 +355,7 @@ var WS_ID = "g5-L02";
       var isFact=ans==='fact';
       c.className='card border-4 rounded-2xl p-4 shadow-sm flex flex-col '+(isFact?'bg-sky-50 border-sky-300':'bg-rose-50 border-rose-300');
       rev.className='reveal mt-3 text-sm rounded-xl p-3 flip bg-white '+(isFact?'text-sky-800':'text-rose-800');
-      rev.innerHTML='<b>'+(isFact?'🌡️ 這是事實句':'👕 這是意見句')+'</b>'+
+      rev.innerHTML='<b>'+(isFact?'🔵 這是事實句':'🔴 這是意見句')+'</b>'+
         (voted===undefined?' <span class="text-slate-400">（你沒投票）</span>':(got?' <span class="text-emerald-600">· 你答對了！</span>':' <span class="text-amber-600">· 再想想</span>'));
       rev.classList.remove('hidden');
     });
@@ -421,20 +434,19 @@ var WS_ID = "g5-L02";
     if(!identityValid(idn)){alert('請先在最上方填好年級、班級（1-14）、座號（都是數字）。');window.scrollTo({top:0,behavior:'smooth'});return;}
     if(!db){alert('系統尚未連線，請稍後或重新整理頁面。');return;}
     var experienceAnswers={},scoreAnswers={},answers={},qtypes={};
-    items.forEach(function(it,i){var qid='v'+(i+1),given=state.votes[i];given=(given===undefined)?null:given;var correct=answerOf(i);
-      experienceAnswers[qid]={given:given,correct:correct,isCorrect:given==null?false:(given===correct)};answers[qid]=given;qtypes[qid]='experience';});
+    var totalCorrect=0,totalScored=items.length+clauses.length;
+    items.forEach(function(it,i){var qid='v'+(i+1),given=state.votes[i];given=(given===undefined)?null:given;var correct=answerOf(i),ok=given!=null&&given===correct;
+      if(ok)totalCorrect++;
+      scoreAnswers[qid]={given:given,correct:correct,isCorrect:ok};answers[qid]=given;qtypes[qid]='score';});
     var mythGiven=state.myth||null;
     experienceAnswers.myth={given:mythGiven,correct:'fact',isCorrect:mythGiven==='fact'};
     answers.myth=mythGiven;qtypes.myth='experience';
-    var clauseCorrect=0;
     clauses.forEach(function(cl,i){var qid='c'+(i+1),given=state.clauses[i];given=(given===undefined)?null:given;var correct=cl.type,ok=given===correct;
-      if(ok)clauseCorrect++;
+      if(ok)totalCorrect++;
       scoreAnswers[qid]={given:given,correct:correct,isCorrect:ok};answers[qid]=given;qtypes[qid]='score';});
-    var experienceItemsTotal=items.length+1;
-    var experienceAnswered=Object.keys(state.votes).length+(state.myth?1:0);
-    var experienceCompletion=Math.round(experienceAnswered/experienceItemsTotal*100);
-    var accuracyRate=Math.round(clauseCorrect/clauses.length*100);
-    if(!confirm('確定要繳交嗎？⑤畫線交出去後由老師核對並計算成績，不會馬上顯示對錯。'))return;
+    var experienceCompletion=state.myth?100:0;
+    var accuracyRate=Math.round(totalCorrect/totalScored*100);
+    if(!confirm('確定要繳交嗎？③投票和⑤畫線都會計分，交出去後由老師核對，不會馬上顯示對錯。'))return;
     var docId=WS_ID+'__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:WS_ID,worksheetTitle:'事實與意見區分',lessonPath:'g5/L02',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
@@ -546,7 +558,7 @@ quizzes/{L02}、submissions 都已涵蓋在既有規則的通用路徑內，無�
 Authentication 需啟用：匿名（學生）＋ 電子郵件/密碼（老師 boyin0304@slps.tn.edu.tw）。
 用法：學生開一般網址作答；老師開 網址#admin → 登入 → 「⬆ 上傳答案」（僅需一次）→
 上課時按「🎉 公布」→ 全班③投票卡同步翻答案，老師看「已交卷 N 人 · 平均 X/4」。
-⑤ 偵探畫線不在頁面揭曉，學生直接繳交，老師於評分平台後台核對計分。
+③投票與⑤偵探畫線都計入 accuracyRate；⑤不在頁面揭曉，學生直接繳交，老師於評分平台後台核對計分。
 =====================================================================
 -->
 </body>
