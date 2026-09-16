@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>事實還是意見？｜五上 L02 教學活動</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Noto Sans TC',sans-serif;background:#F4F6FB;color:#1f2430}
+  .cute{font-family:'Baloo 2','Noto Sans TC',cursive}
+  .opt{transition:.15s}
+  .pop{animation:pp .35s}@keyframes pp{0%{transform:scale(.9)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+  .flip{animation:fl .5s}@keyframes fl{0%{transform:rotateX(90deg);opacity:0}100%{transform:rotateX(0);opacity:1}}
+  .step{scroll-margin-top:84px}
+  .idnum{width:52px;text-align:center}
+  .clausewrap{font-size:1.1rem;line-height:2.4}
+  .clause{cursor:pointer;padding:2px 3px;border-radius:5px;transition:.15s;display:inline}
+  .clause:hover{background:#eef2ff}
+  .clause.mk-fact{background:#dbeafe;text-decoration:underline;text-decoration-color:#2563eb;text-decoration-thickness:3px;color:#1e40af;font-weight:700}
+  .clause.mk-opinion{background:#fee2e2;text-decoration:underline;text-decoration-color:#e11d48;text-decoration-thickness:3px;color:#9f1239;font-weight:700}
+  .slido-wrap{width:100%;display:flex;justify-content:center}
+  .slido-wrap iframe{border:0;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.15);max-width:100%}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="text-slate-800">
+
+<!-- 識別列：年級/班級/座號（數字），頁面最上方，見《學習單資料與提交規範》§1 -->
+<div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b-2 border-sky-200">
+  <div class="max-w-4xl mx-auto px-4 py-2 flex items-center gap-3 flex-wrap text-sm">
+    <span class="cute font-bold text-sky-700">我是誰</span>
+    <label class="flex items-center gap-1 text-slate-500">年級<input id="idGrade" class="idnum border-2 border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-700 focus:border-sky-400 outline-none" inputmode="numeric" maxlength="2"></label>
+    <label class="flex items-center gap-1 text-slate-500">班級<input id="idClass" class="idnum border-2 border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-700 focus:border-sky-400 outline-none" inputmode="numeric" maxlength="2"></label>
+    <label class="flex items-center gap-1 text-slate-500">座號<input id="idStudent" class="idnum border-2 border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-700 focus:border-sky-400 outline-none" inputmode="numeric" maxlength="2"></label>
+    <span id="idOk" class="hidden text-emerald-600 font-bold text-xs">✓ 已記住</span>
+  </div>
+</div>
+
+<div class="max-w-4xl mx-auto px-4 py-6">
+
+  <header class="text-center mb-6">
+    <h1 class="cute text-3xl md:text-5xl font-extrabold text-sky-600">🔍 事實還是意見？</h1>
+    <p class="text-sm text-slate-500 mt-2">五年級上學期 · L02 事實與意見區分 · 教學活動流程</p>
+    <div class="mt-3 flex justify-center gap-2 text-xs flex-wrap">
+      <span class="bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 font-bold">① 開場對比</span>
+      <span class="bg-amber-100 text-amber-700 rounded-full px-3 py-1 font-bold">② 解密比喻</span>
+      <span class="bg-emerald-100 text-emerald-700 rounded-full px-3 py-1 font-bold">③ 找線索</span>
+      <span class="bg-rose-100 text-rose-700 rounded-full px-3 py-1 font-bold">④ 破解迷思</span>
+      <span class="bg-teal-100 text-teal-700 rounded-full px-3 py-1 font-bold">⑤ 偵探畫線</span>
+    </div>
+  </header>
+
+  <!-- ===== ① 開場：同一家店，兩種說法 ===== -->
+  <section id="s1" class="step">
+    <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-indigo-700">① 同一家店，為什麼說法差這麼多？</h2>
+      <p class="text-slate-600 mt-1">這兩則都是網友寫「文章牛肉湯」的真實留言。<br>先點開看看，再想一想：<b>如果你要去吃，該相信誰？</b></p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <a href="https://maggieblog.tw/winchangbeef" target="_blank" rel="noopener" class="block bg-white border-4 border-emerald-200 rounded-2xl overflow-hidden hover:border-emerald-400 hover:shadow-sm">
+        <div class="h-16 bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-4xl">👍</div>
+        <div class="p-4">
+          <p class="text-sm text-slate-700 leading-relaxed">「文章牛肉湯是我目前吃到臺南<b>第一名</b>的牛肉湯耶！我吃了第一口就<b>愛上</b>⋯」</p>
+          <div class="mt-2 flex items-center gap-2 text-xs text-slate-400">
+            <img src="https://www.google.com/s2/favicons?domain=maggieblog.tw&sz=32" class="w-4 h-4 rounded" onerror="this.style.display='none'">
+            <span>maggieblog.tw</span><span class="ml-auto font-bold text-emerald-600">開啟 ↗</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.threads.com/@hunter_lil_yau/post/DCliRl_SyeY" target="_blank" rel="noopener" class="block bg-white border-4 border-slate-200 rounded-2xl overflow-hidden hover:border-slate-400 hover:shadow-sm">
+        <div class="h-16 bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-4xl">🤷</div>
+        <div class="p-4">
+          <p class="text-sm text-slate-700 leading-relaxed">「牛肉湯有很多好吃的，不懂為什麼都要去文章，身為台南人我吃牛肉湯從來<b>沒排過隊</b>還是吃的很爽」</p>
+          <div class="mt-2 flex items-center gap-2 text-xs text-slate-400">
+            <img src="https://www.google.com/s2/favicons?domain=threads.com&sz=32" class="w-4 h-4 rounded" onerror="this.style.display='none'">
+            <span>threads.com</span><span class="ml-auto font-bold text-slate-600">開啟 ↗</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="mt-4 bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-4 text-sm text-indigo-900">
+      💡 兩則都是「個人感覺」，不是店家的真實狀況——那我們要怎麼知道什麼是「真的資訊」呢？這就是今天要學的：<b>先分清楚事實跟意見</b>。
+    </div>
+  </section>
+
+  <!-- ===== ② 解密：溫度計 vs 穿衣服 ===== -->
+  <section id="s2" class="step mt-10">
+    <div class="bg-white border-4 border-amber-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-amber-700">② 兩把量尺：溫度計 ／ 穿衣服</h2>
+      <p class="text-slate-600 mt-1">點一下卡片，看看怎麼分辨「事實」跟「意見」。</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <button class="metaphor text-left bg-white border-4 border-sky-300 rounded-2xl p-5 hover:shadow-md" data-m="fact">
+        <div class="text-4xl">🌡️</div>
+        <h3 class="cute text-xl font-extrabold text-sky-700 mt-1">事實 ＝ 溫度計</h3>
+        <p class="text-sm text-slate-600 mt-1">有刻度、大家量出來都一樣，<b>可以查證</b>。</p>
+        <div class="mex hidden mt-3 bg-sky-50 rounded-xl p-3 text-sm text-sky-900">〔例〕今天氣溫 25 度。──可以拿溫度計量，答案唯一。</div>
+      </button>
+      <button class="metaphor text-left bg-white border-4 border-rose-300 rounded-2xl p-5 hover:shadow-md" data-m="opinion">
+        <div class="text-4xl">👕</div>
+        <h3 class="cute text-xl font-extrabold text-rose-700 mt-1">意見 ＝ 穿幾件衣服</h3>
+        <p class="text-sm text-slate-600 mt-1">每個人的感覺不一樣，<b>沒有標準答案</b>。</p>
+        <div class="mex hidden mt-3 bg-rose-50 rounded-xl p-3 text-sm text-rose-900">〔例〕今天天氣很舒服。──有人覺得冷、有人覺得剛好，因人而異。</div>
+      </button>
+    </div>
+    <p class="text-center text-sm text-slate-500 mt-3">👉 判斷口訣：「拿尺量得出對錯的，是事實；只能問你覺不覺得的，是意見。」</p>
+  </section>
+
+  <!-- ===== ③ 找線索：觀察範例 → Slido 分享發現 → 換你分類 ===== -->
+  <section id="s3" class="step mt-10">
+    <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-emerald-700">③ 偵探的第一步：找出線索</h2>
+      <p class="text-slate-600 mt-1">下面每一組都是「同一個主題」的事實句跟意見句。仔細看看，<b>圈出來的地方</b>是不是有什麼規律？</p>
+    </div>
+
+    <div id="examples" class="grid sm:grid-cols-2 gap-3"></div>
+
+    <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 my-5 shadow-sm">
+      <p class="text-lg font-bold text-emerald-700 mb-2">📝 你發現了嗎？事實句跟意見句，在用詞上有什麼不同？打字分享你發現的「線索」！</p>
+      <div class="slido-wrap">
+        <iframe src="https://app.sli.do/event/1oGrbvgpbJquwtoX9Y8KkX/embed/polls/c477dc45-d294-47d4-87bd-cbd807fe7fb2" width="300" height="400" allow="clipboard-write"></iframe>
+      </div>
+    </div>
+
+    <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h3 class="cute text-xl font-extrabold text-emerald-700">🕵️ 換你來分類</h3>
+      <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是溫度計（事實）還是穿衣服（意見）？</p>
+      <div class="inline-flex items-center gap-2 bg-emerald-50 border-2 border-emerald-200 rounded-full px-4 py-1.5 text-sm font-bold text-emerald-700">
+        <span>🗳️ 已投票</span><span id="voted">0 / 4</span>
+      </div>
+    </div>
+
+    <div id="grid" class="grid sm:grid-cols-2 gap-4"></div>
+  </section>
+
+  <!-- ===== ④ 承接與釐清：孔廟迷思 ===== -->
+  <section id="s4" class="step mt-10">
+    <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-rose-700">④ 小心！這一題會讓你嚇一跳</h2>
+      <p class="text-slate-600 mt-1 font-bold">「台南孔廟建於西元 2024 年。」──這是事實還是意見？先選一個！</p>
+      <div class="mt-3 grid grid-cols-2 gap-2 max-w-sm">
+        <button id="mythFact" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400">🌡️ 事實</button>
+        <button id="mythOpinion" class="opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400">👕 意見</button>
+      </div>
+      <div id="mythReveal" class="hidden mt-4 bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 text-sm text-rose-900 flip">
+        <b>答案是「事實句」！</b>（雖然它是假的——孔廟其實建於西元 1665 年。）<br>
+        因為你可以拿歷史資料去<b>查證</b>它的真假。「事實句」的意思是「可以被查證」，<b>不是「保證是真的」</b>。看起來很像意見的假話，也可能其實是事實句喔！
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ⑤ 任務：偵探畫線 ===== -->
+  <section id="s5" class="step mt-10">
+    <div class="bg-white border-4 border-teal-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <h2 class="cute text-2xl font-extrabold text-teal-700">⑤ 換你當偵探：把事實跟意見拆開</h2>
+      <p class="text-slate-600 mt-1">下面這篇文章把事實跟意見混在一起了。先選一個顏色，再點文章裡的句子把它畫線標出來。</p>
+      <div class="mt-3 flex items-center gap-2">
+        <button id="modeFact" class="modebtn flex-1 border-2 rounded-xl py-2 font-bold">🔵 標事實</button>
+        <button id="modeOpinion" class="modebtn flex-1 border-2 rounded-xl py-2 font-bold">🔴 標意見</button>
+      </div>
+      <p class="text-xs text-slate-400 mt-2">已選色：<span id="curMode" class="font-bold"></span>　·　點一次標記，再點一次取消</p>
+    </div>
+
+    <div class="bg-white border-4 border-teal-300 rounded-3xl p-5 mb-5 shadow-sm">
+      <div id="passage" class="clausewrap text-slate-800"></div>
+    </div>
+
+    <button id="resetClauses" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl px-4 py-3">🔄 清除重來</button>
+
+    <div class="mt-4 bg-teal-50 border-2 border-teal-200 rounded-2xl p-4 text-sm text-teal-900">
+      🧑‍🤝‍🧑 <b>同桌互相討論</b>：完成後跟同桌交換螢幕，說說看你們畫線的地方一不一樣、為什麼這樣分類。
+    </div>
+  </section>
+
+  <!-- ===== 繳交學習單 ===== -->
+  <section class="step mt-10">
+    <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm text-center">
+      <h2 class="cute text-xl font-extrabold text-indigo-700 mb-1">📮 繳交學習單</h2>
+      <p class="text-sm text-slate-500 mb-3">確定都填好了嗎？按下面按鈕交給老師（老師會後續核對並計算成績，可以重交，會覆蓋前一次）。</p>
+      <button id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white cute text-xl font-extrabold rounded-2xl py-3">繳交學習單</button>
+      <p id="submitStat" class="text-sm font-bold mt-3 min-h-[20px]"></p>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-400 mt-8 pb-4">交出去之後，老師會統一核對答案並計算成績，不會馬上顯示對錯。</footer>
+</div>
+
+<script>
+/* ============================================================
+   Firebase 設定（沿用 pcclass-94300 專案，僅用於匿名登入＋寫入 submissions）
+   單機模式：把 firebaseConfig 設為 null 即可（此時無法繳交，需連網）。
+   ============================================================ */
+var firebaseConfig = {
+  apiKey:"AIzaSyAaodBvsP-BSovON14izt22DOXeH40TTGM",
+  authDomain:"pcclass-94300.firebaseapp.com",
+  projectId:"pcclass-94300",
+  storageBucket:"pcclass-94300.firebasestorage.app",
+  messagingSenderId:"1034787516465",
+  appId:"1:1034787516465:web:73c334b2ddad152c472510",
+  measurementId:"G-37P75R7TZ7"
+};
+var WS_ID = "g5-L02";
+
+(function(){
+  // ===== 識別列 =====
+  var ID_KEY='wk_identity';
+  function digits(s){return String(s||'').replace(/[^0-9]/g,'');}
+  function loadIdentity(){try{return JSON.parse(localStorage.getItem(ID_KEY)||'{}')}catch(e){return {}}}
+  function saveIdentity(o){try{localStorage.setItem(ID_KEY,JSON.stringify(o))}catch(e){}}
+  function getIdentity(){
+    var g=digits(document.getElementById('idGrade').value),c=digits(document.getElementById('idClass').value),s=digits(document.getElementById('idStudent').value);
+    return {grade:g?Number(g):null,className:c?Number(c):null,studentId:s?Number(s):null};
+  }
+  function identityValid(id){return id.grade!=null&&id.className!=null&&id.className>=1&&id.className<=14&&id.studentId!=null;}
+  function clampClass(v){while(v!==''&&Number(v)>14)v=v.slice(0,-1);return v;}
+  (function initIdentity(){
+    var saved=loadIdentity();
+    if(saved.grade)document.getElementById('idGrade').value=saved.grade;
+    if(saved.className)document.getElementById('idClass').value=saved.className;
+    if(saved.studentId)document.getElementById('idStudent').value=saved.studentId;
+    if(identityValid(saved))document.getElementById('idOk').classList.remove('hidden');
+    ['idGrade','idClass','idStudent'].forEach(function(id){
+      var el=document.getElementById(id);
+      el.addEventListener('input',function(){
+        var d=digits(el.value);
+        if(id==='idClass')d=clampClass(d);
+        if(d!==el.value)el.value=d;
+        var idn=getIdentity();
+        if(identityValid(idn)){saveIdentity(idn);document.getElementById('idOk').classList.remove('hidden');}
+        else document.getElementById('idOk').classList.add('hidden');
+      });
+    });
+  })();
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  // ===== ② 比喻演示：點卡展開範例 =====
+  document.querySelectorAll('.metaphor').forEach(function(b){
+    b.addEventListener('click',function(){ b.querySelector('.mex').classList.toggle('hidden'); });
+  });
+
+  // ===== ③ 找線索：觀察範例（已標好答案，供學生自己歸納規律，不是投票題） =====
+  var examples=[
+    {t:'文章牛肉湯創立於<b>民國 83 年</b>。',tag:'事實',cls:'sky'},
+    {t:'文章牛肉湯的牛腩湯<b>超級好吃</b>，讓人吃了還想再吃。',tag:'意見',cls:'rose'},
+    {t:'台南孔廟建於<b>西元 1665 年</b>。',tag:'事實',cls:'sky'},
+    {t:'台南孔廟是全台南<b>最漂亮</b>的地方。',tag:'意見',cls:'rose'}
+  ];
+  var exEl=document.getElementById('examples');
+  examples.forEach(function(ex){
+    var d=document.createElement('div');
+    var isFact=ex.tag==='事實';
+    d.className='bg-white border-4 rounded-2xl p-4 shadow-sm '+(isFact?'border-sky-200':'border-rose-200');
+    d.innerHTML='<span class="text-xs font-bold px-2 py-0.5 rounded-full '+(isFact?'bg-sky-100 text-sky-700':'bg-rose-100 text-rose-700')+'">'+(isFact?'🌡️ 事實':'👕 意見')+'</span>'+
+      '<p class="mt-2 text-sm text-slate-700 leading-relaxed">'+ex.t+'</p>';
+    exEl.appendChild(d);
+  });
+
+  // ===== ③ 換你來分類（無揭曉，僅記錄投票，成績由老師後台核對）=====
+  var items=[
+    {t:'文章牛肉湯位於台南市安平區安平路 300 號。',type:'fact'},
+    {t:'我覺得文章牛肉湯的湯頭鮮甜，讓人一喝就上癮。',type:'opinion'},
+    {t:'文章牛肉湯的粉絲專頁有超過 1 萬 6 千人追蹤。',type:'fact'},
+    {t:'溫暖，是台南最美的風景。',type:'opinion'}
+  ];
+  var state={votes:{},myth:null,clauses:{}};
+  function save(){try{localStorage.setItem('g5L02flow',JSON.stringify({votes:state.votes,myth:state.myth,clauses:state.clauses}))}catch(e){}}
+  function load(){try{var d=localStorage.getItem('g5L02flow');if(d){var o=JSON.parse(d)||{};state.votes=o.votes||{};state.myth=o.myth||null;state.clauses=o.clauses||{};}}catch(e){}}
+  load();
+
+  var grid=document.getElementById('grid');
+  items.forEach(function(it,i){
+    var c=document.createElement('div');
+    c.className='card bg-white border-4 border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col';
+    c.innerHTML=
+      '<div class="flex items-start gap-2 mb-2"><span class="cute text-lg font-extrabold text-slate-400">'+(i+1)+'</span>'+
+        '<div class="font-bold text-slate-700 leading-snug">'+esc(it.t)+'</div></div>'+
+      '<div class="mt-auto grid grid-cols-2 gap-2">'+
+        '<button class="vt v-fact opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-sky-400" data-v="fact">🌡️ 事實</button>'+
+        '<button class="vt v-opinion opt border-2 border-slate-200 rounded-lg py-2 font-bold hover:border-rose-400" data-v="opinion">👕 意見</button>'+
+      '</div>';
+    grid.appendChild(c);
+    var btns=c.querySelectorAll('.vt');
+    btns.forEach(function(b){b.onclick=function(){
+      state.votes[i]=b.dataset.v;
+      btns.forEach(function(x){x.classList.remove('bg-indigo-100','border-indigo-400','text-indigo-700')});
+      b.classList.add('bg-indigo-100','border-indigo-400','text-indigo-700');
+      updateVoted();save();
+    }});
+    if(state.votes[i]!==undefined)
+      c.querySelector(state.votes[i]==='fact'?'.v-fact':'.v-opinion').classList.add('bg-indigo-100','border-indigo-400','text-indigo-700');
+  });
+  function updateVoted(){document.getElementById('voted').textContent=Object.keys(state.votes).length+' / '+items.length;}
+  updateVoted();
+
+  // ===== ④ 孔廟迷思：個人自我檢核，作答後立即看解說（教學釐清，非評量）=====
+  document.getElementById('mythFact').onclick=function(){ mythPick('fact'); };
+  document.getElementById('mythOpinion').onclick=function(){ mythPick('opinion'); };
+  function mythPick(v){
+    state.myth=v;save();
+    ['mythFact','mythOpinion'].forEach(function(id){document.getElementById(id).classList.remove('bg-indigo-100','border-indigo-400')});
+    document.getElementById(v==='fact'?'mythFact':'mythOpinion').classList.add('bg-indigo-100','border-indigo-400');
+    document.getElementById('mythReveal').classList.remove('hidden');
+  }
+  if(state.myth)mythPick(state.myth);
+
+  // ===== ⑤ 偵探畫線：國華街文章（不揭曉，老師後台核對計分）=====
+  var clauses=[
+    {text:'位於台南市中西區的國華街全長約 1.5 公里',type:'fact',sep:'，'},
+    {text:'是我心中全台灣最有魅力的美食聖地。',type:'opinion',sep:''},
+    {text:'這裡聚集了小卷米粉、碗粿等多家在地老店',type:'fact',sep:'，'},
+    {text:'每逢週末假日總是人山人海',type:'fact',sep:'，'},
+    {text:'可見大家都不想錯過這座城市最棒的古早味。',type:'opinion',sep:'¶'},
+    {text:'在所有小吃中，國華街的牛肉湯最令人驚艷。',type:'opinion',sep:''},
+    {text:'店家使用的是每天凌晨從善化肉品市場直送的溫體牛肉',type:'fact',sep:'，'},
+    {text:'比起其他縣市的紅燒牛肉麵，這種清湯牛肉湯更能完美展現食材的原味。',type:'opinion',sep:''},
+    {text:'鮮甜的湯頭讓人一喝就感到無比幸福',type:'opinion',sep:'，'},
+    {text:'如果來到台南卻沒有喝到牛肉湯，這趟行程可說是完全白費了。',type:'opinion',sep:''}
+  ];
+  var activeMode='fact';
+  function paintModeBtns(){
+    document.getElementById('modeFact').className='modebtn flex-1 border-2 rounded-xl py-2 font-bold '+(activeMode==='fact'?'bg-sky-100 border-sky-500 text-sky-700':'border-slate-200 text-slate-500');
+    document.getElementById('modeOpinion').className='modebtn flex-1 border-2 rounded-xl py-2 font-bold '+(activeMode==='opinion'?'bg-rose-100 border-rose-500 text-rose-700':'border-slate-200 text-slate-500');
+    document.getElementById('curMode').textContent=activeMode==='fact'?'🔵 事實':'🔴 意見';
+    document.getElementById('curMode').className='font-bold '+(activeMode==='fact'?'text-sky-600':'text-rose-600');
+  }
+  document.getElementById('modeFact').onclick=function(){activeMode='fact';paintModeBtns();};
+  document.getElementById('modeOpinion').onclick=function(){activeMode='opinion';paintModeBtns();};
+  paintModeBtns();
+
+  var passageEl=document.getElementById('passage');
+  function renderPassage(){
+    var html='';
+    clauses.forEach(function(cl,i){
+      var mk=state.clauses[i];
+      var cls='clause'+(mk?(' mk-'+mk):'');
+      html+='<span class="'+cls+'" data-i="'+i+'">'+esc(cl.text)+'</span>';
+      if(cl.sep==='¶')html+='<br><br>';
+      else html+=esc(cl.sep);
+    });
+    passageEl.innerHTML=html;
+    passageEl.querySelectorAll('.clause').forEach(function(sp){
+      sp.onclick=function(){
+        var i=Number(sp.dataset.i);
+        if(state.clauses[i]===activeMode)delete state.clauses[i];
+        else state.clauses[i]=activeMode;
+        save();renderPassage();
+      };
+    });
+  }
+  renderPassage();
+  document.getElementById('resetClauses').onclick=function(){ state.clauses={};save();renderPassage(); };
+
+  /* ================= Firebase：匿名登入＋繳交 ================= */
+  var db=null,auth=null;
+  function loadScript(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+  function ensureAuth(){return (auth&&auth.currentUser)?Promise.resolve(auth.currentUser):auth.signInAnonymously().then(function(c){return c.user});}
+  function boot(){
+    if(!firebaseConfig)return;
+    var base='https://www.gstatic.com/firebasejs/10.8.0/';
+    loadScript(base+'firebase-app-compat.js')
+      .then(function(){return loadScript(base+'firebase-auth-compat.js')})
+      .then(function(){return loadScript(base+'firebase-firestore-compat.js')})
+      .then(function(){ firebase.initializeApp(firebaseConfig);db=firebase.firestore();auth=firebase.auth(); })
+      .catch(function(e){console.warn('Firebase 啟用失敗',e);});
+  }
+  boot();
+
+  // ===== 繳交學習單（見《學習單資料與提交規範》§3；不在頁面上揭曉對錯，isCorrect 供老師後台核對）=====
+  document.getElementById('submitBtn').onclick=function(){
+    var idn=getIdentity();
+    if(!identityValid(idn)){alert('請先在最上方填好年級、班級（1-14）、座號（都是數字）。');window.scrollTo({top:0,behavior:'smooth'});return;}
+    if(!db){alert('系統尚未連線，請稍後或重新整理頁面。');return;}
+    var experienceAnswers={},scoreAnswers={},answers={},qtypes={};
+    items.forEach(function(it,i){var qid='v'+(i+1),given=state.votes[i];given=(given===undefined)?null:given;var correct=it.type;
+      experienceAnswers[qid]={given:given,correct:correct,isCorrect:given==null?false:(given===correct)};answers[qid]=given;qtypes[qid]='experience';});
+    var mythGiven=state.myth||null;
+    experienceAnswers.myth={given:mythGiven,correct:'fact',isCorrect:mythGiven==='fact'};
+    answers.myth=mythGiven;qtypes.myth='experience';
+    var clauseCorrect=0;
+    clauses.forEach(function(cl,i){var qid='c'+(i+1),given=state.clauses[i];given=(given===undefined)?null:given;var correct=cl.type,ok=given===correct;
+      if(ok)clauseCorrect++;
+      scoreAnswers[qid]={given:given,correct:correct,isCorrect:ok};answers[qid]=given;qtypes[qid]='score';});
+    var experienceItemsTotal=items.length+1;
+    var experienceAnswered=Object.keys(state.votes).length+(state.myth?1:0);
+    var experienceCompletion=Math.round(experienceAnswered/experienceItemsTotal*100);
+    var accuracyRate=Math.round(clauseCorrect/clauses.length*100);
+    if(!confirm('確定要繳交嗎？交出去後老師會核對答案並計算成績，不會馬上顯示對錯。'))return;
+    var docId=WS_ID+'__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
+    var payload={worksheetId:WS_ID,worksheetTitle:'事實與意見區分',lessonPath:'g5/L02',
+      grade:idn.grade,className:idn.className,studentId:idn.studentId,
+      answers:answers,qtypes:qtypes,scoreAnswers:scoreAnswers,experienceAnswers:experienceAnswers,openAnswers:{},
+      accuracyRate:accuracyRate,experienceCompletion:experienceCompletion,
+      status:'submitted',submittedAt:firebase.firestore.FieldValue.serverTimestamp()};
+    var btn=this,stat=document.getElementById('submitStat');
+    btn.disabled=true;stat.className='text-sm font-bold mt-3 min-h-[20px] text-indigo-600';stat.textContent='繳交中…';
+    ensureAuth().then(function(){return db.collection('submissions').doc(docId).set(payload,{merge:true});})
+      .then(function(){
+        btn.disabled=false;btn.textContent='重新繳交（覆蓋）';
+        stat.className='text-sm font-bold mt-3 min-h-[20px] text-emerald-600';
+        stat.textContent='✓ 已繳交，老師會後續核對並計算成績。可再按一次覆蓋更新。';
+      }).catch(function(e){
+        btn.disabled=false;
+        stat.className='text-sm font-bold mt-3 min-h-[20px] text-amber-600';
+        stat.textContent='繳交失敗：'+e.message+'（可能是老師尚未部署 Firestore 規則）';
+      });
+  };
+
+  var phases=[['s1','① 開場對比'],['s2','② 解密比喻'],['s3','③ 找線索'],['s4','④ 破解迷思'],['s5','⑤ 偵探畫線']];
+  window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=phases[0][1];
+    phases.forEach(function(p){var el=document.getElementById(p[0]);if(el&&el.offsetTop<=y)cur=p[1];});
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
