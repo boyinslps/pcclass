@@ -70,6 +70,59 @@
       <img src="assets/景點搜尋.png" alt="景點搜尋頁" class="shot">
     </div>
 
+    <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 mb-6">
+      <h3 class="cute text-lg font-extrabold text-rose-700 mb-2">🔘 篩選小撇步：點亮按鈕找景點</h3>
+      <p class="text-lg mb-4">我們可以透過<b>點亮不同的按鈕</b>，來找出我們要的景點！</p>
+
+      <div class="grid md:grid-cols-2 gap-6 items-center mb-5">
+        <img src="assets/歷史古蹟和宗教廟宇.png" alt="同時點亮歷史古蹟和宗教廟宇" class="shot">
+        <div>
+          <p class="font-bold text-rose-700 mb-1">多個主題查詢</p>
+          <p class="text-lg">同時點亮<b>歷史古蹟</b>和<b>宗教廟宇</b>，兩種主題的景點<b>都會出現</b>——結果從 102 筆變成 <b>222 筆</b>，因為兩個主題「加起來」了！</p>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <p class="font-bold text-rose-700 mb-2">主題 ＋ 區域：先選主題，再選區域</p>
+        <div class="grid md:grid-cols-2 gap-4 mb-3">
+          <div>
+            <img src="assets/歷史古蹟篩選.png" alt="先選歷史古蹟" class="shot">
+            <p class="text-center text-sm font-bold text-rose-600 mt-1">先選主題：歷史古蹟（102筆）</p>
+          </div>
+          <div>
+            <img src="assets/中西區.png" alt="再選中西區" class="shot">
+            <p class="text-center text-sm font-bold text-rose-600 mt-1">再選區域：中西區</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-3 flex justify-center">
+          <svg viewBox="0 0 300 220" width="260" height="190">
+            <circle cx="150" cy="105" r="95" fill="#fde68a" stroke="#d97706" stroke-width="3"/>
+            <circle cx="150" cy="140" r="48" fill="#bae6fd" stroke="#0284c7" stroke-width="3"/>
+            <text x="150" y="35" text-anchor="middle" font-size="20" font-weight="800" fill="#92400e">歷史古蹟</text>
+            <text x="150" y="143" text-anchor="middle" font-size="18" font-weight="800" fill="#075985">中西區</text>
+          </svg>
+        </div>
+        <p class="text-center text-sm text-slate-500 mt-1">中西區的歷史古蹟，是「歷史古蹟」這個大圈圈裡的一小部分</p>
+      </div>
+
+      <div class="bg-white border-2 border-rose-200 rounded-2xl p-4">
+        <p class="text-lg font-bold text-rose-800 mb-2">🤔 考考你：怎麼選出「中西區的歷史古蹟 + 宗教廟宇」呢？</p>
+        <button id="filterQuizBtn" class="mt-1 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl px-5 py-2">看看正確做法</button>
+        <div id="filterQuizAns" class="hidden mt-3">
+          <ol class="text-lg list-decimal list-inside space-y-1 mb-3">
+            <li>點亮主題：<b>歷史古蹟</b> + <b>宗教廟宇</b>（多主題查詢）</li>
+            <li>再點亮區域：<b>中西區</b>（主題＋區域）</li>
+          </ol>
+          <img src="assets/中西區的歷史古蹟和宗教廟宇.png" alt="中西區的歷史古蹟和宗教廟宇" class="shot">
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3 mt-4 flex items-start gap-2">
+        <span class="text-2xl">⚠️</span>
+        <p class="text-lg text-amber-800"><b>提醒：</b>查新的景點時，一定要把<b>之前點亮的按鈕取消掉</b>喔！不然條件會一直疊加，越查越少。</p>
+      </div>
+    </div>
+
     <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
       <img src="assets/旅遊地圖.png" alt="旅遊地圖" class="shot">
       <div>
@@ -204,6 +257,11 @@ var firebaseConfig = {
       .catch(function(e){console.warn('Firebase 啟用失敗，改用單機模式',e);});
   }
   boot();
+
+  document.getElementById('filterQuizBtn').onclick=function(){
+    document.getElementById('filterQuizAns').classList.remove('hidden');
+    this.textContent='✓ 答案在下面';
+  };
 
   var done={survey:false};
   function save(){try{localStorage.setItem('g4L02v1',JSON.stringify(done))}catch(e){}}
