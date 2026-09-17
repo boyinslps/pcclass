@@ -80,7 +80,7 @@
   </section>
 
   <!-- 功能一：景點搜尋 -->
-  <section class="bg-white border-4 border-pink-300 rounded-3xl p-6 mb-6 shadow-sm">
+  <section id="funcSearch" class="bg-white border-4 border-pink-300 rounded-3xl p-6 mb-6 shadow-sm scroll-mt-20">
     <h2 class="cute text-2xl font-extrabold text-pink-700 mb-4">🔎 功能一：景點搜尋</h2>
     <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
       <div>
@@ -182,7 +182,7 @@
   </section>
 
   <!-- 功能二：旅遊地圖 -->
-  <section class="bg-white border-4 border-sky-300 rounded-3xl p-6 mb-6 shadow-sm">
+  <section id="funcMap" class="bg-white border-4 border-sky-300 rounded-3xl p-6 mb-6 shadow-sm scroll-mt-20">
     <h2 class="cute text-2xl font-extrabold text-sky-700 mb-4">🗺️ 功能二：旅遊地圖</h2>
     <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
       <img src="assets/旅遊地圖.png" alt="旅遊地圖" class="shot">
@@ -192,7 +192,7 @@
   </section>
 
   <!-- 功能三：景點詳細資訊 -->
-  <section class="bg-white border-4 border-violet-300 rounded-3xl p-6 mb-6 shadow-sm">
+  <section id="funcInfo" class="bg-white border-4 border-violet-300 rounded-3xl p-6 mb-6 shadow-sm scroll-mt-20">
     <h2 class="cute text-2xl font-extrabold text-violet-700 mb-4">📄 功能三：點進景點，會看到…</h2>
     <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
       <div>
@@ -299,6 +299,17 @@
 
 </div>
 
+<!-- 浮動複習導覽：方便學生跳轉回顧各功能 -->
+<div id="reviewNav" class="fixed bottom-4 right-4 z-40">
+  <div id="reviewMenu" class="hidden mb-2 bg-white border-4 border-orange-300 rounded-2xl shadow-xl p-2 w-64">
+    <p class="text-xs font-bold text-slate-400 px-3 pt-1 pb-2">我想複習…</p>
+    <a href="#funcSearch" class="reviewLink block px-3 py-2 rounded-xl hover:bg-orange-50 font-bold text-slate-700">🔘 篩選、關鍵字查詢</a>
+    <a href="#funcMap" class="reviewLink block px-3 py-2 rounded-xl hover:bg-orange-50 font-bold text-slate-700">🗺️ 旅遊地圖</a>
+    <a href="#funcInfo" class="reviewLink block px-3 py-2 rounded-xl hover:bg-orange-50 font-bold text-slate-700">📄 景點資訊、網址、路線規劃</a>
+  </div>
+  <button id="reviewBtn" class="bg-orange-600 hover:bg-orange-700 text-white rounded-full shadow-lg px-5 py-3 font-bold cute text-lg">📖 我想複習…</button>
+</div>
+
 <script>
 /* ============================================================
    Firebase 同步設定（沿用 pcclass-94300 專案，跟四上 L01／五上 L01 同一個資料庫）
@@ -359,6 +370,16 @@ var QUIZ_ID = "g4-L02";
     this.textContent='✓ 答案在下面';
   };
 
+  // ===== 浮動複習導覽 =====
+  (function(){
+    var btn=document.getElementById('reviewBtn'),menu=document.getElementById('reviewMenu');
+    btn.onclick=function(e){e.stopPropagation();menu.classList.toggle('hidden');};
+    menu.querySelectorAll('.reviewLink').forEach(function(a){a.onclick=function(){menu.classList.add('hidden');};});
+    document.addEventListener('click',function(e){
+      if(!menu.classList.contains('hidden')&&!menu.contains(e.target)&&e.target!==btn)menu.classList.add('hidden');
+    });
+  })();
+
   // ===== 練習用：點亮/取消按鈕示範（不計分，純示範操作）=====
   (function(){
     var b=document.getElementById('demoToggle'),msg=document.getElementById('demoToggleMsg');
@@ -375,7 +396,7 @@ var QUIZ_ID = "g4-L02";
     {id:'q_relig',kind:'number',unit:'個',label:'請問台南有幾個「宗教廟宇」景點呢？',answer:148},
     {id:'q_zhongxi',kind:'number',unit:'個',label:'「中西區」有幾個景點呢？',answer:79},
     {id:'q_map',kind:'choice',label:'如果你想知道「住家附近」有哪些景點，最適合用哪個功能？',options:['景點搜尋','旅遊地圖'],answer:'旅遊地圖'},
-    {id:'q_price',kind:'number',unit:'元',label:'安平古堡的全票門票是多少錢？',answer:70},
+    {id:'q_price',kind:'number',unit:'元',label:'熱蘭遮城的全票門票是多少錢？',answer:70,img:'assets/熱蘭遮城.jpg'},
     {id:'q_share',kind:'choice',label:'如果你想帶全家人一起去，要先用哪個功能安排怎麼去？',options:['如何到達','分享網站'],answer:'如何到達'}
   ];
   var state={quiz:{},revealed:false,_pushed:false};
@@ -385,6 +406,7 @@ var QUIZ_ID = "g4-L02";
     var slot=document.querySelector('[data-qid="'+item.id+'"]');
     if(!slot)return;
     var html='<p class="font-bold text-rose-800 mb-2">🎯 小試身手：'+item.label+'</p>';
+    if(item.img)html+='<img src="'+item.img+'" alt="" class="shot mb-3" style="max-width:260px">';
     if(item.kind==='number'){
       html+='<div class="flex items-center gap-2"><input type="number" inputmode="numeric" class="quizInput border-2 border-slate-200 rounded-xl px-3 py-2 w-28 text-lg font-bold focus:border-rose-400 outline-none"><span class="text-lg font-bold">'+item.unit+'</span></div>';
     }else{
