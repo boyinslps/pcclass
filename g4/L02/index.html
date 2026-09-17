@@ -76,11 +76,14 @@
     </div>
 
     <a href="https://www.twtainan.net/" target="_blank" rel="noopener"
-       class="block text-center bg-rose-500 hover:bg-rose-600 text-white cute text-xl font-extrabold rounded-2xl py-3 mb-6">🌐 開啟台南旅遊網，自己逛逛看 →</a>
+       class="block text-center bg-rose-500 hover:bg-rose-600 text-white cute text-xl font-extrabold rounded-2xl py-3">🌐 開啟台南旅遊網，自己逛逛看 →</a>
+  </section>
 
+  <!-- 功能一：景點搜尋 -->
+  <section class="bg-white border-4 border-pink-300 rounded-3xl p-6 mb-6 shadow-sm">
+    <h2 class="cute text-2xl font-extrabold text-pink-700 mb-4">🔎 功能一：景點搜尋</h2>
     <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
       <div>
-        <h3 class="cute text-xl font-extrabold text-rose-600 mb-2">🔎 功能一：景點搜尋</h3>
         <ul class="text-lg space-y-1">
           <li>① 搜尋<b>一個區</b>有什麼景點</li>
           <li>② 篩選你想要的<b>主題</b>（歷史古蹟、自然景觀…）</li>
@@ -90,39 +93,39 @@
       <img src="assets/景點搜尋.png" alt="景點搜尋頁" class="shot">
     </div>
 
-    <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 mb-6">
-      <h3 class="cute text-lg font-extrabold text-rose-700 mb-2">🔘 篩選小撇步：點亮按鈕找景點</h3>
+    <div class="bg-pink-50 border-2 border-pink-200 rounded-2xl p-4 mb-6">
+      <h3 class="cute text-lg font-extrabold text-pink-700 mb-2">🔘 篩選小撇步：點亮按鈕找景點</h3>
       <p class="text-lg mb-2">我們可以透過<b>點亮不同的按鈕</b>，來找出我們要的景點！</p>
-      <p class="text-lg mb-1">點一下按鈕，它就會<b class="text-rose-600">變成紅色</b>，代表你選了這個條件（例如「歷史古蹟」）。</p>
+      <p class="text-lg mb-1">點一下按鈕，它就會<b class="text-pink-600">變成紅色</b>，代表你選了這個條件（例如「歷史古蹟」）。</p>
       <p class="text-lg mb-4">想取消嗎？<b>再點一次同一個按鈕</b>，它就會變回白色，這個條件就取消了。</p>
 
-      <div class="bg-white border-2 border-rose-200 rounded-2xl p-4 mb-5">
-        <p class="font-bold text-rose-700 mb-2">✋ 練習看看：點一下下面的按鈕試試看！</p>
-        <button id="demoToggle" class="opt border-2 border-slate-200 rounded-xl px-5 py-2 font-bold hover:border-rose-400">歷史古蹟</button>
+      <div class="bg-white border-2 border-pink-200 rounded-2xl p-4 mb-5">
+        <p class="font-bold text-pink-700 mb-2">✋ 練習看看：點一下下面的按鈕試試看！</p>
+        <button id="demoToggle" class="opt border-2 border-slate-200 rounded-xl px-5 py-2 font-bold hover:border-pink-400">歷史古蹟</button>
         <p id="demoToggleMsg" class="text-sm text-slate-500 mt-2 min-h-[20px]"></p>
       </div>
 
-      <div class="bg-white border-2 border-rose-200 rounded-2xl p-4 mb-5" data-qid="q_relig"></div>
-      <div class="bg-white border-2 border-rose-200 rounded-2xl p-4 mb-5" data-qid="q_zhongxi"></div>
+      <div class="bg-white border-2 border-pink-200 rounded-2xl p-4 mb-5" data-qid="q_relig"></div>
+      <div class="bg-white border-2 border-pink-200 rounded-2xl p-4 mb-5" data-qid="q_zhongxi"></div>
 
       <div class="grid md:grid-cols-2 gap-6 items-center mb-5">
         <img src="assets/歷史古蹟和宗教廟宇.png" alt="同時點亮歷史古蹟和宗教廟宇" class="shot">
         <div>
-          <p class="font-bold text-rose-700 mb-1">多個主題查詢</p>
+          <p class="font-bold text-pink-700 mb-1">多個主題查詢</p>
           <p class="text-lg">同時點亮<b>歷史古蹟</b>和<b>宗教廟宇</b>，兩種主題的景點<b>都會出現</b>——結果從 102 筆變成 <b>222 筆</b>，因為兩個主題「加起來」了！</p>
         </div>
       </div>
 
       <div class="mb-5">
-        <p class="font-bold text-rose-700 mb-2">主題 ＋ 區域：先選主題，再選區域</p>
+        <p class="font-bold text-pink-700 mb-2">主題 ＋ 區域：先選主題，再選區域</p>
         <div class="grid md:grid-cols-2 gap-4 mb-3">
           <div>
             <img src="assets/歷史古蹟篩選.png" alt="先選歷史古蹟" class="shot">
-            <p class="text-center text-sm font-bold text-rose-600 mt-1">先選主題：歷史古蹟（102筆）</p>
+            <p class="text-center text-sm font-bold text-pink-600 mt-1">先選主題：歷史古蹟（102筆）</p>
           </div>
           <div>
             <img src="assets/中西區.png" alt="再選中西區" class="shot">
-            <p class="text-center text-sm font-bold text-rose-600 mt-1">再選區域：中西區</p>
+            <p class="text-center text-sm font-bold text-pink-600 mt-1">再選區域：中西區</p>
           </div>
         </div>
         <div class="bg-white rounded-2xl p-3 flex justify-center">
@@ -136,9 +139,9 @@
         <p class="text-center text-sm text-slate-500 mt-1">中西區的歷史古蹟，是「歷史古蹟」這個大圈圈裡的一小部分</p>
       </div>
 
-      <div class="bg-white border-2 border-rose-200 rounded-2xl p-4">
-        <p class="text-lg font-bold text-rose-800 mb-2">🤔 考考你：怎麼選出「中西區的歷史古蹟 + 宗教廟宇」呢？</p>
-        <button id="filterQuizBtn" class="mt-1 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl px-5 py-2">看看正確做法</button>
+      <div class="bg-white border-2 border-pink-200 rounded-2xl p-4">
+        <p class="text-lg font-bold text-pink-800 mb-2">🤔 考考你：怎麼選出「中西區的歷史古蹟 + 宗教廟宇」呢？</p>
+        <button id="filterQuizBtn" class="mt-1 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl px-5 py-2">看看正確做法</button>
         <div id="filterQuizAns" class="hidden mt-3">
           <ol class="text-lg list-decimal list-inside space-y-1 mb-3">
             <li>點亮主題：<b>歷史古蹟</b> + <b>宗教廟宇</b>（多主題查詢）</li>
@@ -154,34 +157,54 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
-      <img src="assets/旅遊地圖.png" alt="旅遊地圖" class="shot">
-      <div>
-        <h3 class="cute text-xl font-extrabold text-rose-600 mb-2">🗺️ 功能二：旅遊地圖</h3>
-        <p class="text-lg">用地圖就能看到<b>附近有哪些景點</b>，每一個小圖釘都是一個景點！想找學校附近的景點特別好用。</p>
+    <div class="bg-pink-50 border-2 border-pink-200 rounded-2xl p-4">
+      <h3 class="cute text-lg font-extrabold text-pink-700 mb-2">🔍 關鍵字查詢</h3>
+      <p class="text-lg mb-3">除了點主題按鈕，你也可以直接在搜尋框打<b>關鍵字</b>，找特定的景點！</p>
+      <p class="text-lg mb-3">現在你會用關鍵字查詢了，讓我們來查<b class="text-pink-700">國立臺灣歷史博物館</b>！</p>
+      <div class="grid md:grid-cols-2 gap-6 items-center mb-4">
+        <img src="assets/國立臺灣歷史博物館.png" alt="國立臺灣歷史博物館 景點資訊" class="shot">
+        <div class="space-y-2">
+          <p class="text-lg">但是你發現<b>門票的位置</b>寫著：「票價以國立臺灣歷史博物館<b>官方網站公告</b>為主。」——沒有寫實際金額！</p>
+          <p class="text-lg">這時候，看下面的<b class="text-pink-700">「相關連結」</b>就能找到<b>官方網站</b>，點一下就能看到<b>最新的資料</b>囉！</p>
+        </div>
+      </div>
+      <div class="bg-white border-2 border-amber-300 rounded-2xl p-3 flex items-start gap-2">
+        <span class="text-2xl">💡</span>
+        <p class="text-lg text-amber-800">台南旅遊網的資訊可能不是最新的，遇到寫「詳見官網」的時候，記得點官方連結查最新消息！</p>
       </div>
     </div>
+  </section>
 
-    <div class="bg-white border-2 border-rose-200 rounded-2xl p-4 mb-6" data-qid="q_map"></div>
+  <!-- 功能二：旅遊地圖 -->
+  <section class="bg-white border-4 border-sky-300 rounded-3xl p-6 mb-6 shadow-sm">
+    <h2 class="cute text-2xl font-extrabold text-sky-700 mb-4">🗺️ 功能二：旅遊地圖</h2>
+    <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
+      <img src="assets/旅遊地圖.png" alt="旅遊地圖" class="shot">
+      <p class="text-lg">用地圖就能看到<b>附近有哪些景點</b>，每一個小圖釘都是一個景點！想找學校附近的景點特別好用。</p>
+    </div>
+    <div class="bg-white border-2 border-sky-200 rounded-2xl p-4" data-qid="q_map"></div>
+  </section>
 
+  <!-- 功能三：景點詳細資訊 -->
+  <section class="bg-white border-4 border-violet-300 rounded-3xl p-6 mb-6 shadow-sm">
+    <h2 class="cute text-2xl font-extrabold text-violet-700 mb-4">📄 功能三：點進景點，會看到…</h2>
     <div class="grid md:grid-cols-2 gap-6 items-center mb-6">
       <div>
-        <h3 class="cute text-xl font-extrabold text-rose-600 mb-2">📄 點進景點，會看到…</h3>
         <p class="text-lg mb-3">分類、地址、<b>營業時間</b>、<b>門票</b>寫得清清楚楚（例：安平古堡）：</p>
         <div class="grid grid-cols-2 gap-2 text-center text-sm font-bold">
-          <div class="bg-rose-50 rounded-xl py-2">🏷️ 分類<br><span class="text-rose-700">歷史古蹟</span></div>
-          <div class="bg-rose-50 rounded-xl py-2">🕐 時間<br><span class="text-rose-700">10:00–17:10</span></div>
-          <div class="bg-rose-50 rounded-xl py-2">🎫 門票<br><span class="text-rose-700">全票70/半票35</span></div>
-          <div class="bg-rose-50 rounded-xl py-2">📍 地址<br><span class="text-rose-700">安平區國勝路82號</span></div>
+          <div class="bg-violet-50 rounded-xl py-2">🏷️ 分類<br><span class="text-violet-700">歷史古蹟</span></div>
+          <div class="bg-violet-50 rounded-xl py-2">🕐 時間<br><span class="text-violet-700">10:00–17:10</span></div>
+          <div class="bg-violet-50 rounded-xl py-2">🎫 門票<br><span class="text-violet-700">全票70/半票35</span></div>
+          <div class="bg-violet-50 rounded-xl py-2">📍 地址<br><span class="text-violet-700">安平區國勝路82號</span></div>
         </div>
       </div>
       <img src="assets/景點資訊.png" alt="景點資訊 安平古堡" class="shot">
     </div>
 
-    <div class="bg-white border-2 border-rose-200 rounded-2xl p-4 mb-6" data-qid="q_price"></div>
+    <div class="bg-white border-2 border-violet-200 rounded-2xl p-4 mb-6" data-qid="q_price"></div>
 
-    <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 mb-6">
-      <h3 class="cute text-lg font-extrabold text-rose-700 mb-3">🚗 交通規劃和分享網站</h3>
+    <div class="bg-violet-50 border-2 border-violet-200 rounded-2xl p-4 mb-6">
+      <h3 class="cute text-lg font-extrabold text-violet-700 mb-3">🚗 交通規劃和分享網站</h3>
       <div class="grid md:grid-cols-2 gap-6 items-center">
         <img src="assets/交通規劃和分享網站.png" alt="交通規劃和分享網站" class="shot">
         <div class="space-y-3">
@@ -191,7 +214,7 @@
       </div>
     </div>
 
-    <div class="bg-white border-2 border-rose-200 rounded-2xl p-4 mb-6" data-qid="q_share"></div>
+    <div class="bg-white border-2 border-violet-200 rounded-2xl p-4" data-qid="q_share"></div>
   </section>
 
   <!-- ② 景點調查員 -->
@@ -220,13 +243,14 @@
         <input id="q6" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
       </div>
       <div>
-        <p class="field font-bold mb-1">⭐ 加分：「<b class="text-amber-700">勝利國小</b>」附近有什麼景點？</p>
+        <div class="flex items-center justify-between gap-2 mb-1">
+          <p class="field font-bold">⭐ 加分：「<b class="text-amber-700">勝利國小</b>」附近有什麼景點？</p>
+          <span id="q4Status" class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-400 shrink-0">🎁 尚未完成</span>
+        </div>
         <input id="q4" class="field w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:border-amber-400 outline-none">
       </div>
     </div>
-    <button id="surveyBtn" class="mt-5 w-full bg-amber-500 hover:bg-amber-600 text-white cute text-xl font-extrabold rounded-2xl py-3">📸 完成！產生我的調查表</button>
-    <p id="surveyMsg" class="text-center font-bold text-amber-700 mt-3 min-h-[28px]"></p>
-    <canvas id="surveyCv" width="900" height="860" class="hidden"></canvas>
+    <p class="text-sm text-slate-400 mt-3">填好之後，到最下面按「繳交學習單」就會一起交給老師。</p>
   </section>
 
   <!-- ===== 繳交學習單 ===== -->
@@ -455,36 +479,12 @@ var QUIZ_ID = "g4-L02";
   }
   boot();
 
-  var done={survey:false};
-  function save(){try{localStorage.setItem('g4L02v1',JSON.stringify(done))}catch(e){}}
-  function load(){try{var d=localStorage.getItem('g4L02v1');if(d)done=Object.assign(done,JSON.parse(d))}catch(e){}}
-  load();
-  function prog(){save();}
-
-  function drawSurvey(){
-    var cv=document.getElementById('surveyCv'),x=cv.getContext('2d');
-    x.fillStyle='#FFFBF3';x.fillRect(0,0,900,860);
-    x.fillStyle='#f59e0b';x.fillRect(0,0,900,74);
-    x.fillStyle='#fff';x.font='bold 34px "Noto Sans TC",sans-serif';x.fillText('🔍 我的台南景點調查表',28,48);
-    var rows=[['1. 東區的 3 個景點',document.getElementById('q1').value||'（未填）'],
-      ['2. 在地藝文景點',document.getElementById('q2').value||'（未填）'],
-      ['3. 水交社文化園區 週六開放',document.getElementById('q3').value||'（未填）'],
-      ['4. 東區的在地藝文景點',document.getElementById('q5').value||'（未填）'],
-      ['5. 交通方式',document.getElementById('q6').value||'（未填）'],
-      ['⭐ 勝利國小附近景點',document.getElementById('q4').value||'（未填）']];
-    var y=120;
-    rows.forEach(function(r){x.fillStyle='#b45309';x.font='bold 24px "Noto Sans TC",sans-serif';x.fillText(r[0],36,y);
-      x.fillStyle='#243b53';x.font='22px "Noto Sans TC",sans-serif';var t=r[1];if(t.length>34)t=t.slice(0,34)+'…';x.fillText(t,36,y+36);
-      x.strokeStyle='#fcd34d';x.beginPath();x.moveTo(36,y+56);x.lineTo(864,y+56);x.stroke();y+=110;});
-    x.fillStyle='#94a3b8';x.font='18px "Noto Sans TC",sans-serif';x.fillText('台南小導遊養成記 · 四上 L02',36,840);
-    return cv;
-  }
-  document.getElementById('surveyBtn').onclick=function(){
-    var cv=drawSurvey();
-    try{var a=document.createElement('a');a.download='景點調查表.png';a.href=cv.toDataURL('image/png');a.click();
-      document.getElementById('surveyMsg').textContent='✓ 調查表已下載！';}catch(e){document.getElementById('surveyMsg').textContent='✓ 調查完成！';}
-    if(!done.survey){done.survey=true;prog();}
-  };
+  (function(){
+    var q4=document.getElementById('q4'),st=document.getElementById('q4Status');
+    function upd(){var done=!!q4.value.trim();st.textContent=done?'🎁 已完成':'🎁 尚未完成';
+      st.className='text-xs font-bold px-2 py-0.5 rounded-full shrink-0 '+(done?'bg-emerald-100 text-emerald-700':'bg-slate-100 text-slate-400');}
+    q4.oninput=upd;upd();
+  })();
 
   // ===== 繳交學習單（見《學習單資料與提交規範》§3）=====
   // 這份全部標 experience，沒有 score／open 題：這節是「先接觸、有感」的體驗課，不是正式檢核（呼應 L01 一貫定位）。
@@ -493,17 +493,23 @@ var QUIZ_ID = "g4-L02";
     if(!identityValid(idn)){alert('請先在最上方填好年級、班級、學號（都是數字）。');window.scrollTo({top:0,behavior:'smooth'});return;}
     if(!db){alert('系統尚未連線，請稍後再試或重新整理頁面。');return;}
 
-    var answers={},qtypes={},experienceAnswers={};
+    var answers={},qtypes={},experienceAnswers={},bonusAnswers={};
 
-    // ② 景點調查員（q1-q6）：自由文字查證題，答案因人而查、無法用固定字串核對——
-    // 用「幾格都填了」當這一段的完成／正確依據，而不是比對正確地名。
-    var qv={q1:document.getElementById('q1').value.trim(),q2:document.getElementById('q2').value.trim(),
-      q3:document.getElementById('q3').value.trim(),q4:document.getElementById('q4').value.trim(),
-      q5:document.getElementById('q5').value.trim(),q6:document.getElementById('q6').value.trim()};
-    var surveyCore=['q1','q2','q3','q5','q6']; // q4 是加分題，不進完成度分母
-    var surveyFilled=surveyCore.filter(function(k){return qv[k];}).length;
-    experienceAnswers.survey={given:qv,correct:null,isCorrect:surveyFilled===surveyCore.length};
-    answers.survey=qv;qtypes.survey='experience';
+    // ② 景點調查員（q1,q2,q3,q5,q6）：自由文字查證題，答案因人而查、無法用固定字串核對——
+    // 每題各自一個 qid，用「有沒有填」當這一題的完成／正確依據，而不是比對正確地名（見《學習單資料與提交規範》§3）。
+    var surveyCore=['q1','q2','q3','q5','q6'];
+    surveyCore.forEach(function(qid){
+      var v=document.getElementById(qid).value.trim();
+      experienceAnswers[qid]={given:v||null,correct:null,isCorrect:!!v};
+      answers[qid]=v||null;qtypes[qid]='experience';
+    });
+    var surveyFilled=surveyCore.filter(function(qid){return answers[qid];}).length;
+
+    // q4 是加分題（標記在 bonusQids，不進完成度分母，見《學習單資料與提交規範》§2-b）
+    var q4v=document.getElementById('q4').value.trim();
+    experienceAnswers.q4={given:q4v||null,correct:null,isCorrect:!!q4v};
+    answers.q4=q4v||null;qtypes.q4='experience';
+    bonusAnswers.q4={given:q4v||null,completed:!!q4v};
 
     // 各段「小試身手」：老師公布答案後才知道對錯，這裡先記錄學生當下的作答與（若已公布）正確與否。
     quizItems.forEach(function(item,i){
@@ -514,7 +520,9 @@ var QUIZ_ID = "g4-L02";
     });
 
     var quizAnswered=quizItems.filter(function(it,i){return state.quiz[i]!=null&&state.quiz[i]!=='';}).length;
-    var experienceCompletion=Math.round(((surveyFilled>0?1:0)+(quizAnswered>0?1:0))/2*100);
+    var experienceItemsTotal=surveyCore.length+quizItems.length;
+    var experienceAnswered=surveyFilled+quizAnswered;
+    var experienceCompletion=Math.round(experienceAnswered/experienceItemsTotal*100);
 
     var msg='確定要繳交嗎？\n景點調查表：'+(surveyFilled===surveyCore.length?'都填了':(surveyFilled>0?'填了 '+surveyFilled+' / '+surveyCore.length+' 題':'還沒填'))
       +'\n小試身手：答了 '+quizAnswered+' / '+quizItems.length+' 題'
@@ -524,7 +532,7 @@ var QUIZ_ID = "g4-L02";
     var docId='g4-L02__'+idn.grade+'-'+idn.className+'-'+idn.studentId;
     var payload={worksheetId:'g4-L02',worksheetTitle:'台南小導遊養成記',lessonPath:'g4/L02',
       grade:idn.grade,className:idn.className,studentId:idn.studentId,
-      answers:answers,qtypes:qtypes,scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{},
+      answers:answers,qtypes:qtypes,bonusQids:['q4'],scoreAnswers:{},experienceAnswers:experienceAnswers,openAnswers:{},bonusAnswers:bonusAnswers,
       accuracyRate:null,experienceCompletion:experienceCompletion,
       status:'submitted',submittedAt:firebase.firestore.FieldValue.serverTimestamp()};
     var btn=this,stat=document.getElementById('submitStat');
@@ -541,8 +549,6 @@ var QUIZ_ID = "g4-L02";
         stat.textContent='繳交失敗：'+e.message+'（可能是老師尚未部署 Firestore 規則）';
       });
   };
-
-  prog();
 })();
 </script>
 </body>
