@@ -38,6 +38,7 @@
     <span id="tStatus" class="text-slate-300 text-xs"></span>
     <span id="tTally" class="text-emerald-300 text-xs font-bold"></span>
     <div class="ml-auto flex gap-2">
+      <button id="viewAnswersBtn" class="bg-emerald-600 hover:bg-emerald-700 font-bold rounded-lg px-3 py-1" title="查看目前資料庫裡儲存的正確答案">👁 檢視答案</button>
       <button id="uploadBtn" class="bg-sky-600 hover:bg-sky-700 font-bold rounded-lg px-3 py-1" title="備課用：只需做一次">⬆ 上傳答案</button>
       <button id="revealBtn" class="bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1">🎉 公布</button>
       <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="回到未公布狀態">↩ 還原</button>
@@ -46,6 +47,17 @@
   </div>
 </div>
 <button id="backToTeacher" class="hidden fixed bottom-4 right-4 z-30 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full px-4 py-2 shadow-lg">↩ 返回教師模式</button>
+
+<!-- 教師專用：檢視目前的正確答案 / 檢視學生繳交作答（唯讀），見《學習單資料與提交規範》§5-7 -->
+<div id="answersModal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-lg w-full max-h-[80vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="cute text-xl font-extrabold text-emerald-700" id="answersModalTitle">👁 目前的正確答案</h3>
+      <button id="closeAnswersModal" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
+    </div>
+    <div id="answersModalBody" class="text-sm space-y-2 text-slate-700"></div>
+  </div>
+</div>
 
 <div class="max-w-5xl mx-auto px-4 py-6">
 
@@ -364,6 +376,8 @@ var QUIZ_ID = "g4-L02";
 
 (function(){
   var IS_ADMIN = location.hash === '#admin';
+  var REVIEW_ID=(function(){try{return new URLSearchParams(location.search).get('review');}catch(e){return null;}})();
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   var PREVIEW_KEY='wk_previewMode';
   if(!IS_ADMIN){
     try{ if(sessionStorage.getItem(PREVIEW_KEY)==='1')document.getElementById('backToTeacher').classList.remove('hidden'); }catch(e){}
@@ -481,7 +495,7 @@ var QUIZ_ID = "g4-L02";
   }
   function gradeSurveyNow(){
     var patterns=SURVEY_PATTERNS||{};
-    if(IS_ADMIN){
+    if(IS_ADMIN&&!REVIEW_ID){
       var localPatterns={};
       surveyQids.forEach(function(qid){var el=document.getElementById(qid);if(el&&el.value.trim())localPatterns[qid]=el.value.trim();});
       if(Object.keys(localPatterns).length)patterns=Object.assign({},patterns,localPatterns);
@@ -566,6 +580,66 @@ var QUIZ_ID = "g4-L02";
       .set({score:correct,total:quizItems.length,at:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(function(){});
   }
 
+  // ===== 教師：檢視目前已上傳的正確答案（唯讀彈窗，不影響作答欄位）=====
+  function openAnswersModal(title,bodyHtml){
+    document.getElementById('answersModalTitle').textContent=title;
+    document.getElementById('answersModalBody').innerHTML=bodyHtml;
+    document.getElementById('answersModal').classList.remove('hidden');
+  }
+  document.getElementById('closeAnswersModal').onclick=function(){document.getElementById('answersModal').classList.add('hidden');};
+  document.getElementById('answersModal').addEventListener('click',function(e){if(e.target===this)this.classList.add('hidden');});
+  document.getElementById('viewAnswersBtn').onclick=function(){
+    var patterns=SURVEY_PATTERNS||{};
+    var surveyLabel={q1:'1. 中西區景點',q2:'2. 在地藝文景點',q3:'3. 南區生態教育景點',q4a:'4a. 週六開放時間－起',q4b:'4b. 週六開放時間－迄',q5:'⭐5. 歷史古蹟＋生態教育',q6:'⭐6. 勝利國小週邊'};
+    var h='<p class="font-bold text-emerald-700 mb-1">② 景點調查員（正則表達式）</p>';
+    surveyQids.forEach(function(qid){
+      var p=patterns[qid];
+      h+='<div class="flex justify-between gap-2 border-b border-slate-100 pb-1"><span class="text-slate-500">'+surveyLabel[qid]+'</span><span class="font-bold text-right">'+(p?esc(p):'<span class="text-slate-400">（尚未設定，只看有沒有填）</span>')+'</span></div>';
+    });
+    h+='<p class="font-bold text-rose-700 mt-3 mb-1">小試身手</p>';
+    quizItems.forEach(function(item,i){
+      h+='<div class="flex justify-between gap-2 border-b border-slate-100 pb-1"><span class="text-slate-500">'+esc(item.label)+'</span><span class="font-bold">'+esc(String(answerOf(i)))+(item.unit||'')+'</span></div>';
+    });
+    openAnswersModal('👁 目前的正確答案',h);
+  };
+
+  // ===== 教師：檢視某位學生的繳交作答（唯讀重現），見《學習單資料與提交規範》§5-7 =====
+  function applyReview(data){
+    var banner=document.createElement('div');
+    banner.style.cssText='position:sticky;top:0;z-index:40;background:#0f766e;color:#fff;text-align:center;font-weight:700;padding:8px;font-size:14px';
+    banner.innerHTML='🔍 檢視模式（唯讀）：'+esc(String(data.grade)+'年'+String(data.className)+'班'+String(data.studentId)+'號')+' 的作答　<a href="'+location.pathname+'#admin" style="text-decoration:underline;color:#fff">✕ 離開檢視</a>';
+    document.body.insertBefore(banner,document.body.firstChild);
+    var ans=data.answers||{};
+    surveyQids.forEach(function(qid){
+      var el=document.getElementById(qid);
+      if(el){el.value=ans[qid]!=null?ans[qid]:'';el.disabled=true;}
+    });
+    ['q5Status','q6Status'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent='';});
+    quizItems.forEach(function(item,i){
+      var slot=document.querySelector('[data-qid="'+item.id+'"]');
+      if(!slot)return;
+      var v=ans[item.id];
+      if(item.kind==='number'){
+        var inp=slot.querySelector('.quizInput');
+        if(inp){inp.value=(v!=null?v:'');inp.disabled=true;}
+      }else{
+        slot.querySelectorAll('.quizOpt').forEach(function(b){
+          b.disabled=true;
+          if(b.dataset.v===v)b.classList.add('bg-rose-50','border-rose-500','text-rose-700');
+        });
+      }
+    });
+    var submitSec=document.getElementById('submitBtn');if(submitSec&&submitSec.closest('section'))submitSec.closest('section').style.display='none';
+    var rb=document.getElementById('rewardBox');if(rb)rb.remove();
+  }
+  function maybeApplyReview(){
+    if(!REVIEW_ID||!db)return;
+    db.collection('submissions').doc(REVIEW_ID).get().then(function(doc){
+      if(!doc.exists){alert('找不到這筆繳交紀錄：'+REVIEW_ID);return;}
+      applyReview(doc.data());
+    }).catch(function(e){console.warn('讀取繳交紀錄失敗',e);});
+  }
+
   function boot(){
     renderQtypeSlots();
     if(!firebaseConfig){ if(IS_ADMIN)teacherOffline(); return; }
@@ -616,6 +690,7 @@ var QUIZ_ID = "g4-L02";
     document.getElementById('tStatus').textContent='已登入 '+email;
     document.getElementById('surveyAdminHint').classList.remove('hidden');
     teacherAuthed=true;renderQtypeSlots();
+    maybeApplyReview();
     var up=document.getElementById('uploadBtn');
     if(up)up.onclick=function(){up.disabled=true;up.textContent='上傳中…';
       var patterns={};
