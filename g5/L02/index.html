@@ -134,6 +134,22 @@
       </div>
     </div>
 
+    <div id="wordFeatureBox" class="hidden bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm flip">
+      <h3 class="cute text-xl font-extrabold text-emerald-700 mb-3">🔑 老師公布：事實與意見的用詞特徵</h3>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-sky-50 border-2 border-sky-200 rounded-2xl p-4">
+          <p class="font-bold text-sky-700 mb-1">🔵 事實</p>
+          <p class="text-sm text-slate-700 mb-2">用詞特徵：中性名詞、精確數字、時間、地點、客觀動詞。</p>
+          <p class="text-sm text-slate-700">典型關鍵詞：據……統計、平均、海拔、位於、結果顯示、發生於……</p>
+        </div>
+        <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4">
+          <p class="font-bold text-rose-700 mb-1">🔴 意見</p>
+          <p class="text-sm text-slate-700 mb-2">常含主觀形容詞、程度副詞、感受詞與價值判斷詞。</p>
+          <p class="text-sm text-slate-700">典型關鍵詞：覺得、認為、最好、最差、非常、太……、應該、令人……</p>
+        </div>
+      </div>
+    </div>
+
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
       <h3 class="cute text-xl font-extrabold text-emerald-700">🕵️ 換你來分類</h3>
       <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是事實還是意見？投完票先別急，等老師公布答案。</p>
@@ -336,6 +352,7 @@ var WS_ID = "g5-L02";
     document.getElementById('scoreTotal').textContent=items.length;
     var r=document.getElementById('result');r.classList.remove('hidden');
     document.getElementById('factNote').classList.remove('hidden');
+    document.getElementById('wordFeatureBox').classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth',block:'center'});
     if(!IS_ADMIN)pushResult(correct);
   }
