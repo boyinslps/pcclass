@@ -147,7 +147,7 @@
     <div id="result" class="hidden mt-6 text-center bg-gradient-to-b from-emerald-100 to-sky-100 border-4 border-emerald-300 rounded-3xl p-6 pop">
       <div class="text-5xl mb-1">🎯</div>
       <h3 class="cute text-2xl font-extrabold text-emerald-700">公布答案！</h3>
-      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-sky-600 font-extrabold">0</span> / 5</p>
+      <p class="text-lg mt-2">你答對了 <span id="score" class="cute text-3xl text-sky-600 font-extrabold">0</span> / <span id="scoreTotal">5</span></p>
     </div>
 
     <div id="factNote" class="hidden mt-4 bg-sky-50 border-2 border-sky-200 rounded-2xl p-4 text-sm text-sky-900 flip">
@@ -275,9 +275,10 @@ var WS_ID = "g5-L02";
 
   // ===== ③ 換你來分類（教師公布，Firebase 同步）=====
   var items=[
-    {t:'中央氣象署發布，今天台南地區高溫達 35 度。',type:'fact'},
-    {t:'這波高溫熱到讓人幾乎融化，實在讓人受不了。',type:'opinion'},
     {t:'台南市教育局公告，全市國小將於下週三舉辦防災演練。',type:'fact'},
+    {t:'這波高溫熱到讓人幾乎融化，實在讓人受不了。',type:'opinion'},
+    {t:'研究指出，習慣早睡早起的族群，其心血管疾病風險通常低於深夜作息的人。',type:'fact'},
+    {t:'中央氣象署發布，今天台南地區高溫達 35 度。',type:'fact'},
     {t:'我認為這次防災演練安排得非常用心。',type:'opinion'},
     {t:'台南孔廟建於西元 2024 年。',type:'fact'}
   ];
@@ -332,6 +333,7 @@ var WS_ID = "g5-L02";
     });
     var correct=scoreNow();
     document.getElementById('score').textContent=correct;
+    document.getElementById('scoreTotal').textContent=items.length;
     var r=document.getElementById('result');r.classList.remove('hidden');
     document.getElementById('factNote').classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth',block:'center'});
