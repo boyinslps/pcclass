@@ -343,15 +343,19 @@ var WS_ID = "g5-L02";
   // ===== ④ 偵探畫線：國華街文章（不在頁面揭曉，老師後台核對計分）=====
   var clauses=[
     {text:'位於台南市中西區的國華街全長約 1.5 公里',type:'fact',sep:'，'},
-    {text:'是我心中全台灣最有魅力的美食聖地。',type:'opinion',sep:''},
+    {text:'是全台灣最有魅力的美食聖地',type:'opinion',sep:'。'},
     {text:'這裡聚集了小卷米粉、碗粿等多家在地老店',type:'fact',sep:'，'},
-    {text:'每逢週末假日總是人山人海',type:'fact',sep:'，'},
-    {text:'可見大家都不想錯過這座城市最棒的古早味。',type:'opinion',sep:'¶'},
-    {text:'在所有小吃中，國華街的牛肉湯最令人驚艷。',type:'opinion',sep:''},
-    {text:'店家使用的是每天凌晨從善化肉品市場直送的溫體牛肉',type:'fact',sep:'，'},
-    {text:'比起其他縣市的紅燒牛肉麵，這種清湯牛肉湯更能完美展現食材的原味。',type:'opinion',sep:''},
-    {text:'鮮甜的湯頭讓人一喝就感到無比幸福',type:'opinion',sep:'，'},
-    {text:'如果來到台南卻沒有喝到牛肉湯，這趟行程可說是完全白費了。',type:'opinion',sep:''}
+    {text:'每逢週末假日總是人山人海，可見大家都不想錯過這座城市最棒的古早味。',type:'opinion',sep:'¶'},
+    {text:'在所有小吃中，國華街的牛肉湯最令人驚艷',type:'opinion',sep:'，'},
+    {text:'它不僅是當地美食，更有著一段30年的發展歷史',type:'fact',sep:'，'},
+    {text:'大家可能很難相信',type:'opinion',sep:'，'},
+    {text:'早期的台灣其實是不吃牛肉的',type:'fact',sep:'，'},
+    {text:'因為當時牛隻是幫忙農夫下田種地的農耕動物',type:'fact',sep:'，'},
+    {text:'直到日本政府推廣食用牛肉的風氣，這開啟了台灣人對牛肉的接受和食用。',type:'fact',sep:'¶'},
+    {text:'在台南，善化區和鹽水區是主要的牛墟所在，這也促成了牛肉湯在當地的廣泛流行',type:'fact',sep:'。'},
+    {text:'其製作方式包括將溫體牛肉切成薄片，再與以牛大骨熬煮的清湯一同烹煮，使肉片五至七分熟，最後搭配白飯或肉燥飯食用',type:'fact',sep:'。'},
+    {text:'比起其他縣市的紅燒牛肉麵，這種清湯牛肉湯更能完美展現食材的原味',type:'opinion',sep:'。'},
+    {text:'鮮甜的湯頭讓人一喝就感到無比幸福，如果來到台南卻沒有喝到牛肉湯，這趟行程可說是完全白費了。',type:'opinion',sep:''}
   ];
   var activeMode='fact';
   function paintModeBtns(){
