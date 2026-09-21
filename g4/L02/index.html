@@ -244,19 +244,7 @@
     <h2 class="cute text-2xl font-extrabold text-amber-700 mb-1">② 任務：景點調查員 🔍</h2>
     <p class="text-lg text-slate-600 mb-4">打開台南旅遊網，當一位小小調查員，把答案填進來！</p>
 
-    <!-- 教師專用：設定各題正確答案（僅 #admin 且已通過驗證時顯示）-->
-    <div id="surveyAdminBox" class="hidden bg-slate-900 text-white rounded-2xl p-4 mb-4 text-sm">
-      <p class="font-bold text-amber-300 mb-2">👩‍🏫 教師：設定各題正確答案（可用正則表達式涵蓋多種寫法，例：大天后宮|祀典武廟；留空＝只看有沒有填寫，不判對錯）</p>
-      <div class="grid md:grid-cols-2 gap-2">
-        <label class="flex flex-col gap-1">1. 中西區景點<input class="surveyAnsInput bg-slate-800 border border-slate-600 rounded-lg px-2 py-1" data-qid="q1"></label>
-        <label class="flex flex-col gap-1">2. 在地藝文景點<input class="surveyAnsInput bg-slate-800 border border-slate-600 rounded-lg px-2 py-1" data-qid="q2"></label>
-        <label class="flex flex-col gap-1">3. 南區生態教育景點<input class="surveyAnsInput bg-slate-800 border border-slate-600 rounded-lg px-2 py-1" data-qid="q3"></label>
-        <label class="flex flex-col gap-1">4a. 週六開放時間－起<input class="surveyAnsInput bg-slate-800 border border-slate-600 rounded-lg px-2 py-1" data-qid="q4a"></label>
-        <label class="flex flex-col gap-1">4b. 週六開放時間－迄<input class="surveyAnsInput bg-slate-800 border border-slate-600 rounded-lg px-2 py-1" data-qid="q4b"></label>
-        <label class="flex flex-col gap-1">5.（加分）歷史古蹟＋生態教育景點<input class="surveyAnsInput bg-slate-800 border border-slate-600 rounded-lg px-2 py-1" data-qid="q5"></label>
-        <label class="flex flex-col gap-1">6.（加分）勝利國小週邊景點<input class="surveyAnsInput bg-slate-800 border border-slate-600 rounded-lg px-2 py-1" data-qid="q6"></label>
-      </div>
-    </div>
+    <p id="surveyAdminHint" class="hidden text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-3">👩‍🏫 教師模式：直接把正確答案（可用正則表達式涵蓋多種寫法，例：大天后宮|祀典武廟）打進下面各題的作答欄位，再按上方「⬆ 上傳答案」即可；留空＝只看學生有沒有填寫，不判對錯。</p>
 
     <div class="grid md:grid-cols-2 gap-4">
       <div>
@@ -288,11 +276,11 @@
           <p class="field font-bold">4.「<b class="text-amber-700">水交社文化園區</b>」<b>週六</b>開放時間是？</p>
           <span class="qtypeSlot" data-qid="q4"></span>
         </div>
-        <div class="flex items-center gap-2">
-          <input id="q4a" inputmode="numeric" maxlength="2" class="field idnum border-2 border-amber-300 rounded-xl px-2 py-2 text-center focus:border-amber-500 outline-none">
-          <span class="field font-bold">點　到</span>
-          <input id="q4b" inputmode="numeric" maxlength="2" class="field idnum border-2 border-amber-300 rounded-xl px-2 py-2 text-center focus:border-amber-500 outline-none">
-          <span class="field font-bold">點</span>
+        <div class="flex items-center flex-wrap gap-2">
+          <input id="q4a" inputmode="numeric" maxlength="2" class="field w-16 shrink-0 text-center border-2 border-amber-300 rounded-xl px-2 py-2 focus:border-amber-500 outline-none">
+          <span class="field font-bold shrink-0">點　到</span>
+          <input id="q4b" inputmode="numeric" maxlength="2" class="field w-16 shrink-0 text-center border-2 border-amber-300 rounded-xl px-2 py-2 focus:border-amber-500 outline-none">
+          <span class="field font-bold shrink-0">點</span>
         </div>
         <p class="surveyFeedback text-sm font-bold mt-1 min-h-[18px]" data-qid="q4"></p>
       </div>
@@ -472,17 +460,19 @@ var QUIZ_ID = "g4-L02";
   }
 
   // ===== 景點調查員：教師上傳正確答案（可用正則表達式涵蓋多種寫法）=====
+  // 教師在 #admin 直接把正則打進原本的作答欄位（q1~q6）當答案key，不另外開設定區——學生看到的欄位跟教師輸入答案的欄位是同一個。
   var surveyQids=['q1','q2','q3','q4a','q4b','q5','q6'];
   var surveyBonusQids=['q5','q6'];
   var SURVEY_PATTERNS=null;
   var surveyGraded={};
-  var surveyBoxPopulated=false;
-  function populateSurveyAdminBox(){
-    if(surveyBoxPopulated||!SURVEY_PATTERNS)return;
-    document.querySelectorAll('.surveyAnsInput').forEach(function(inp){
-      var v=SURVEY_PATTERNS[inp.dataset.qid];if(v)inp.value=v;
+  var surveyFieldsPopulated=false;
+  function populateSurveyPatternFields(){
+    if(!IS_ADMIN||surveyFieldsPopulated||!SURVEY_PATTERNS)return;
+    surveyQids.forEach(function(qid){
+      var el=document.getElementById(qid);
+      if(el&&!el.value&&SURVEY_PATTERNS[qid])el.value=SURVEY_PATTERNS[qid];
     });
-    surveyBoxPopulated=true;
+    surveyFieldsPopulated=true;
   }
   function testPattern(pattern,value){
     if(!pattern)return null;
@@ -490,12 +480,12 @@ var QUIZ_ID = "g4-L02";
     catch(e){console.warn('無效的正則表達式：',pattern,e);return null;}
   }
   function gradeSurveyNow(){
+    var patterns=SURVEY_PATTERNS||{};
     if(IS_ADMIN){
       var localPatterns={};
-      document.querySelectorAll('.surveyAnsInput').forEach(function(inp){if(inp.value.trim())localPatterns[inp.dataset.qid]=inp.value.trim();});
-      if(Object.keys(localPatterns).length)SURVEY_PATTERNS=Object.assign({},SURVEY_PATTERNS||{},localPatterns);
+      surveyQids.forEach(function(qid){var el=document.getElementById(qid);if(el&&el.value.trim())localPatterns[qid]=el.value.trim();});
+      if(Object.keys(localPatterns).length)patterns=Object.assign({},patterns,localPatterns);
     }
-    var patterns=SURVEY_PATTERNS||{};
     surveyQids.forEach(function(qid){
       var el=document.getElementById(qid);
       if(!el)return;
@@ -591,7 +581,7 @@ var QUIZ_ID = "g4-L02";
           if(Array.isArray(d.answers)&&d.answers.length===quizItems.length)ANSWERS=d.answers;
           if(d.surveyPatterns)SURVEY_PATTERNS=d.surveyPatterns;
           if(d.qtypeOverrides)QTYPE_OVERRIDES=d.qtypeOverrides;
-          populateSurveyAdminBox();
+          populateSurveyPatternFields();
           renderQtypeSlots();
           if(d.revealed&&!state.revealed)doReveal();
         },function(e){console.warn('讀取失敗',e);});
@@ -616,7 +606,7 @@ var QUIZ_ID = "g4-L02";
   function teacherOffline(){
     showBar();document.getElementById('tStatus').textContent='單機模式（答案已內建，免上傳）';
     var pw=prompt('教師密碼：');if(pw!=='1234'){if(pw!==null)alert('密碼錯誤');document.getElementById('teacherbar').classList.add('hidden');return;}
-    document.getElementById('surveyAdminBox').classList.remove('hidden');
+    document.getElementById('surveyAdminHint').classList.remove('hidden');
     teacherAuthed=true;renderQtypeSlots();
     var up=document.getElementById('uploadBtn');if(up)up.onclick=function(){alert('單機模式：答案已內建，不需上傳。');};
     document.getElementById('revealBtn').onclick=doReveal;
@@ -624,12 +614,12 @@ var QUIZ_ID = "g4-L02";
   }
   function wireTeacherUI(email){
     document.getElementById('tStatus').textContent='已登入 '+email;
-    document.getElementById('surveyAdminBox').classList.remove('hidden');
+    document.getElementById('surveyAdminHint').classList.remove('hidden');
     teacherAuthed=true;renderQtypeSlots();
     var up=document.getElementById('uploadBtn');
     if(up)up.onclick=function(){up.disabled=true;up.textContent='上傳中…';
       var patterns={};
-      document.querySelectorAll('.surveyAnsInput').forEach(function(inp){patterns[inp.dataset.qid]=inp.value.trim();});
+      surveyQids.forEach(function(qid){var el=document.getElementById(qid);patterns[qid]=el?el.value.trim():'';});
       quizRef.set({answers:quizItems.map(function(it){return it.answer}),surveyPatterns:patterns,answersAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})
         .then(function(){up.disabled=false;up.textContent='✓ 已上傳';setTimeout(function(){up.textContent='⬆ 上傳答案';},2500);
           alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要按「🎉 公布」即可。');})
