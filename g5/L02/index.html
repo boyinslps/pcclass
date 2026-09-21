@@ -466,8 +466,8 @@ var WS_ID = "g5-L02";
   }
 
   // ===== 教師：檢視目前已上傳的正確答案——直接把答案填進頁面本身（投票選起來、畫線標起來），
-  // 不是另開彈窗列表；看完後用工具列「👀 預覽學生模式」清空回歸空白（見《學習單資料與提交規範》§5-7）=====
-  document.getElementById('viewAnswersBtn').onclick=function(){
+  // 不是另開彈窗列表；「↩ 還原」按鈕會一併清空（見《學習單資料與提交規範》§5-7）=====
+  function fillAnswersIn(){
     items.forEach(function(it,i){
       var ans=answerOf(i);
       state.votes[i]=ans;
@@ -480,7 +480,20 @@ var WS_ID = "g5-L02";
     updateVoted();
     clauses.forEach(function(cl,i){state.clauses[i]=cl.type;});
     renderPassage();
-    alert('✓ 已將目前的正確答案填入頁面（投票已選好、文章已畫線）。要清空恢復，按工具列的「👀 預覽學生模式」。');
+  }
+  // 清掉「檢視答案」填進去的內容（不影響 Firestore 上的正確答案本身，只清這台裝置畫面上的顯示）
+  function clearFilledAnswers(){
+    state.votes={};
+    Array.prototype.forEach.call(grid.children,function(card){
+      card.querySelectorAll('.vt').forEach(function(b){b.classList.remove('bg-indigo-100','border-indigo-400','text-indigo-700');});
+    });
+    updateVoted();
+    state.clauses={};
+    renderPassage();
+  }
+  document.getElementById('viewAnswersBtn').onclick=function(){
+    fillAnswersIn();
+    alert('✓ 已將目前的正確答案填入頁面（投票已選好、文章已畫線）。按工具列的「↩ 還原」可以清空回歸空白。');
   };
 
   // ===== 教師：檢視某位學生的繳交作答（唯讀重現），見《學習單資料與提交規範》§5-7 =====
@@ -580,7 +593,8 @@ var WS_ID = "g5-L02";
     document.getElementById('revealWordsBtn').onclick=function(){quizRef.set({revealedWords:true,revealedWordsAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
     document.getElementById('revealClassifyBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
     document.getElementById('lockBtn').onclick=function(){
-      if(!confirm('確定要還原成未公布狀態嗎？（用詞特徵與分類答案都會收回）'))return;
+      if(!confirm('確定要還原成未公布狀態嗎？（用詞特徵與分類答案都會收回，「檢視答案」填進畫面的內容也會一併清空）'))return;
+      clearFilledAnswers();
       quizRef.set({revealed:false,revealedWords:false},{merge:true});
     };
     quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});

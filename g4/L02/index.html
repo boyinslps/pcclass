@@ -571,7 +571,7 @@ var QUIZ_ID = "g4-L02";
 
   // ===== 教師：檢視目前已上傳的正確答案——直接抓資料庫內容填進學習單本身的欄位，
   // 不是另開彈窗列表；看完後用工具列「👀 預覽學生模式」清空回歸空白（見《學習單資料與提交規範》§5-7）=====
-  document.getElementById('viewAnswersBtn').onclick=function(){
+  function fillAnswersIn(){
     var patterns=SURVEY_PATTERNS||{};
     surveyQids.forEach(function(qid){
       var el=document.getElementById(qid);
@@ -592,7 +592,22 @@ var QUIZ_ID = "g4-L02";
         });
       }
     });
-    alert('✓ 已將資料庫裡的正確答案填入下方欄位。要清空恢復，按工具列的「👀 預覽學生模式」。');
+  }
+  // 清掉「檢視答案」填進去的內容（不影響 Firestore 上的正確答案本身，只清這台裝置畫面上的顯示），
+  // 由「↩ 還原」按鈕一併呼叫，見下方 lockBtn。
+  function clearFilledAnswers(){
+    surveyQids.forEach(function(qid){var el=document.getElementById(qid);if(el)el.value='';});
+    quizItems.forEach(function(item,i){
+      delete state.quiz[i];
+      var slot=document.querySelector('[data-qid="'+item.id+'"]');
+      if(!slot)return;
+      if(item.kind==='number'){var inp=slot.querySelector('.quizInput');if(inp)inp.value='';}
+      else slot.querySelectorAll('.quizOpt').forEach(function(b){b.classList.remove('bg-rose-50','border-rose-500','text-rose-700');});
+    });
+  }
+  document.getElementById('viewAnswersBtn').onclick=function(){
+    fillAnswersIn();
+    alert('✓ 已將資料庫裡的正確答案填入下方欄位。按工具列的「↩ 還原」可以清空回歸空白。');
   };
 
   // ===== 教師：檢視某位學生的繳交作答（唯讀重現），見《學習單資料與提交規範》§5-7 =====
@@ -693,7 +708,8 @@ var QUIZ_ID = "g4-L02";
         .catch(function(e){up.disabled=false;up.textContent='⬆ 上傳答案';alert('上傳失敗：'+e.message);});};
     document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
     document.getElementById('lockBtn').onclick=function(){
-      if(!confirm('確定要還原成未公布狀態嗎？'))return;
+      if(!confirm('確定要還原成未公布狀態嗎？（會一併清空「檢視答案」填進畫面的內容）'))return;
+      clearFilledAnswers();
       quizRef.set({revealed:false},{merge:true});
     };
     quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
