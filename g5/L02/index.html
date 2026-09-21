@@ -47,8 +47,7 @@
     <div class="ml-auto flex gap-2">
       <button id="viewAnswersBtn" class="bg-emerald-600 hover:bg-emerald-700 font-bold rounded-lg px-3 py-1" title="查看目前的正確答案">👁 檢視答案</button>
       <button id="uploadBtn" class="bg-sky-600 hover:bg-sky-700 font-bold rounded-lg px-3 py-1" title="備課用：把③的正確答案存進資料庫，只需做一次">⬆ 上傳答案</button>
-      <button id="revealBtn" class="bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1">🎉 公布</button>
-      <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="回到未公布狀態">↩ 還原</button>
+      <button id="lockBtn" class="bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="回到未公布狀態（用詞特徵與分類答案都會收回）">↩ 還原</button>
       <button id="previewModeBtn" class="bg-indigo-600 hover:bg-indigo-700 font-bold rounded-lg px-3 py-1" title="暫時隱藏教師工具列，看學生看到的畫面">👀 預覽學生模式</button>
     </div>
   </div>
@@ -140,7 +139,10 @@
     <div id="examplesOpinion" class="grid sm:grid-cols-2 gap-3"></div>
 
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 my-5 shadow-sm">
-      <p class="text-lg font-bold text-emerald-700 mb-2">📝 你發現了嗎？事實句跟意見句，在用詞上有什麼不同？打字分享你發現的「線索」！</p>
+      <div class="flex items-center gap-2 flex-wrap mb-2">
+        <p class="text-lg font-bold text-emerald-700 m-0">📝 你發現了嗎？事實句跟意見句，在用詞上有什麼不同？打字分享你發現的「線索」！</p>
+        <button id="revealWordsBtn" class="hidden shrink-0 bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold rounded-lg px-3 py-1.5" title="僅教師 #admin 可見">🎉 公布用詞特徵</button>
+      </div>
       <div class="slido-wrap">
         <iframe src="https://app.sli.do/event/1oGrbvgpbJquwtoX9Y8KkX/embed/polls/c477dc45-d294-47d4-87bd-cbd807fe7fb2" width="300" height="400" allow="clipboard-write"></iframe>
       </div>
@@ -163,7 +165,10 @@
     </div>
 
     <div class="bg-white border-4 border-emerald-300 rounded-3xl p-5 mb-5 shadow-sm">
-      <h3 class="cute text-xl font-extrabold text-emerald-700">🕵️ 換你來分類</h3>
+      <div class="flex items-center gap-2 flex-wrap">
+        <h3 class="cute text-xl font-extrabold text-emerald-700 m-0">🕵️ 換你來分類</h3>
+        <button id="revealClassifyBtn" class="hidden shrink-0 bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold rounded-lg px-3 py-1.5" title="僅教師 #admin 可見">🎉 公布分類答案</button>
+      </div>
       <p class="text-sm text-slate-600 mb-2">用你剛剛發現的線索，幫下面幾句話投票：是事實還是意見？投完票先別急，等老師公布答案。</p>
       <div class="inline-flex items-center gap-2 bg-emerald-50 border-2 border-emerald-200 rounded-full px-4 py-1.5 text-sm font-bold text-emerald-700">
         <span>🗳️ 已投票</span><span id="voted">0 / 5</span>
@@ -311,7 +316,7 @@ var WS_ID = "g5-L02";
     {t:'我認為這次防災演練安排得非常用心。',type:'opinion'},
     {t:'台南孔廟建於西元 2024 年。',type:'fact'}
   ];
-  var state={votes:{},revealed:false,clauses:{},_pushed:false};
+  var state={votes:{},revealed:false,revealedWords:false,clauses:{},_pushed:false};
   var ANSWERS=null;
   function answerOf(i){return (ANSWERS&&ANSWERS.length===items.length)?ANSWERS[i]:items[i].type;}
   function save(){try{localStorage.setItem('g5L02flow',JSON.stringify({votes:state.votes,clauses:state.clauses}))}catch(e){}}
@@ -365,9 +370,15 @@ var WS_ID = "g5-L02";
     document.getElementById('scoreTotal').textContent=items.length;
     var r=document.getElementById('result');r.classList.remove('hidden');
     document.getElementById('factNote').classList.remove('hidden');
-    document.getElementById('wordFeatureBox').classList.remove('hidden');
     r.scrollIntoView({behavior:'smooth',block:'center'});
     if(!IS_ADMIN)pushResult(correct);
+  }
+  function doRevealWords(){
+    if(state.revealedWords)return;
+    state.revealedWords=true;
+    var box=document.getElementById('wordFeatureBox');
+    box.classList.remove('hidden');
+    box.scrollIntoView({behavior:'smooth',block:'center'});
   }
 
   // ===== ④ 偵探畫線：國華街文章（不在頁面揭曉，老師後台核對計分）=====
@@ -532,8 +543,9 @@ var WS_ID = "g5-L02";
         document.getElementById('syncBadge').classList.remove('hidden');
         quizRef.onSnapshot(function(doc){var d=(doc&&doc.data())||{};
           if(Array.isArray(d.answers)&&d.answers.length===items.length)ANSWERS=d.answers;
+          if(d.revealedWords&&!state.revealedWords)doRevealWords();
           if(d.revealed&&!state.revealed)doReveal();
-          if(!d.revealed&&state.revealed)location.reload();
+          if((!d.revealed&&state.revealed)||(!d.revealedWords&&state.revealedWords))location.reload();
         },function(e){console.warn('讀取失敗',e);});
         if(IS_ADMIN)teacherOnline();
         else{
@@ -556,26 +568,34 @@ var WS_ID = "g5-L02";
     location.href=location.pathname+location.search+'#admin';
     location.reload();
   };
+  function showAdminRevealButtons(){
+    document.getElementById('revealWordsBtn').classList.remove('hidden');
+    document.getElementById('revealClassifyBtn').classList.remove('hidden');
+  }
   function teacherOffline(){
     showBar();document.getElementById('tStatus').textContent='單機模式（答案已內建，免上傳）';
     var pw=prompt('教師密碼：');if(pw!=='1234'){if(pw!==null)alert('密碼錯誤');document.getElementById('teacherbar').classList.add('hidden');return;}
+    showAdminRevealButtons();
     var up=document.getElementById('uploadBtn');if(up)up.onclick=function(){alert('單機模式：答案已內建，不需上傳。');};
-    document.getElementById('revealBtn').onclick=doReveal;
+    document.getElementById('revealWordsBtn').onclick=doRevealWords;
+    document.getElementById('revealClassifyBtn').onclick=doReveal;
     document.getElementById('lockBtn').onclick=function(){location.reload();};
   }
   function wireTeacherUI(email){
     document.getElementById('tStatus').textContent='已登入 '+email;
     maybeApplyReview();
+    showAdminRevealButtons();
     var up=document.getElementById('uploadBtn');
     if(up)up.onclick=function(){up.disabled=true;up.textContent='上傳中…';
       quizRef.set({answers:items.map(function(it){return it.type}),answersAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})
         .then(function(){up.disabled=false;up.textContent='✓ 已上傳';setTimeout(function(){up.textContent='⬆ 上傳答案';},2500);
-          alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要按「🎉 公布」即可。');})
+          alert('✓ 正確答案已存進資料庫（只需這一次）。之後上課只要用下面各段的「🎉 公布」按鈕即可。');})
         .catch(function(e){up.disabled=false;up.textContent='⬆ 上傳答案';alert('上傳失敗：'+e.message);});};
-    document.getElementById('revealBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
+    document.getElementById('revealWordsBtn').onclick=function(){quizRef.set({revealedWords:true,revealedWordsAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
+    document.getElementById('revealClassifyBtn').onclick=function(){quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});};
     document.getElementById('lockBtn').onclick=function(){
-      if(!confirm('確定要還原成未公布狀態嗎？'))return;
-      quizRef.set({revealed:false},{merge:true});
+      if(!confirm('確定要還原成未公布狀態嗎？（用詞特徵與分類答案都會收回）'))return;
+      quizRef.set({revealed:false,revealedWords:false},{merge:true});
     };
     quizRef.collection('results').onSnapshot(function(qs){var n=qs.size,sum=0;qs.forEach(function(d){sum+=(d.data().score||0)});
       document.getElementById('tTally').textContent='已交卷 '+n+' 人 · 平均 '+(n?(sum/n).toFixed(1):'0')+' / '+items.length;});
