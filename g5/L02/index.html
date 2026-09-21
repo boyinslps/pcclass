@@ -55,17 +55,6 @@
 <!-- 預覽學生模式時顯示的浮動返回鍵 -->
 <button id="backToTeacher" class="hidden fixed bottom-4 right-4 z-30 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full px-4 py-2 shadow-lg">↩ 返回教師模式</button>
 
-<!-- 教師專用：檢視目前的正確答案 / 檢視學生繳交作答（唯讀），見《學習單資料與提交規範》§5-7 -->
-<div id="answersModal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-  <div class="bg-white rounded-3xl p-6 max-w-lg w-full max-h-[80vh] overflow-y-auto">
-    <div class="flex items-center justify-between mb-3">
-      <h3 class="cute text-xl font-extrabold text-indigo-700" id="answersModalTitle">👁 目前的正確答案</h3>
-      <button id="closeAnswersModal" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
-    </div>
-    <div id="answersModalBody" class="text-sm space-y-2 text-slate-700"></div>
-  </div>
-</div>
-
 <div class="max-w-4xl mx-auto px-4 py-6">
 
   <header class="text-center mb-6">
@@ -476,25 +465,22 @@ var WS_ID = "g5-L02";
       .set({score:correct,total:items.length,at:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(function(){});
   }
 
-  // ===== 教師：檢視目前已上傳的正確答案（唯讀彈窗，不影響作答）=====
-  function openAnswersModal(title,bodyHtml){
-    document.getElementById('answersModalTitle').textContent=title;
-    document.getElementById('answersModalBody').innerHTML=bodyHtml;
-    document.getElementById('answersModal').classList.remove('hidden');
-  }
-  document.getElementById('closeAnswersModal').onclick=function(){document.getElementById('answersModal').classList.add('hidden');};
-  document.getElementById('answersModal').addEventListener('click',function(e){if(e.target===this)this.classList.add('hidden');});
+  // ===== 教師：檢視目前已上傳的正確答案——直接把答案填進頁面本身（投票選起來、畫線標起來），
+  // 不是另開彈窗列表；看完後用工具列「👀 預覽學生模式」清空回歸空白（見《學習單資料與提交規範》§5-7）=====
   document.getElementById('viewAnswersBtn').onclick=function(){
-    var h='<p class="font-bold text-indigo-700 mb-1">③ 換你來分類</p>';
     items.forEach(function(it,i){
       var ans=answerOf(i);
-      h+='<div class="flex justify-between gap-2 border-b border-slate-100 pb-1"><span class="text-slate-500">v'+(i+1)+'. '+esc(it.t)+'</span><span class="font-bold">'+(ans==='fact'?'🔵 事實':'🔴 意見')+'</span></div>';
+      state.votes[i]=ans;
+      var card=grid.children[i];if(!card)return;
+      card.querySelectorAll('.vt').forEach(function(b){
+        var on=b.dataset.v===ans;
+        b.classList.toggle('bg-indigo-100',on);b.classList.toggle('border-indigo-400',on);b.classList.toggle('text-indigo-700',on);
+      });
     });
-    h+='<p class="font-bold text-teal-700 mt-3 mb-1">④ 偵探畫線（寫死在學習單裡，不可上傳修改）</p>';
-    clauses.forEach(function(cl,i){
-      h+='<div class="flex justify-between gap-2 border-b border-slate-100 pb-1"><span class="text-slate-500">c'+(i+1)+'. '+esc(cl.text)+'</span><span class="font-bold">'+(cl.type==='fact'?'🔵 事實':'🔴 意見')+'</span></div>';
-    });
-    openAnswersModal('👁 目前的正確答案',h);
+    updateVoted();
+    clauses.forEach(function(cl,i){state.clauses[i]=cl.type;});
+    renderPassage();
+    alert('✓ 已將目前的正確答案填入頁面（投票已選好、文章已畫線）。要清空恢復，按工具列的「👀 預覽學生模式」。');
   };
 
   // ===== 教師：檢視某位學生的繳交作答（唯讀重現），見《學習單資料與提交規範》§5-7 =====

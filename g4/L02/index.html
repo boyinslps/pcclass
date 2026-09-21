@@ -48,17 +48,6 @@
 </div>
 <button id="backToTeacher" class="hidden fixed bottom-4 right-4 z-30 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full px-4 py-2 shadow-lg">↩ 返回教師模式</button>
 
-<!-- 教師專用：檢視目前的正確答案 / 檢視學生繳交作答（唯讀），見《學習單資料與提交規範》§5-7 -->
-<div id="answersModal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-  <div class="bg-white rounded-3xl p-6 max-w-lg w-full max-h-[80vh] overflow-y-auto">
-    <div class="flex items-center justify-between mb-3">
-      <h3 class="cute text-xl font-extrabold text-emerald-700" id="answersModalTitle">👁 目前的正確答案</h3>
-      <button id="closeAnswersModal" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
-    </div>
-    <div id="answersModalBody" class="text-sm space-y-2 text-slate-700"></div>
-  </div>
-</div>
-
 <div class="max-w-5xl mx-auto px-4 py-6">
 
   <!-- 標題 -->
@@ -580,27 +569,30 @@ var QUIZ_ID = "g4-L02";
       .set({score:correct,total:quizItems.length,at:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(function(){});
   }
 
-  // ===== 教師：檢視目前已上傳的正確答案（唯讀彈窗，不影響作答欄位）=====
-  function openAnswersModal(title,bodyHtml){
-    document.getElementById('answersModalTitle').textContent=title;
-    document.getElementById('answersModalBody').innerHTML=bodyHtml;
-    document.getElementById('answersModal').classList.remove('hidden');
-  }
-  document.getElementById('closeAnswersModal').onclick=function(){document.getElementById('answersModal').classList.add('hidden');};
-  document.getElementById('answersModal').addEventListener('click',function(e){if(e.target===this)this.classList.add('hidden');});
+  // ===== 教師：檢視目前已上傳的正確答案——直接抓資料庫內容填進學習單本身的欄位，
+  // 不是另開彈窗列表；看完後用工具列「👀 預覽學生模式」清空回歸空白（見《學習單資料與提交規範》§5-7）=====
   document.getElementById('viewAnswersBtn').onclick=function(){
     var patterns=SURVEY_PATTERNS||{};
-    var surveyLabel={q1:'1. 中西區景點',q2:'2. 在地藝文景點',q3:'3. 南區生態教育景點',q4a:'4a. 週六開放時間－起',q4b:'4b. 週六開放時間－迄',q5:'⭐5. 歷史古蹟＋生態教育',q6:'⭐6. 勝利國小週邊'};
-    var h='<p class="font-bold text-emerald-700 mb-1">② 景點調查員（正則表達式）</p>';
     surveyQids.forEach(function(qid){
-      var p=patterns[qid];
-      h+='<div class="flex justify-between gap-2 border-b border-slate-100 pb-1"><span class="text-slate-500">'+surveyLabel[qid]+'</span><span class="font-bold text-right">'+(p?esc(p):'<span class="text-slate-400">（尚未設定，只看有沒有填）</span>')+'</span></div>';
+      var el=document.getElementById(qid);
+      if(el&&patterns[qid])el.value=patterns[qid];
     });
-    h+='<p class="font-bold text-rose-700 mt-3 mb-1">小試身手</p>';
     quizItems.forEach(function(item,i){
-      h+='<div class="flex justify-between gap-2 border-b border-slate-100 pb-1"><span class="text-slate-500">'+esc(item.label)+'</span><span class="font-bold">'+esc(String(answerOf(i)))+(item.unit||'')+'</span></div>';
+      var slot=document.querySelector('[data-qid="'+item.id+'"]');
+      if(!slot)return;
+      var ans=answerOf(i);
+      state.quiz[i]=ans;
+      if(item.kind==='number'){
+        var inp=slot.querySelector('.quizInput');
+        if(inp)inp.value=ans;
+      }else{
+        slot.querySelectorAll('.quizOpt').forEach(function(b){
+          var on=b.dataset.v===ans;
+          b.classList.toggle('bg-rose-50',on);b.classList.toggle('border-rose-500',on);b.classList.toggle('text-rose-700',on);
+        });
+      }
     });
-    openAnswersModal('👁 目前的正確答案',h);
+    alert('✓ 已將資料庫裡的正確答案填入下方欄位。要清空恢復，按工具列的「👀 預覽學生模式」。');
   };
 
   // ===== 教師：檢視某位學生的繳交作答（唯讀重現），見《學習單資料與提交規範》§5-7 =====
