@@ -61,7 +61,7 @@
     <h1 class="cute text-3xl md:text-5xl font-extrabold text-sky-600">🔍 事實還是意見？</h1>
     <p class="text-sm text-slate-500 mt-2">五年級上學期 · L02 事實與意見區分 · 教學活動流程</p>
     <div class="mt-3 flex justify-center gap-2 text-xs flex-wrap">
-      <span class="bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 font-bold">① 開場對比</span>
+      <span class="bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 font-bold">① 課前影片</span>
       <span class="bg-amber-100 text-amber-700 rounded-full px-3 py-1 font-bold">② 解密比喻</span>
       <span class="bg-emerald-100 text-emerald-700 rounded-full px-3 py-1 font-bold">③ 找線索</span>
       <span class="bg-teal-100 text-teal-700 rounded-full px-3 py-1 font-bold">④ 偵探畫線</span>
@@ -69,36 +69,13 @@
     <p id="syncBadge" class="hidden mt-2 text-xs text-emerald-600 font-bold">🔗 已連線：老師公布③的答案時，這台會自動同步</p>
   </header>
 
-  <!-- ===== ① 開場：同一家店，兩種說法 ===== -->
+  <!-- ===== ① 課前影片 ===== -->
   <section id="s1" class="step">
     <div class="bg-white border-4 border-indigo-300 rounded-3xl p-5 mb-5 shadow-sm">
-      <h2 class="cute text-2xl font-extrabold text-indigo-700">① 同一家店，為什麼說法差這麼多？</h2>
-      <p class="text-slate-600 mt-1">這兩則都是網友寫「文章牛肉湯」的真實留言。<br>先點開看看，再想一想：<b>如果你要去吃，該相信誰？</b></p>
+      <h2 class="cute text-2xl font-extrabold text-indigo-700">① 課前影片</h2>
     </div>
-    <div class="grid sm:grid-cols-2 gap-4">
-      <a href="https://maggieblog.tw/winchangbeef" target="_blank" rel="noopener" class="block bg-white border-4 border-emerald-200 rounded-2xl overflow-hidden hover:border-emerald-400 hover:shadow-sm">
-        <div class="h-16 bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-4xl">👍</div>
-        <div class="p-4">
-          <p class="text-sm text-slate-700 leading-relaxed">「文章牛肉湯是我目前吃到臺南<b>第一名</b>的牛肉湯耶！我吃了第一口就<b>愛上</b>⋯」</p>
-          <div class="mt-2 flex items-center gap-2 text-xs text-slate-400">
-            <img src="https://www.google.com/s2/favicons?domain=maggieblog.tw&sz=32" class="w-4 h-4 rounded" onerror="this.style.display='none'">
-            <span>maggieblog.tw</span><span class="ml-auto font-bold text-emerald-600">開啟 ↗</span>
-          </div>
-        </div>
-      </a>
-      <a href="https://www.threads.com/@hunter_lil_yau/post/DCliRl_SyeY" target="_blank" rel="noopener" class="block bg-white border-4 border-slate-200 rounded-2xl overflow-hidden hover:border-slate-400 hover:shadow-sm">
-        <div class="h-16 bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-4xl">🤷</div>
-        <div class="p-4">
-          <p class="text-sm text-slate-700 leading-relaxed">「牛肉湯有很多好吃的，不懂為什麼都要去文章，身為台南人我吃牛肉湯從來<b>沒排過隊</b>還是吃的很爽」</p>
-          <div class="mt-2 flex items-center gap-2 text-xs text-slate-400">
-            <img src="https://www.google.com/s2/favicons?domain=threads.com&sz=32" class="w-4 h-4 rounded" onerror="this.style.display='none'">
-            <span>threads.com</span><span class="ml-auto font-bold text-slate-600">開啟 ↗</span>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="mt-4 bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-4 text-sm text-indigo-900">
-      💡 兩則都是「個人感覺」，不是店家的真實狀況——那我們要怎麼知道什麼是「真的資訊」呢？這就是今天要學的：<b>先分清楚事實跟意見</b>。
+    <div class="aspect-video rounded-2xl overflow-hidden shadow-sm">
+      <iframe class="w-full h-full" src="https://www.youtube.com/embed/_bjdd9XZAbI" title="課前影片" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </section>
 
@@ -524,7 +501,7 @@ var WS_ID = "g5-L02";
   }
   boot();
 
-  var phases=[['s1','① 開場對比'],['s2','② 解密比喻'],['s3','③ 找線索'],['s4','④ 偵探畫線']];
+  var phases=[['s1','① 課前影片'],['s2','② 解密比喻'],['s3','③ 找線索'],['s4','④ 偵探畫線']];
   window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=phases[0][1];
     phases.forEach(function(p){var el=document.getElementById(p[0]);if(el&&el.offsetTop<=y)cur=p[1];});
   },{passive:true});
