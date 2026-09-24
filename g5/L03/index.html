@@ -425,10 +425,10 @@
   renderLineStep();
 
   // ===== ④ 三網站評分站 =====
-  // 三則新聞素材尚未提供，correctAnswer 暫留 null；教師找到素材後，把每個 site 的
+  // 網站2、3 素材尚未提供，correctAnswer 暫留 null；教師找到素材後，把每個 site 的
   // correctAnswer 填成 {who:'yes'/'no', when:'yes'/'no', where:'yes'/'no'} 即可自動計分。
   var sites=[
-    {n:1,name:'任務網站 1',img:'assets/任務網站1.png',correctAnswer:null},
+    {n:1,name:'任務網站 1',link:'https://www.cna.com.tw/news/ahel/202609240191.aspx',correctAnswer:{who:'yes',when:'yes',where:'yes'}},
     {n:2,name:'任務網站 2',img:'assets/任務網站2.png',correctAnswer:null},
     {n:3,name:'任務網站 3',img:'assets/任務網站3.png',correctAnswer:null}
   ];
@@ -436,10 +436,15 @@
   sites.forEach(function(site){
     var card=document.createElement('div');
     card.className='bg-white border-4 border-emerald-300 rounded-3xl p-5 shadow-sm';
+    var mediaHtml=site.link?
+      ('<a href="'+site.link+'" target="_blank" rel="noopener" class="block border-4 border-dashed border-emerald-300 rounded-2xl p-5 mb-3 text-center hover:bg-emerald-50">'+
+        '<div class="text-3xl mb-1">🔗</div><div class="font-bold text-emerald-700">點此開啟真實網站</div>'+
+        '<div class="text-xs text-slate-400 mt-1 break-all">'+site.link+'</div></a>')
+      :('<img class="shotimg mb-3" src="'+site.img+'" alt="'+site.name+'截圖" onerror="this.replaceWith(Object.assign(document.createElement(&quot;div&quot;),{className:&quot;imgph&quot;,innerText:&quot;🖼️ '+site.img+'\\n（教師找到適合的新聞後會放在這裡）&quot;}))">');
     card.innerHTML=
       '<div class="flex items-center justify-between mb-3"><h3 class="cute text-lg font-extrabold text-emerald-700">'+site.name+'</h3>'+
         '<span class="doneTag hidden text-xs font-bold bg-emerald-100 text-emerald-700 rounded-full px-3 py-1">✓ 已完成</span></div>'+
-      '<img class="shotimg mb-3" src="'+site.img+'" alt="'+site.name+'截圖" onerror="this.replaceWith(Object.assign(document.createElement(&quot;div&quot;),{className:&quot;imgph&quot;,innerText:&quot;🖼️ '+site.img+'\\n（教師找到適合的新聞後會放在這裡）&quot;}))">'+
+      mediaHtml+
       '<div class="space-y-2 mb-3">'+
         ['who','when','where'].map(function(k,i){
           var label=['有作者','有日期','有來源'][i];
