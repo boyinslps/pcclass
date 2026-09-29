@@ -69,8 +69,7 @@
     <span class="cute font-bold text-amber-300">👩‍🏫 教師模式</span>
     <span id="tStatus" class="text-slate-300 text-xs"></span>
     <div class="ml-auto flex gap-2">
-      <button id="revealBtn" class="hidden bg-rose-500 hover:bg-rose-600 font-bold rounded-lg px-3 py-1" title="公布①的解析，全班同步出現">🎉 公布解析</button>
-      <button id="lockBtn" class="hidden bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="收回，回到未公布狀態">↩ 還原</button>
+      <button id="lockBtn" class="hidden bg-slate-700 hover:bg-slate-600 rounded-lg px-3 py-1" title="收回①的解析、清空④的投票與留言，回到未公布狀態">↩ 還原</button>
       <button id="previewModeBtn" class="bg-indigo-600 hover:bg-indigo-700 font-bold rounded-lg px-3 py-1">👀 預覽學生模式</button>
     </div>
   </div>
@@ -105,7 +104,10 @@
   <!-- ===== ① 開場：憑什麼相信它 ===== -->
   <section id="s1" class="step">
     <div class="bg-white border-4 border-indigo-300 rounded-3xl p-6 mb-5 shadow-sm">
-      <h2 class="cute text-3xl font-extrabold text-indigo-700">① 憑什麼相信它？</h2>
+      <div class="flex items-center gap-2 flex-wrap">
+        <h2 class="cute text-3xl font-extrabold text-indigo-700 m-0">① 憑什麼相信它？</h2>
+        <button id="revealBtn" class="hidden shrink-0 bg-rose-500 hover:bg-rose-600 text-white text-sm font-bold rounded-lg px-3 py-1.5" title="公布解析，全班同步出現">🎉 公布解析</button>
+      </div>
       <p class="text-slate-600 mt-2 text-lg">先不看內容，單憑這兩份「長相」，你覺得哪一份比較可信？</p>
     </div>
     <div class="grid sm:grid-cols-2 gap-4">
@@ -278,7 +280,10 @@
   <!-- ===== ⑤ 複習：5W 配對 ===== -->
   <section id="s5" class="step mt-10">
     <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 mb-5 shadow-sm">
-      <h2 class="cute text-2xl font-extrabold text-rose-700">⑤ 複習：5W 配對</h2>
+      <div class="flex items-center gap-2 flex-wrap">
+        <h2 class="cute text-2xl font-extrabold text-rose-700 m-0">⑤ 複習：5W 配對</h2>
+        <span class="qtypeSlot" data-qid="match5w"></span>
+      </div>
       <p class="text-slate-600 mt-1">先點左邊一個 W，再點右邊對應的問題，配對正確會變綠色。</p>
     </div>
     <div class="grid grid-cols-2 gap-4">
@@ -359,10 +364,24 @@
         votesRef=db.collection('quizzes').doc(QUIZ_ID).collection('votes');
         quizRef=db.collection('quizzes').doc(QUIZ_ID);
         document.getElementById('syncBadge').classList.remove('hidden');
-        return auth.signInAnonymously();
       })
       .catch(function(e){console.warn('Firebase 連線失敗，公布同步／投票／繳交功能暫停',e);});
   })();
+  // 只在真的要寫入時才匿名登入，不搶跑（見《學習單資料與提交規範》§5-2：
+  // 無條件 signInAnonymously 會把老師持久化的登入 session 蓋掉，導致 #admin 每次重整都要重新登入）
+  function ensureAuth(){return (auth&&auth.currentUser)?Promise.resolve(auth.currentUser):auth.signInAnonymously().then(function(c){return c.user;});}
+  // 全頁共用：等 Firebase 把「持久化的登入狀態」還原完成後才 resolve（第一次觸發就是還原結果，不論是老師的
+  // email session、還是完全沒登入過），admin 分支與學生分支都靠它判斷「現在到底有沒有人登入」，避免各自
+  // 各自呼叫 onAuthStateChanged／signInAnonymously 互相搶跑（見 §5-2）。
+  var authResolved=fbReady.then(function(){
+    if(!auth)return null;
+    return new Promise(function(resolve){
+      var unsub=auth.onAuthStateChanged(function(u){ if(unsub){unsub();unsub=null;} resolve(u); });
+    });
+  });
+  // 學生分支專用：確認過真的沒有任何登入狀態才匿名登入，並把「最終使用者」往下傳給要用到 uid 的地方
+  // （例如留言牆監聽、投票）；admin 分支不可以用這個，會跳過教師自己的登入流程，見 teacherOnline()。
+  var studentAuthReady=IS_ADMIN?authResolved:authResolved.then(function(u){ return u||ensureAuth(); });
 
   // ===== 識別列 =====
   var ID_KEY='wk_identity';
@@ -489,6 +508,7 @@
       '<div class="flex items-center justify-between mb-3"><h3 class="cute text-lg font-extrabold text-emerald-700">'+site.name+'</h3>'+
         '<span class="doneTag hidden text-xs font-bold bg-emerald-100 text-emerald-700 rounded-full px-3 py-1">✓ 已完成</span></div>'+
       mediaHtml+
+      '<div class="flex items-center gap-2 mb-1"><div class="text-xs font-bold text-slate-500 flex-1">身分證檢查</div><span class="qtypeSlot" data-qid="site'+site.n+'_checklist"></span></div>'+
       '<div class="space-y-2 mb-3">'+
         ['who','when','where'].map(function(k,i){
           var label=['有作者','有日期','有來源'][i];
@@ -500,14 +520,14 @@
             '</div></div>';
         }).join('')+
       '</div>'+
-      '<div class="mb-3"><div class="text-xs font-bold text-slate-500 mb-1">整體可信度：點星星評分（再點一次最高分可清除）</div>'+
+      '<div class="mb-3"><div class="flex items-center gap-2 mb-1"><div class="text-xs font-bold text-slate-500 flex-1">整體可信度：點星星評分（再點一次最高分可清除）</div><span class="qtypeSlot" data-qid="site'+site.n+'_rating"></span></div>'+
         '<div class="starrow flex gap-1 mb-2" data-site="'+site.n+'">'+
           [1,2,3,4,5].map(function(v){return '<button class="starbtn text-2xl leading-none" data-site="'+site.n+'" data-v="'+v+'">☆</button>';}).join('')+
         '</div>'+
         '<button class="votebtn w-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-lg py-1.5" data-site="'+site.n+'">🗳️ 投票</button>'+
         '<div class="votechart mt-2 border-2 border-slate-200 rounded-xl p-2" data-site="'+site.n+'" title="點擊放大看全班投票結果"></div>'+
       '</div>'+
-      '<div><div class="text-xs font-bold text-slate-500 mb-1">實際查證「來源」：離開頁面搜尋後，寫下查到什麼、你的判斷理由</div>'+
+      '<div><div class="flex items-center gap-2 mb-1"><div class="text-xs font-bold text-slate-500 flex-1">實際查證「來源」：離開頁面搜尋後，寫下查到什麼、你的判斷理由</div><span class="qtypeSlot" data-qid="site'+site.n+'_whereproof"></span></div>'+
         '<textarea class="whereproof w-full border-2 border-emerald-300 bg-emerald-50/40 rounded-xl p-2 text-sm focus:border-emerald-500 outline-none" data-site="'+site.n+'" rows="2"></textarea>'+
         '<button class="pushbtn mt-1.5 w-full bg-white border-2 border-emerald-300 text-emerald-700 text-xs font-bold rounded-lg py-1.5 hover:bg-emerald-50" data-site="'+site.n+'">📤 推送給同學看</button>'+
         '<div class="feedlist mt-1.5 max-h-24 overflow-y-auto space-y-1" data-site="'+site.n+'"></div>'+
@@ -567,7 +587,9 @@
       if(!s.whereproof||!s.whereproof.trim()){alert('請先在上面欄位寫下你查到的內容，再推送。');return;}
       b.disabled=true;b.textContent='推送中…';
       fbReady.then(function(){
-        if(!db||!firebase.auth().currentUser)throw new Error('連線中，請稍等一下再試一次');
+        if(!db)throw new Error('連線中，請稍等一下再試一次');
+        return ensureAuth();
+      }).then(function(){
         var tag=idn.grade+'年'+idn.className+'班'+idn.studentId+'號';
         return feedRefFor(n).add({text:String(s.whereproof).slice(0,120),tag:tag,at:firebase.firestore.FieldValue.serverTimestamp()});
       }).then(function(){
@@ -579,8 +601,8 @@
     };
   });
   [1,2,3].forEach(function(n){
-    fbReady.then(function(){
-      if(!db)return;
+    studentAuthReady.then(function(u){
+      if(!db||!u)return; // admin 還沒登入時 u 可能是 null，等它自己走完登入流程，不在這裡搶著匿名登入
       feedRefFor(n).orderBy('at','desc').limit(20).onSnapshot(function(qs){
         var el=document.querySelector('.feedlist[data-site="'+n+'"]');
         if(!el)return;
@@ -606,9 +628,11 @@
       if(!s.rating){alert('請先點星星評分，再投票。');return;}
       b.disabled=true;b.textContent='投票中…';
       fbReady.then(function(){
-        if(!db||!firebase.auth().currentUser){alert('連線中，請稍等一下再試一次。');b.disabled=false;b.textContent='🗳️ 投票';return;}
+        if(!db)throw new Error('連線中，請稍等一下再試一次');
+        return ensureAuth();
+      }).then(function(user){
         var field={};field['site'+n]=s.rating;
-        return votesRef.doc(firebase.auth().currentUser.uid).set(field,{merge:true});
+        return votesRef.doc(user.uid).set(field,{merge:true});
       }).then(function(){
         b.disabled=false;b.textContent='✓ 已投票（改評分可重新投票）';
       }).catch(function(e){
@@ -671,6 +695,31 @@
     location.href=location.pathname+location.search+'#admin';
     location.reload();
   };
+  // ===== 教師：題型切換（體驗／檢測／開放三態循環），見《學習單資料與提交規範》§5-6 =====
+  var DEFAULT_QTYPE={
+    site1_checklist:'experience',site2_checklist:'experience',site3_checklist:'experience',
+    site1_rating:'experience',site2_rating:'experience',site3_rating:'experience',
+    site1_whereproof:'open',site2_whereproof:'open',site3_whereproof:'open',
+    match5w:'score'
+  };
+  var QTYPE_CYCLE=['score','experience','open'];
+  var QTYPE_LABEL={score:'檢測',experience:'體驗',open:'開放'};
+  var QTYPE_STYLE={score:'bg-rose-100 text-rose-700 border-rose-300',experience:'bg-sky-100 text-sky-700 border-sky-300',open:'bg-emerald-100 text-emerald-700 border-emerald-300'};
+  var QTYPE_OVERRIDES={};
+  var teacherAuthed=false;
+  function effectiveQtype(qid){return QTYPE_OVERRIDES[qid]||DEFAULT_QTYPE[qid]||'experience';}
+  function persistQtypeOverrides(){if(db&&quizRef)quizRef.set({qtypeOverrides:QTYPE_OVERRIDES},{merge:true});}
+  function renderQtypeSlots(){
+    document.querySelectorAll('.qtypeSlot').forEach(function(slot){
+      var qid=slot.dataset.qid,t=effectiveQtype(qid);
+      if(!IS_ADMIN||!teacherAuthed){slot.innerHTML='';return;}
+      slot.innerHTML='<button type="button" class="qtypeBtn border rounded-full px-2 py-0.5 text-xs font-bold '+QTYPE_STYLE[t]+'">'+QTYPE_LABEL[t]+'</button>';
+      slot.querySelector('.qtypeBtn').onclick=function(){
+        var cur=effectiveQtype(qid),next=QTYPE_CYCLE[(QTYPE_CYCLE.indexOf(cur)+1)%QTYPE_CYCLE.length];
+        QTYPE_OVERRIDES[qid]=next;persistQtypeOverrides();renderQtypeSlots();
+      };
+    });
+  }
   function clearVotes(){
     return votesRef.get().then(function(qs){
       var batch=db.batch();
@@ -691,6 +740,7 @@
     document.getElementById('tStatus').textContent=label;
     document.getElementById('revealBtn').classList.remove('hidden');
     document.getElementById('lockBtn').classList.remove('hidden');
+    teacherAuthed=true;renderQtypeSlots();
     document.getElementById('revealBtn').onclick=function(){
       quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
     };
@@ -706,14 +756,13 @@
     var pw=prompt('教師密碼：');if(pw!=='1234'){if(pw!==null)alert('密碼錯誤');document.getElementById('teacherbar').classList.add('hidden');return;}
     document.getElementById('revealBtn').classList.remove('hidden');
     document.getElementById('lockBtn').classList.remove('hidden');
+    teacherAuthed=true;renderQtypeSlots();
     document.getElementById('revealBtn').onclick=doReveal;
     document.getElementById('lockBtn').onclick=function(){location.reload();};
   }
   function teacherOnline(){
     showBar();
-    var handled=false;
-    var unsub=auth.onAuthStateChanged(function(u){
-      if(handled)return;handled=true;if(unsub)unsub();
+    authResolved.then(function(u){
       if(u&&!u.isAnonymous&&u.email){ wireTeacherUI('已登入 '+u.email); return; }
       var email=prompt('教師 Email：',TEACHER_EMAIL);if(email===null){document.getElementById('teacherbar').classList.add('hidden');return;}
       var pw=prompt('密碼：');if(pw===null){document.getElementById('teacherbar').classList.add('hidden');return;}
@@ -727,8 +776,10 @@
       var d=(doc&&doc.data())||{};
       if(d.revealed && !state.revealed)doReveal();
       if(!d.revealed && state.revealed)undoReveal();
+      if(d.qtypeOverrides){QTYPE_OVERRIDES=d.qtypeOverrides;renderQtypeSlots();}
     },function(e){console.warn('讀取①公布狀態失敗',e);});
     if(IS_ADMIN)teacherOnline();
+    else studentAuthReady.catch(function(e){console.warn('匿名登入失敗',e);}); // 觸發學生端匿名登入（§5-2），讓留言牆一進頁面就讀得到
   });
 
   // ===== ⑤ 5W 配對 =====
@@ -798,13 +849,13 @@
     }
     sites.forEach(function(site){
       var s=siteState(site.n),ca=site.correctAnswer;
-      fileItem('site'+site.n+'_who',s.who||null,ca?ca.who:null,'experience');
-      fileItem('site'+site.n+'_when',s.when||null,ca?ca.when:null,'experience');
-      fileItem('site'+site.n+'_where',s.where||null,ca?ca.where:null,'experience');
-      fileItem('site'+site.n+'_rating',s.rating||null,null,'experience');
-      fileItem('site'+site.n+'_whereproof',s.whereproof||null,null,'open'); // 開放題型，離開頁面實際查證來源（必做，不是加分）
+      fileItem('site'+site.n+'_who',s.who||null,ca?ca.who:null,effectiveQtype('site'+site.n+'_checklist'));
+      fileItem('site'+site.n+'_when',s.when||null,ca?ca.when:null,effectiveQtype('site'+site.n+'_checklist'));
+      fileItem('site'+site.n+'_where',s.where||null,ca?ca.where:null,effectiveQtype('site'+site.n+'_checklist'));
+      fileItem('site'+site.n+'_rating',s.rating||null,null,effectiveQtype('site'+site.n+'_rating'));
+      fileItem('site'+site.n+'_whereproof',s.whereproof||null,null,effectiveQtype('site'+site.n+'_whereproof')); // 必做，不是加分
     });
-    fileItem('match5w',Object.keys(matched).length,5,'score');
+    fileItem('match5w',Object.keys(matched).length,5,effectiveQtype('match5w'));
     var accuracyRate=scoreTotal?Math.round(scoreCorrect/scoreTotal*100):null;
     var experienceCompletion=expTotal?Math.round(expAnswered/expTotal*100):null;
     if(!confirm('確定要繳交嗎？'))return;
@@ -818,6 +869,9 @@
     btn.disabled=true;stat.className='text-sm font-bold mt-3 min-h-[20px] text-indigo-600';stat.textContent='繳交中…';
     fbReady.then(function(){
         if(!db)throw new Error('Firebase 尚未連線');
+        return ensureAuth();
+      })
+      .then(function(){
         return db.collection('submissions').doc(docId).set(Object.assign({},payload,{submittedAt:firebase.firestore.FieldValue.serverTimestamp()}),{merge:true});
       })
       .then(function(){
