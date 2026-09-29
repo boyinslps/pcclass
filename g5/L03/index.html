@@ -473,7 +473,7 @@
   var sites=[
     {n:1,name:'任務網站 1',link:'https://raywang1016.pixnet.net/blog/posts/9465929426',thumb:'https://pimg.1px.tw/raywang1016/1541827228-1982900082.jpg',correctAnswer:null},
     {n:2,name:'任務網站 2',link:'https://research.sinica.edu.tw/popular-science-reading-literacy-guide/',thumb:'https://research.sinica.edu.tw/wp-content/uploads/2026/01/popular_science_01_3.jpg',correctAnswer:null},
-    {n:3,name:'任務網站 3',link:'https://www.teepr.com/1921600/mollylin/%e5%b7%bd%e4%bb%96%e9%9b%b2%e8%b1%b9/',correctAnswer:null}
+    {n:3,name:'任務網站 3',link:'https://www.teepr.com/1921600/mollylin/%e5%b7%bd%e4%bb%96%e9%9b%b2%e8%b1%b9/',thumb:'assets/豹.jpeg',correctAnswer:null}
   ];
   var sitesWrap=document.getElementById('sitesWrap');
   sites.forEach(function(site){
@@ -508,7 +508,10 @@
         '<div class="votechart mt-2 border-2 border-slate-200 rounded-xl p-2" data-site="'+site.n+'" title="點擊放大看全班投票結果"></div>'+
       '</div>'+
       '<div><div class="text-xs font-bold text-slate-500 mb-1">實際查證「來源」：離開頁面搜尋後，寫下查到什麼、你的判斷理由</div>'+
-        '<textarea class="whereproof w-full border-2 border-slate-200 rounded-xl p-2 text-sm focus:border-emerald-400 outline-none" data-site="'+site.n+'" rows="2"></textarea></div>';
+        '<textarea class="whereproof w-full border-2 border-emerald-300 bg-emerald-50/40 rounded-xl p-2 text-sm focus:border-emerald-500 outline-none" data-site="'+site.n+'" rows="2"></textarea>'+
+        '<button class="pushbtn mt-1.5 w-full bg-white border-2 border-emerald-300 text-emerald-700 text-xs font-bold rounded-lg py-1.5 hover:bg-emerald-50" data-site="'+site.n+'">📤 推送給同學看</button>'+
+        '<div class="feedlist mt-1.5 max-h-24 overflow-y-auto space-y-1" data-site="'+site.n+'"></div>'+
+      '</div>';
     sitesWrap.appendChild(card);
   });
 
@@ -545,9 +548,56 @@
     };
   });
   document.querySelectorAll('.whereproof').forEach(function(ta){
-    ta.addEventListener('input',function(){var n=ta.dataset.site,s=siteState(n);s.whereproof=ta.value;save();refreshSiteUI(n);});
+    ta.addEventListener('input',function(){
+      var n=ta.dataset.site,s=siteState(n);s.whereproof=ta.value;save();refreshSiteUI(n);
+      // 改過內容才重新解鎖推送鈕（見《學習單資料與提交規範》§4 防連點規則）
+      var btn=document.querySelector('.pushbtn[data-site="'+n+'"]');
+      if(btn&&btn.disabled){btn.disabled=false;btn.textContent='📤 推送給同學看';}
+    });
   });
   [1,2,3].forEach(refreshSiteUI);
+
+  // ===== ④ 開放題即時同儕動態：實際查證「來源」的推送與留言牆 =====
+  // 每個網站各自一個 feed 文件（feeds/{WS_ID}-site{n}/messages），避免 where+orderBy 複合查詢還要另外建索引（見規範 §4）
+  function feedRefFor(n){ return db.collection('feeds').doc(WS_ID+'-site'+n).collection('messages'); }
+  document.querySelectorAll('.pushbtn').forEach(function(b){
+    b.onclick=function(){
+      var n=b.dataset.site,s=siteState(n),idn=getIdentity();
+      if(!identityValid(idn)){alert('請先在最上方填好年級、班級、座號。');window.scrollTo({top:0,behavior:'smooth'});return;}
+      if(!s.whereproof||!s.whereproof.trim()){alert('請先在上面欄位寫下你查到的內容，再推送。');return;}
+      b.disabled=true;b.textContent='推送中…';
+      fbReady.then(function(){
+        if(!db||!firebase.auth().currentUser)throw new Error('連線中，請稍等一下再試一次');
+        var tag=idn.grade+'年'+idn.className+'班'+idn.studentId+'號';
+        return feedRefFor(n).add({text:String(s.whereproof).slice(0,120),tag:tag,at:firebase.firestore.FieldValue.serverTimestamp()});
+      }).then(function(){
+        b.textContent='✓ 已送出（改內容可再推送）';
+      }).catch(function(e){
+        b.disabled=false;b.textContent='📤 推送給同學看';
+        alert('推送失敗：'+e.message+'（可能是老師尚未部署 Firestore 規則）');
+      });
+    };
+  });
+  [1,2,3].forEach(function(n){
+    fbReady.then(function(){
+      if(!db)return;
+      feedRefFor(n).orderBy('at','desc').limit(20).onSnapshot(function(qs){
+        var el=document.querySelector('.feedlist[data-site="'+n+'"]');
+        if(!el)return;
+        if(qs.empty){el.innerHTML='<div class="text-xs text-slate-400">還沒有人推送…</div>';return;}
+        var html='';
+        qs.forEach(function(doc){
+          var m=doc.data();
+          html+='<div class="text-xs bg-slate-50 rounded-lg px-2 py-1"><b class="text-emerald-600">'+esc(m.tag||'')+'</b> '+esc(m.text||'')+'</div>';
+        });
+        el.innerHTML=html;
+      },function(e){
+        console.warn('讀取推送內容失敗',e);
+        var el=document.querySelector('.feedlist[data-site="'+n+'"]');
+        if(el)el.innerHTML='<div class="text-xs text-slate-400">現在看不到同學的內容，晚點再來看看。</div>';
+      });
+    });
+  });
 
   // ===== ④ 即時投票（Firebase：每人一筆 quizzes/L03/votes/{uid}，全班即時看平均） =====
   document.querySelectorAll('.votebtn').forEach(function(b){
@@ -628,6 +678,15 @@
       return batch.commit();
     });
   }
+  function clearFeeds(){
+    return Promise.all([1,2,3].map(function(n){
+      return feedRefFor(n).get().then(function(qs){
+        var batch=db.batch();
+        qs.forEach(function(doc){batch.delete(doc.ref);});
+        return batch.commit();
+      });
+    }));
+  }
   function wireTeacherUI(label){
     document.getElementById('tStatus').textContent=label;
     document.getElementById('revealBtn').classList.remove('hidden');
@@ -636,9 +695,10 @@
       quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
     };
     document.getElementById('lockBtn').onclick=function(){
-      if(!confirm('確定要還原嗎？（全班畫面會收回①的解析，④的投票結果也會全部清空，適合換下一班上課前用）'))return;
+      if(!confirm('確定要還原嗎？（全班畫面會收回①的解析，④的投票結果與同學推送的留言也會全部清空，適合換下一班上課前用；學生已經繳交的學習單資料不會受影響）'))return;
       quizRef.set({revealed:false},{merge:true});
       clearVotes().catch(function(e){alert('清空投票失敗：'+e.message+'（可能是老師尚未部署最新 Firestore 規則）');});
+      clearFeeds().catch(function(e){alert('清空留言失敗：'+e.message+'（可能是老師尚未部署最新 Firestore 規則）');});
     };
   }
   function teacherOffline(){
