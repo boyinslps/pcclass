@@ -765,8 +765,9 @@ var QUIZ_ID = "g4-L02";
     // 各段「小試身手」：老師公布答案後才知道對錯，這裡先記錄學生當下的作答與（若已公布）正確與否。
     quizItems.forEach(function(item,i){
       var given=state.quiz[i];given=(given===undefined)?null:given;
-      var ans=answerOf(i),isCorrect=state.revealed?(given!=null&&given===ans):false,correct=state.revealed?ans:null;
-      var type=effectiveQtype(item.id);
+      var type=effectiveQtype(item.id),answered=given!=null&&given!=='';
+      // 公布答案前沒有正解可比對：體驗題改看「有沒有作答」（見《學習單資料與提交規範》§3），檢測題維持 false 等老師公布
+      var ans=answerOf(i),isCorrect=state.revealed?(given!=null&&given===ans):(type==='experience'&&answered),correct=state.revealed?ans:null;
       answers[item.id]=given;qtypes[item.id]=type;
       if(type==='open')openAnswers[item.id]=given;
       else if(type==='score')scoreAnswers[item.id]={given:given,correct:correct,isCorrect:isCorrect};
