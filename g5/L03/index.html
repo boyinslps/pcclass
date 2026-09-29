@@ -588,6 +588,13 @@
     location.href=location.pathname+location.search+'#admin';
     location.reload();
   };
+  function clearVotes(){
+    return votesRef.get().then(function(qs){
+      var batch=db.batch();
+      qs.forEach(function(doc){batch.delete(doc.ref);});
+      return batch.commit();
+    });
+  }
   function wireTeacherUI(label){
     document.getElementById('tStatus').textContent=label;
     document.getElementById('revealBtn').classList.remove('hidden');
@@ -596,8 +603,9 @@
       quizRef.set({revealed:true,revealedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
     };
     document.getElementById('lockBtn').onclick=function(){
-      if(!confirm('確定要還原成未公布狀態嗎？（全班畫面都會收回①的解析）'))return;
+      if(!confirm('確定要還原嗎？（全班畫面會收回①的解析，④的投票結果也會全部清空，適合換下一班上課前用）'))return;
       quizRef.set({revealed:false},{merge:true});
+      clearVotes().catch(function(e){alert('清空投票失敗：'+e.message+'（可能是老師尚未部署最新 Firestore 規則）');});
     };
   }
   function teacherOffline(){
