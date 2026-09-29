@@ -844,7 +844,7 @@
     function fileItem(qid,given,correct,type){
       answers[qid]=given;qtypes[qid]=type;
       if(type==='open'){openAnswers[qid]=given;}
-      else if(type==='experience'){experienceAnswers[qid]={given:given,correct:correct,isCorrect:correct!=null&&given===correct};expTotal++;if(given!=null&&given!=='')expAnswered++;}
+      else if(type==='experience'){experienceAnswers[qid]={given:given,correct:correct,isCorrect:correct!=null?given===correct:(given!=null&&given!=='')};expTotal++;if(given!=null&&given!=='')expAnswered++;}
       else{var ok=correct!=null&&given===correct;scoreAnswers[qid]={given:given,correct:correct,isCorrect:ok};scoreTotal++;if(ok)scoreCorrect++;}
     }
     sites.forEach(function(site){
