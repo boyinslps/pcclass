@@ -471,18 +471,19 @@
   // 網站2、3 素材尚未提供，correctAnswer 暫留 null；教師找到素材後，把每個 site 的
   // correctAnswer 填成 {who:'yes'/'no', when:'yes'/'no', where:'yes'/'no'} 即可自動計分。
   var sites=[
-    {n:1,name:'任務網站 1',link:'https://raywang1016.pixnet.net/blog/posts/9465929426',correctAnswer:null},
-    {n:2,name:'任務網站 2',link:'https://research.sinica.edu.tw/popular-science-reading-literacy-guide/',correctAnswer:null},
-    {n:3,name:'任務網站 3',link:'https://www.teepr.com/1921600/mollylin/%e5%b7%bd%e4%bb%96%e9%9b%b2%e8%b1%b9/',correctAnswer:null}
+    {n:1,name:'任務網站 1',link:'https://raywang1016.pixnet.net/blog/posts/9465929426',thumb:'https://pimg.1px.tw/raywang1016/1541827228-1982900082.jpg',correctAnswer:null},
+    {n:2,name:'任務網站 2',link:'https://research.sinica.edu.tw/popular-science-reading-literacy-guide/',thumb:'https://research.sinica.edu.tw/wp-content/uploads/2026/01/popular_science_01_3.jpg',correctAnswer:null},
+    {n:3,name:'任務網站 3',link:'https://www.teepr.com/1921600/mollylin/%e5%b7%bd%e4%bb%96%e9%9b%b2%e8%b1%b9/',thumb:'https://media.teepr.com/wp-content/uploads/2026/08/Sunda-clouded-leopard.jpeg',correctAnswer:null}
   ];
   var sitesWrap=document.getElementById('sitesWrap');
   sites.forEach(function(site){
     var card=document.createElement('div');
     card.className='bg-white border-4 border-emerald-300 rounded-3xl p-5 shadow-sm';
     var mediaHtml=site.link?
-      ('<a href="'+site.link+'" target="_blank" rel="noopener" class="block border-4 border-dashed border-emerald-300 rounded-2xl p-5 mb-3 text-center hover:bg-emerald-50">'+
-        '<div class="text-3xl mb-1">🔗</div><div class="font-bold text-emerald-700">點此開啟真實網站</div>'+
-        '<div class="text-xs text-slate-400 mt-1 break-all">'+site.link+'</div></a>')
+      ('<a href="'+site.link+'" target="_blank" rel="noopener" class="block border-4 border-dashed border-emerald-300 rounded-2xl overflow-hidden mb-3 hover:bg-emerald-50">'+
+        (site.thumb?'<img src="'+site.thumb+'" class="w-full h-36 object-cover" alt="'+site.name+'預覽圖" onerror="this.style.display=\'none\'">':'')+
+        '<div class="p-4 text-center"><div class="text-3xl mb-1">🔗</div><div class="font-bold text-emerald-700">點此開啟真實網站</div>'+
+        '<div class="text-xs text-slate-400 mt-1 break-all">'+site.link+'</div></div></a>')
       :('<img class="shotimg mb-3" src="'+site.img+'" alt="'+site.name+'截圖" onerror="this.replaceWith(Object.assign(document.createElement(&quot;div&quot;),{className:&quot;imgph&quot;,innerText:&quot;🖼️ '+site.img+'\\n（教師找到適合的新聞後會放在這裡）&quot;}))">');
     card.innerHTML=
       '<div class="flex items-center justify-between mb-3"><h3 class="cute text-lg font-extrabold text-emerald-700">'+site.name+'</h3>'+
