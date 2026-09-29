@@ -39,6 +39,14 @@
   .linehint[disabled]{display:none}
   .matchchip.sel{outline:3px solid #6366f1}
   .matchchip.ok{background:#dcfce7!important;border-color:#22c55e!important;color:#166534;cursor:default}
+  /* ④ 投票結果長條圖（點擊可放大） */
+  .votechart{cursor:zoom-in}
+  .votechart:hover{background:#f0fdf4}
+  .votebar-row{display:flex;align-items:center;gap:6px;font-size:.75rem;color:#475569}
+  .votebar-track{flex:1;background:#e2e8f0;border-radius:999px;height:10px;overflow:hidden}
+  .votebar-fill{height:100%;background:#10b981;border-radius:999px;transition:width .4s}
+  .votechart.big .votebar-row{font-size:1.15rem;gap:14px;margin-bottom:10px}
+  .votechart.big .votebar-track{height:28px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -69,6 +77,15 @@
 </div>
 <!-- 預覽學生模式時顯示的浮動返回鍵 -->
 <button id="backToTeacher" class="hidden fixed bottom-4 right-4 z-30 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full px-4 py-2 shadow-lg">↩ 返回教師模式</button>
+
+<!-- 投票長條圖放大檢視（點小圖表觸發，方便老師投影） -->
+<div id="voteChartModal" class="hidden fixed inset-0 z-40 bg-black/60 flex items-center justify-center p-6">
+  <div class="bg-white rounded-3xl p-6 max-w-xl w-full relative">
+    <button id="voteChartModalClose" class="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-slate-800 text-white font-bold">✕</button>
+    <h3 id="voteChartModalTitle" class="cute text-2xl font-extrabold text-emerald-700 mb-4"></h3>
+    <div id="voteChartModalBody"></div>
+  </div>
+</div>
 
 <div class="max-w-6xl mx-auto px-4 py-6">
 
@@ -243,10 +260,10 @@
     <div id="sitesWrap" class="grid md:grid-cols-3 gap-4"></div>
   </section>
 
-  <!-- ===== ⑤ 收束：5W 配對 ===== -->
+  <!-- ===== ⑤ 複習：5W 配對 ===== -->
   <section id="s5" class="step mt-10">
     <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 mb-5 shadow-sm">
-      <h2 class="cute text-2xl font-extrabold text-rose-700">⑤ 收尾：5W 配對</h2>
+      <h2 class="cute text-2xl font-extrabold text-rose-700">⑤ 複習：5W 配對</h2>
       <p class="text-slate-600 mt-1">先點左邊一個 W，再點右邊對應的問題，配對正確會變綠色。</p>
     </div>
     <div class="grid grid-cols-2 gap-4">
@@ -455,7 +472,7 @@
           [1,2,3,4,5].map(function(v){return '<button class="starbtn text-2xl leading-none" data-site="'+site.n+'" data-v="'+v+'">☆</button>';}).join('')+
         '</div>'+
         '<button class="votebtn w-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-lg py-1.5" data-site="'+site.n+'">🗳️ 投票</button>'+
-        '<div class="voteresult text-xs text-slate-500 mt-1.5" data-site="'+site.n+'">全班目前還沒有人投票</div>'+
+        '<div class="votechart mt-2 border-2 border-slate-200 rounded-xl p-2" data-site="'+site.n+'" title="點擊放大看全班投票結果"></div>'+
       '</div>'+
       '<div><div class="text-xs font-bold text-slate-500 mb-1">實際查證「來源」<span class="text-amber-600">（加分）</span>：離開頁面搜尋後，寫下查到什麼、你的判斷理由</div>'+
         '<textarea class="whereproof w-full border-2 border-slate-200 rounded-xl p-2 text-sm focus:border-emerald-400 outline-none" data-site="'+site.n+'" rows="2"></textarea></div>';
@@ -517,18 +534,43 @@
       });
     };
   });
+  // 長條圖：histogram={1:n,2:n,3:n,4:n,5:n}；big=true 時用放大版樣式（供教師投影用的彈窗）
+  function buildVoteChartHTML(histogram,total,big){
+    var maxN=Math.max(1,Math.max.apply(null,[1,2,3,4,5].map(function(v){return histogram[v]||0;})));
+    var rows=[5,4,3,2,1].map(function(v){
+      var n=histogram[v]||0,pct=total?Math.round(n/maxN*100):0;
+      return '<div class="votebar-row"><span style="width:'+(big?'2.2em':'1.6em')+'">'+v+'★</span>'+
+        '<div class="votebar-track"><div class="votebar-fill" style="width:'+pct+'%"></div></div>'+
+        '<span style="width:'+(big?'2.5em':'1.6em')+';text-align:right">'+n+'人</span></div>';
+    }).join('');
+    var summary=total?('平均 '+(Object.keys(histogram).reduce(function(s,v){return s+Number(v)*(histogram[v]||0);},0)/total).toFixed(1)+' ★・共 '+total+' 人投票'):'全班目前還沒有人投票';
+    return rows+'<p class="text-'+(big?'lg':'xs')+' text-slate-500 mt-2 text-center">'+summary+'</p>';
+  }
+  var emptyHist={1:0,2:0,3:0,4:0,5:0};
+  var voteData={1:{hist:emptyHist,total:0},2:{hist:emptyHist,total:0},3:{hist:emptyHist,total:0}};
+  document.querySelectorAll('.votechart').forEach(function(el){el.innerHTML=buildVoteChartHTML(emptyHist,0,false);});
+  document.querySelectorAll('.votechart').forEach(function(el){
+    el.onclick=function(){
+      var n=el.dataset.site;
+      document.getElementById('voteChartModalTitle').textContent='任務網站 '+n+' － 全班投票結果';
+      document.getElementById('voteChartModalBody').innerHTML='<div class="votechart big">'+buildVoteChartHTML(voteData[n].hist||{},voteData[n].total||0,true)+'</div>';
+      document.getElementById('voteChartModal').classList.remove('hidden');
+    };
+  });
+  document.getElementById('voteChartModalClose').onclick=function(){document.getElementById('voteChartModal').classList.add('hidden');};
+  document.getElementById('voteChartModal').addEventListener('click',function(e){if(e.target===this)this.classList.add('hidden');});
   fbReady.then(function(){
     if(!votesRef)return;
     votesRef.onSnapshot(function(qs){
-      var sums={1:0,2:0,3:0},counts={1:0,2:0,3:0};
+      var hist={1:{1:0,2:0,3:0,4:0,5:0},2:{1:0,2:0,3:0,4:0,5:0},3:{1:0,2:0,3:0,4:0,5:0}},totals={1:0,2:0,3:0};
       qs.forEach(function(doc){
         var d=doc.data();
-        [1,2,3].forEach(function(n){var v=d['site'+n];if(typeof v==='number'){sums[n]+=v;counts[n]++;}});
+        [1,2,3].forEach(function(n){var v=d['site'+n];if(typeof v==='number'&&v>=1&&v<=5){hist[n][v]++;totals[n]++;}});
       });
       [1,2,3].forEach(function(n){
-        var el=document.querySelector('.voteresult[data-site="'+n+'"]');
-        if(!el)return;
-        el.textContent=counts[n]===0?'全班目前還沒有人投票':('目前平均 '+(sums[n]/counts[n]).toFixed(1)+' ★（'+counts[n]+' 人已投票）');
+        voteData[n]={hist:hist[n],total:totals[n]};
+        var el=document.querySelector('.votechart[data-site="'+n+'"]');
+        if(el)el.innerHTML=buildVoteChartHTML(hist[n],totals[n],false);
       });
     },function(e){console.warn('讀取投票結果失敗',e);});
   });
