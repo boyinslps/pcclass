@@ -281,6 +281,15 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 .rp details .vs div{background:#f6f4ef;border-radius:10px;padding:6px 10px;font-size:15px}
 @media(max-width:620px){.rp details .vs{grid-template-columns:1fr}}
 
+.docq{display:flex;gap:10px;align-items:flex-start;background:#eef4ff;border:1.5px solid #bcd0f5;border-radius:12px;padding:8px 12px;margin:0 0 10px;font-size:16px}
+.docq .ico{color:#2f5aa8;margin-top:4px}
+.docbox{background:#fff;border:2.5px solid #2f5aa8;border-radius:18px;padding:14px 18px;margin:0 0 16px}
+.docbox h3{margin:0 0 8px;font-size:19px;display:flex;gap:8px;align-items:center;color:#22427e}
+pre.skel{white-space:pre-wrap;font-family:inherit;font-size:16px;background:#f6f8fd;border:1.5px dashed #9db6e6;border-radius:12px;padding:10px 14px;margin:8px 0}
+.eg{background:#fff;border:1.5px solid var(--line);border-left:6px solid #2f5aa8;border-radius:12px;padding:10px 14px;margin:0 0 10px;font-size:16px}
+.eg .egt{font-size:13px;font-weight:900;color:#22427e;margin-bottom:2px}
+.eg .blu{color:#2f5aa8;font-weight:700}.eg .rd{color:#d9534f;font-weight:700}
+
 :root{--ac:#2f5aa8;--ac-soft:#e8eefa;--ac-ink:#22427e}
 .sec{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin:0 0 16px}
 .sec>h3{margin:0 0 10px;font-size:20px;font-weight:900;display:flex;gap:10px;align-items:center}
@@ -380,7 +389,7 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
   <div>
     <span class="kicker"><svg class="ico"><use href="#i-file"/></svg>第 5 節・10/22（四）・40 分鐘</span>
     <div class="h1row"><h1>寫說明書、整理歷程紀錄，<br>交出你的作品</h1><button class="hbbook" id="hbBook" type="button" aria-label="打開這一節的手冊頁面"></button></div>
-    <p class="goal">今天做完：<b>作品說明書</b>、<b>AI 協作歷程紀錄</b>，<b>4 份文件</b>全部備齊。</p>
+    <p class="goal">今天做完：<b>作品說明書</b>，<b>4 份文件</b>全部備齊、交件。</p>
     <div class="flow" id="flow"></div>
   </div>
   <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
@@ -397,13 +406,13 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
 <main><div class="wrap">
 
 <!-- ========== 步驟 1 ========== -->
-<section class="step" data-title="作品說明書" data-min="20">
+<section class="step" data-title="作品說明書" data-min="25">
   <div class="step-head"><div class="num">1</div><div>
-    <h2>作品說明書：把前四節的收穫寫進去</h2>
-    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>20 分鐘</span><span class="chip">說明書欄位照原本順序</span></div>
+    <h2>作品說明書：在文件裡寫</h2>
+    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>25 分鐘</span><span class="chip">說明書欄位照原本順序</span></div>
   </div></div>
 
-  <div class="note"><svg class="ico"><use href="#i-bulb"/></svg><p>先在這裡寫，寫完按最下面的「<b>複製全部</b>」，貼到老師給的說明書檔案。每一欄旁邊都有<b>你前幾節寫過的東西</b>，可以參考，但要<b>重新寫成完整的句子</b>。</p></div>
+  <div class="note"><svg class="ico"><use href="#i-bulb"/></svg><p><b>說明書直接寫在你的文件「五、作品說明書」下面。</b>這一頁只告訴你每一欄要寫什麼、評審看什麼；<b>前四節的紀錄都在你的文件裡</b>，邊看邊寫。先按最下面的「複製說明書格式」貼進文件，再一欄一欄填。</p></div>
   <a class="link-card" href="assets/作品說明書_115.odt" download>
     <span class="li"><svg class="ico"><use href="#i-download"/></svg></span><span><b>下載作品說明書（原始檔）</b><span>小學－作品說明書（115.9.19），用 Word 或 LibreOffice 開啟</span></span><svg class="ico go"><use href="#i-download"/></svg></a>
 
@@ -414,7 +423,7 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
       <div class="a"><b><svg class="ico"><use href="#i-bulb"/></svg>問自己</b><ul><li>為什麼選這一刻？</li><li>這件事改變了我什麼？</li></ul></div>
     </div>
     <div class="ref"><div class="rt">第 1 節 主題卡</div><div class="rv"><span data-ref="L1.moment"></span>　／　<span data-ref="L1.detail"></span>　／　<span data-ref="L1.why"></span></div></div>
-    <div class="field"><label for="f_idea" class="sr">創作理念</label><textarea id="f_idea" data-key="idea" data-req rows="4" data-count></textarea></div>
+    <div class="docq"><svg class="ico"><use href="#i-pen"/></svg><div>在文件裡寫：<b>創作理念：想告訴大家什麼？結合了你什麼真實的生活經驗？</b></div></div>
   </div>
 
   <div class="sec">
@@ -428,28 +437,27 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
       <label><input type="checkbox" data-key="chapters" value="第五章"><span><b>伍 AI 幫助我學習</b>寫作精靈給修改建議</span></label>
       <label><input type="checkbox" data-key="chapters" value="第六章"><span><b>陸 AI 時代的好公民</b>三色燈、標記、剛剛好的資料</span></label>
     </div>
-    <div class="field" style="margin-top:10px"><label for="f_chn">對應部分說明</label><textarea id="f_chn" data-key="chapter_note" data-req rows="3"></textarea></div>
+    <div class="docq"><svg class="ico"><use href="#i-pen"/></svg><div>在文件裡寫：<b>對應部分說明：你用到手冊哪一章的什麼方法？</b></div></div>
   </div>
 
   <div class="sec">
     <h3><span class="no">3</span>使用教育型 AI 過程</h3>
     <div class="field"><div class="lbl">教育型 AI 有出現錯誤嗎？</div>
       <div class="opts"><label class="opt"><input type="radio" name="err" data-key="err" value="有" data-req>有</label><label class="opt"><input type="radio" name="err" data-key="err" value="沒有">沒有</label></div>
-      <p class="small muted" style="margin:6px 0 0">勾「沒有」通常代表沒有仔細檢查。回去看看第 3、4 節的紀錄。</p></div>
+      <p class="small muted" style="margin:6px 0 0">勾「沒有」通常代表沒有仔細檢查。回去看看文件裡的歷程紀錄。</p></div>
     <div class="judge"><div class="j"><b><svg class="ico"><use href="#i-eye"/></svg>評審看什麼</b>你<b>怎麼發現</b>的？<b>怎麼追問、怎麼改</b>？改完有沒有更好？</div>
       <div class="a"><b><svg class="ico"><use href="#i-bulb"/></svg>寫法</b>發現了什麼 → 我怎麼問 → 結果變成怎樣</div></div>
-    <div class="ref"><div class="rt">第 3 節 採用的圖和理由</div><div class="rv"><span data-ref="L3.pick"></span>　／　<span data-ref="L3.pick_why"></span></div></div>
-    <div class="ref"><div class="rt">第 4 節 檢查紀錄</div><div class="rv" data-ref="L4.found"></div></div>
-    <div class="field"><label for="f_fix">你是怎麼發現跟修正的？</label><textarea id="f_fix" data-key="fix" data-req rows="4" data-count></textarea></div>
-    <div class="field"><label for="f_where">你在哪些地方使用到 e度？<span class="hint">文思精靈想細節、寫作精靈給建議、繪圖精靈畫圖、一般模式查事實……</span></label><textarea id="f_where" data-key="where" data-req rows="3"></textarea></div>
+    <div class="eg"><div class="egt">範例句型（不是你的題目，換成你自己的事）</div>
+      我一開始提了一個點子：<b>「比賽很緊張」</b>，AI 把它改成<span class="rd">「握筆的手一直發抖」</span>，我覺得它講的<span class="rd">「手發抖」</span>很有畫面，<b>所以我把它加進我的句子裡</b>，再自己改成<span class="blu">「我握筆的手微微發抖」</span>。AI 還建議加「全場鼓掌」，但那天沒有發生，<b>我沒有採用</b>。</div>
+    <div class="docq"><svg class="ico"><use href="#i-pen"/></svg><div>在文件裡寫：<b>你是怎麼發現跟修正的？</b></div></div>
+    <div class="docq"><svg class="ico"><use href="#i-pen"/></svg><div>在文件裡寫：<b>你在哪些地方使用到 e度？（文思精靈想細節、寫作精靈給建議、繪圖精靈畫圖、一般模式查事實……）</b></div></div>
   </div>
 
   <div class="sec">
     <h3><span class="no">4</span>查證揭露</h3>
     <div class="judge"><div class="j"><b><svg class="ico"><use href="#i-eye"/></svg>評審看什麼</b>哪些部分是 AI 協助、哪些是自己創作？有沒有完整標示？</div>
-      <div class="a"><b><svg class="ico"><use href="#i-bulb"/></svg>寫法</b>照第 4 節的黑、紅、藍分三句寫</div></div>
-    <div class="ref"><div class="rt">第 4 節 黑紅藍</div><div class="rv"><b style="color:#1f2a44">黑：</b><span data-ref="L4.black"></span>　<b style="color:#d9534f">紅：</b><span data-ref="L4.red"></span>　<b style="color:#2f5aa8">藍：</b><span data-ref="L4.blue"></span></div></div>
-    <div class="field"><label for="f_disc" class="sr">查證揭露</label><textarea id="f_disc" data-key="disclose" data-req rows="4" data-count></textarea></div>
+      <div class="a"><b><svg class="ico"><use href="#i-bulb"/></svg>寫法</b>分三句寫：我自己想的、AI 幫忙的、我自己改的（和 Word 裡標的黑、紅、藍一樣）</div></div>
+    <div class="docq"><svg class="ico"><use href="#i-pen"/></svg><div>在文件裡寫：<b>查證揭露：哪些是 AI 協助、哪些是你自己創作的？</b></div></div>
   </div>
 
   <div class="sec">
@@ -457,10 +465,15 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
     <div class="field"><div class="lbl">用到哪些工具</div>
       <div class="opts"><label class="opt"><input type="checkbox" data-key="tools" value="因材網 e度" data-req>因材網 e度</label><label class="opt"><input type="checkbox" data-key="tools" value="Canva">Canva</label><label class="opt"><input type="checkbox" data-key="tools" value="PowerPoint">PowerPoint</label><label class="opt"><input type="checkbox" data-key="tools" value="Word">Word</label><label class="opt"><input type="checkbox" data-key="tools" value="其他">其他</label></div></div>
     <div class="ref"><div class="rt">第 2 節 我用過的招式</div><div class="rv" data-ref="L2.moves"></div></div>
-    <div class="field"><label for="f_learn">透過這次實作，你學到了什麼？<span class="hint">寫一個具體的改變，不要只寫「學到很多」</span></label><textarea id="f_learn" data-key="learned" data-req rows="4" data-count></textarea></div>
+    <div class="docq"><svg class="ico"><use href="#i-pen"/></svg><div>在文件裡寫：<b>透過這次實作，你學到了什麼？（寫一個具體的改變，不要只寫「學到很多」）</b></div></div>
   </div>
 
-  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" type="button" id="copyAll"><svg class="ico"><use href="#i-copy"/></svg>複製全部說明書內容</button></div>
+  <div class="docbox">
+    <h3><svg class="ico"><use href="#i-copy"/></svg>複製說明書格式，貼進文件</h3>
+    <p class="small muted" style="margin:0 0 6px">按下複製，貼在文件的「五、作品說明書」下面；上面勾的選項會一起帶進去。</p>
+    <button class="btn" type="button" id="copyAll"><svg class="ico"><use href="#i-copy"/></svg>複製說明書格式</button>
+    <div class="checks" style="margin-top:10px"><label><input type="checkbox" data-key="doc5" value="說明書寫好" data-req>我已經在文件裡寫好說明書的 5 欄。</label></div>
+  </div>
   <div class="frames" style="margin-top:16px">
     <div class="frame"><div class="lab"><span class="k">⑥</span>寫好後，可以請 e度 檢查（不能請它幫你寫）</div>
       <div class="why"><svg class="ico"><use href="#i-bulb"/></svg><span><b>為什麼這樣問：</b>請它只指出問題，內容自己改，說明書才是你寫的。</span></div>
@@ -471,42 +484,10 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
 </section>
 
 <!-- ========== 步驟 2 ========== -->
-<section class="step" data-title="歷程紀錄" data-min="12" hidden>
+<section class="step" data-title="交件檢查" data-min="10" hidden>
   <div class="step-head"><div class="num">2</div><div>
-    <h2>AI 協作歷程紀錄（最多 2 頁）</h2>
-    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>12 分鐘</span><span class="chip">簡章 四-2-4</span></div>
-  </div></div>
-
-  <div class="card">
-    <h3><svg class="ico"><use href="#i-list"/></svg>照著做</h3>
-    <ol class="do">
-      <li><b class="t">拿到你的對話紀錄</b>老師會從 e度 匯出你的對話（Excel）給你。</li>
-      <li><b class="t">挑 2～3 輪最有代表性的</b>挑「<b>有發現問題、有追問、改完更像你家</b>」的那幾輪，不是挑最漂亮的圖。</li>
-      <li><b class="t">每一輪都寫 4 件事</b>照下面的表格。原始提問要跟 Excel 裡的一樣。</li>
-      <li><b class="t">排成 2 頁以內，存成 PDF</b>用 Word、PowerPoint 或 Canva 都可以，可以用黑紅藍標出 AI 說的和你改的。</li>
-    </ol>
-  </div>
-
-  <table class="log" style="margin-bottom:16px">
-    <tr><th>我的原始提問</th><th>AI 的回答摘要，和我發現的問題</th><th>我的追問或修正指令</th><th>最終採用的理由</th></tr>
-    <tr><td class="muted small">我打給 e度 的話</td><td class="muted small">它回答了什麼？哪裡不對、不像我家？</td><td class="muted small">我怎麼再問、要它改哪裡</td><td class="muted small">為什麼最後用這個版本</td></tr>
-  </table>
-
-  <div class="card" style="border:2px solid var(--ac)">
-    <h3><svg class="ico"><use href="#i-layers"/></svg>先放好格式，再從 Excel 填進去</h3>
-    <p class="small muted">按下按鈕，會放進「寫作一輪、繪圖一輪」的格式。打開老師給的 Excel，把你挑的那幾輪對話複製進來，再寫你發現的問題和採用理由。</p>
-    <button class="btn" type="button" id="buildLog"><svg class="ico"><use href="#i-layers"/></svg>放入紀錄格式</button>
-    <div class="field" style="margin-top:12px"><label for="f_log">我的歷程紀錄草稿</label><textarea id="f_log" data-key="log" data-req rows="14"></textarea></div>
-    <button class="copy" type="button" data-copy="f_log" data-done="已複製歷程紀錄"><svg class="ico"><use href="#i-copy"/></svg>複製草稿</button>
-  </div>
-  <div class="stepnav"></div>
-</section>
-
-<!-- ========== 步驟 3 ========== -->
-<section class="step" data-title="交件檢查" data-min="6" hidden>
-  <div class="step-head"><div class="num">3</div><div>
     <h2>交件檢查</h2>
-    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>6 分鐘</span><span class="chip">簡章 一、四</span></div>
+    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>10 分鐘</span><span class="chip">簡章 一、四</span></div>
   </div></div>
 
   <div class="card">
@@ -520,8 +501,8 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
     <h3><svg class="ico"><use href="#i-check"/></svg>4 份文件都備齊了嗎？</h3>
     <div class="checks">
       <label><input type="checkbox" data-key="files" value="卡片PDF" data-req="all">賀卡（PDF）</label>
-      <label><input type="checkbox" data-key="files" value="說明書">作品說明書（已經填好、存檔）</label>
-      <label><input type="checkbox" data-key="files" value="歷程紀錄">AI 協作歷程紀錄（PDF，最多 2 頁）</label>
+      <label><input type="checkbox" data-key="files" value="說明書">作品說明書（從文件整理好，照原本表格填好、存檔）</label>
+      <label><input type="checkbox" data-key="files" value="歷程紀錄">AI 協作歷程紀錄（從文件下載成 PDF，最多 2 頁）</label>
       <label><input type="checkbox" data-key="files" value="同意書">作品授權同意書（家長已簽名）</label>
       <label><input type="checkbox" data-key="files" value="檔名">每個檔案都照規定取名</label>
       <label><input type="checkbox" data-key="files" value="無個資">卡片和歷程紀錄裡，沒有出現姓名、學校、地址</label>
@@ -531,8 +512,8 @@ table.log th{background:var(--ac-soft);color:var(--ac-ink)}
   <div class="stepnav"></div>
 </section>
 
-<!-- ========== 步驟 4 ========== -->
-<section class="step" data-title="完成！" data-min="2" hidden>
+<!-- ========== 步驟 3 ========== -->
+<section class="step" data-title="完成！" data-min="5" hidden>
   <div class="result cele">
     <svg class="big" viewBox="0 0 120 120" aria-hidden="true"><use href="#bot"/></svg>
     <h3 style="justify-content:center;font-size:26px">恭喜完成你的作品！</h3>
@@ -554,9 +535,8 @@ window.PAGE={code:'C05',lesson:'L5',hbTitle:"手冊六章（寫說明書「手�
   var grp=g.grade?(g.grade<=4?'中年級組':'高年級組'):'〔組別〕';
   var f=document.getElementById('fname');if(f)f.textContent='【'+grp+'-〔你的姓名〕-'+t+'】';
   var box=document.getElementById('allDone');if(!box)return;
-  function has(L,keys){var d=all[L]||{};return keys.every(function(k){var v=d[k];return Array.isArray(v)?v.length:!!(v&&String(v).trim());});}
-  var rows=[['第 1 節 主題卡',has('L1',['who','moment','title'])],['第 2 節 感謝文字第二版',has('L2',['draft2'])],['第 3 節 採用的圖和理由',has('L3',['pick_why'])],['第 4 節 檢查與黑紅藍',has('L4',['found','black','red'])],['第 5 節 說明書與歷程紀錄',has('L5',['idea','fix','disclose','log'])]];
-  box.innerHTML=rows.map(function(r){return '<label style="cursor:default"><input type="checkbox" disabled '+(r[1]?'checked':'')+'>'+r[0]+(r[1]?'':'　<span class="muted small">（還沒完成）</span>')+'</label>';}).join('');
+  var names=['第 1 節 認識 e度與主題','第 2 節 文字創作與提問','第 3 節 AI 繪圖','第 4 節 檢查、歷程紀錄與排版','第 5 節 說明書與交件'];
+  box.innerHTML=names.map(function(n,k){var ok=!!(all['L'+(k+1)]&&all['L'+(k+1)]._sub);return '<label style="cursor:default"><input type="checkbox" disabled '+(ok?'checked':'')+'>'+n+(ok?'　已繳交':'　<span class="muted small">（還沒繳交）</span>')+'</label>';}).join('');
 }};
 </script>
 <script>
@@ -961,29 +941,10 @@ var COLL = 'cardWork';
 </script>
 <script>
 (function(){
-  function v(id){var e=document.getElementById(id);return e?e.value.trim():'';}
   function checked(k){return $$('[data-key="'+k+'"]').filter(function(x){return x.checked;}).map(function(x){return x.value;});}
   document.getElementById('copyAll').onclick=function(){
-    var t='一、創作理念\n'+v('f_idea')+'\n\n二、手冊對應章節\n勾選：'+(checked('chapters').join('、')||'（未勾）')+'\n對應部分說明：'+v('f_chn')+
-      '\n\n三、使用教育型 AI 過程\n教育型 AI 有出現錯誤嗎？'+(checked('err')[0]||'（未勾）')+'\n你是怎麼發現跟修正的？'+v('f_fix')+'\n你在哪些地方使用到 e度？'+v('f_where')+
-      '\n\n四、查證揭露\n'+v('f_disc')+'\n\n五、學習反思\n用到的工具：'+(checked('tools').join('、')||'（未勾）')+'\n透過這次實作，你學到了什麼？'+v('f_learn');
-    copyText(t,this,'已複製全部說明書內容');
-  };
-  document.getElementById('buildLog').onclick=function(){
-    var G=cardGet,ta=document.getElementById('f_log');
-    if(ta.value.trim()&&!confirm('格子裡已經有內容，要用前幾節的紀錄蓋掉嗎？'))return;
-    var a='【第 1 輪：感謝文字（寫作精靈）】
-我的原始提問：〔從 Excel 複製〕
-AI 的回答摘要與我發現的問題：〔AI 說了什麼？哪裡不對、不像我家？〕
-我的追問或修正：〔從 Excel 複製〕
-最終採用的理由：〔為什麼最後這樣寫〕';
-    var b='【第 2 輪：卡片的圖（繪圖精靈）】
-我的原始提問：〔從 Excel 複製〕
-AI 的回答摘要與我發現的問題：〔圖哪裡不對、不像我家？〕
-我的追問或修正：〔從 Excel 複製〕
-最終採用的理由：'+(G('L3.pick_why')||'〔為什麼最後用這張圖〕');
-    var c='';
-    ta.value=a+'\n\n'+b+c;ta.dispatchEvent(new Event('input',{bubbles:true}));toast('已放入格式，請從 Excel 填進去');
+    var t='五、作品說明書（第 5 節）\n\n1. 創作理念\n（想告訴大家什麼？結合了我什麼真實的生活經驗？）\n\n2. 手冊對應章節\n勾選：'+(checked('chapters').join('、')||'（還沒勾）')+'\n對應部分說明：\n\n3. 使用教育型 AI 過程\n教育型 AI 有出現錯誤嗎？'+(checked('err')[0]||'（還沒勾）')+'\n你是怎麼發現跟修正的？\n你在哪些地方使用到 e度？\n\n4. 查證揭露\n我自己想的：\nAI 幫忙的：\n我自己改的：\n\n5. 學習反思\n用到的工具：'+(checked('tools').join('、')||'（還沒勾）')+'\n透過這次實作，我學到了：\n';
+    copyText(t,this,'已複製！貼到文件的「五、作品說明書」下面');
   };
 })();
 </script>
