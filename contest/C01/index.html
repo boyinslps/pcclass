@@ -672,13 +672,13 @@ svg.cv{width:100%;height:auto;border-radius:12px;display:block;font-family:inher
 <!-- ========== 步驟 4 ========== -->
 <section class="step" data-title="我的主題卡" data-min="13" hidden>
   <div class="step-head"><div class="num">4</div><div>
-    <h2>先想想：找到只有你家才有的那一刻</h2>
+    <h2>先想想：你最想留下哪一個回憶？</h2>
     <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>13 分鐘</span><span class="chip">手冊 參 p.22、p.33</span></div>
   </div></div>
 
   <a class="link-card" href="assets/第1節回家學習單_先想想.docx" download>
     <span class="li"><svg class="ico"><use href="#i-download"/></svg></span>
-    <span><b>下載 Word 學習單（列印回家寫）</b><span>先想想、記下來：主題卡 7 題、創作理念的小欄位、回家任務。寫好帶回來，照著打進下面。</span></span>
+    <span><b>下載 Word 學習單（A4 一頁，黑白列印回家寫）</b><span>7 個問題，和下面的主題卡一樣。寫好帶回來，照著打進下面。</span></span>
     <svg class="ico go"><use href="#i-download"/></svg></a>
 
   <div class="hb">
@@ -689,27 +689,33 @@ svg.cv{width:100%;height:auto;border-radius:12px;display:block;font-family:inher
     </div>
   </div>
 
+  <div class="card" style="background:#fffdf0;border:2px solid var(--gold)">
+    <h3><svg class="ico"><use href="#i-heart"/></svg>今年，你最想把哪一個家的回憶留下來？</h3>
+    <p>一頓全家一起吃的晚餐、一趟難忘的旅行、最好笑的一件事、最感動的一天、家人說過的一句話，或是一個你很想謝謝的人……</p>
+    <p><b>生活裡的大小事，都可以成為最棒的創意來源！</b></p>
+    <p>找 e 度當你的學習夥伴，從一個想法開始，試著提問、追問、查證、修改，一步一步把屬於你的生活故事變成一張獨一無二的年度賀年感恩卡。</p>
+    <p class="small muted" style="margin-top:6px">年度記憶不一定是被誰幫助了，也可以是<b>度過一段快樂的時光</b>：旅行、和家人團聚、一起笑的那一天。重點是你的<b>回憶、感想，和想說的謝謝</b>。</p>
+  </div>
+
   <div class="card">
-    <h3><svg class="ico"><use href="#i-bulb"/></svg>想一想：今年（115 年）家裡發生過什麼？</h3>
-    <div class="months"><span>1–2 月 寒假、過年</span><span>4 月 兒童節、清明</span><span>5 月 母親節</span><span>7–8 月 暑假、父親節</span><span>9 月 中秋節</span><span>平常的某一天</span></div>
-    <p style="margin-top:10px">不用是大事。<b>越小、越具體越好</b>：一句話、一個動作、一樣東西。</p>
-    <div class="grid2" style="margin-top:8px">
-      <div class="note safe" style="margin:0"><svg class="ico"><use href="#i-x"/></svg><p><b>太空泛</b><br>謝謝媽媽一直照顧我。</p></div>
-      <div class="note good" style="margin:0"><svg class="ico"><use href="#i-check"/></svg><p><b>有畫面</b><br>颱風停電那晚，媽媽用手電筒照著，幫我綁頭髮。</p></div>
+    <h3><svg class="ico"><use href="#i-search"/></svg>什麼叫「只有你家寫得出來」？</h3>
+    <div class="grid2">
+      <div class="note safe" style="margin:0"><svg class="ico"><use href="#i-x"/></svg><p><b>太空泛</b><br>我們全家出去玩，很開心。<br>謝謝媽媽一直照顧我。</p></div>
+      <div class="note good" style="margin:0"><svg class="ico"><use href="#i-check"/></svg><p><b>有畫面</b><br>夜市裡，爸爸為了搶最後一碗豆花被擠得滿頭大汗，全家笑成一團。<br>颱風停電那晚，媽媽用手電筒照著，幫我綁頭髮。</p></div>
     </div>
-    <p class="tiny" style="margin-top:6px">上面只是說明「具體」是什麼意思，不要照抄，要寫你自己家的事。</p>
+    <p class="tiny" style="margin-top:6px">只是說明「具體」是什麼意思，不要照抄，要寫你自己家的事。</p>
   </div>
 
   <div class="card" style="border:2px solid var(--ac)">
     <h3><svg class="ico"><use href="#i-pen"/></svg>我的主題卡</h3>
-    <p class="small muted">寫在這裡就好，<b>不要整段貼給 e度</b>。之後跟 e度 說的時候，只說稱謂和發生的事。</p>
-    <div class="field"><label for="f_who">1. 我想感謝誰？<span class="hint">用稱謂，例如阿公、姊姊</span></label><input type="text" id="f_who" data-key="who" data-req maxlength="30"></div>
-    <div class="field"><label for="f_moment">2. 是哪一刻？<span class="hint">什麼時候、在哪裡、發生了什麼事</span></label><textarea id="f_moment" data-key="moment" data-req rows="3" data-count></textarea></div>
-    <div class="field"><label for="f_detail">3. 那一刻，他說了哪一句話？或有一樣什麼東西？</label><input type="text" id="f_detail" data-key="detail" data-req maxlength="80"></div>
-    <div class="field"><label for="f_why">4. 為什麼想謝謝他？<span class="hint">這件事讓我覺得……、讓我學到……</span></label><textarea id="f_why" data-key="why" rows="3" data-count></textarea></div>
-    <div class="field"><div class="lbl">5. 我想寫成</div>
-      <div class="opts"><label class="opt"><input type="radio" name="form" data-key="form" value="感謝信">感謝信</label><label class="opt"><input type="radio" name="form" data-key="form" value="童詩">童詩</label><label class="opt"><input type="radio" name="form" data-key="form" value="其他">其他</label></div></div>
-    <div class="field"><label for="f_title">6. 作品名稱（先暫定）<span class="hint">會用在檔名，之後可以改</span></label><input type="text" id="f_title" data-key="title" data-req maxlength="20"></div>
+    <p class="small muted">和紙本學習單一樣的 6 題。寫在這裡就好，<b>不要整段貼給 e度</b>，跟 e度 說的時候只說稱謂和發生的事。</p>
+    <div class="field"><label for="f_moment">1. 這是哪一個回憶？什麼時候、在哪裡、和誰一起？</label><textarea id="f_moment" data-key="moment" data-req rows="3" data-count></textarea></div>
+    <div class="field"><label for="f_detail">2. 那一刻發生了什麼事？有沒有一句話、一個畫面或一樣東西，讓你一直記得？</label><textarea id="f_detail" data-key="detail" data-req rows="3" data-count></textarea></div>
+    <div class="field"><label for="f_why">3. 我的感想：那時候我覺得……　現在想起來……</label><textarea id="f_why" data-key="why" rows="3" data-count></textarea></div>
+    <div class="field"><label for="f_who">4. 我想感謝誰？我想對他說什麼？<span class="hint">用稱謂就好，例如阿嬤、哥哥</span></label><textarea id="f_who" data-key="who" data-req rows="2" data-count></textarea></div>
+    <div class="field"><label for="f_reason">5. 為什麼我想寫這個回憶？<span class="hint">這就是作品的「創作理念」</span></label><textarea id="f_reason" data-key="reason" rows="3" data-count></textarea></div>
+    <div class="field"><label for="f_form">6. 我想寫成</label><input type="text" id="f_form" data-key="form" maxlength="30"></div>
+    <div class="field"><label for="f_title">7. 作品名稱（先暫定）<span class="hint">會用在檔名，之後可以改</span></label><input type="text" id="f_title" data-key="title" data-req maxlength="20"></div>
   </div>
 
   <div class="bot-note"><svg class="bot" viewBox="0 0 120 120"><use href="#bot"/></svg>
@@ -727,10 +733,11 @@ svg.cv{width:100%;height:auto;border-radius:12px;display:block;font-family:inher
   <div class="result">
     <h3><svg class="ico" style="color:var(--ac)"><use href="#i-star"/></svg>我的主題卡</h3>
     <dl>
-      <dt>感謝誰</dt><dd data-ref="L1.who"></dd>
-      <dt>那一刻</dt><dd data-ref="L1.moment"></dd>
-      <dt>一句話／一樣東西</dt><dd data-ref="L1.detail"></dd>
-      <dt>為什麼</dt><dd data-ref="L1.why"></dd>
+      <dt>回憶</dt><dd data-ref="L1.moment"></dd>
+      <dt>那一刻</dt><dd data-ref="L1.detail"></dd>
+      <dt>我的感想</dt><dd data-ref="L1.why"></dd>
+      <dt>想感謝</dt><dd data-ref="L1.who"></dd>
+      <dt>創作理念</dt><dd data-ref="L1.reason"></dd>
       <dt>寫成</dt><dd data-ref="L1.form"></dd>
       <dt>作品名稱</dt><dd data-ref="L1.title"></dd>
     </dl>
@@ -762,9 +769,9 @@ window.PAGE={code:'C01',lesson:'L1',hbTitle:"第 1 節要讀的手冊頁面",hb:
   var d=all.L1||{},list=document.getElementById('doneList'),g=(window.cardIdentity&&cardIdentity())||null;
   var dn=document.getElementById('docName');if(dn)dn.textContent='賀卡作品紀錄＿'+(g?g.grade+'年'+g.className+'班'+g.studentId+'號':'（先填最上面的年級、班級、座號）');
   var t=document.getElementById('themeTxt');
-  if(t)t.textContent='一、主題卡（第 1 節）\n我想感謝：'+(d.who||'')+'\n那一刻：'+(d.moment||'')+'\n那一句話／那樣東西：'+(d.detail||'')+'\n為什麼想謝謝他：'+(d.why||'')+'\n我想寫成：'+(d.form||'')+'\n作品名稱（暫定）：'+(d.title||'');
+  if(t)t.textContent='一、主題卡（第 1 節）\n這是哪一個回憶：'+(d.moment||'')+'\n那一刻發生了什麼事：'+(d.detail||'')+'\n我的感想：'+(d.why||'')+'\n我想感謝誰、想說什麼：'+(d.who||'')+'\n為什麼我想寫這個回憶（創作理念）：'+(d.reason||'')+'\n我想寫成：'+(d.form||'')+'\n作品名稱（暫定）：'+(d.title||'');
   if(!list)return;
-  var items=[['勾好我的聲明（6 項）',(d.promise||[]).length>=6],['開好作品紀錄文件',(d.doc1||[]).length>0],['主題卡：感謝誰、那一刻、一句話或東西',!!(d.who&&d.moment&&d.detail)],['作品名稱',!!d.title],['主題卡貼進文件',(d.doc1b||[]).length>0]];
+  var items=[['勾好我的聲明（6 項）',(d.promise||[]).length>=6],['開好作品紀錄文件',(d.doc1||[]).length>0],['主題卡：回憶、那一刻、想感謝誰',!!(d.who&&d.moment&&d.detail)],['作品名稱',!!d.title],['主題卡貼進文件',(d.doc1b||[]).length>0]];
   list.innerHTML=items.map(function(x){return '<label style="cursor:default"><input type="checkbox" disabled '+(x[1]?'checked':'')+'>'+x[0]+(x[1]?'':'　<span class="muted small">（還沒完成）</span>')+'</label>';}).join('');
 }};
 </script>
