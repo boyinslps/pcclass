@@ -281,6 +281,15 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 .rp details .vs div{background:#f6f4ef;border-radius:10px;padding:6px 10px;font-size:15px}
 @media(max-width:620px){.rp details .vs{grid-template-columns:1fr}}
 
+.docq{display:flex;gap:10px;align-items:flex-start;background:#eef4ff;border:1.5px solid #bcd0f5;border-radius:12px;padding:8px 12px;margin:0 0 10px;font-size:16px}
+.docq .ico{color:#2f5aa8;margin-top:4px}
+.docbox{background:#fff;border:2.5px solid #2f5aa8;border-radius:18px;padding:14px 18px;margin:0 0 16px}
+.docbox h3{margin:0 0 8px;font-size:19px;display:flex;gap:8px;align-items:center;color:#22427e}
+pre.skel{white-space:pre-wrap;font-family:inherit;font-size:16px;background:#f6f8fd;border:1.5px dashed #9db6e6;border-radius:12px;padding:10px 14px;margin:8px 0}
+.eg{background:#fff;border:1.5px solid var(--line);border-left:6px solid #2f5aa8;border-radius:12px;padding:10px 14px;margin:0 0 10px;font-size:16px}
+.eg .egt{font-size:13px;font-weight:900;color:#22427e;margin-bottom:2px}
+.eg .blu{color:#2f5aa8;font-weight:700}.eg .rd{color:#d9534f;font-weight:700}
+
 :root{--ac:#d4952a;--ac-soft:#fdf1d8;--ac-ink:#8a5a0c}
 .hub-hero{background:radial-gradient(circle at 85% 20%,#fff2c4 0,transparent 45%),linear-gradient(180deg,var(--paper),var(--cream));border-bottom:1px solid var(--line)}
 .hub-hero .wrap{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:center;padding-top:34px;padding-bottom:30px}
@@ -403,7 +412,7 @@ table.adm .y{color:var(--green);font-weight:900}.adm .n{color:#c0c4cf}
     <p class="goal" style="font-size:17px">五節課，每節做完一樣東西。照著每一節的步驟做，10/22 就能交出完整的作品。</p>
     <div class="facts">
       <span><svg class="ico"><use href="#i-users"/></svg>中年級組・高年級組</span>
-      <span><svg class="ico"><use href="#i-clock"/></svg>週二、四午休・電腦教室一</span>
+      <span><svg class="ico"><use href="#i-clock"/></svg>週二、四午休・電腦教室2</span>
       <span><svg class="ico"><use href="#i-flag"/></svg>比賽 10/23（五）截止</span>
       <span><svg class="ico"><use href="#i-shield"/></svg>只能用因材網 e度＋Canva／PowerPoint／Word</span>
     </div>
@@ -436,10 +445,10 @@ table.adm .y{color:var(--green);font-weight:900}.adm .n{color:#c0c4cf}
       <h3>AI 繪圖</h3><p>畫圖五要素，和繪圖精靈先聊再畫、一次改一處。</p>
       <div class="out">成果：<b>卡片的圖＋修正紀錄</b></div><span class="st" data-l="L3">未開始</span></a>
     <a class="lesson" data-go="C04" href="#" style="--c:#3f9b52"><div class="top"><span class="n">4</span><span class="date">10/20（二）</span></div>
-      <h3>檢查、標記與排版</h3><p>當 AI 偵探找錯，黑紅藍標記，用 Canva 排版。</p>
-      <div class="out">成果：<b>卡片 PDF</b></div><span class="st" data-l="L4">未開始</span></a>
+      <h3>檢查、標記與排版</h3><p>當 AI 偵探找錯，寫 AI 協作歷程紀錄，用 Canva 排版。</p>
+      <div class="out">成果：<b>歷程紀錄＋卡片 PDF</b></div><span class="st" data-l="L4">未開始</span></a>
     <a class="lesson" data-go="C05" href="#" style="--c:#2f5aa8"><div class="top"><span class="n">5</span><span class="date">10/22（四）</span></div>
-      <h3>說明書與交件</h3><p>寫作品說明書、整理 AI 協作歷程紀錄，交出 4 份文件。</p>
+      <h3>說明書與交件</h3><p>寫作品說明書，檢查並交出 4 份文件。</p>
       <div class="out">成果：<b>4 份文件備齊</b></div><span class="st" data-l="L5">未開始</span></a>
   </div>
 
@@ -452,11 +461,14 @@ table.adm .y{color:var(--green);font-weight:900}.adm .n{color:#c0c4cf}
   </div>
   <p class="tiny" style="margin-top:6px">口訣出自《中小學 AI 之學習應用手冊—國小生聰明用 AI》序章 p.VI、參 p.33；配分出自競賽簡章第五點。</p>
 
+  <div class="sect"><svg class="ico"><use href="#i-pen"/></svg>你的「作品紀錄」Google 文件</div>
+  <div class="note" id="docCard"><svg class="ico"><use href="#i-file"/></svg><p><b>五節課做的東西，都記在同一份 Google 文件裡</b>（第 1 節教你開）。最後交件會用到，每一節都要好好寫。以後到電腦教室2，自己開電腦、用 OpenID 登入，打開<b>因材網（e度）</b>和<b>你的文件</b>，就可以開始。</p></div>
+
   <div class="sect"><svg class="ico"><use href="#i-file"/></svg>最後要交的 4 份</div>
   <div class="grid4">
-    <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-image"/></svg>賀卡</h3><p class="small">存成 PDF（第 4 節）</p></div>
+    <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-image"/></svg>賀卡</h3><p class="small">存成 PDF（第 4 節排版）</p></div>
     <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-pen"/></svg>作品說明書</h3><p class="small">第 5 節寫</p></div>
-    <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-chat"/></svg>AI 協作歷程紀錄</h3><p class="small">最多 2 頁 PDF（第 5 節）</p></div>
+    <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-chat"/></svg>AI 協作歷程紀錄</h3><p class="small">最多 2 頁 PDF（第 4 節寫）</p></div>
     <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-users"/></svg>授權同意書</h3><p class="small">請家長簽名，10/22 前交</p></div>
   </div>
 
