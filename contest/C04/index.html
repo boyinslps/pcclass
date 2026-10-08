@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第 4 節 檢查、標記與排版｜AI 繪家賀卡創作營</title>
+<title>第 4 節 檢查、歷程紀錄與完成卡片｜AI 繪家賀卡創作營</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -290,6 +290,28 @@ pre.skel{white-space:pre-wrap;font-family:inherit;font-size:16px;background:#f6f
 .eg .egt{font-size:13px;font-weight:900;color:#22427e;margin-bottom:2px}
 .eg .blu{color:#2f5aa8;font-weight:700}.eg .rd{color:#d9534f;font-weight:700}
 
+/* Canva 步驟：左文右圖 */
+.cs{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;margin:0 0 14px}
+.cs:nth-of-type(even){grid-template-columns:1.2fr 1fr}
+.cs:nth-of-type(even) .ct{order:2}
+@media(max-width:760px){.cs,.cs:nth-of-type(even){grid-template-columns:1fr}.cs:nth-of-type(even) .ct{order:0}}
+.cs h3{margin:0 0 6px;font-size:20px;font-weight:900;display:flex;gap:10px;align-items:center}
+.cs h3 .no{width:32px;height:32px;border-radius:10px;background:var(--ac);color:#fff;display:grid;place-items:center;font-size:17px;flex:none}
+.cs p{margin:0 0 6px}
+.cs ul{margin:4px 0 6px;padding-left:20px}
+svg.cv{width:100%;height:auto;border-radius:12px;display:block;font-family:inherit;cursor:zoom-in}
+.cs .vwrap{margin-top:10px}
+.vwrap{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#111}
+.vwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lib{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.lib{grid-template-columns:1fr}}
+.lib a{display:block;text-decoration:none;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px}
+.lib a:hover{border-color:var(--ac)}
+.lib b{display:flex;gap:6px;align-items:center;font-size:17px}
+.lib span{display:block;font-size:14px;color:var(--sub);margin-top:2px}
+.lib .tag{display:inline-block;font-size:12.5px;font-weight:900;border-radius:999px;padding:0 9px;margin:4px 4px 0 0}
+.lib .ok{background:var(--green-soft);color:var(--green)}.lib .wa{background:#fff1d6;color:#a86b00}
+
 :root{--ac:#3f9b52;--ac-soft:#e6f5ea;--ac-ink:#2a6e39}
 .err5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .err5 label{display:flex;flex-direction:column;gap:4px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;cursor:pointer}
@@ -388,7 +410,7 @@ pre.skel{white-space:pre-wrap;font-family:inherit;font-size:16px;background:#f6f
 <section class="hero"><div class="wrap">
   <div>
     <span class="kicker"><svg class="ico"><use href="#i-search"/></svg>第 4 節・10/20（二）・40 分鐘</span>
-    <div class="h1row"><h1>檢查看、要標記，<br>排版成一張卡片</h1><button class="hbbook" id="hbBook" type="button" aria-label="打開這一節的手冊頁面"></button></div>
+    <div class="h1row"><h1>檢查看、要標記，<br>寫歷程紀錄、完成卡片</h1><button class="hbbook" id="hbBook" type="button" aria-label="打開這一節的手冊頁面"></button></div>
     <p class="goal">今天做完：<b>AI 協作歷程紀錄</b>（寫在文件裡）和<b>卡片 PDF</b>。</p>
     <div class="flow" id="flow"></div>
   </div>
@@ -541,35 +563,21 @@ AI 的回答摘要，和我發現的問題：
   <div class="stepnav"></div>
 </section>
 
-<!-- ========== 步驟 4 ========== -->
-<section class="step" data-title="Canva 排版" data-min="12" hidden>
+<!-- ========== 步驟 4：完成卡片 ========== -->
+<section class="step" data-title="完成卡片" data-min="10" hidden>
   <div class="step-head"><div class="num">4</div><div>
-    <h2>用 Canva 排版，存成 PDF</h2>
-    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>12 分鐘</span><span class="chip">簡章 四、八</span></div>
+    <h2>把卡片收尾、檢查完成</h2>
+    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>10 分鐘</span><span class="chip">簡章 四、八</span></div>
   </div></div>
 
-  <div class="card">
-    <h3><svg class="ico"><use href="#i-list"/></svg>照著做</h3>
-    <ol class="do">
-      <li><b class="t">打開 Canva，建立新設計</b>用老師說的帳號登入。搜尋「<b>明信片</b>」或「<b>卡片</b>」，選一個空白的開始。</li>
-      <li><b class="t">放上你的 e度 圖</b>左邊「<b>上傳</b>」→「上傳檔案」→ 選你存的「賀卡圖」，拖到卡片上。</li>
-      <li><b class="t">自己打字</b>按左邊「<b>文字</b>」新增文字框，把你的感謝文字貼進去。
-        <p class="small muted" style="margin:6px 0 0">到你的文件「二、感謝文字」，複製第 2 版，貼進 Canva。第 3 節已經開始排的，直接繼續。</p></li>
-      <li><b class="t">用 Canva 的素材裝飾</b>只用 Canva 裡的圖案和背景。<b>不要用網路上抓的圖，也不要用卡通人物</b>（著作權）。</li>
-      <li><b class="t">加上 AI 標示</b>在卡片角落加一行小字，例如「圖片由因材網 e度 協助生成」。手冊說要記得註明是<q>由 AI 協作生成</q>（參 p.28）。</li>
-      <li><b class="t">署名用稱謂</b>例如「愛你的孫子 敬上」。簡章說作品上<b>不要出現姓名等個人資訊</b>；能不能寫真名，以老師通知為準。</li>
-      <li><b class="t">下載成 PDF</b>右上角「<b>分享</b>」→「<b>下載</b>」→ 檔案類型選「<b>PDF 標準</b>」→ 按「下載」。</li>
-    </ol>
-    <a class="link-card" style="margin-top:12px" href="https://steam.oxxostudio.tw/category/canva/design/download.html" target="_blank" rel="noopener">
-      <span class="li"><svg class="ico"><use href="#i-download"/></svg></span><span><b>看圖解：Canva 怎麼下載檔案</b><span>STEAM 教育學習網的 Canva 教學（有截圖）</span></span><svg class="ico go"><use href="#i-ext"/></svg></a>
-  </div>
+  <div class="note"><svg class="ico"><use href="#i-brush"/></svg><p><b>卡片第 3 節就開始排了。</b>這一步回到 Canva，把還沒排好的排完，再用下面的清單檢查。不會用的地方，看<a data-go="C03" href="#" style="color:#2f5aa8;font-weight:900"> 第 3 節的 Canva 步驟 </a>。</p></div>
 
   <div class="card" style="border:2px solid var(--ac)">
     <h3><svg class="ico"><use href="#i-check"/></svg>交卡片前，全部打勾</h3>
     <div class="checks">
       <label><input type="checkbox" data-key="canva" value="e度圖" data-req="all">卡片上有我和 e度 一起畫的圖</label>
       <label><input type="checkbox" data-key="canva" value="自己打字">感謝文字是我自己在 Canva 打（貼上）的</label>
-      <label><input type="checkbox" data-key="canva" value="素材">裝飾都是 Canva 內建素材，沒有網路抓的圖、卡通人物</label>
+      <label><input type="checkbox" data-key="canva" value="素材">裝飾都是 Canva 內建素材或免費素材庫的圖，沒有網路亂抓的圖、卡通人物</label>
       <label><input type="checkbox" data-key="canva" value="標示">有寫「由 AI 協作生成」之類的標示</label>
       <label><input type="checkbox" data-key="canva" value="沒有個資">卡片上沒有姓名、學校、地址等個人資訊</label>
       <label><input type="checkbox" data-key="canva" value="PDF">已經下載成 PDF，打開看過是正常的</label>
@@ -601,7 +609,7 @@ AI 的回答摘要，和我發現的問題：
     <dl>
       <dt>檢查了</dt><dd data-ref="L4.checks"></dd>
       <dt>文件</dt><dd>「四、AI 協作歷程紀錄」寫好 2～3 輪</dd>
-      <dt>卡片</dt><dd>用 Canva 排好，存成 PDF</dd>
+      <dt>卡片</dt><dd>檢查完成，PDF 存好</dd>
     </dl>
     <svg class="bot" viewBox="0 0 120 120"><use href="#bot"/></svg>
   </div>
