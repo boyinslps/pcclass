@@ -678,7 +678,7 @@ svg.cv{width:100%;height:auto;border-radius:12px;display:block;font-family:inher
 
   <a class="link-card" href="assets/第1節回家學習單_先想想.docx" download>
     <span class="li"><svg class="ico"><use href="#i-download"/></svg></span>
-    <span><b>下載 Word 學習單（A4 一頁，黑白列印回家寫）</b><span>7 個問題，和下面的主題卡一樣。寫好帶回來，照著打進下面。</span></span>
+    <span><b>下載 Word 學習單（A4 一頁，黑白列印回家寫）</b><span>6 個問題，和下面的主題卡一樣。寫好帶回來，照著打進下面。</span></span>
     <svg class="ico go"><use href="#i-download"/></svg></a>
 
   <div class="hb">
@@ -714,8 +714,7 @@ svg.cv{width:100%;height:auto;border-radius:12px;display:block;font-family:inher
     <div class="field"><label for="f_why">3. 我的感想：那時候我覺得……　現在想起來……</label><textarea id="f_why" data-key="why" rows="3" data-count></textarea></div>
     <div class="field"><label for="f_who">4. 我想感謝誰？我想對他說什麼？<span class="hint">用稱謂就好，例如阿嬤、哥哥</span></label><textarea id="f_who" data-key="who" data-req rows="2" data-count></textarea></div>
     <div class="field"><label for="f_reason">5. 為什麼我想寫這個回憶？<span class="hint">這就是作品的「創作理念」</span></label><textarea id="f_reason" data-key="reason" rows="3" data-count></textarea></div>
-    <div class="field"><label for="f_form">6. 我想寫成</label><input type="text" id="f_form" data-key="form" maxlength="30"></div>
-    <div class="field"><label for="f_title">7. 作品名稱（先暫定）<span class="hint">會用在檔名，之後可以改</span></label><input type="text" id="f_title" data-key="title" data-req maxlength="20"></div>
+    <div class="field"><label for="f_title">6. 作品名稱（先暫定）<span class="hint">會用在檔名，之後可以改</span></label><input type="text" id="f_title" data-key="title" data-req maxlength="20"></div>
   </div>
 
   <div class="bot-note"><svg class="bot" viewBox="0 0 120 120"><use href="#bot"/></svg>
@@ -738,7 +737,6 @@ svg.cv{width:100%;height:auto;border-radius:12px;display:block;font-family:inher
       <dt>我的感想</dt><dd data-ref="L1.why"></dd>
       <dt>想感謝</dt><dd data-ref="L1.who"></dd>
       <dt>創作理念</dt><dd data-ref="L1.reason"></dd>
-      <dt>寫成</dt><dd data-ref="L1.form"></dd>
       <dt>作品名稱</dt><dd data-ref="L1.title"></dd>
     </dl>
     <svg class="bot" viewBox="0 0 120 120"><use href="#bot"/></svg>
@@ -769,7 +767,7 @@ window.PAGE={code:'C01',lesson:'L1',hbTitle:"第 1 節要讀的手冊頁面",hb:
   var d=all.L1||{},list=document.getElementById('doneList'),g=(window.cardIdentity&&cardIdentity())||null;
   var dn=document.getElementById('docName');if(dn)dn.textContent='賀卡作品紀錄＿'+(g?g.grade+'年'+g.className+'班'+g.studentId+'號':'（先填最上面的年級、班級、座號）');
   var t=document.getElementById('themeTxt');
-  if(t)t.textContent='一、主題卡（第 1 節）\n這是哪一個回憶：'+(d.moment||'')+'\n那一刻發生了什麼事：'+(d.detail||'')+'\n我的感想：'+(d.why||'')+'\n我想感謝誰、想說什麼：'+(d.who||'')+'\n為什麼我想寫這個回憶（創作理念）：'+(d.reason||'')+'\n我想寫成：'+(d.form||'')+'\n作品名稱（暫定）：'+(d.title||'');
+  if(t)t.textContent='一、主題卡（第 1 節）\n這是哪一個回憶：'+(d.moment||'')+'\n那一刻發生了什麼事：'+(d.detail||'')+'\n我的感想：'+(d.why||'')+'\n我想感謝誰、想說什麼：'+(d.who||'')+'\n為什麼我想寫這個回憶（創作理念）：'+(d.reason||'')+'\n作品名稱（暫定）：'+(d.title||'');
   if(!list)return;
   var items=[['勾好我的聲明（6 項）',(d.promise||[]).length>=6],['開好作品紀錄文件',(d.doc1||[]).length>0],['主題卡：回憶、那一刻、想感謝誰',!!(d.who&&d.moment&&d.detail)],['作品名稱',!!d.title],['主題卡貼進文件',(d.doc1b||[]).length>0]];
   list.innerHTML=items.map(function(x){return '<label style="cursor:default"><input type="checkbox" disabled '+(x[1]?'checked':'')+'>'+x[0]+(x[1]?'':'　<span class="muted small">（還沒完成）</span>')+'</label>';}).join('');
