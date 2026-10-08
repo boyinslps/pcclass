@@ -281,6 +281,15 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 .rp details .vs div{background:#f6f4ef;border-radius:10px;padding:6px 10px;font-size:15px}
 @media(max-width:620px){.rp details .vs{grid-template-columns:1fr}}
 
+.docq{display:flex;gap:10px;align-items:flex-start;background:#eef4ff;border:1.5px solid #bcd0f5;border-radius:12px;padding:8px 12px;margin:0 0 10px;font-size:16px}
+.docq .ico{color:#2f5aa8;margin-top:4px}
+.docbox{background:#fff;border:2.5px solid #2f5aa8;border-radius:18px;padding:14px 18px;margin:0 0 16px}
+.docbox h3{margin:0 0 8px;font-size:19px;display:flex;gap:8px;align-items:center;color:#22427e}
+pre.skel{white-space:pre-wrap;font-family:inherit;font-size:16px;background:#f6f8fd;border:1.5px dashed #9db6e6;border-radius:12px;padding:10px 14px;margin:8px 0}
+.eg{background:#fff;border:1.5px solid var(--line);border-left:6px solid #2f5aa8;border-radius:12px;padding:10px 14px;margin:0 0 10px;font-size:16px}
+.eg .egt{font-size:13px;font-weight:900;color:#22427e;margin-bottom:2px}
+.eg .blu{color:#2f5aa8;font-weight:700}.eg .rd{color:#d9534f;font-weight:700}
+
 :root{--ac:#1f9e8f;--ac-soft:#e2f4f1;--ac-ink:#12675d}
 .score{display:grid;gap:10px}
 .score .row{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}
@@ -389,7 +398,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
   <div>
     <span class="kicker"><svg class="ico"><use href="#i-flag"/></svg>第 1 節・10/8（四）・40 分鐘</span>
     <div class="h1row"><h1>認識比賽、認識 e度，<br>找到你家的那一刻</h1><button class="hbbook" id="hbBook" type="button" aria-label="打開這一節的手冊頁面"></button></div>
-    <p class="goal">今天做完：<b>勾好我的聲明</b>、<b>會打開 e度</b>、<b>寫好「我的主題卡」</b>。</p>
+    <p class="goal">今天做完：<b>勾好我的聲明</b>、<b>會打開 e度</b>、<b>開好作品紀錄文件</b>、<b>寫好「我的主題卡」</b>。</p>
     <div class="flow" id="flow"></div>
   </div>
   <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
@@ -492,10 +501,10 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 </section>
 
 <!-- ========== 步驟 2 ========== -->
-<section class="step" data-title="e度與安全" data-min="12" hidden>
+<section class="step" data-title="e度與安全" data-min="10" hidden>
   <div class="step-head"><div class="num">2</div><div>
     <h2>打開 e度，先學會保護自己</h2>
-    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>12 分鐘</span><span class="chip book" data-zoom="assets/hb_p17.jpg"><svg class="ico"><use href="#i-book"/></svg>手冊 貳 p.10–12、p.17</span></div>
+    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>10 分鐘</span><span class="chip book" data-zoom="assets/hb_p17.jpg"><svg class="ico"><use href="#i-book"/></svg>手冊 貳 p.10–12、p.17</span></div>
   </div></div>
 
   <div class="hb">
@@ -569,11 +578,80 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
   <div class="stepnav"></div>
 </section>
 
-<!-- ========== 步驟 3 ========== -->
-<section class="step" data-title="我的主題卡" data-min="18" hidden>
+<!-- ========== 步驟 3：作品紀錄文件 ========== -->
+<section class="step" data-title="我的文件" data-min="7" hidden>
   <div class="step-head"><div class="num">3</div><div>
+    <h2>開好你的「作品紀錄」文件</h2>
+    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>7 分鐘</span><span class="chip">Google 文件</span></div>
+  </div></div>
+
+  <div class="note"><svg class="ico"><use href="#i-file"/></svg><p><b>這份 Google 文件，就是你的作品紀錄。</b>五節課做出來的東西，都要記在這裡；最後交件時會用到。所以<b>每一節都要好好寫</b>，寫完存好，不要弄丟。</p></div>
+
+  <div class="grid2">
+    <div>
+      <video class="shot" style="width:100%;margin:0;background:#111" src="assets/教學_打開文件.mp4" poster="assets/教學_打開文件_封面.jpg" controls playsinline preload="none"></video>
+      <p class="vcap">影片：怎麼打開老師給你的文件（示範用的是四年級的作業，打開的方法一樣）</p>
+    </div>
+    <div class="card" style="margin:0">
+      <h3><svg class="ico"><use href="#i-list"/></svg>照著做</h3>
+      <ol class="do">
+        <li><b class="t">打開 Google Classroom</b>找到老師的作業，點進去。</li>
+        <li><b class="t">點「你的作業」裡老師給你的文件</b>文件就會打開。</li>
+        <li><b class="t">改檔名</b>點左上角的名字，改成下面這一行。</li>
+        <li><b class="t">貼上標題格式</b>下面按「複製」，貼到文件最上面。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="docbox">
+    <h3><svg class="ico"><use href="#i-pen"/></svg>檔名（會依你填的年級、班級、座號自動變）</h3>
+    <div class="fname" id="docName" style="font-size:18px">賀卡作品紀錄＿（先填最上面的年級、班級、座號）</div>
+    <button class="copy" type="button" data-copy="docName" data-done="已複製檔名" style="margin-top:8px"><svg class="ico"><use href="#i-copy"/></svg>複製檔名</button>
+  </div>
+
+  <div class="docbox">
+    <h3><svg class="ico"><use href="#i-file"/></svg>文件的標題格式（貼在文件最上面）</h3>
+    <pre class="skel" id="docSkel">賀卡作品紀錄
+
+一、主題卡（第 1 節）
+
+二、感謝文字（第 2 節）
+
+三、畫面規劃與繪圖（第 3 節）
+
+四、AI 協作歷程紀錄（第 4 節）
+
+五、作品說明書（第 5 節）
+</pre>
+    <button class="copy" type="button" data-copy="docSkel" data-done="已複製！貼到你的文件最上面"><svg class="ico"><use href="#i-copy"/></svg>複製標題格式</button>
+    <div style="margin-top:12px">
+      <video class="shot" style="width:100%;max-width:520px;margin:0;background:#111" src="assets/教學_複製資料.mp4" poster="assets/教學_複製資料_封面.jpg" controls playsinline preload="none"></video>
+      <p class="vcap">影片：複製、貼上到文件（示範的內容不同，做法一樣；加上 <kbd>Shift</kbd> 是只貼文字）</p>
+    </div>
+  </div>
+
+  <div class="card" style="border:2px solid var(--ac)">
+    <h3><svg class="ico"><use href="#i-home"/></svg>以後每次來上課</h3>
+    <ol class="do">
+      <li><b class="t">到電腦教室2，自己開電腦</b>坐在自己的位子。</li>
+      <li><b class="t">用 OpenID 登入</b>用你的教育雲端帳號。</li>
+      <li><b class="t">打開兩樣東西</b>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><a class="btn navy" href="https://adl.edu.tw/" target="_blank" rel="noopener">因材網（e度）<svg class="ico"><use href="#i-ext"/></svg></a><a class="btn navy" href="https://classroom.google.com/" target="_blank" rel="noopener">Google Classroom（打開你的文件）<svg class="ico"><use href="#i-ext"/></svg></a></div></li>
+      <li><b class="t">打開這份學習單</b>填好年級、班級、座號，就可以接著做。</li>
+    </ol>
+  </div>
+
+  <div class="checks">
+    <label><input type="checkbox" data-key="doc1" value="已開文件" data-req>我已經打開文件、改好檔名、貼上標題格式了。</label>
+  </div>
+  <div class="stepnav"></div>
+</section>
+
+<!-- ========== 步驟 4 ========== -->
+<section class="step" data-title="我的主題卡" data-min="13" hidden>
+  <div class="step-head"><div class="num">4</div><div>
     <h2>先想想：找到只有你家才有的那一刻</h2>
-    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>18 分鐘</span><span class="chip">手冊 參 p.22、p.33</span></div>
+    <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>13 分鐘</span><span class="chip">手冊 參 p.22、p.33</span></div>
   </div></div>
 
   <div class="hb">
@@ -614,7 +692,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 
 <!-- ========== 步驟 4 ========== -->
 <section class="step" data-title="今天的成果" data-min="2" hidden>
-  <div class="step-head"><div class="num">4</div><div>
+  <div class="step-head"><div class="num">5</div><div>
     <h2>今天的成果</h2>
     <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>2 分鐘</span></div>
   </div></div>
@@ -631,7 +709,14 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
     </dl>
     <svg class="bot" viewBox="0 0 120 120"><use href="#bot"/></svg>
   </div>
-  <div class="checks" id="doneList"></div>
+  <div class="docbox" style="margin-top:16px">
+    <h3><svg class="ico"><use href="#i-copy"/></svg>把主題卡複製到你的文件</h3>
+    <p class="small muted" style="margin:0 0 6px">按下複製，打開你的文件，貼在「一、主題卡（第 1 節）」下面。</p>
+    <pre class="skel" id="themeTxt"></pre>
+    <button class="copy" type="button" data-copy="themeTxt" data-done="已複製！貼到文件的「一、主題卡」下面"><svg class="ico"><use href="#i-copy"/></svg>複製我的主題卡</button>
+    <div class="checks" style="margin-top:10px"><label><input type="checkbox" data-key="doc1b" value="已貼主題卡" data-req>我已經貼到文件裡了。</label></div>
+  </div>
+  <div class="checks" id="doneList" style="margin-top:12px"></div>
 
   <div class="grid2" style="margin-top:16px">
     <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-home"/></svg>回家任務</h3>
@@ -647,8 +732,12 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 <footer><div class="wrap">本頁引用《中小學 AI 之學習應用手冊—國小生聰明用 AI》（教育部，2026）的內容與頁面，僅供本校競賽指導使用；頁碼為手冊印刷頁碼。競賽規定以「115 年度小學生教育型 AI 學習夥伴應用競賽」簡章為準。</div></footer>
 <script>
 window.PAGE={code:'C01',lesson:'L1',hbTitle:"第 1 節要讀的手冊頁面",hb:[[12, "序章 p.VI", "四個口訣：先想想、再問問、檢查看、要標記"], [16, "壹 p.3", "AI 是什麼？e度 是 AI 代理人"], [23, "貳 p.10", "認識 e度、登入因材網"], [24, "貳 p.11", "打開 e度、開始輸入"], [25, "貳 p.12", "語音輸入、三個技巧"], [30, "貳 p.17", "怎麼保護自己？"], [68, "陸 p.55", "只給剛剛好的資料"], [71, "陸 p.58", "AI 使用承諾卡"]],onData:function(all){
-  var d=all.L1||{},list=document.getElementById('doneList');if(!list)return;
-  var items=[['勾好我的聲明（6 項）',(d.promise||[]).length>=6],['主題卡：感謝誰、那一刻、一句話或東西',!!(d.who&&d.moment&&d.detail)],['作品名稱',!!d.title]];
+  var d=all.L1||{},list=document.getElementById('doneList'),g=(window.cardIdentity&&cardIdentity())||null;
+  var dn=document.getElementById('docName');if(dn)dn.textContent='賀卡作品紀錄＿'+(g?g.grade+'年'+g.className+'班'+g.studentId+'號':'（先填最上面的年級、班級、座號）');
+  var t=document.getElementById('themeTxt');
+  if(t)t.textContent='一、主題卡（第 1 節）\n我想感謝：'+(d.who||'')+'\n那一刻：'+(d.moment||'')+'\n那一句話／那樣東西：'+(d.detail||'')+'\n為什麼想謝謝他：'+(d.why||'')+'\n我想寫成：'+(d.form||'')+'\n作品名稱（暫定）：'+(d.title||'');
+  if(!list)return;
+  var items=[['勾好我的聲明（6 項）',(d.promise||[]).length>=6],['開好作品紀錄文件',(d.doc1||[]).length>0],['主題卡：感謝誰、那一刻、一句話或東西',!!(d.who&&d.moment&&d.detail)],['作品名稱',!!d.title],['主題卡貼進文件',(d.doc1b||[]).length>0]];
   list.innerHTML=items.map(function(x){return '<label style="cursor:default"><input type="checkbox" disabled '+(x[1]?'checked':'')+'>'+x[0]+(x[1]?'':'　<span class="muted small">（還沒完成）</span>')+'</label>';}).join('');
 }};
 </script>
