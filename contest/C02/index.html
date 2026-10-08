@@ -281,6 +281,15 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 .rp details .vs div{background:#f6f4ef;border-radius:10px;padding:6px 10px;font-size:15px}
 @media(max-width:620px){.rp details .vs{grid-template-columns:1fr}}
 
+.docq{display:flex;gap:10px;align-items:flex-start;background:#eef4ff;border:1.5px solid #bcd0f5;border-radius:12px;padding:8px 12px;margin:0 0 10px;font-size:16px}
+.docq .ico{color:#2f5aa8;margin-top:4px}
+.docbox{background:#fff;border:2.5px solid #2f5aa8;border-radius:18px;padding:14px 18px;margin:0 0 16px}
+.docbox h3{margin:0 0 8px;font-size:19px;display:flex;gap:8px;align-items:center;color:#22427e}
+pre.skel{white-space:pre-wrap;font-family:inherit;font-size:16px;background:#f6f8fd;border:1.5px dashed #9db6e6;border-radius:12px;padding:10px 14px;margin:8px 0}
+.eg{background:#fff;border:1.5px solid var(--line);border-left:6px solid #2f5aa8;border-radius:12px;padding:10px 14px;margin:0 0 10px;font-size:16px}
+.eg .egt{font-size:13px;font-weight:900;color:#22427e;margin-bottom:2px}
+.eg .blu{color:#2f5aa8;font-weight:700}.eg .rd{color:#d9534f;font-weight:700}
+
 :root{--ac:#e0664f;--ac-soft:#fdebe6;--ac-ink:#a3402c}
 .pages4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .pages4 figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;text-align:center}
@@ -367,7 +376,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
   <div>
     <span class="kicker"><svg class="ico"><use href="#i-pen"/></svg>第 2 節・10/13（二）・40 分鐘</span>
     <div class="h1row"><h1>學會手冊的提問六招，<br>寫出你自己的感謝文字</h1><button class="hbbook" id="hbBook" type="button" aria-label="打開這一節的手冊頁面"></button></div>
-    <p class="goal">今天做完：<b>感謝文字草稿</b>（你自己寫的），和<b>一筆「我問 e度 → 我怎麼改」的紀錄</b>。</p>
+    <p class="goal">今天做完：<b>感謝文字</b>（你自己寫在文件裡的第 1 版和第 2 版）。</p>
     <div class="flow" id="flow"></div>
   </div>
   <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
@@ -557,7 +566,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 
   <div class="note"><svg class="ico"><use href="#i-bulb"/></svg><p>文思精靈是幫你<b>想起來</b>，不是幫你<b>編出來</b>。它給的點子，<b>不是真的發生過的就不要用</b>。</p></div>
 
-  <div class="field"><label for="f_ideas">e度 問了我什麼？我想起了哪些新細節？</label><textarea id="f_ideas" data-key="ideas" data-req rows="4" data-count></textarea></div>
+  <div class="docq"><svg class="ico"><use href="#i-file"/></svg><div><b>寫在文件裡：</b>打開你的文件，在「二、感謝文字」下面寫：<b>e度 問了我什麼？我想起了哪些新細節？</b>先不要整篇寫，條列幾個就好。</div></div>
+  <div class="checks"><label><input type="checkbox" data-key="doc2a" value="已記細節" data-req>我已經把想起的新細節寫進文件了。</label></div>
   <div class="stepnav"></div>
 </section>
 
@@ -596,10 +606,17 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
     <p class="tiny" style="margin-top:6px">邊看這張卡，邊寫下面的草稿。</p>
   </div>
 
-  <div class="card">
+  <div class="docbox">
     <h3><svg class="ico"><use href="#i-pen"/></svg>1. 先自己寫草稿（不要先問 AI）</h3>
-    <p class="small muted">感謝信大約 4～8 句；童詩大約 6～12 行。把主題卡的「那一刻」和「那一句話／那樣東西」寫進去。</p>
-    <div class="field"><label for="f_d1">我的草稿（第一版）</label><textarea id="f_d1" data-key="draft1" data-req rows="7" data-count></textarea></div>
+    <p class="small muted" style="margin:0 0 6px">在文件「二、感謝文字」下面寫。感謝信大約 4～8 句；童詩大約 6～12 行。把主題卡的「那一刻」和「那一句話／那樣東西」寫進去。需要的話，複製下面的格式貼進去：</p>
+    <pre class="skel" id="skel2">二、感謝文字（第 2 節）
+【第 1 版：我自己寫的草稿】
+
+【我想起的新細節（和文思精靈討論）】
+
+【第 2 版：和 e度 討論後，我自己改的】
+</pre>
+    <button class="copy" type="button" data-copy="skel2" data-done="已複製！貼到文件的「二、感謝文字」"><svg class="ico"><use href="#i-copy"/></svg>複製格式</button>
   </div>
 
   <div class="grid2">
@@ -627,10 +644,10 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
       <div class="fbox"><div class="ftext">我要寫<span class="blank">〔哪一個畫面或心情〕</span>，有哪些句型可以使用？請給句型，不要幫我寫完整句子。</div><button class="copy" type="button"><svg class="ico"><use href="#i-copy"/></svg>複製</button></div></div>
   </div>
 
-  <div class="card" style="border:2px solid var(--ac)">
-    <h3><svg class="ico"><use href="#i-star"/></svg>3. 我的修改版（第二版）</h3>
-    <p class="small muted">記住哪些字詞是 e度 建議的、哪些是你自己改的。第 4 節要用黑、紅、藍標出來。</p>
-    <div class="field"><label for="f_d2">修改後的感謝文字</label><textarea id="f_d2" data-key="draft2" data-req rows="8" data-count></textarea></div>
+  <div class="docbox">
+    <h3><svg class="ico"><use href="#i-star"/></svg>3. 寫下修改版（第 2 版）</h3>
+    <p class="small muted" style="margin:0">看了 e度 的建議，用<b>自己的話</b>改，寫在文件的第 2 版。哪些字詞是 e度 建議的、哪些是你自己改的，先記在心裡，第 4 節要把它寫成歷程紀錄。</p>
+    <div class="checks" style="margin-top:10px"><label><input type="checkbox" data-key="doc2b" value="已寫第2版" data-req>我已經在文件裡寫好第 1 版和第 2 版了。</label></div>
   </div>
   <div class="stepnav"></div>
 </section>
@@ -643,8 +660,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
   </div></div>
 
   <div class="result">
-    <h3><svg class="ico" style="color:var(--ac)"><use href="#i-star"/></svg>我的感謝文字（第二版）</h3>
-    <div data-ref="L2.draft2" data-empty="（還沒寫第二版）" style="white-space:pre-wrap;font-size:18px;line-height:1.9"></div>
+    <h3><svg class="ico" style="color:var(--ac)"><use href="#i-star"/></svg>今天要放進文件的</h3>
+    <p style="margin:0">你的文件「二、感謝文字」裡，應該有<b>第 1 版草稿</b>、<b>新細節</b>、<b>第 2 版</b>。打開文件，確認都在，再按繳交。</p>
     <svg class="bot" viewBox="0 0 120 120"><use href="#bot"/></svg>
   </div>
 
@@ -660,11 +677,12 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
       <label class="opt"><input type="checkbox" data-key="moves" value="進階技巧">進階技巧</label>
     </div>
     <p class="small muted" style="margin-top:8px">第 5 節寫說明書「學到了什麼」時會用到。</p>
+    <div class="checks" style="margin-top:10px"><label><input type="checkbox" data-key="doc2c" value="文件已存" data-req>文件裡的感謝文字都寫好了，我確認過了。</label></div>
   </div>
 
   <div class="grid2">
     <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-home"/></svg>回家任務</h3>
-      <p>把第二版<b>小聲念一遍</b>，念起來卡卡的地方自己改。自己改的地方，之後要標<b>藍色</b>。</p></div>
+      <p>把第二版<b>小聲念一遍</b>，念起來卡卡的地方自己改。</p></div>
     <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-next"/></svg>下一節（10/15）</h3>
       <p>用<b>繪圖精靈</b>畫出卡片的圖：先聊再畫、一次改一個地方。</p>
       <a class="btn" data-go="C03" href="#">先看第 3 節<svg class="ico"><use href="#i-next"/></svg></a></div>
