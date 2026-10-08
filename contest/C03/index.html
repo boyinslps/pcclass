@@ -281,6 +281,15 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 .rp details .vs div{background:#f6f4ef;border-radius:10px;padding:6px 10px;font-size:15px}
 @media(max-width:620px){.rp details .vs{grid-template-columns:1fr}}
 
+.docq{display:flex;gap:10px;align-items:flex-start;background:#eef4ff;border:1.5px solid #bcd0f5;border-radius:12px;padding:8px 12px;margin:0 0 10px;font-size:16px}
+.docq .ico{color:#2f5aa8;margin-top:4px}
+.docbox{background:#fff;border:2.5px solid #2f5aa8;border-radius:18px;padding:14px 18px;margin:0 0 16px}
+.docbox h3{margin:0 0 8px;font-size:19px;display:flex;gap:8px;align-items:center;color:#22427e}
+pre.skel{white-space:pre-wrap;font-family:inherit;font-size:16px;background:#f6f8fd;border:1.5px dashed #9db6e6;border-radius:12px;padding:10px 14px;margin:8px 0}
+.eg{background:#fff;border:1.5px solid var(--line);border-left:6px solid #2f5aa8;border-radius:12px;padding:10px 14px;margin:0 0 10px;font-size:16px}
+.eg .egt{font-size:13px;font-weight:900;color:#22427e;margin-bottom:2px}
+.eg .blu{color:#2f5aa8;font-weight:700}.eg .rd{color:#d9534f;font-weight:700}
+
 :root{--ac:#6d5bd0;--ac-soft:#eeebfb;--ac-ink:#4a3aa6}
 .qk{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .qk button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:3px 12px;font-size:14.5px;font-weight:700;cursor:pointer;color:var(--ink)}
@@ -384,7 +393,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
   <div>
     <span class="kicker"><svg class="ico"><use href="#i-brush"/></svg>第 3 節・10/15（四）・40 分鐘</span>
     <div class="h1row"><h1>和繪圖精靈一起畫：<br>先聊再畫、一次改一處</h1><button class="hbbook" id="hbBook" type="button" aria-label="打開這一節的手冊頁面"></button></div>
-    <p class="goal">今天做完：<b>卡片要用的 AI 圖</b>，過程中<b>至少一次「發現問題 → 追問修正」</b>。</p>
+    <p class="goal">今天做完：<b>卡片要用的 AI 圖</b>，過程中<b>至少一次「發現問題 → 追問修正」</b>，並把畫面規劃記進文件。</p>
     <div class="flow" id="flow"></div>
   </div>
   <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
@@ -484,9 +493,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
     <div class="field"><label for="f_focus">強調重點<span class="hint">最想讓人一眼看到什麼</span></label><input type="text" id="f_focus" data-key="focus" data-req maxlength="60">
       <div class="qk" data-for="f_focus"><button type="button">大家的笑容</button><button type="button">牽著的手</button><button type="button">手上的東西</button><button type="button">兩個人的眼神</button><button type="button">正在做的動作</button></div></div>
 
-    <div class="field"><label for="f_avoid">不要出現的東西<span class="hint">招式 C</span></label><input type="text" id="f_avoid" data-key="avoid" maxlength="60">
-      <div class="qk" data-for="f_avoid"><button type="button">文字</button><button type="button">多出來的人</button><button type="button">奇怪的手指</button><button type="button">太亂的背景</button></div></div>
-    <p class="small muted">建議：<b>圖裡不要放字</b>。卡片上的字自己在 Canva 打，不會出錯，也是你自己的作品。</p>
+    <p class="small muted">卡片上的字，之後自己在 Canva 打，不用請 e度 畫在圖裡。</p>
   </div>
   <div class="stepnav"></div>
 </section>
@@ -515,7 +522,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
       <div class="frame"><div class="lab">說背景、視角、重點</div>
       <div class="why"><svg class="ico"><use href="#i-bulb"/></svg><span><b>為什麼這樣問：</b>背景、視角、重點，決定這張圖像不像「那一刻」。</span></div>
         <div class="demo"><span class="s">手冊例子　參 p.28</span><q>學校建築是紅磚牆……強調學生飛行的姿態，請從側面平視……</q></div>
-        <div class="fbox"><div class="ftext">背景是<span class="blank">〔背景〕</span>，色調<span class="blank">〔色調〕</span>，請從<span class="blank">〔視角〕</span>畫，特別強調<span class="blank">〔重點〕</span>。畫面裡不要出現文字。</div><button class="copy" type="button"><svg class="ico"><use href="#i-copy"/></svg>複製</button></div></div>
+        <div class="fbox"><div class="ftext">背景是<span class="blank">〔背景〕</span>，色調<span class="blank">〔色調〕</span>，請從<span class="blank">〔視角〕</span>畫，特別強調<span class="blank">〔重點〕</span>。</div><button class="copy" type="button"><svg class="ico"><use href="#i-copy"/></svg>複製</button></div></div>
       <div class="frame"><div class="lab">確認後才生圖</div>
       <div class="why"><svg class="ico"><use href="#i-bulb"/></svg><span><b>為什麼這樣問：</b>讓它先說打算怎麼畫，你就能在生圖前抓出它理解錯的地方。</span></div>
         <div class="demo"><span class="s">手冊例子　參 p.28</span><q>請幫我生圖。</q>　生好後點【開啟圖片】看大圖。</div>
@@ -565,34 +572,32 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 </section>
 
 <!-- ========== 步驟 4 ========== -->
-<section class="step" data-title="選定我的圖" data-min="5" hidden>
+<section class="step" data-title="記進文件" data-min="5" hidden>
   <div class="step-head"><div class="num">4</div><div>
-    <h2>選定我的圖</h2>
+    <h2>把成果記進文件</h2>
     <div class="meta"><span class="chip"><svg class="ico"><use href="#i-clock"/></svg>5 分鐘</span></div>
   </div></div>
 
-  <div class="card" style="border:2px solid var(--ac)">
-    <h3><svg class="ico"><use href="#i-star"/></svg>最後採用哪一張？為什麼？</h3>
-    <div class="field"><label for="f_pick">我採用</label><input type="text" id="f_pick" data-key="pick" data-req maxlength="30"></div>
-    <div class="field"><label for="f_pickwhy">為什麼最後採用它？<span class="hint">它比其他版本好在哪裡、哪裡最像你家</span></label><textarea id="f_pickwhy" data-key="pick_why" data-req rows="3" data-count></textarea></div>
-    <p class="small muted">這句話就是歷程紀錄裡的「最終採用理由」。</p>
+  <div class="docbox">
+    <h3><svg class="ico"><use href="#i-copy"/></svg>1. 複製「我的畫面規劃」</h3>
+    <p class="small muted" style="margin:0 0 6px">貼在文件的「三、畫面規劃與繪圖（第 3 節）」下面。</p>
+    <pre class="skel" id="planTxt"></pre>
+    <button class="copy" type="button" data-copy="planTxt" data-done="已複製！貼到文件的「三、畫面規劃與繪圖」"><svg class="ico"><use href="#i-copy"/></svg>複製畫面規劃</button>
   </div>
 
-  <div class="result">
-    <h3><svg class="ico" style="color:var(--ac)"><use href="#i-image"/></svg>我的繪圖紀錄</h3>
-    <dl>
-      <dt>畫面</dt><dd data-ref="L3.main"></dd>
-      <dt>採用</dt><dd data-ref="L3.pick"></dd>
-      <dt>理由</dt><dd data-ref="L3.pick_why"></dd>
-    </dl>
-    <svg class="bot" viewBox="0 0 120 120"><use href="#bot"/></svg>
+  <div class="docbox">
+    <h3><svg class="ico"><use href="#i-pen"/></svg>2. 在文件裡寫「我採用哪一張圖？為什麼？」</h3>
+    <p class="small muted" style="margin:0">寫在「三」的下面：<b>我最後採用哪一張</b>，還有<b>為什麼最後採用它</b>（它比其他版本好在哪裡、哪裡最像你家）。這句話就是歷程紀錄的「最終採用理由」。每一版的圖檔都留著，第 4 節可以放「修改前、修改後」。</p>
+    <div class="checks" style="margin-top:10px"><label><input type="checkbox" data-key="doc3" value="已記進文件" data-req>我已經把畫面規劃和採用理由記進文件了。</label></div>
   </div>
+
+  <div class="note"><svg class="ico"><use href="#i-brush"/></svg><p><b>進度快的話，可以開始用 Canva 排版。</b>第 4 節會一步一步教，但先打開 Canva、把圖放上去試試看也可以。</p></div>
 
   <div class="grid2">
     <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-home"/></svg>回家任務</h3>
-      <p>確定圖檔有存好。再看一次你的圖：<b>有沒有哪裡不像你家？</b>想好下次可以怎麼追問。</p></div>
+      <p>確定圖檔有存好。再看一次你的圖：<b>有沒有哪裡不像你家？</b></p></div>
     <div class="card" style="margin:0"><h3><svg class="ico"><use href="#i-next"/></svg>下一節（10/20）</h3>
-      <p>檢查 AI 的錯、用黑紅藍標記，再用 <b>Canva</b> 排版、存成 PDF。</p>
+      <p>檢查 AI 的錯、寫<b>歷程紀錄</b>，再用 <b>Canva</b> 排版、存成 PDF。</p>
       <a class="btn" data-go="C04" href="#">先看第 4 節<svg class="ico"><use href="#i-next"/></svg></a></div>
   </div>
   <div class="stepnav"></div>
@@ -601,7 +606,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;font-size:12.5px;col
 </div></main>
 <footer><div class="wrap">本頁引用《中小學 AI 之學習應用手冊—國小生聰明用 AI》（教育部，2026）的內容與頁面，僅供本校競賽指導使用；頁碼為手冊印刷頁碼。競賽規定以「115 年度小學生教育型 AI 學習夥伴應用競賽」簡章為準。</div></footer>
 <script>
-window.PAGE={code:'C03',lesson:'L3',hbTitle:"第 3 節要讀的手冊頁面",hb:[[38, "參 p.25", "任務二：和 AI 一起畫圖"], [39, "參 p.26", "自己先構思主題和風格"], [40, "參 p.27", "主要元素、調整細節"], [41, "參 p.28", "生圖、標記 AI 生成"], [46, "參 p.33", "我學到了嗎"], [49, "肆 p.36", "刻板印象"]]};
+window.PAGE={code:'C03',lesson:'L3',onData:function(all){var d=all.L3||{},t=document.getElementById('planTxt');if(t)t.textContent='三、畫面規劃與繪圖（第 3 節）\n主要元素：'+(d.main||'')+'\n背景：'+(d.bg||'')+'\n視角：'+(d.view||'')+'\n風格和色調：'+(d.style||'')+'\n強調重點：'+(d.focus||'')+'\n\n我最後採用的圖：\n為什麼採用它：';},hbTitle:"第 3 節要讀的手冊頁面",hb:[[38, "參 p.25", "任務二：和 AI 一起畫圖"], [39, "參 p.26", "自己先構思主題和風格"], [40, "參 p.27", "主要元素、調整細節"], [41, "參 p.28", "生圖、標記 AI 生成"], [46, "參 p.33", "我學到了嗎"], [49, "肆 p.36", "刻板印象"]]};
 </script>
 <script>
 /* ============================================================
