@@ -198,6 +198,33 @@
                     </div>
                 </div>
             </a>
+
+            <!-- 真假對決：網址由老師在 #admin 填，存在 Firestore quizzes/portal-games（學習單同一套規則：任何人可讀、只有老師可寫）。沒填網址時學生看不到這張卡 -->
+            <div id="tf-card" class="hidden mt-6 rounded-3xl p-6 md:p-7 text-white shadow-xl" style="background:linear-gradient(120deg,#be123c 0%,#7c3aed 100%)">
+                <div class="flex flex-col md:flex-row md:items-center gap-5">
+                    <div class="text-6xl leading-none select-none" aria-hidden="true">⚖️</div>
+                    <div class="flex-1">
+                        <div class="text-2xl md:text-3xl font-black tracking-wide">真假對決</div>
+                        <p class="mt-1 text-white/90 leading-relaxed">網路上的訊息，是真的還是假的？用你學到的查證本領一起來對決，看誰最會分辨真假！</p>
+                    </div>
+                    <a id="tf-go" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-2xl bg-white text-rose-700 font-black text-lg shadow-lg hover:bg-rose-50 transition-colors">
+                        開始對決 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div id="tf-admin" class="hidden mt-5 rounded-2xl bg-black/30 p-4 text-sm">
+                    <p class="font-bold mb-2">老師設定：真假對決的網址（開好伺服器後貼上並儲存，學生馬上看到）</p>
+                    <div id="tf-login" class="flex flex-wrap gap-2 items-center">
+                        <input id="tf-email" type="email" autocomplete="username" class="border-2 border-white/40 rounded-xl px-3 py-2 bg-white text-gray-900 min-w-[14rem]" value="boyin0304@slps.tn.edu.tw">
+                        <input id="tf-pw" type="password" autocomplete="current-password" placeholder="密碼" class="border-2 border-white/40 rounded-xl px-3 py-2 bg-white text-gray-900">
+                        <button id="tf-signin" type="button" class="bg-white text-rose-700 font-bold rounded-xl px-4 py-2">老師登入</button>
+                    </div>
+                    <div id="tf-edit" class="hidden flex flex-wrap gap-2 items-center">
+                        <input id="tf-url" type="url" autocomplete="off" class="flex-1 min-w-[16rem] border-2 border-white/40 rounded-xl px-3 py-2 bg-white text-gray-900">
+                        <button id="tf-save" type="button" class="bg-white text-rose-700 font-bold rounded-xl px-4 py-2">儲存網址</button>
+                    </div>
+                    <p id="tf-stat" class="font-bold mt-2 min-h-[20px]"></p>
+                </div>
+            </div>
         </section>
 
         <!-- 第一部分：教學平台類 -->
@@ -370,6 +397,55 @@
         const now = new Date();
         const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
         document.getElementById('current-date').textContent = now.toLocaleDateString('zh-TW', options);
+
+        // ===== 真假對決：網址存在 Firebase（quizzes/portal-games.truefalseUrl），老師加 #admin 登入後可改 =====
+        (function () {
+            var IS_ADMIN = location.hash === '#admin';
+            var card = document.getElementById('tf-card'), go = document.getElementById('tf-go');
+            var admin = document.getElementById('tf-admin'), stat = document.getElementById('tf-stat');
+            var inp = document.getElementById('tf-url'), box = document.getElementById('tf-edit'), login = document.getElementById('tf-login');
+            var cfg = { apiKey: "AIzaSyAaodBvsP-BSovON14izt22DOXeH40TTGM", authDomain: "pcclass-94300.firebaseapp.com", projectId: "pcclass-94300", appId: "1:1034787516465:web:73c334b2ddad152c472510" };
+            var base = 'https://www.gstatic.com/firebasejs/10.8.0/';
+            var ref = null, auth = null, url = '';
+            function load(src) { return new Promise(function (ok, no) { var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
+            function show() {
+                var on = !!url || IS_ADMIN;
+                card.classList.toggle('hidden', !on);
+                if (url) go.setAttribute('href', url); else go.removeAttribute('href');
+                go.classList.toggle('opacity-50', !url);
+                if (document.activeElement !== inp) inp.value = url;
+            }
+            if (IS_ADMIN) admin.classList.remove('hidden');
+            load(base + 'firebase-app-compat.js')
+                .then(function () { return load(base + 'firebase-firestore-compat.js'); })
+                .then(function () { return IS_ADMIN ? load(base + 'firebase-auth-compat.js') : null; })
+                .then(function () {
+                    firebase.initializeApp(cfg);
+                    ref = firebase.firestore().collection('quizzes').doc('portal-games');
+                    ref.onSnapshot(function (d) { url = String((d.data() || {}).truefalseUrl || '').trim(); show(); }, function (e) { console.warn('讀不到真假對決網址', e); });
+                    if (!IS_ADMIN) return;
+                    auth = firebase.auth();
+                    auth.onAuthStateChanged(function (u) {
+                        var ok = !!(u && !u.isAnonymous && u.email);
+                        login.classList.toggle('hidden', ok); box.classList.toggle('hidden', !ok);
+                        if (ok) stat.textContent = '已登入 ' + u.email;
+                    });
+                })
+                .catch(function (e) { console.warn('Firebase 載入失敗', e); });
+            if (!IS_ADMIN) return;
+            document.getElementById('tf-signin').onclick = function () {
+                if (!auth) { stat.textContent = '還在連線，稍後再按一次'; return; }
+                auth.signInWithEmailAndPassword(document.getElementById('tf-email').value.trim(), document.getElementById('tf-pw').value)
+                    .catch(function (e) { stat.textContent = '登入失敗：' + e.message; });
+            };
+            document.getElementById('tf-save').onclick = function () {
+                var v = inp.value.trim();
+                if (v && !/^https?:\/\//i.test(v)) { alert('網址要以 http:// 或 https:// 開頭'); return; }
+                ref.set({ truefalseUrl: v }, { merge: true })
+                    .then(function () { stat.textContent = v ? '已儲存，學生馬上看到' : '已清除，學生看不到這張卡'; })
+                    .catch(function (e) { alert('儲存失敗：' + e.message); });
+            };
+        })();
 
         // ===== 打字勇者：右上角循環的小小更新訊息 =====
         // 每次更新「打字勇者」，請順便在這裡加一則新訊息（放最前面），並刪掉太舊的，保持 3～5 則。
