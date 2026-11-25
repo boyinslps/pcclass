@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FFFBF3;--card:#ffffff;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;
+    --bg:#FBF1DE;--card:#ffffff;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;
     --brand:#ea580c;--brand-d:#c2410c;--brand-bg:#fff7ed;
     --start:#0369a1;--start-bg:#e0f2fe;--start-bd:#7dd3fc;
     --text:#c2410c;--text-bg:#ffedd5;--text-bd:#fdba74;
@@ -25,12 +25,12 @@
   .hidden.hidden,.sc-flat .sc-slide.hidden{display:none !important}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
   kbd{background:#f1f5f9;border:1px solid #cbd5e1;border-bottom-width:3px;border-radius:6px;padding:0 6px;font-family:inherit;font-weight:700;color:var(--ink)}
-  .shot{border-radius:14px;border:3px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,.14);width:100%;display:block;background:#fff}
+  .shot{border-radius:14px;border:3px solid #FFF8EC;box-shadow:0 6px 20px rgba(0,0,0,.14);width:100%;display:block;background:#FFF8EC}
   .zoomable{cursor:zoom-in}
   a{color:inherit}
 
   /* 頁首導覽列 */
-  .topnav{background:#fff;border-bottom:3px solid #fed7aa}
+  .topnav{background:#FFF6E3;border-bottom:3px solid #fed7aa}
   .topnav .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
   .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;white-space:nowrap}
   .brand b{font-family:'Baloo 2','Noto Sans TC',cursive;font-size:1.5rem;font-weight:800;color:var(--brand)}
@@ -49,7 +49,7 @@
   .c-page{--c:var(--page);--cbg:var(--page-bg);--cbd:var(--page-bd)}
   .c-done{--c:var(--done);--cbg:var(--done-bg);--cbd:var(--done-bd)}
   .c-all{--c:#334155;--cbg:#f1f5f9;--cbd:#cbd5e1}
-  .chip{display:inline-flex;align-items:center;gap:6px;font:inherit;font-weight:800;font-size:1.1rem;padding:6px 18px;border-radius:999px;border:3px solid var(--cbd);background:#fff;color:var(--c);cursor:pointer}
+  .chip{display:inline-flex;align-items:center;gap:6px;font:inherit;font-weight:800;font-size:1.1rem;padding:6px 18px;border-radius:999px;border:3px solid var(--cbd);background:#FFF8EC;color:var(--c);cursor:pointer}
   .chip:hover{background:var(--cbg)}
   .chip.on{background:var(--c);border-color:var(--c);color:#fff}
   .chip .n{font-size:.85rem;opacity:.8}
@@ -59,37 +59,37 @@
   .badge-lesson.soon{background:#f8fafc;color:#64748b;border-color:#e2e8f0}
 
   /* 搜尋框：前面固定一個「搜尋技能」標籤（不用 placeholder） */
-  .search{display:flex;align-items:stretch;border:4px solid #fdba74;border-radius:22px;background:#fff;overflow:hidden}
+  .search{display:flex;align-items:stretch;border:4px solid #fdba74;border-radius:22px;background:#FFF8EC;overflow:hidden}
   .search:focus-within{border-color:var(--brand);box-shadow:0 0 0 5px rgba(234,88,12,.15)}
   .search label{display:flex;align-items:center;gap:10px;padding:0 18px;background:var(--brand-bg);color:var(--brand-d);font-weight:900;font-size:1.3rem;white-space:nowrap;border-right:3px solid #fed7aa;cursor:text}
   .search label svg{width:28px;height:28px}
-  .search input{flex:1;min-width:0;border:0;font-size:1.5rem;font-weight:700;padding:14px 18px;outline:none;background:#fff;color:var(--ink)}
+  .search input{flex:1;min-width:0;border:0;font-size:1.5rem;font-weight:700;padding:14px 18px;outline:none;background:#FFF8EC;color:var(--ink)}
 
   /* 結果小卡 */
-  .tile{display:flex;align-items:center;gap:12px;text-decoration:none;background:#fff;border:3px solid var(--cbd);border-left:12px solid var(--c);border-radius:16px;padding:10px 14px;font-weight:800;font-size:1.15rem;color:var(--ink)}
+  .tile{display:flex;align-items:center;gap:12px;text-decoration:none;background:#FFF8EC;border:3px solid var(--cbd);border-left:12px solid var(--c);border-radius:16px;padding:10px 14px;font-weight:800;font-size:1.15rem;color:var(--ink)}
   .tile:hover{background:var(--cbg)}
   .tile small{display:block;font-size:.85rem;font-weight:700;color:var(--muted)}
 
   /* 步驟圖元件（三頁共用）：大圖一次一張＋上一張／下一張＋編號縮圖列＋看動畫 */
-  .ss{background:#fff;border:3px solid var(--line);border-radius:20px;padding:12px}
+  .ss{background:#FFF8EC;border:3px solid var(--line);border-radius:20px;padding:12px}
   .ss-stage{position:relative;background:#0f172a;border-radius:14px;overflow:hidden;display:flex;justify-content:center}
-  .ss-img{display:block;max-width:100%;max-height:56vh;object-fit:contain;cursor:zoom-in;background:#fff}
+  .ss-img{display:block;max-width:100%;max-height:56vh;object-fit:contain;cursor:zoom-in;background:#FFF8EC}
   .ss-hint{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.55);color:#fff;font-size:13px;font-weight:700;border-radius:8px;padding:1px 8px;pointer-events:none}
   .ss-bar{display:flex;align-items:center;gap:12px;margin-top:10px}
   .ss-bar button{font:inherit;font-weight:900;font-size:1.2rem;border-radius:16px;padding:8px 20px;cursor:pointer}
-  .ss-prev,.ss-next{border:3px solid #fdba74;background:#fff;color:#c2410c}
+  .ss-prev,.ss-next{border:3px solid #fdba74;background:#FFF8EC;color:#c2410c}
   .ss-next{background:#ea580c;border-color:#ea580c;color:#fff}
   .ss-bar button:disabled{opacity:.35;cursor:default}
   .ss-count{font-weight:900;font-size:1.2rem;color:#334155;min-width:7em;text-align:center}
   .ss-anim{margin-left:auto;border:2px solid #cbd5e1;background:#f8fafc;color:#475569;font-size:1rem !important;padding:6px 14px !important}
   .ss-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
-  .ss-th{position:relative;flex:none;width:96px;border:3px solid #e2e8f0;border-radius:10px;padding:0;background:#fff;cursor:pointer;overflow:hidden}
+  .ss-th{position:relative;flex:none;width:96px;border:3px solid #e2e8f0;border-radius:10px;padding:0;background:#FFF8EC;cursor:pointer;overflow:hidden}
   .ss-th img{display:block;width:100%;height:56px;object-fit:cover}
   .ss-th span{position:absolute;left:4px;top:4px;width:24px;height:24px;border-radius:999px;background:rgba(15,23,42,.75);color:#fff;font-size:.8rem;font-weight:900;display:flex;align-items:center;justify-content:center}
   .ss-th.on{border-color:#ea580c}
   .ss-th.on span{background:#ea580c}
   .ssov{position:fixed;inset:0;z-index:99998;background:rgba(15,23,42,.9);display:flex;align-items:center;justify-content:center;gap:14px;padding:16px;cursor:zoom-out}
-  .ssov img,.ssov video{max-width:92vw;max-height:88vh;border-radius:12px;background:#fff}
+  .ssov img,.ssov video{max-width:92vw;max-height:88vh;border-radius:12px;background:#FFF8EC}
   .ssov button{position:absolute;top:50%;transform:translateY(-50%);font:inherit;font-weight:900;font-size:1.4rem;border:0;border-radius:999px;width:64px;height:64px;background:rgba(255,255,255,.9);color:#c2410c;cursor:pointer}
   .ssov .l{left:14px}.ssov .r{right:14px}
   .ssov button:disabled{opacity:.3}
@@ -104,16 +104,16 @@
   .wikihead h1{font-family:'Baloo 2','Noto Sans TC',cursive;font-size:2.4rem;font-weight:900;color:var(--brand-d);margin:0;white-space:nowrap}
   .chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
   .wiki{display:grid;grid-template-columns:330px minmax(0,1fr);gap:22px;align-items:start}
-  .list{background:#fff;border:3px solid var(--line);border-radius:24px;padding:12px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+  .list{background:#FFF8EC;border:3px solid var(--line);border-radius:24px;padding:12px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
   .list h3{display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:900;color:var(--c);margin:10px 8px 6px}
   .list h3:first-child{margin-top:2px}
   .item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;font-weight:800;font-size:1.12rem;padding:9px 12px;border-radius:14px;border:2px solid transparent;background:none;color:var(--ink);cursor:pointer}
   .item:hover{background:var(--cbg)}
   .item.on{background:var(--c);color:#fff}
-  .item.on .dot{background:#fff}
+  .item.on .dot{background:#FFF8EC}
   .item .soon{margin-left:auto;font-size:.75rem;font-weight:800;color:#94a3b8}
   .item.on .soon{color:#fff;opacity:.85}
-  .detail{background:#fff;border:4px solid var(--cbd);border-top:14px solid var(--c);border-radius:28px;padding:22px 26px}
+  .detail{background:#FFF8EC;border:4px solid var(--cbd);border-top:14px solid var(--c);border-radius:28px;padding:22px 26px}
   .detail h2{font-family:'Baloo 2','Noto Sans TC',cursive;font-size:2.3rem;font-weight:900;color:var(--c);margin:0 0 6px;line-height:1.2}
   .detail .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
   .detail .media{margin-bottom:18px}
@@ -125,12 +125,21 @@
   .points li:before{content:counter(pt);flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;background:var(--c);color:#fff;font-size:1.2rem;margin-top:2px}
   .points b{color:var(--c)}
   .keys{display:flex;align-items:center;justify-content:center;gap:18px;background:var(--cbg);border-radius:20px;padding:40px 10px;font-size:2.4rem;font-weight:900;color:var(--ink)}
-  .keys kbd{font-size:3rem;padding:6px 28px;border-radius:14px;border-bottom-width:7px;background:#fff}
+  .keys kbd{font-size:3rem;padding:6px 28px;border-radius:14px;border-bottom-width:7px;background:#FFF8EC}
   .bigsay{background:var(--cbg);border-radius:20px;padding:40px 20px;text-align:center;font-size:2.1rem;font-weight:900;color:var(--c)}
   .links{display:flex;gap:14px;flex-wrap:wrap;background:var(--cbg);border-radius:20px;padding:28px}
   .links a{display:inline-flex;align-items:center;min-height:64px;padding:0 26px;border-radius:18px;font-size:1.35rem;font-weight:900;text-decoration:none;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18)}
   .links a.primary{background:var(--brand)}.links a.second{background:#0f766e}
   .empty{font-size:1.2rem;font-weight:800;color:var(--muted);padding:12px}
+
+  .tdemo{margin:28px 0 8px;background:#FFEBD3;border:3px dashed #c2410c;border-radius:22px;padding:14px 18px}
+  .tdemo h2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 4px;font-family:'Baloo 2','Noto Sans TC',cursive;font-size:1.5rem;font-weight:900;color:#c2410c}
+  .tdemo h2 span{background:#c2410c;color:#fff;font-size:1.05rem;border-radius:999px;padding:2px 14px}
+  .tdemo p{margin:0 0 10px;font-weight:700;color:var(--muted)}
+  .tdemo .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .tdemo figure{margin:0;text-align:center;font-weight:800;font-size:.95rem}
+  .tdemo img{width:100%;border-radius:8px;border:3px solid #FFF8EC;box-shadow:0 3px 10px rgba(0,0,0,.14)}
+  .bg-white{background-color:#FFF8EC !important}
 </style>
 </head>
 <body>
@@ -143,6 +152,7 @@
     <aside class="list" id="list" aria-label="技能清單"></aside>
     <div class="sc sc-flat sc-nonum" data-sc><article class="detail" id="detail" aria-live="polite"></article></div>
   </div>
+<section class="tdemo"><h2><span>👩‍🏫 老師示範</span>整本導覽手冊長這樣</h2><p>做的時候不確定要做成什麼樣子，就來這裡對照。點圖可以放大。</p><div class="g"><figure><img class="zoomable" src="../assets/手冊_p1.jpg" alt="老師示範：封面"><figcaption>第 1 頁　封面</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p2.jpg" alt="老師示範：目錄"><figcaption>第 2 頁　目錄</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p3.jpg" alt="老師示範：行程規劃"><figcaption>第 3 頁　行程規劃</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p4.jpg" alt="老師示範：路線圖"><figcaption>第 4 頁　路線圖</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p5.jpg" alt="老師示範：第 1 站"><figcaption>第 5 頁　第 1 站</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p6.jpg" alt="老師示範：第 2 站"><figcaption>第 6 頁　第 2 站</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p7.jpg" alt="老師示範：第 3 站"><figcaption>第 7 頁　第 3 站</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p8.jpg" alt="老師示範：第 4 站"><figcaption>第 8 頁　第 4 站</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p9.jpg" alt="老師示範：第 5 站"><figcaption>第 9 頁　第 5 站</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p10.jpg" alt="老師示範：旅行小提醒"><figcaption>第 10 頁　旅行小提醒</figcaption></figure><figure><img class="zoomable" src="../assets/手冊_p11.jpg" alt="老師示範：封底"><figcaption>第 11 頁　封底</figcaption></figure></div></section>
 </main>
 <footer class="sign">made by 資訊老師黃博胤</footer>
 
@@ -347,7 +357,7 @@ window.StepShow=(function(){
 <!--STEPCARDS-START-->
 <style>
 /* 步驟卡（一個畫面一小步）：規格見 引導規範/HTML互動教材設計規範.md §5.12 */
-.sc{background:#fff;border:4px solid #fde68a;border-radius:24px;padding:16px 16px 12px;margin:0 0 16px}
+.sc{background:#FFF8EC;border:4px solid #fde68a;border-radius:24px;padding:16px 16px 12px;margin:0 0 16px}
 .sc-slide{display:none}
 .sc-slide.on{display:block}
 .sc-t{font-size:1.45rem;font-weight:800;line-height:1.4;margin:0 0 10px;color:#334155}
@@ -357,7 +367,7 @@ window.StepShow=(function(){
 .sc-media .sc-hint{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;border-radius:8px;padding:1px 8px;pointer-events:none}
 .sc-media.paused:after{content:'▶';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;line-height:64px;text-align:center;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;font-size:28px;pointer-events:none}
 .sc-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
-.sc-nav button{font-weight:800;border-radius:16px;padding:8px 16px;border:2px solid #cbd5e1;background:#fff;color:#475569}
+.sc-nav button{font-weight:800;border-radius:16px;padding:8px 16px;border:2px solid #cbd5e1;background:#FFF8EC;color:#475569}
 .sc-nav button.sc-next{background:#f59e0b;border-color:#f59e0b;color:#fff}
 .sc-nav button:disabled{opacity:.35;cursor:default}
 .sc-dots{display:flex;gap:6px;align-items:center}
@@ -368,7 +378,7 @@ window.StepShow=(function(){
 
 /* 平鋪模式（sc-flat）：所有小步驟直接攤開在同一頁，不切換、沒有上下一步；標題前自動編號 */
 .sc-flat{background:transparent;border:0;padding:0;margin:0;counter-reset:scn}
-.sc-flat .sc-slide{display:block;background:#fff;border:4px solid #fde68a;border-radius:24px;padding:16px;margin:0 0 16px;counter-increment:scn}
+.sc-flat .sc-slide{display:block;background:#FFF8EC;border:4px solid #fde68a;border-radius:24px;padding:16px;margin:0 0 16px;counter-increment:scn}
 .sc-flat .sc-t:before{content:counter(scn);display:inline-flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;margin-right:.5em;border-radius:9999px;background:#f59e0b;color:#fff;font-size:.8em}
 .sc-flat.sc-nonum .sc-t:before{display:none}
 

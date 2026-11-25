@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FFFBF3;--card:#ffffff;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;
+    --bg:#FBF1DE;--card:#ffffff;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;
     --brand:#ea580c;--brand-d:#c2410c;--brand-bg:#fff7ed;
     --start:#0369a1;--start-bg:#e0f2fe;--start-bd:#7dd3fc;
     --text:#c2410c;--text-bg:#ffedd5;--text-bd:#fdba74;
@@ -25,12 +25,12 @@
   .hidden.hidden,.sc-flat .sc-slide.hidden{display:none !important}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
   kbd{background:#f1f5f9;border:1px solid #cbd5e1;border-bottom-width:3px;border-radius:6px;padding:0 6px;font-family:inherit;font-weight:700;color:var(--ink)}
-  .shot{border-radius:14px;border:3px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,.14);width:100%;display:block;background:#fff}
+  .shot{border-radius:14px;border:3px solid #FFF8EC;box-shadow:0 6px 20px rgba(0,0,0,.14);width:100%;display:block;background:#FFF8EC}
   .zoomable{cursor:zoom-in}
   a{color:inherit}
 
   /* 頁首導覽列 */
-  .topnav{background:#fff;border-bottom:3px solid #fed7aa}
+  .topnav{background:#FFF6E3;border-bottom:3px solid #fed7aa}
   .topnav .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
   .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;white-space:nowrap}
   .brand b{font-family:'Baloo 2','Noto Sans TC',cursive;font-size:1.5rem;font-weight:800;color:var(--brand)}
@@ -49,7 +49,7 @@
   .c-page{--c:var(--page);--cbg:var(--page-bg);--cbd:var(--page-bd)}
   .c-done{--c:var(--done);--cbg:var(--done-bg);--cbd:var(--done-bd)}
   .c-all{--c:#334155;--cbg:#f1f5f9;--cbd:#cbd5e1}
-  .chip{display:inline-flex;align-items:center;gap:6px;font:inherit;font-weight:800;font-size:1.1rem;padding:6px 18px;border-radius:999px;border:3px solid var(--cbd);background:#fff;color:var(--c);cursor:pointer}
+  .chip{display:inline-flex;align-items:center;gap:6px;font:inherit;font-weight:800;font-size:1.1rem;padding:6px 18px;border-radius:999px;border:3px solid var(--cbd);background:#FFF8EC;color:var(--c);cursor:pointer}
   .chip:hover{background:var(--cbg)}
   .chip.on{background:var(--c);border-color:var(--c);color:#fff}
   .chip .n{font-size:.85rem;opacity:.8}
@@ -59,37 +59,37 @@
   .badge-lesson.soon{background:#f8fafc;color:#64748b;border-color:#e2e8f0}
 
   /* 搜尋框：前面固定一個「搜尋技能」標籤（不用 placeholder） */
-  .search{display:flex;align-items:stretch;border:4px solid #fdba74;border-radius:22px;background:#fff;overflow:hidden}
+  .search{display:flex;align-items:stretch;border:4px solid #fdba74;border-radius:22px;background:#FFF8EC;overflow:hidden}
   .search:focus-within{border-color:var(--brand);box-shadow:0 0 0 5px rgba(234,88,12,.15)}
   .search label{display:flex;align-items:center;gap:10px;padding:0 18px;background:var(--brand-bg);color:var(--brand-d);font-weight:900;font-size:1.3rem;white-space:nowrap;border-right:3px solid #fed7aa;cursor:text}
   .search label svg{width:28px;height:28px}
-  .search input{flex:1;min-width:0;border:0;font-size:1.5rem;font-weight:700;padding:14px 18px;outline:none;background:#fff;color:var(--ink)}
+  .search input{flex:1;min-width:0;border:0;font-size:1.5rem;font-weight:700;padding:14px 18px;outline:none;background:#FFF8EC;color:var(--ink)}
 
   /* 結果小卡 */
-  .tile{display:flex;align-items:center;gap:12px;text-decoration:none;background:#fff;border:3px solid var(--cbd);border-left:12px solid var(--c);border-radius:16px;padding:10px 14px;font-weight:800;font-size:1.15rem;color:var(--ink)}
+  .tile{display:flex;align-items:center;gap:12px;text-decoration:none;background:#FFF8EC;border:3px solid var(--cbd);border-left:12px solid var(--c);border-radius:16px;padding:10px 14px;font-weight:800;font-size:1.15rem;color:var(--ink)}
   .tile:hover{background:var(--cbg)}
   .tile small{display:block;font-size:.85rem;font-weight:700;color:var(--muted)}
 
   /* 步驟圖元件（三頁共用）：大圖一次一張＋上一張／下一張＋編號縮圖列＋看動畫 */
-  .ss{background:#fff;border:3px solid var(--line);border-radius:20px;padding:12px}
+  .ss{background:#FFF8EC;border:3px solid var(--line);border-radius:20px;padding:12px}
   .ss-stage{position:relative;background:#0f172a;border-radius:14px;overflow:hidden;display:flex;justify-content:center}
-  .ss-img{display:block;max-width:100%;max-height:56vh;object-fit:contain;cursor:zoom-in;background:#fff}
+  .ss-img{display:block;max-width:100%;max-height:56vh;object-fit:contain;cursor:zoom-in;background:#FFF8EC}
   .ss-hint{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.55);color:#fff;font-size:13px;font-weight:700;border-radius:8px;padding:1px 8px;pointer-events:none}
   .ss-bar{display:flex;align-items:center;gap:12px;margin-top:10px}
   .ss-bar button{font:inherit;font-weight:900;font-size:1.2rem;border-radius:16px;padding:8px 20px;cursor:pointer}
-  .ss-prev,.ss-next{border:3px solid #fdba74;background:#fff;color:#c2410c}
+  .ss-prev,.ss-next{border:3px solid #fdba74;background:#FFF8EC;color:#c2410c}
   .ss-next{background:#ea580c;border-color:#ea580c;color:#fff}
   .ss-bar button:disabled{opacity:.35;cursor:default}
   .ss-count{font-weight:900;font-size:1.2rem;color:#334155;min-width:7em;text-align:center}
   .ss-anim{margin-left:auto;border:2px solid #cbd5e1;background:#f8fafc;color:#475569;font-size:1rem !important;padding:6px 14px !important}
   .ss-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
-  .ss-th{position:relative;flex:none;width:96px;border:3px solid #e2e8f0;border-radius:10px;padding:0;background:#fff;cursor:pointer;overflow:hidden}
+  .ss-th{position:relative;flex:none;width:96px;border:3px solid #e2e8f0;border-radius:10px;padding:0;background:#FFF8EC;cursor:pointer;overflow:hidden}
   .ss-th img{display:block;width:100%;height:56px;object-fit:cover}
   .ss-th span{position:absolute;left:4px;top:4px;width:24px;height:24px;border-radius:999px;background:rgba(15,23,42,.75);color:#fff;font-size:.8rem;font-weight:900;display:flex;align-items:center;justify-content:center}
   .ss-th.on{border-color:#ea580c}
   .ss-th.on span{background:#ea580c}
   .ssov{position:fixed;inset:0;z-index:99998;background:rgba(15,23,42,.9);display:flex;align-items:center;justify-content:center;gap:14px;padding:16px;cursor:zoom-out}
-  .ssov img,.ssov video{max-width:92vw;max-height:88vh;border-radius:12px;background:#fff}
+  .ssov img,.ssov video{max-width:92vw;max-height:88vh;border-radius:12px;background:#FFF8EC}
   .ssov button{position:absolute;top:50%;transform:translateY(-50%);font:inherit;font-weight:900;font-size:1.4rem;border:0;border-radius:999px;width:64px;height:64px;background:rgba(255,255,255,.9);color:#c2410c;cursor:pointer}
   .ssov .l{left:14px}.ssov .r{right:14px}
   .ssov button:disabled{opacity:.3}
@@ -100,29 +100,29 @@
   footer.sign{text-align:right;font-size:.8rem;color:#94a3b8;padding:24px 20px 18px}
 </style>
 <style>
-  .idbar{background:#fff;border-bottom:2px solid #fed7aa}
+  .idbar{background:#FFF1D6;border-bottom:2px solid #fed7aa}
   .idbar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px;font-size:1rem}
   .idbar label{display:flex;align-items:center;gap:6px;color:var(--muted);font-weight:700}
   .idbar .ltitle{margin-left:auto;font-weight:900;color:#c2410c;font-size:1.1rem}
   .idbar .ltitle small{color:var(--muted);font-weight:800;margin-right:6px}
   .idnum{width:58px;text-align:center;border:2px solid #e2e8f0;border-radius:10px;padding:3px 6px;font-weight:800;font-size:1.05rem;color:var(--ink);outline:none}
   .idnum:focus{border-color:#fb923c}
-  .stepbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:2px solid #ffedd5}
+  .stepbar{position:sticky;top:0;z-index:20;background:rgba(255,243,222,.96);backdrop-filter:blur(6px);border-bottom:2px solid #ffedd5}
   .stepbar .wrap{padding-top:8px;padding-bottom:8px}
   .stepdot{width:40px;height:40px;font-size:1.05rem}
   .stepname{font-size:1.05rem;font-weight:800;margin-top:2px;white-space:nowrap}
   main.wrap{padding-top:16px}
-  .step{background:#fff;border:4px solid var(--sbd);border-radius:30px;padding:20px 24px;scroll-margin-top:90px}
-  .s-sky{--s:#0369a1;--sbd:#7dd3fc;--sbg:#f0f9ff}
-  .s-violet{--s:#6d28d9;--sbd:#c4b5fd;--sbg:#f5f3ff}
-  .s-teal{--s:#0f766e;--sbd:#5eead4;--sbg:#f0fdfa}
-  .s-orange{--s:#c2410c;--sbd:#fdba74;--sbg:#fff7ed}
-  .s-rose{--s:#be123c;--sbd:#fda4af;--sbg:#fff1f2}
+  .step{background:var(--sbg);border:4px solid var(--sbd);border-radius:30px;padding:20px 24px;scroll-margin-top:90px}
+  .s-sky{--s:#0369a1;--sbd:#7dd3fc;--sbg:#E3F3FD}
+  .s-violet{--s:#6d28d9;--sbd:#c4b5fd;--sbg:#EEEAFE}
+  .s-teal{--s:#0f766e;--sbd:#5eead4;--sbg:#E0F7F3}
+  .s-orange{--s:#c2410c;--sbd:#fdba74;--sbg:#FFEBD3}
+  .s-rose{--s:#be123c;--sbd:#fda4af;--sbg:#FFE6EA}
   .shead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
   .shead h2{font-family:'Baloo 2','Noto Sans TC',cursive;font-size:2.1rem;font-weight:900;color:var(--s);margin:0;line-height:1.2}
   .shead h2 .no{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:999px;background:var(--s);color:#fff;font-size:1.5rem;margin-right:12px;vertical-align:middle}
   .wlink{display:inline-flex;align-items:center;gap:6px;flex:none;text-decoration:none;font-weight:800;font-size:1rem;color:var(--s);border:2px solid var(--sbd);background:var(--sbg);border-radius:999px;padding:5px 14px}
-  .wlink:hover{background:#fff}
+  .wlink:hover{background:#FFF8EC}
   /* 步驟卡元件的 CSS 由 inject 插在 body 尾端，這裡用 .step 前綴提高權重 */
   .step .sc-t{font-size:1.5rem}
   .step .sc-t b{color:var(--s)}
@@ -133,7 +133,7 @@
   .tip{display:block;font-size:1.2rem;font-weight:800;color:#334155;background:var(--sbg);border-radius:14px;padding:6px 14px;margin:10px 0 0}
   .tip b{color:var(--s)}
   .warn{font-size:1.25rem;font-weight:900;color:#be123c;background:#fff1f2;border:3px solid #fda4af;border-radius:16px;padding:8px 14px;margin:12px 0 0}
-  .checkbox{background:var(--sbg);border:3px solid var(--sbd);border-radius:22px;padding:14px 18px;margin-top:16px}
+  .checkbox{background:#FFFDF6;border:3px solid var(--sbd);border-radius:22px;padding:14px 18px;margin-top:16px}
   .checkbox .cbt{font-family:'Baloo 2','Noto Sans TC',cursive;font-size:1.4rem;font-weight:900;color:var(--s);margin:0 0 6px}
   .checkbox label{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:800;margin:6px 0;cursor:pointer}
   .checkbox input{width:28px;height:28px;accent-color:var(--s);flex:none}
@@ -142,11 +142,11 @@
   .legend div{display:flex;align-items:center;gap:10px;font-size:1.25rem;font-weight:800;background:var(--sbg);border-radius:16px;padding:8px 12px}
   .legend .n{flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;background:#ea580c;color:#fff;font-weight:900}
   .legend span.d{color:var(--muted);font-weight:700;font-size:1.05rem}
-  .ptype{border:4px solid #bae6fd;background:#fff;border-radius:18px;padding:4px 16px;font-weight:800;font-size:1.2rem;color:#0369a1}
+  .ptype{border:4px solid #bae6fd;background:#FFF8EC;border-radius:18px;padding:4px 16px;font-weight:800;font-size:1.2rem;color:#0369a1}
   .ptype.on{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
   .kwchips{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
   .kwchips .lab{font-size:1.2rem;font-weight:900;color:#334155}
-  .kw{font:inherit;font-size:1.3rem;font-weight:900;border:3px solid var(--sbd);background:#fff;color:var(--s);border-radius:999px;padding:2px 18px;cursor:pointer}
+  .kw{font:inherit;font-size:1.3rem;font-weight:900;border:3px solid var(--sbd);background:#FFF8EC;color:var(--s);border-radius:999px;padding:2px 18px;cursor:pointer}
   .kw:hover{background:var(--sbg)}
   .kw.done{background:var(--s);color:#fff;border-color:var(--s)}
   .three{list-style:none;margin:0;padding:0}
@@ -155,21 +155,21 @@
   .goalcard{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:center;background:var(--sbg);border:3px solid var(--sbd);border-radius:22px;padding:14px 16px;margin-bottom:16px}
   .goalcard .say{font-size:1.3rem;font-weight:800;line-height:1.6}
   .goalcard b{color:var(--s)}
-  .btn-s{display:inline-flex;align-items:center;gap:8px;margin-top:8px;text-decoration:none;font-size:1.1rem;font-weight:900;color:var(--s);background:#fff;border:3px solid var(--sbd);border-radius:16px;padding:6px 16px}
+  .btn-s{display:inline-flex;align-items:center;gap:8px;margin-top:8px;text-decoration:none;font-size:1.1rem;font-weight:900;color:var(--s);background:#FFF8EC;border:3px solid var(--sbd);border-radius:16px;padding:6px 16px}
   .btn-s:hover{background:var(--sbg)}
   .bigwiki{display:inline-flex;align-items:center;gap:10px;margin-top:12px;text-decoration:none;font-size:1.2rem;font-weight:900;color:#fff;background:var(--s);border-radius:18px;padding:10px 20px;box-shadow:0 4px 0 rgba(0,0,0,.2)}
   .projname{font-family:'Baloo 2','Noto Sans TC',cursive;font-size:1.9rem;font-weight:900;color:var(--s);margin:0}
-  .btn-o{font:inherit;font-weight:800;border:2px solid var(--sbd);background:#fff;color:var(--s);border-radius:14px;padding:4px 16px;cursor:pointer}
+  .btn-o{font:inherit;font-weight:800;border:2px solid var(--sbd);background:#FFF8EC;color:var(--s);border-radius:14px;padding:4px 16px;cursor:pointer}
   .joinbtns{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
   .joinbtns a{display:inline-flex;align-items:center;min-height:60px;padding:0 24px;border-radius:18px;font-size:1.35rem;font-weight:900;color:#fff;text-decoration:none;box-shadow:0 4px 0 rgba(0,0,0,.18)}
   .namerow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
-  .terms{margin-top:14px;background:#fffbeb;border:3px solid #fcd34d;border-radius:18px;padding:10px 16px}
+  .terms{margin-top:14px;background:#FFF6D8;border:3px solid #fcd34d;border-radius:18px;padding:10px 16px}
   .terms .th{display:inline-flex;align-items:center;gap:6px;font-weight:900;font-size:1rem;color:#92400e;background:#fef3c7;border-radius:999px;padding:0 12px;margin-bottom:4px}
   .terms dl{margin:0}.terms dt{display:inline;font-weight:900;font-size:1.2rem;color:#b45309}
   .terms dd{display:inline;margin:0;font-weight:700;font-size:1.15rem;color:#334155}
   .terms .row{margin:6px 0;display:flex;align-items:center;gap:14px}
   .terms .tx{flex:1;min-width:0}
-  .bicon{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:64px;padding:0 10px;background:#fff;border:3px solid #94a3b8;border-radius:14px;box-shadow:0 3px 0 #cbd5e1;color:#1e293b;font-weight:900;font-size:1.15rem;white-space:nowrap}
+  .bicon{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:64px;padding:0 10px;background:#FFF8EC;border:3px solid #94a3b8;border-radius:14px;box-shadow:0 3px 0 #cbd5e1;color:#1e293b;font-weight:900;font-size:1.15rem;white-space:nowrap}
   .bicon svg{width:40px;height:40px}
   .bicon.share{background:#7c3aed;border-color:#6d28d9;color:#fff;box-shadow:0 3px 0 #5b21b6}
   .bicon.wide{padding:0 18px}
@@ -181,12 +181,28 @@
   .ttcols{font-weight:900;color:var(--muted);font-size:1rem;margin-bottom:2px}
   .ttrow{margin-bottom:8px}
   .ttn{color:var(--s);font-size:1.15rem}
-  .ttin,.ttsel{font:inherit;font-weight:800;font-size:1.15rem;border:3px solid var(--sbd);border-radius:12px;padding:4px 10px;background:#fff;color:var(--ink);outline:none;min-width:0}
+  .ttin,.ttsel{font:inherit;font-weight:800;font-size:1.15rem;border:3px solid var(--sbd);border-radius:12px;padding:4px 10px;background:#FFF8EC;color:var(--ink);outline:none;min-width:0}
   .ttin:focus,.ttsel:focus{border-color:var(--s)}
   .ttmin{text-align:center}
   .ttbtns{display:flex;gap:10px;margin:4px 0 12px}
   .btn-o:disabled{opacity:.35;cursor:default}
-  .ttout{white-space:pre-wrap;background:#fff;border:3px dashed var(--sbd);border-radius:16px;padding:10px 16px;font-size:1.2rem;font-weight:800;line-height:1.65;margin-bottom:6px}
+  .ttout{white-space:pre-wrap;background:#FFF8EC;border:3px dashed var(--sbd);border-radius:16px;padding:10px 16px;font-size:1.2rem;font-weight:800;line-height:1.65;margin-bottom:6px}
+
+  /* 老師示範（每一步最下面） */
+  .demo{margin-top:18px;background:var(--sbg);border:3px dashed var(--s);border-radius:22px;padding:12px 16px}
+  .demo-h{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+  .demo-tag{background:var(--s);color:#fff;font-weight:900;font-size:1.05rem;border-radius:999px;padding:2px 14px}
+  .demo-t{font-weight:900;font-size:1.2rem;color:var(--s)}
+  .demo-hint{margin-left:auto;font-size:.9rem;font-weight:700;color:var(--muted)}
+  .demo-body{display:flex;gap:18px;align-items:center}
+  .demo-pics{display:flex;gap:10px;flex:none}
+  .demo-pics img{width:170px;border-radius:10px}
+  .demo-pics img:only-child{width:210px}
+  .demo-wide{flex:none;width:min(52%,520px);border-radius:10px}
+  .demo-notes{flex:1;min-width:0}
+  .demo-notes li{font-size:1.15rem}
+  @media(max-width:760px){.demo-body{flex-direction:column;align-items:stretch}.demo-pics{flex-wrap:wrap}.demo-wide{width:100%}}
+  .bg-white{background-color:#FFF8EC !important}
 </style>
 </head>
 <body>
@@ -206,30 +222,35 @@
     <div class="shead"><h2><span class="no">1</span>加三張新的紙</h2><a class="wlink" href="技能百科.html#new-page"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 8h6"/></svg>忘記怎麼做？查技能百科</a></div>
     <div class="sc sc-flat sc-nonum" data-sc><div class="sc-slide"><p class="sc-t">按 <b>＋</b> 多三張紙，每張<b>打上標題</b></p><div class="legend"><div><span class="n">2</span><span>第 2 頁：目錄<br><span class="d">下一步做</span></span></div><div><span class="n">3</span><span>第 3 頁：行程規劃<br><span class="d">時間表</span></span></div><div><span class="n">4</span><span>第 4 頁：路線圖<br><span class="d">Google 地圖截圖</span></span></div></div><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/新增頁面_01.jpg&quot;, &quot;cap&quot;: &quot;捲到最下面，找到「＋ 新增頁面」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/新增頁面_02.jpg&quot;, &quot;cap&quot;: &quot;按一下，多出第 2 頁&quot;}, {&quot;src&quot;: &quot;../assets/步圖/新增頁面_03.jpg&quot;, &quot;cap&quot;: &quot;再按兩次，一共 4 頁：封面、目錄、行程規劃、路線圖&quot;}, {&quot;src&quot;: &quot;../assets/步圖/新增頁面_04.jpg&quot;, &quot;cap&quot;: &quot;不小心多按了？點頁面上方的垃圾桶刪掉&quot;}]' data-video="../assets/步_canva_新增頁面.mp4"></div><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/加文字_01.jpg&quot;, &quot;cap&quot;: &quot;點左邊的「文字」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_02.jpg&quot;, &quot;cap&quot;: &quot;點「新增標題」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_03.jpg&quot;, &quot;cap&quot;: &quot;連按兩下，Ctrl＋A，直接打字&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_04.jpg&quot;, &quot;cap&quot;: &quot;連按兩下，Ctrl＋A，直接打字&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_05.jpg&quot;, &quot;cap&quot;: &quot;按住文字，拖到頁面上方中間&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_06.jpg&quot;, &quot;cap&quot;: &quot;按住文字，拖到頁面上方中間&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_07.jpg&quot;, &quot;cap&quot;: &quot;每一頁都這樣打好標題&quot;}]' data-video="../assets/步_canva_加文字.mp4"></div><div class="terms"><span class="th">📖 名詞小卡</span><dl><div class="row"><span class="bicon wide">＋ 新增頁面</span><div class="tx"><dt>新增頁面</dt><dd>：頁面下方這顆按鈕，按一下多一張新的頁面</dd></div></div><div class="row"><span class="bicon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11h24M16 11V7h8v4M11 11l1.5 22h15L29 11M17 17v11M23 17v11"/></svg></span><div class="tx"><dt>刪除頁面</dt><dd>：多按了？點頁面上方的垃圾桶刪掉</dd></div></div><div class="row"><div class="tx"><dt>頁面</dt><dd>：Canva 裡的一張紙，手冊的一頁就是一個頁面</dd></div></div><div class="row"><div class="tx"><dt>標題</dt><dd>：一頁最上面最大的字，說明這頁是什麼</dd></div></div></dl></div></div></div>
     <div class="checkbox"><p class="cbt">這一步檢查</p><label><input type="checkbox" class="chk"> <span>多了<b>三頁</b></span></label><label><input type="checkbox" class="chk"> <span>三頁都有<b>標題</b></span></label></div>
+    <div class="demo"><div class="demo-h"><span class="demo-tag">👩‍🏫 老師示範</span><span class="demo-t">三張新紙，各有標題</span><span class="demo-hint">點圖可以放大</span></div><div class="demo-body"><div class="demo-pics"><img src="../assets/手冊_p2.jpg" alt="老師示範：手冊第 2 頁" class="shot zoomable"><img src="../assets/手冊_p3.jpg" alt="老師示範：手冊第 3 頁" class="shot zoomable"><img src="../assets/手冊_p4.jpg" alt="老師示範：手冊第 4 頁" class="shot zoomable"></div><ul class="three demo-notes"><li><span class="n">1</span><span>第 2 頁：<b>目錄</b></span></li><li><span class="n">2</span><span>第 3 頁：<b>行程規劃</b></span></li><li><span class="n">3</span><span>第 4 頁：<b>路線圖</b>（標題都在最上面中間）</span></li></ul></div></div>
     <div class="stepnav"></div>
   </section>
   <section class="step s-orange hidden" data-step="2">
     <div class="shead"><h2><span class="no">2</span>做目錄</h2><a class="wlink" href="技能百科.html#align-list"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 8h6"/></svg>忘記怎麼做？查技能百科</a></div>
-    <div class="sc sc-flat sc-nonum" data-sc><div class="sc-slide"><p class="sc-t">第 2 頁做<b>目錄</b>：看一眼就知道手冊有什麼</p><p class="sub" style="margin:0 0 8px">手冊分三塊：先看全貌 → 景點介紹 → 最後收尾。目錄列出<b>封面、目錄以外</b>的每個章節。</p><div style="display:flex;gap:10px;align-items:stretch;flex-wrap:wrap"><div style="flex:5;background:#e0f2fe;border:3px solid #0369a1;border-radius:16px;padding:8px 12px"><p style="margin:0 0 4px;font-weight:900;color:#0369a1;font-size:1.15rem">先看全貌</p><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">封面</span><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">目錄</span><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">行程規劃</span><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">路線圖</span></div><div style="flex:5;background:#ffedd5;border:3px solid #c2410c;border-radius:16px;padding:8px 12px"><p style="margin:0 0 4px;font-weight:900;color:#c2410c;font-size:1.15rem">景點介紹</p><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">第 1 站</span><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">第 2 站</span><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">…</span><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">美食也算一站</span></div><div style="flex:3;background:#ffe4e6;border:3px solid #be123c;border-radius:16px;padding:8px 12px"><p style="margin:0 0 4px;font-weight:900;color:#be123c;font-size:1.15rem">最後收尾</p><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">旅行小提醒</span><span style="display:inline-block;background:#fff;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">封底</span></div></div><div class="legend" style="margin-top:14px"><div><span class="n">1</span><span>章節名<br><span class="d">手冊有哪些章節，一行一個</span></span></div><div><span class="n">2</span><span>照順序<br><span class="d">從行程規劃寫到旅行小提醒</span></span></div><div><span class="n">3</span><span>靠左<br><span class="d">每行都靠左邊</span></span></div><div><span class="n">4</span><span>項目符號<br><span class="d">每行前面有小圓點</span></span></div></div><p class="tip"><b>頁碼</b>先不用打，之後景點頁做好了再補。</p><div class="terms"><span class="th">📖 名詞小卡</span><dl><div class="row"><div class="tx"><dt>目錄</dt><dd>：列出手冊有哪些章節的一頁，翻開就知道要去哪裡找</dd></div></div><div class="row"><span class="bicon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><circle cx="7" cy="9" r="2.4" fill="currentColor"/><circle cx="7" cy="20" r="2.4" fill="currentColor"/><circle cx="7" cy="31" r="2.4" fill="currentColor"/><path d="M15 9h20M15 20h20M15 31h20"/></svg></span><div class="tx"><dt>項目符號</dt><dd>：每一行最前面的小圓點，用來一行一行列出東西；按工具列上這顆</dd></div></div><div class="row"><span class="bicon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M5 8h30M5 16h19M5 24h30M5 32h19"/></svg></span><div class="tx"><dt>靠左對齊</dt><dd>：每一行的字都從左邊開始排；按工具列上這顆，按到字靠左就停</dd></div></div></dl></div><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_01.jpg&quot;, &quot;cap&quot;: &quot;文字 →「新增少量內文文字」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_02.jpg&quot;, &quot;cap&quot;: &quot;一行一個章節，先不用打頁碼&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_03.jpg&quot;, &quot;cap&quot;: &quot;連按兩下，Ctrl＋A，按上面的「對齊」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_04.jpg&quot;, &quot;cap&quot;: &quot;按「項目符號」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_05.jpg&quot;, &quot;cap&quot;: &quot;靠左、有項目符號，就是目錄了&quot;}]' data-video="../assets/步_canva_目錄靠左列點.mp4"></div></div></div>
+    <div class="sc sc-flat sc-nonum" data-sc><div class="sc-slide"><p class="sc-t">第 2 頁做<b>目錄</b>：看一眼就知道手冊有什麼</p><p class="sub" style="margin:0 0 8px">手冊分三塊：先看全貌 → 景點介紹 → 最後收尾。目錄列出<b>封面、目錄以外</b>的每個章節。</p><div style="display:flex;gap:10px;align-items:stretch;flex-wrap:wrap"><div style="flex:5;background:#e0f2fe;border:3px solid #0369a1;border-radius:16px;padding:8px 12px"><p style="margin:0 0 4px;font-weight:900;color:#0369a1;font-size:1.15rem">先看全貌</p><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">封面</span><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">目錄</span><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">行程規劃</span><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">路線圖</span></div><div style="flex:5;background:#ffedd5;border:3px solid #c2410c;border-radius:16px;padding:8px 12px"><p style="margin:0 0 4px;font-weight:900;color:#c2410c;font-size:1.15rem">景點介紹</p><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">第 1 站</span><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">第 2 站</span><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">…</span><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">美食也算一站</span></div><div style="flex:3;background:#ffe4e6;border:3px solid #be123c;border-radius:16px;padding:8px 12px"><p style="margin:0 0 4px;font-weight:900;color:#be123c;font-size:1.15rem">最後收尾</p><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">旅行小提醒</span><span style="display:inline-block;background:#FFF8EC;border-radius:10px;padding:0 10px;margin:2px 4px 2px 0;font-weight:800;font-size:1.1rem">封底</span></div></div><div class="legend" style="margin-top:14px"><div><span class="n">1</span><span>章節名<br><span class="d">手冊有哪些章節，一行一個</span></span></div><div><span class="n">2</span><span>照順序<br><span class="d">從行程規劃寫到旅行小提醒</span></span></div><div><span class="n">3</span><span>靠左<br><span class="d">每行都靠左邊</span></span></div><div><span class="n">4</span><span>項目符號<br><span class="d">每行前面有小圓點</span></span></div></div><p class="tip"><b>頁碼</b>先不用打，之後景點頁做好了再補。</p><div class="terms"><span class="th">📖 名詞小卡</span><dl><div class="row"><div class="tx"><dt>目錄</dt><dd>：列出手冊有哪些章節的一頁，翻開就知道要去哪裡找</dd></div></div><div class="row"><span class="bicon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><circle cx="7" cy="9" r="2.4" fill="currentColor"/><circle cx="7" cy="20" r="2.4" fill="currentColor"/><circle cx="7" cy="31" r="2.4" fill="currentColor"/><path d="M15 9h20M15 20h20M15 31h20"/></svg></span><div class="tx"><dt>項目符號</dt><dd>：每一行最前面的小圓點，用來一行一行列出東西；按工具列上這顆</dd></div></div><div class="row"><span class="bicon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M5 8h30M5 16h19M5 24h30M5 32h19"/></svg></span><div class="tx"><dt>靠左對齊</dt><dd>：每一行的字都從左邊開始排；按工具列上這顆，按到字靠左就停</dd></div></div></dl></div><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_01.jpg&quot;, &quot;cap&quot;: &quot;文字 →「新增少量內文文字」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_02.jpg&quot;, &quot;cap&quot;: &quot;一行一個章節，先不用打頁碼&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_03.jpg&quot;, &quot;cap&quot;: &quot;連按兩下，Ctrl＋A，按上面的「對齊」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_04.jpg&quot;, &quot;cap&quot;: &quot;按「項目符號」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/目錄靠左列點_05.jpg&quot;, &quot;cap&quot;: &quot;靠左、有項目符號，就是目錄了&quot;}]' data-video="../assets/步_canva_目錄靠左列點.mp4"></div></div></div>
     <div class="checkbox"><p class="cbt">這一步檢查</p><label><input type="checkbox" class="chk"> <span>有每一個<b>章節名</b>，一行一個</span></label><label><input type="checkbox" class="chk"> <span>目錄<b>靠左</b>，每行前面有<b>項目符號</b>（小圓點）</span></label></div>
+    <div class="demo"><div class="demo-h"><span class="demo-tag">👩‍🏫 老師示範</span><span class="demo-t">目錄頁</span><span class="demo-hint">點圖可以放大</span></div><div class="demo-body"><div class="demo-pics"><img src="../assets/手冊_p2.jpg" alt="老師示範：手冊第 2 頁" class="shot zoomable"></div><ul class="three demo-notes"><li><span class="n">1</span><span>每個章節<b>一行一個</b>，從行程規劃寫到旅行小提醒</span></li><li><span class="n">2</span><span><b>靠左</b>，每行前面有<b>項目符號</b></span></li><li><span class="n">3</span><span>頁碼這一步先不用打，景點頁做完再補</span></li></ul></div></div>
     <div class="stepnav"></div>
   </section>
   <section class="step s-teal hidden" data-step="3">
     <div class="shead"><h2><span class="no">3</span>用 Google 地圖畫路線</h2><a class="wlink" href="技能百科.html#gmap-route"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 8h6"/></svg>忘記怎麼做？查技能百科</a></div>
     <div class="sc sc-flat sc-nonum" data-sc><div class="sc-slide"><p class="sc-t">開 <b>Google 地圖</b>，畫出整條路線</p><div class="joinbtns"><a href="https://www.google.com/maps/dir/" target="_blank" rel="noopener" style="background:#0f766e">開 Google 地圖 ↗</a></div><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_01.jpg&quot;, &quot;cap&quot;: &quot;打開 Google 地圖，按「路線」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_02.jpg&quot;, &quot;cap&quot;: &quot;起點打「赤崁樓」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_03.jpg&quot;, &quot;cap&quot;: &quot;終點打「安平古堡」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_04.jpg&quot;, &quot;cap&quot;: &quot;交通方式選「機車」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_05.jpg&quot;, &quot;cap&quot;: &quot;按「新增目的地」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_06.jpg&quot;, &quot;cap&quot;: &quot;一站一站加，照順序&quot;}, {&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_07.jpg&quot;, &quot;cap&quot;: &quot;整條路線出現了&quot;}, {&quot;src&quot;: &quot;../assets/步圖/Google地圖路線_08.jpg&quot;, &quot;cap&quot;: &quot;每段幾分鐘，看你的文件就好&quot;}]' data-video="../assets/步_canva_Google地圖路線.mp4"></div><p class="tip">交通方式選「<b>機車</b>」。搭公車的人也選機車，只是用來畫線。</p></div></div>
     <div class="checkbox"><p class="cbt">這一步檢查</p><label><input type="checkbox" class="chk"> <span>地圖上有我<b>全部的站</b></span></label><label><input type="checkbox" class="chk"> <span>看到<b>整條路線</b></span></label></div>
+    <div class="demo"><div class="demo-h"><span class="demo-tag">👩‍🏫 老師示範</span><span class="demo-t">地圖畫出整條路線</span><span class="demo-hint">點圖可以放大</span></div><div class="demo-body"><div class="demo-pics"><img src="../assets/手冊_p4.jpg" alt="老師示範：手冊第 4 頁" class="shot zoomable"></div><ul class="three demo-notes"><li><span class="n">1</span><span><b>全部的站</b>照順序都在地圖上</span></li><li><span class="n">2</span><span>交通方式選<b>機車</b>，只是用來畫線、查分鐘</span></li><li><span class="n">3</span><span>看得到<b>一整條</b>連起來的路線</span></li></ul></div></div>
     <div class="stepnav"></div>
   </section>
   <section class="step s-violet hidden" data-step="4">
     <div class="shead"><h2><span class="no">4</span>截圖貼到路線圖頁</h2><a class="wlink" href="技能百科.html#snip-paste"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 8h6"/></svg>忘記怎麼做？查技能百科</a></div>
     <div class="sc sc-flat sc-nonum" data-sc><div class="sc-slide"><p class="sc-t">把地圖<b>截圖</b>，貼到第 4 頁</p><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/截圖貼上_01.jpg&quot;, &quot;cap&quot;: &quot;在地圖畫面按 Win＋Shift＋S&quot;}, {&quot;src&quot;: &quot;../assets/步圖/截圖貼上_02.jpg&quot;, &quot;cap&quot;: &quot;拖一個框，把路線框起來&quot;}, {&quot;src&quot;: &quot;../assets/步圖/截圖貼上_03.jpg&quot;, &quot;cap&quot;: &quot;回到 Canva，點第 4 頁「路線圖」的紙&quot;}, {&quot;src&quot;: &quot;../assets/步圖/截圖貼上_04.jpg&quot;, &quot;cap&quot;: &quot;按 Ctrl＋V&quot;}, {&quot;src&quot;: &quot;../assets/步圖/截圖貼上_05.jpg&quot;, &quot;cap&quot;: &quot;拉四個角的白點，把地圖變大&quot;}, {&quot;src&quot;: &quot;../assets/步圖/截圖貼上_06.jpg&quot;, &quot;cap&quot;: &quot;拖到標題下面，剛剛好&quot;}, {&quot;src&quot;: &quot;../assets/步圖/截圖貼上_07.jpg&quot;, &quot;cap&quot;: &quot;在地圖下面加一行小字&quot;}]' data-video="../assets/步_canva_截圖貼上.mp4"></div><p class="tip">地圖下面打一行「<b>圖片：Google 地圖</b>」。</p><div class="terms"><span class="th">📖 名詞小卡</span><dl><div class="row"><div class="tx"><dt>截圖</dt><dd>：把螢幕上看到的畫面拍成一張圖</dd></div></div><div class="row"><div class="tx"><dt>圖片來源</dt><dd>：這張圖是從哪裡來的，寫出來是尊重原作者</dd></div></div></dl></div></div></div>
     <div class="checkbox"><p class="cbt">這一步檢查</p><label><input type="checkbox" class="chk"> <span>第 4 頁有<b>地圖</b></span></label><label><input type="checkbox" class="chk"> <span>地圖<b>夠大</b></span></label><label><input type="checkbox" class="chk"> <span>有寫<b>圖片來源</b></span></label></div>
+    <div class="demo"><div class="demo-h"><span class="demo-tag">👩‍🏫 老師示範</span><span class="demo-t">路線圖頁</span><span class="demo-hint">點圖可以放大</span></div><div class="demo-body"><div class="demo-pics"><img src="../assets/手冊_p4.jpg" alt="老師示範：手冊第 4 頁" class="shot zoomable"></div><ul class="three demo-notes"><li><span class="n">1</span><span>地圖<b>夠大</b>，放在標題下面</span></li><li><span class="n">2</span><span>地圖下面有一行小字：<b>圖片：Google 地圖</b></span></li><li><span class="n">3</span><span>地圖旁邊可以再寫每一段的路線文字</span></li></ul></div></div>
     <div class="stepnav"></div>
   </section>
   <section class="step s-orange hidden" data-step="5">
     <div class="shead"><h2><span class="no">5</span>排行程時間表</h2><a class="wlink" href="技能百科.html#add-text"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 8h6"/></svg>忘記怎麼做？查技能百科</a></div>
-    <div class="sc sc-flat sc-nonum" data-sc><div class="sc-slide"><p class="sc-t">第 3 頁做<b>時間表</b>，下面 4 樣一定要有</p><div class="legend"><div><span class="n">1</span><span>景點<br><span class="d">每一站的名字</span></span></div><div><span class="n">2</span><span>時間<br><span class="d">幾點到、停多久</span></span></div><div><span class="n">3</span><span>交通方式<br><span class="d">走路、機車、開車…</span></span></div><div><span class="n">4</span><span>看得出順序<br><span class="d">第 1 站、第 2 站…照順序排</span></span></div></div><div class="ttwrap" style="margin-top:14px"><img src="../assets/手冊_p3.jpg" alt="行程規劃範例頁：每一站有時間、站名、停留時間，站與站之間寫交通方式和分鐘" class="shot zoomable"><div><p class="sub">照<b>你的 L05 文件</b>做，不用重查。排法可以不一樣，只要 4 樣都有。</p><a class="btn-s" href="https://boyinslps.github.io/pcclass/g4/L05/" target="_blank" rel="noopener">打開 L05 學習單 ↗</a></div></div><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/加文字_01.jpg&quot;, &quot;cap&quot;: &quot;點左邊的「文字」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_02.jpg&quot;, &quot;cap&quot;: &quot;點「新增標題」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_03.jpg&quot;, &quot;cap&quot;: &quot;連按兩下，Ctrl＋A，直接打字&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_04.jpg&quot;, &quot;cap&quot;: &quot;連按兩下，Ctrl＋A，直接打字&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_05.jpg&quot;, &quot;cap&quot;: &quot;按住文字，拖到頁面上方中間&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_06.jpg&quot;, &quot;cap&quot;: &quot;按住文字，拖到頁面上方中間&quot;}, {&quot;src&quot;: &quot;../assets/步圖/加文字_07.jpg&quot;, &quot;cap&quot;: &quot;每一頁都這樣打好標題&quot;}]' data-video="../assets/步_canva_加文字.mp4"></div></div></div>
+    <div class="sc sc-flat sc-nonum" data-sc><div class="sc-slide"><p class="sc-t">第 3 頁做<b>時間表</b>，下面 4 樣一定要有</p><div class="legend"><div><span class="n">1</span><span>景點<br><span class="d">每一站的名字</span></span></div><div><span class="n">2</span><span>時間<br><span class="d">幾點到、停多久</span></span></div><div><span class="n">3</span><span>交通方式<br><span class="d">走路、機車、開車…</span></span></div><div><span class="n">4</span><span>看得出順序<br><span class="d">第 1 站、第 2 站…照順序排</span></span></div></div><p class="sub" style="margin-top:14px"><b>看你的旅遊文件</b>做。交通那幾格還沒完成：站與站中間的<b>交通方式</b>和<b>時間</b>是空的，先補上，再抄進時間表。排法可以不一樣，只要 4 樣都有。</p><div class="ss" data-ss data-imgs='[{&quot;src&quot;: &quot;../assets/步圖/行程時間表_01.jpg&quot;, &quot;cap&quot;: &quot;先看你的旅遊文件：交通那幾格是空的&quot;}, {&quot;src&quot;: &quot;../assets/步圖/行程時間表_02.jpg&quot;, &quot;cap&quot;: &quot;到第 3 頁，文字 →「新增少量內文文字」&quot;}, {&quot;src&quot;: &quot;../assets/步圖/行程時間表_03.jpg&quot;, &quot;cap&quot;: &quot;照文件一行一行打，打完一行按 Enter&quot;}, {&quot;src&quot;: &quot;../assets/步圖/行程時間表_04.jpg&quot;, &quot;cap&quot;: &quot;檢查：景點、時間、交通、順序，4 樣都有&quot;}]'></div></div></div>
     <div class="checkbox"><p class="cbt">這一步檢查</p><label><input type="checkbox" class="chk"> <span>每一站都有<b>景點</b>和<b>時間</b></span></label><label><input type="checkbox" class="chk"> <span>站與站之間有<b>交通方式</b></span></label><label><input type="checkbox" class="chk"> <span>一看就知道<b>先後順序</b></span></label></div>
+    <div class="demo"><div class="demo-h"><span class="demo-tag">👩‍🏫 老師示範</span><span class="demo-t">行程規劃頁：4 樣都有</span><span class="demo-hint">點圖可以放大</span></div><div class="demo-body"><div class="demo-pics"><img src="../assets/手冊_p3.jpg" alt="老師示範：手冊第 3 頁" class="shot zoomable"></div><ul class="three demo-notes"><li><span class="n">1</span><span><b>景點</b>：第 1 站到第 5 站的名字</span></li><li><span class="n">2</span><span><b>時間</b>：幾點到、停留多久</span></li><li><span class="n">3</span><span><b>交通方式與分鐘</b>：每兩站中間一行（▼ 機車 17 分）；<b>順序</b>一看就懂</span></li></ul></div></div>
     <div class="stepnav"></div>
   </section>
   <section class="step s-rose hidden" data-step="6">
@@ -248,6 +269,7 @@
            class="cute inline-block bg-orange-600 hover:bg-orange-700 text-white text-lg font-extrabold rounded-2xl px-6 py-2">電腦教室遊戲網站</a>
       </div>
     </div>
+    <div class="demo"><div class="demo-h"><span class="demo-tag">👩‍🏫 老師示範</span><span class="demo-t">今天做完的樣子</span><span class="demo-hint">點圖可以放大</span></div><div class="demo-body"><div class="demo-pics"><img src="../assets/手冊_p1.jpg" alt="老師示範：手冊第 1 頁" class="shot zoomable"><img src="../assets/手冊_p2.jpg" alt="老師示範：手冊第 2 頁" class="shot zoomable"><img src="../assets/手冊_p3.jpg" alt="老師示範：手冊第 3 頁" class="shot zoomable"><img src="../assets/手冊_p4.jpg" alt="老師示範：手冊第 4 頁" class="shot zoomable"></div><ul class="three demo-notes"><li><span class="n">1</span><span>封面</span></li><li><span class="n">2</span><span>目錄、行程規劃、路線圖都有</span></li><li><span class="n">3</span><span>全部做好再按<b>繳交給老師</b></span></li></ul></div></div>
     <div class="stepnav"></div>
   </section>
 </main>
@@ -632,7 +654,7 @@ var LESSON={"ws": "g4-L08-2", "path": "g4/L08", "wstitle": "台南小導遊：Ca
       var css = document.createElement('style');
       css.textContent =
         '#chairGate{position:fixed;inset:0;z-index:2147483000;background:rgba(15,23,42,.72);display:grid;place-items:center;padding:20px;font-family:inherit}' +
-        '#chairGate .cg{background:#fff;border-radius:22px;max-width:420px;width:100%;padding:26px 22px 22px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);border:4px solid #f87171}' +
+        '#chairGate .cg{background:#FFF8EC;border-radius:22px;max-width:420px;width:100%;padding:26px 22px 22px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);border:4px solid #f87171}' +
         '#chairGate .em{font-size:78px;line-height:1;animation:cgShake .5s ease-in-out 2}' +
         '#chairGate h2{margin:10px 0 6px;font-size:24px;color:#b91c1c;font-weight:900}' +
         '#chairGate .cnt{display:inline-block;margin:6px 0 10px;padding:4px 14px;border-radius:999px;background:#fee2e2;color:#991b1b;font-weight:800;font-size:16px}' +
@@ -734,7 +756,7 @@ var LESSON={"ws": "g4-L08-2", "path": "g4/L08", "wstitle": "台南小導遊：Ca
 <!--STEPCARDS-START-->
 <style>
 /* 步驟卡（一個畫面一小步）：規格見 引導規範/HTML互動教材設計規範.md §5.12 */
-.sc{background:#fff;border:4px solid #fde68a;border-radius:24px;padding:16px 16px 12px;margin:0 0 16px}
+.sc{background:#FFF8EC;border:4px solid #fde68a;border-radius:24px;padding:16px 16px 12px;margin:0 0 16px}
 .sc-slide{display:none}
 .sc-slide.on{display:block}
 .sc-t{font-size:1.45rem;font-weight:800;line-height:1.4;margin:0 0 10px;color:#334155}
@@ -744,7 +766,7 @@ var LESSON={"ws": "g4-L08-2", "path": "g4/L08", "wstitle": "台南小導遊：Ca
 .sc-media .sc-hint{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;border-radius:8px;padding:1px 8px;pointer-events:none}
 .sc-media.paused:after{content:'▶';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;line-height:64px;text-align:center;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;font-size:28px;pointer-events:none}
 .sc-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
-.sc-nav button{font-weight:800;border-radius:16px;padding:8px 16px;border:2px solid #cbd5e1;background:#fff;color:#475569}
+.sc-nav button{font-weight:800;border-radius:16px;padding:8px 16px;border:2px solid #cbd5e1;background:#FFF8EC;color:#475569}
 .sc-nav button.sc-next{background:#f59e0b;border-color:#f59e0b;color:#fff}
 .sc-nav button:disabled{opacity:.35;cursor:default}
 .sc-dots{display:flex;gap:6px;align-items:center}
@@ -755,7 +777,7 @@ var LESSON={"ws": "g4-L08-2", "path": "g4/L08", "wstitle": "台南小導遊：Ca
 
 /* 平鋪模式（sc-flat）：所有小步驟直接攤開在同一頁，不切換、沒有上下一步；標題前自動編號 */
 .sc-flat{background:transparent;border:0;padding:0;margin:0;counter-reset:scn}
-.sc-flat .sc-slide{display:block;background:#fff;border:4px solid #fde68a;border-radius:24px;padding:16px;margin:0 0 16px;counter-increment:scn}
+.sc-flat .sc-slide{display:block;background:#FFF8EC;border:4px solid #fde68a;border-radius:24px;padding:16px;margin:0 0 16px;counter-increment:scn}
 .sc-flat .sc-t:before{content:counter(scn);display:inline-flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;margin-right:.5em;border-radius:9999px;background:#f59e0b;color:#fff;font-size:.8em}
 .sc-flat.sc-nonum .sc-t:before{display:none}
 
