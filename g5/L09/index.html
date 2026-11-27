@@ -261,13 +261,22 @@
       <ol class="mt-2 space-y-2 text-lg text-slate-700 list-decimal pl-6">
         <li>按下面的「開啟台詞小教練」。</li>
         <li>對它說：<b class="bg-violet-100 border-2 border-violet-300 rounded-lg px-2 py-0.5">開始寫台詞</b></li>
-        <li><b>把你自己找到的資料給它</b>：貼上來源網址，或貼上你整理的重點（3～5 句）。它會先讀一遍，再問你想講什麼。</li>
+        <li>按下面的<b>「複製完整主題表」</b>，貼給它。裡面有你的類型、開頭句、來源網址、核心訊息。它會先讀一遍，再問你想講什麼。有整理好的重點（3～5 句），也可以一起貼。</li>
         <li>照它的問題一題一題回答，自己把答案說成一句短短的台詞。</li>
         <li>全部寫完，它會給你一張<b>完整的台詞表</b>。下一步照著填進學習單的「台詞表」。</li>
       </ol>
       <div class="flex gap-2 flex-wrap mt-4 items-center">
         <span data-set-show="scriptGemUrl" class="hidden"><a data-set-href="scriptGemUrl" target="_blank" rel="noopener" class="cute inline-block bg-violet-600 hover:bg-violet-700 text-white text-xl font-extrabold rounded-2xl px-6 py-3">開啟台詞小教練 ↗</a></span>
         <button type="button" id="copyGo" class="bg-white border-2 border-violet-400 hover:bg-violet-50 text-violet-800 font-bold rounded-2xl px-5 py-2.5">複製「開始寫台詞」</button>
+      </div>
+    </div>
+    <div class="bg-violet-50 border-4 border-violet-300 rounded-3xl p-6 mb-5 shadow-sm">
+      <p class="cute text-xl font-extrabold text-violet-700 m-0">複製完整主題表，貼給 AI</p>
+      <p class="text-lg text-slate-700 mt-1">這是你在第 1 步拿回來的主題。按「複製完整主題表」，到 AI 教練那裡<b>貼上</b>，它就知道你要講什麼了。</p>
+      <pre id="topicPreview" class="mt-3 bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 text-lg text-slate-800 whitespace-pre-wrap break-words" style="font-family:inherit"></pre>
+      <div class="flex gap-2 flex-wrap mt-3 items-center">
+        <button type="button" id="copyTopic" class="cute bg-violet-600 hover:bg-violet-700 text-white text-lg font-extrabold rounded-2xl px-5 py-2.5">複製完整主題表</button>
+        <span id="topicWarn" class="text-base font-bold text-amber-700"></span>
       </div>
     </div>
     <div class="bg-white border-4 border-violet-300 rounded-3xl p-6 mb-5 shadow-sm">
@@ -589,7 +598,16 @@ var firebaseConfig = {
     ensureSegs();agg();
   };
 
-  function topicLines(){return '類型：'+(state.cat||'')+'\n開頭句：'+(state.hook||'')+'\n來源網址：'+(state.src||'')+'\n核心訊息：'+(state.core||'');}
+  function topicLines(){
+    function v(x){x=String(x||'').trim();return x||'（還沒寫）';}
+    return '【我的短影片主題表】\n類型：'+v(state.cat)+'\n開頭句：'+v(state.hook)+'\n來源網址：'+v(state.src)+'\n核心訊息：'+v(state.core);
+  }
+  function renderTopicCopy(){
+    var p=$('topicPreview');if(!p)return;
+    p.textContent=topicLines();
+    var miss=[['cat','類型'],['hook','開頭句'],['src','來源網址'],['core','核心訊息']].filter(function(a){return !String(state[a[0]]||'').trim();}).map(function(a){return a[1];});
+    var w=$('topicWarn');if(w)w.textContent=miss.length?('還沒寫：'+miss.join('、')+'。先回第 1 步補上。'):'';
+  }
   function projName(){
     var i;try{i=getIdentity();}catch(e){return '';}
     if(!identityValid(i))return '';
@@ -645,7 +663,7 @@ var firebaseConfig = {
   }
   H.hasContent=function(){return topicHas()||workHas();};
   H.render=function(){
-    ensureSegs();agg();buildRows();renderDemo();
+    ensureSegs();agg();buildRows();renderDemo();renderTopicCopy();
     var l=$('srcLink'),u=String(state.src||'').trim();
     if(l){if(/^https?:\/\/\S+/.test(u)){l.href=u;l.classList.remove('hidden');}else{l.removeAttribute('href');l.classList.add('hidden');}}
     document.querySelectorAll('[data-count]').forEach(function(e){var n=String(state[e.dataset.count]||'').length;e.textContent=n;e.parentNode.className='text-sm mt-0.5 '+(n>30?'text-rose-600 font-bold':'text-slate-500');});
@@ -722,6 +740,7 @@ var firebaseConfig = {
   fbReady.then(function(){return authResolved;}).then(autoLoad).catch(function(){});
 
   if($('copyGo'))$('copyGo').onclick=function(){copyText('開始寫台詞',this);};
+  if($('copyTopic'))$('copyTopic').onclick=function(){copyText(topicLines(),this);};
   H.render();
 
   // ===== 作答狀態（localStorage 暫存）=====
